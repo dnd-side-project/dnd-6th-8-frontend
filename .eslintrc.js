@@ -12,7 +12,8 @@ module.exports = {
   ],
   rules: {
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
+    'no-param-reassign': 0,
+    // '@typescript-eslint/no-use-before-define': ['error'],
     'prettier/prettier': 0,
     'import/extensions': [
       'error',
