@@ -10,7 +10,7 @@ import { ReactComponent as Google } from '../../assets/icons/ic_login_google.svg
 
 function WelcomePage() {
   return (
-    <div className="wrapper">
+    <div className="welcomepage-wrapper">
       <TextLogo className="text-logo" />
       <div className="intro">
         트레셔스와 함께

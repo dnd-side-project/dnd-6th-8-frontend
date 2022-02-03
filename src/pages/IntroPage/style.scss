@@ -1,0 +1,28 @@
+@import '../../_reset.scss'; 
+
+.intropage-wrapper{
+    width: 360px;
+    height : 718px;
+    border : 1px solid black; 
+    animation : intropage-wrapper 0.5s forwards; 
+    .intro-message{
+        display: block;
+        margin : auto;
+        margin-top : 76px; 
+        margin-bottom : 32px; 
+    }
+    .intro-sitting { 
+        display: block;
+        margin : auto;
+        margin-top : 32px; 
+    }
+}
+
+@keyframes intropage-wrapper{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity:1; 
+    }
+}
