@@ -1,10 +1,14 @@
 import React from 'react';
+import { Router, Routes, Route } from 'react-router-dom';
+import Home from './Home';
 
 function App() {
   return (
-    <div className="App">
-      Route를 작성하는 공간, App.tsx
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
