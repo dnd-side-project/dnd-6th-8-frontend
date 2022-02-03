@@ -3,20 +3,45 @@
 .wrapper {
     width: 360px;
     height : 718px;
-    border : 1px solid black; 
-    background-color: #5b21ff;
     flex-grow : 0;
-    animation : background 2s forwards; 
-
+    animation-name : background;
+    animation-duration: 2s ;
+    animation-fill-mode: forwards; 
+    .text-logo{
+        width : 184px; 
+        height : 45px; 
+        flex-grow : 0;
+        margin : 176px 88px 24px 88px; 
+        animation-name : textLogo; 
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+    .intro{
+        margin: 24px 10px 0 9px;
+        font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: normal;
+        text-align: center;
+        color: #474451;
+        animation : intro 2s forwards;
+    }    
+    .frame{
+        margin : 136px 0px 145px 0px; 
+        .talk-box{
+            display: block;
+            margin: auto;
+            animation: talk-box 2s forwards;
+        }
+        .social-wrap{
+            margin-top : 24px; 
+            display: flex;
+            justify-content: space-evenly;
+            animation : social-wrap 2s forwards; 
+        }
+    }
 }
 
-.text-logo{
-    width : 184px; 
-    height : 45px; 
-    flex-grow : 0;
-    margin : 176px 88px 473px 88px; 
-    animation : textLogo 2s forwards;
-}
+
 
 @keyframes background {
     from {
@@ -29,9 +54,45 @@
 
 @keyframes textLogo {
     from {
-            fill : red; 
+            fill : white; 
     }
     to { 
             fill : #5b21ff;
+    }
+}
+
+@keyframes social-wrap{
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes talk-box{
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    75%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes intro{
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
