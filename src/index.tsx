@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { Provider } from 'react-redux';
+// import { createStore } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './pages/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import rootReducer from './modules';
+// import rootReducer from './modules';
 
-const store = createStore(rootReducer, composeWithDevTools());
+// const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
-  <Provider store={store}>
+  // <Provider store={store}>
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </Provider>,
+  // </Provider>
+  ,
   document.getElementById('root'),
 );
 
