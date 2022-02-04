@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
-import { ReactComponent as TextLogo } from '../../assets/icons/tracious_text_logo.svg';
-import { ReactComponent as TalkBox } from '../../assets/icons/talk_box.svg';
-import { ReactComponent as Kakao } from '../../assets/icons/ic_login_kakao.svg';
-import { ReactComponent as Naver } from '../../assets/icons/ic_login_naver.svg';
-import { ReactComponent as Google } from '../../assets/icons/ic_login_google.svg';
+import { ReactComponent as TextLogo } from '../../assets/icons/WelcomePage/tracious_text_logo.svg';
+import { ReactComponent as TalkBox } from '../../assets/icons/WelcomePage/talk_box.svg';
+import { ReactComponent as Kakao } from '../../assets/icons/WelcomePage/ic_login_kakao.svg';
+import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login_naver.svg';
+import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 
 function WelcomePage() {

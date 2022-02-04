@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as IntroMessage } from '../../../assets/icons/secondpage-text.svg';
-import { ReactComponent as IntroStanding } from '../../../assets/imgs/Intro_secondPage_standing.svg';
+import { ReactComponent as IntroMessage } from '../../../assets/icons/IntroPage/SecondPage/secondpage-text.svg';
+import { ReactComponent as IntroStanding } from '../../../assets/icons/IntroPage/SecondPage/Intro_secondPage_standing.svg';
 import './style.scss';
 
 function SecondPage() {

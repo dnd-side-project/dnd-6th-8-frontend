@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent as IntroMessage } from '../../../assets/icons/firstpage-text.svg';
-import { ReactComponent as IntroPageSitting } from '../../../assets/imgs/Intro_firstPage_sitting.svg';
+import { ReactComponent as IntroMessage } from '../../../assets/icons/IntroPage/FirstPage/firstpage-text.svg';
+import { ReactComponent as IntroPageSitting } from '../../../assets/icons/IntroPage/FirstPage/Intro_firstPage_sitting.svg';
 import './style.scss';
 
 function FirstPage() {
