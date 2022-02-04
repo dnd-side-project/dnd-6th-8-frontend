@@ -19,7 +19,7 @@ function WelcomePage() {
       <div className="frame">
         <TalkBox className="talk-box" />
         <div className='social-wrap'>
-          <Link to='/intro'><Google/></Link>
+          <Link to='/intro'><Kakao/></Link>
           <Link to='/intro'><Naver /></Link>
           <Link to='/intro'><Google /></Link>
         </div>

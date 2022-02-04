@@ -1,0 +1,17 @@
+@import '../../../_reset.scss'; 
+
+.secondpage-wrapper {
+    width: 360px;
+    height : 760px;
+    .intro-message{
+        display: block;
+        margin : auto;
+        margin-top : 76px; 
+        margin-bottom : 32px; 
+    }
+    .intro-standing{
+        display: block;
+        margin : auto;
+        margin-top : 32px; 
+    }
+}
