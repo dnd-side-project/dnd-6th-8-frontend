@@ -1,6 +1,6 @@
 import React from 'react';
 import './SurveyStart.scss';
-import SurveyIllust from '../../assets/icons/Survey/illust_survey.png';
+import SurveyIllust from '../../assets/icons/SurveyStart/illust_survey.png';
 
 function SurveyStart() {
   return (

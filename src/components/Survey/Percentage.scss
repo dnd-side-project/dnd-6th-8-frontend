@@ -1,0 +1,14 @@
+@import '../../styles/utils.scss';
+
+.percentage-wrapper{
+    background-color: $black20;
+    height:1rem;
+    border-radius: 0.65rem;
+    width:90vw;
+    .percentage{
+        background-color: $primaryPurple;
+        width:33%;
+        border-radius: 0.65rem;
+        height:100%;
+    }
+}
