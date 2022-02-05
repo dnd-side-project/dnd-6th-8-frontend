@@ -1,0 +1,25 @@
+.firstpage-wrapper{
+    width: 36rem;
+    height : 76rem;
+    animation : intropage-wrapper 0.5s forwards; 
+    .intro-message{
+        display: block;
+        margin : auto;
+        margin-top : 7.6rem; 
+        margin-bottom : 3.2rem; 
+    }
+    .intro-sitting { 
+        display: block;
+        margin : auto;
+        margin-top : 3.2rem; 
+    }
+}
+
+@keyframes intropage-wrapper{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity:1; 
+    }
+}

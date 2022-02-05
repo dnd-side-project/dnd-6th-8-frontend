@@ -1,0 +1,34 @@
+//color
+$black20: #e7eaf6;
+$primaryPurple:#5b21ff;
+$black70: #595663;
+$black90: #292733;
+$black50: #a19fad;
+$black40: #c4c7d3;
+$greyishBrown: #434343;
+$pinkishGrey0: rgba(196, 196, 196, 0);
+$black60: #7f7d8a;
+$black10: #f2f6ff;
+$white: #fff;
+
+//font
+@font-face {
+    font-family: "Pretendard-SemiBold";
+    src: url(../assets/fonts/Pretendard-SemiBold.otf);
+}
+
+@font-face {
+    font-family: "Pretendard-Medium";
+    src: url(../assets/fonts/Pretendard-Medium.otf);
+}
+
+@font-face {
+    font-family: "Pretendard-Regular";
+    src: url(../assets/fonts/Pretendard-Regular.otf);
+}
+
+@font-face {
+    font-family: "Pretendard-Bold";
+    src: url(../assets/fonts/Pretendard-Bold.otf);
+}
+
