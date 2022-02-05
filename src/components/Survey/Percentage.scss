@@ -10,5 +10,11 @@
         width:33%;
         border-radius: 0.65rem;
         height:100%;
+        &.two{
+            width:66%
+        }
+        &.three{
+            width:100%
+        }
     }
 }
