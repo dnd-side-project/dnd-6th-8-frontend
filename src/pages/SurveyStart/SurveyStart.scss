@@ -1,0 +1,63 @@
+@import '../../styles/utils.scss';
+
+.surveyStart-wrapper{
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+    width:100vw;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    .middle{
+        width:100vw;
+        height:50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom:auto;
+        margin-top:auto;
+        .illust{
+            width:13.9rem;
+            height:15.6rem;
+            margin-bottom: 3.6rem;
+    
+        }
+        .description{
+            width:100%;
+            font-size: 1.8rem;
+            line-height: 2.6rem;
+            text-align: center;
+            font-family: Pretendard-Regular;
+            margin-bottom: auto;
+            .bold{
+                font-family: Pretendard-SemiBold;
+            }
+        }
+        .skip-button{
+            background-color: transparent;
+            font-family: Pretendard-SemiBold;
+            font-size:1.6rem;
+            line-height: 2.4rem;
+            letter-spacing: 0.045rem;
+            border-width:0 0 0.1rem 0;
+            border-bottom-color: $black50;
+            color:$black50;
+            padding:0;
+            box-sizing: border-box;
+        }
+    }
+    .start-button{
+        background-color: $primaryPurple;
+        width:100%;
+        height:6.2rem;
+        border:0;
+        padding:0;
+        font-family: Pretendard-Bold;
+        color:$white;
+        font-size:1.6rem;
+        line-height: 2.4rem;
+        letter-spacing: 0.045rem;
+    }
+
+    
+}
