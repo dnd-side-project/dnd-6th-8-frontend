@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import App from './pages/App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import './styles/utils.scss'; 
 import './index.scss';
 // import rootReducer from './modules';
 
