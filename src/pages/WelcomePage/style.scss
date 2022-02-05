@@ -1,23 +1,23 @@
 .welcomepage-wrapper {
-    width: 360px;
-    height : 760px;
+    width: 36rem;
+    height : 76rem;
     flex-grow : 0;
     animation-name : background;
     animation-duration: 2s ;
     animation-fill-mode: forwards; 
     .text-logo{
-        width : 184px; 
-        height : 45px; 
+        width : 18.4rem; 
+        height : 4.5rem; 
         flex-grow : 0;
-        margin : 176px 88px 24px 88px; 
+        margin : 17.6rem 8.8rem 2.4rem 8.8rem; 
         animation-name : textLogo; 
         animation-duration: 2s;
         animation-fill-mode: forwards;
     }
     .intro{
-        margin: 24px 10px 0 9px;
+        margin: 2.4rem 1rem 0 0.9rem;
         font-family: 'Pretendard-Regular';
-        font-size: 16px;
+        font-size: 1.6rem;
         line-height: 1.5;
         letter-spacing: normal;
         text-align: center;
@@ -25,14 +25,14 @@
         animation : intro 2s forwards;
     }    
     .frame{
-        margin : 136px 0px 145px 0px; 
+        margin : 13.6rem 0rem 14.5rem 0rem; 
         .talk-box{
             display: block;
             margin: auto;
             animation: talk-box 2s forwards;
         }
         .social-wrap{
-            margin-top : 24px; 
+            margin-top : 2.4rem; 
             display: flex;
             justify-content: space-evenly;
             animation : social-wrap 2s forwards; 

@@ -1,10 +1,10 @@
 .intropage-wrappper{
-    width : 360px; 
-    height : 760px;
+    width : 36rem; 
+    height : 76rem;
 }
 .swiper-container {
-    width: 360px; 
-    height: 760px; 
+    width: 36rem; 
+    height: 76rem; 
     float : left;  
     .swiper-container::after{
         display: block;
@@ -13,22 +13,22 @@
 }
 
 .swiper-pagination-bullet { 
-    width: 10px;
-    height: 10px;
+    width: 1rem;
+    height: 1rem;
     flex-grow: 0;
-    margin: 0 10px 0 0;
+    margin: 0 1rem 0 0;
     transform: rotate(-180deg);
     background-color: #d8dce8;
     position : relative; 
-    bottom : 150px;
+    bottom : 15rem;
 }
 
 .swiper-pagination-bullet-active {     
-    width: 20px;
-    height: 10px;
+    width: 2rem;
+    height: 1rem;
     flex-grow: 0;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 1rem;
     transform: rotate(-180deg);
-    border-radius: 5px;
+    border-radius: 0.5rem;
     background: #a19fad;  
 }
