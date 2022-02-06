@@ -1,0 +1,21 @@
+@import '../../styles/utils.scss';
+
+.question-wrapper{
+    margin-top:3.8rem;
+    padding: 0 1.4rem;
+    margin-bottom:6.2rem;
+    .step{
+        font-family: Pretendard-Medium;
+        font-size:1.8rem;
+        line-height: 2.6rem;
+        color:$black50;
+        margin-bottom:1.6rem;
+    }
+    .question{
+        font-family: Pretendard-Medium;
+        font-size:2rem;
+        line-height: 3.2rem;
+        color:$black90;
+        white-space: pre-wrap;
+    }
+}
