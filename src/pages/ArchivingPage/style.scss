@@ -10,8 +10,7 @@
 }
 
 .archivingpage-wrapper{
-    width : 36rem; 
-    height : 76rem; 
+    background : #ffffff;
     position : relative; 
 
     .archivingpage-header{
@@ -39,7 +38,7 @@
 
     .archivingpage-navigation{
         @extend %flex-nav;
-        width : 36rem; 
+        width : 100%;
         height : 6rem;
         background: white; 
         position : absolute; 

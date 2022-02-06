@@ -9,7 +9,7 @@ function SecondPage() {
 
   useEffect(() => {
     setTimeout(() => {
-      // navigate('/survey'); 
+      navigate('/surveyStart'); 
     }, 5000);
   }, []);
 
