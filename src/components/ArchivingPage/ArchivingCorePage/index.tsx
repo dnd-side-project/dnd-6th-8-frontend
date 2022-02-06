@@ -19,7 +19,7 @@ function ArchivingCorePage() {
       <HistoryBox />
       <div className="travel-feed">
         <div className="feed-title-area">
-          <span>공유한 여행 피드</span> <span>0</span>
+          <span>공유한 여행 피드</span> <span className='count'>0</span>
         </div>
         <div className="feed-toggle-area">
           {sharedClick ? <DownToggle onClick={onSharedClick} /> : <UpToggle onClick={onSharedClick} />}
@@ -28,7 +28,7 @@ function ArchivingCorePage() {
       {sharedClick && <Shared />}
       <div className="travel-feed">
         <div className="feed-title-area">
-          <span>개인소장 여행 피드</span> <span>0</span>
+          <span>개인소장 여행 피드</span> <span className='count'>0</span>
         </div>
         <div className="feed-toggle-area">
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}

@@ -16,7 +16,9 @@
         justify-content: space-between; 
         @extend %font-style; 
         .feed-title-area{
-            
+            .count{
+                font-weight : 600;
+            }
         }
         .feed-toggle-area{
             
