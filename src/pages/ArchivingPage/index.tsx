@@ -13,7 +13,12 @@ function ArchivingPage() {
   return (
     <div className="archivingpage-wrapper">
       <Header title='기록하기'/>
-      <div className="archivingpage-main-area">{loading ? <ArchivingLoadingPage /> : <ArchivingCorePage/>}</div>
+      <div className="archivingpage-main-area">
+        {loading 
+          ? <ArchivingLoadingPage /> 
+          : <ArchivingCorePage/>
+        }
+        </div>
       <div className="archivingpage-navigation">
         <div className="nav-icon">
           <img src={Home} alt="Home" />
