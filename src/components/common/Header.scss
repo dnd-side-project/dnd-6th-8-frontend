@@ -1,0 +1,22 @@
+@import '../../styles/utils.scss';
+
+.header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding : 0.8rem 1.6rem;
+    .logo{
+        width:10.6rem;
+        height:2.6rem;
+    }
+    .title{
+        font-family: Pretendard-Medium;
+        font-size:1.8rem;
+        line-height: 2.6rem;
+        color:black;
+    }
+
+    .scrap{
+        width:2.4rem;
+    }
+
+}
