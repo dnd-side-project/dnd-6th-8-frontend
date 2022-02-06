@@ -1,0 +1,33 @@
+@import '../../styles/utils.scss';
+
+.navigation-wrapper{
+    background-color: $white;
+    height:6rem;
+    position: fixed;
+    bottom:0;
+    width:100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    img{
+        width:2.4rem;
+        margin-bottom:0.2rem;
+    }
+    button{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: $white;
+        border:0;
+        font-family: Pretendard-Medium;
+        font-size:1.4rem;
+        line-height: 1.8rem;
+        color:$black50;
+        &.click{
+            color:$primaryPurple;
+            font-family: Pretendard-SemiBold;
+        }
+    }
+
+
+}
