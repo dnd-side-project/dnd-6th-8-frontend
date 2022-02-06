@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './style.scss';
 import { ReactComponent as UpToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_up.svg';
 import { ReactComponent as DownToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_down.svg';
-import {ReactComponent as AddBtn} from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_upload_archiving.svg'; 
+import { ReactComponent as AddBtn } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_upload_archiving.svg';
 import Personal from './Personal';
 import Shared from './Shared';
 import HistoryBox from './HistoryBox';
@@ -35,7 +35,7 @@ function ArchivingCorePage() {
         </div>
       </div>
       {personalClick && <Personal />}
-      <AddBtn className='add-btn'/>
+      <AddBtn className="add-btn" />
     </div>
   );
 }
