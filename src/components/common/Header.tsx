@@ -11,14 +11,14 @@ Header.defaultProps = {
 
 function Header({ title }: HeaderProps) {
   return (
-    <div className="header-wrapper">
+    <header className="header-wrapper">
       {title ? (
         <div className="title">{title}</div>
       ) : (
         <img src="imgs/common/text_logo.png" alt="logo" className="logo" />
       )}
       <img src="imgs/common/ic_scrap.png" alt="scrap" className="scrap" />
-    </div>
+    </header>
   );
 }
 
