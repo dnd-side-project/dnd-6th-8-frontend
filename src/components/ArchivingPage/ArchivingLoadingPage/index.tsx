@@ -1,33 +1,29 @@
 import React from 'react';
-import { ReactComponent as AllRectangle } from '../../../assets/icons/ArchivingPage/ArchivingLoadingPage/allRectangle.svg';
-import { ReactComponent as HalfSmallRectangle } from '../../../assets/icons/ArchivingPage/ArchivingLoadingPage/halfSmallRectangle.svg';
-import { ReactComponent as Square } from '../../../assets/icons/ArchivingPage/ArchivingLoadingPage/square.svg';
-import { ReactComponent as HalfBigRectangle } from '../../../assets/icons/ArchivingPage/ArchivingLoadingPage/halfBigRectangle.svg';
 import './style.scss';
 
 function ArchivingLoadingPage() {
   return (
     <div className="archivingloadingpage-wrapper">
       <div className="allRectangle-line">
-        <AllRectangle />
+        <div className="allRectangle" />
       </div>
       <div className="halfSmallRectangle-line">
-        <HalfSmallRectangle />
+        <div className="halfSmallRectangle" />
       </div>
       <div className="squareHalfBig1-line">
-        <Square />
-        <HalfBigRectangle />
+        <div className="square" />
+        <div className="halfBigRectangle" />
       </div>
       <div className="squareHalfBig2-line">
-        <Square />
-        <HalfBigRectangle />
+        <div className="square" />
+        <div className="halfBigRectangle" />
       </div>
       <div className="halfSmallRectangle-line">
-        <HalfSmallRectangle />
+        <div className="halfSmallRectangle" />
       </div>
       <div className="squareHalfBig2-line">
-        <Square />
-        <HalfBigRectangle />
+        <div className="square" />
+        <div className="halfBigRectangle" />
       </div>
     </div>
   );
