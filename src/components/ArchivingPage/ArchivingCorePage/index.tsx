@@ -8,12 +8,15 @@ import Shared from './Shared';
 import HistoryBox from './HistoryBox';
 import { archiveCorePageReadFetchData } from '../../../constants/index';
 
-function ArchivingCorePage() {
+type ArchivingCorePage= {
+  setDeleteClick: (click: boolean) => void;
+};
+
+function ArchivingCorePage({setDeleteClick} : ArchivingCorePage) {
   const [sharedInfo, setSharedInfo] = useState();
   const [personalInfo, setPersonalInfo] = useState();
   const [sharedInfoLen, setSharedInfoLen] = useState<number>(0); 
   const [personalInfoLen, setPersonalInfoLen] = useState<number>(0); 
-
 
   useEffect(() => {
     if (archiveCorePageReadFetchData !== undefined) {
@@ -32,6 +35,7 @@ function ArchivingCorePage() {
 
   return (
     <div className="archivingCorePage-wrapper">
+      
       <HistoryBox sharedInfo={sharedInfo} personalInfo={personalInfo} />
       <div className="travel-feed">
         <div className="feed-title-area">
@@ -41,7 +45,7 @@ function ArchivingCorePage() {
           {sharedClick ? <DownToggle onClick={onSharedClick} /> : <UpToggle onClick={onSharedClick} />}
         </div>
       </div>
-      {sharedClick && <Shared sharedInfo={sharedInfo} />}
+      {sharedClick && <Shared sharedInfo={sharedInfo} setDeleteClick={setDeleteClick}/>}
       <div className="travel-feed">
         <div className="feed-title-area">
           <span>개인소장 여행 피드</span> <span className="count">{personalInfoLen && personalInfoLen}</span>
@@ -50,7 +54,7 @@ function ArchivingCorePage() {
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}
         </div>
       </div>
-      {personalClick && <Personal personalInfo={personalInfo} />}
+      {personalClick && <Personal personalInfo={personalInfo} setDeleteClick={setDeleteClick}/>}
       <AddBtn className="add-btn" />
     </div>
   );

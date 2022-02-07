@@ -6,9 +6,10 @@ import './style.scss';
 
 type SharedProps = {
   sharedInfo: any;
+  setDeleteClick: (click: boolean) => void;
 };
 
-function Shared({ sharedInfo }: SharedProps) {
+function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function Shared({ sharedInfo }: SharedProps) {
       {fetchData ? (
         sharedInfo.map((value: any) => {
           // eslint-disable-next-line react/jsx-key
-          return (<Card info={value}/>);
+          return <Card info={value} setDeleteClick={setDeleteClick}/>;
         })
       ) : (
         <Book className="shared-book" />

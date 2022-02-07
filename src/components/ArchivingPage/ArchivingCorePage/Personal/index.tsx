@@ -5,9 +5,10 @@ import './style.scss';
 
 type PersonalProps = {
   personalInfo: any;
+  setDeleteClick: (click: boolean) => void;
 };
 
-function Personal({ personalInfo }: PersonalProps) {
+function Personal({ personalInfo, setDeleteClick }: PersonalProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function Personal({ personalInfo }: PersonalProps) {
       {fetchData ? (
         personalInfo.map((value: any) => {
           // eslint-disable-next-line react/jsx-key
-          return <Card info={value} />;
+          return <Card info={value} setDeleteClick={setDeleteClick} />;
         })
       ) : (
         <Book className="personal-book" />

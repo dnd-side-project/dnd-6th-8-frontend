@@ -1,12 +1,19 @@
 /* eslint-disable react/button-has-type */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+import DeleteDialog from '../DeleteDialog';
 import './style.scss';
 
 type CardProps = {
   info: any;
+  setDeleteClick: (click : boolean) => void;
 };
 
-function Card({ info }: CardProps) {
+function Card({ info, setDeleteClick }: CardProps) {
+
+  const onDeleteHandler = useCallback(() => {
+    setDeleteClick(true);
+  }, []);
+
   return (
     <div className="card-wrapper">
       <div className="card-img">
@@ -21,7 +28,7 @@ function Card({ info }: CardProps) {
         <div className="info-title">{info.title}</div>
         <div className="info-btn">
           <button>수정하기</button>
-          <button>삭제하기</button>
+          <button onClick={onDeleteHandler}>삭제하기</button>
         </div>
         <div className="info-date">
           <p>

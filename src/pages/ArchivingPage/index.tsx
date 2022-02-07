@@ -6,14 +6,16 @@ import Archiving from '../../assets/icons/ArchivingPage/NavigationBar/ic_archivi
 import MyPage from '../../assets/icons/ArchivingPage/NavigationBar/ic_mypage_navigation.png';
 import './style.scss';
 import Header from '../../components/common/Header';
+import DeleteDialog from '../../components/ArchivingPage/ArchivingCorePage/DeleteDialog';
 
 function ArchivingPage() {
   const [loading, setLoading] = useState<boolean>(true);
+  const [deleteClick, setDeleteClick] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 100);
     return () => {
       setLoading(true);
     };
@@ -21,8 +23,9 @@ function ArchivingPage() {
 
   return (
     <div className="archivingpage-wrapper">
+      {deleteClick && <DeleteDialog />}
       <Header title="기록하기" />
-      <div className="archivingpage-main-area">{loading ? <ArchivingLoadingPage /> : <ArchivingCorePage />}</div>
+      <div className="archivingpage-main-area">{loading ? <ArchivingLoadingPage /> : <ArchivingCorePage setDeleteClick={setDeleteClick}/>}</div>
       <div className="archivingpage-navigation">
         <div className="nav-icon">
           <img src={Home} alt="Home" />
