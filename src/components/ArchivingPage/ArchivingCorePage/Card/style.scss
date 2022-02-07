@@ -1,0 +1,96 @@
+%info-type{
+    position: absolute;
+    top : 0; 
+    left : 0; 
+    padding: 0.8rem 0.5rem 0.7rem 0.4rem;
+    border-radius: 1.3rem 0;
+    color : white;
+    font-family: 'Pretendard-Regular';
+}
+
+.card-wrapper{
+    width : 100%;
+    height : 13rem; 
+    margin-top : 1.6rem; 
+    display : flex; 
+    .card-img{
+        width : 13rem; 
+        height : 13rem;
+        border-radius : 1.3rem;
+        background: skyblue;
+        position: relative;  
+        .type-정보{
+            @extend %info-type; 
+            background: #3c38ff;
+        }
+        .type-감정{
+            @extend %info-type; 
+            background: #fa8418;
+        }
+    }
+    .card-info{
+        padding : 0.9rem 1.6rem 0.8rem 1.6rem;
+        .info-header{
+            margin-bottom: 0.8rem;
+            .region{
+                font-family : 'Pretendard-Medium'; 
+                color : #474451; 
+                margin : 0 1rem 0 0.4rem; 
+            }
+            .day-box{
+                width : 3.8rem; 
+                height : 2rem; 
+                padding : 0.4rem; 
+                font-family: 'Pretendard-Medium';
+                font-size: 1rem;
+                font-weight: 500;
+                line-height: 1.2;
+                color : #7f7d8a; 
+                background:  #F8F9FC;;
+                border-radius: 1.2rem;
+                
+            }   
+        }
+        .info-title{
+            font-family: 'Pretendard-Regular'; 
+            font-size: 1.4rem;
+            line-height: 1.57;
+        }
+        .info-btn{
+            margin-top : 1rem; 
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            button{
+                width : 8.7rem; 
+                height : 3.1rem; 
+                font-family: 'Pretendard-SemiBold';
+                color : #595663;
+                font-size : 1rem;
+                font-weight: 600;
+                border : 1.3px solid #d8dce8;
+                background: #ffff;
+                border-radius: 1rem;
+            }
+        }
+        .info-date{
+            margin-top : 1rem; 
+            p{
+                font-family: 'Pretendard-SemiBold';
+                font-size: 1rem;
+                font-weight: 600;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.2;
+                color : #595663;
+                span{
+                    margin-left : 0.8rem; 
+                    font-size: 1rem;
+                    font-weight: 600;
+                    line-height: 1.2;
+                    color : #a19fad;
+                }
+            }
+        }
+    }
+}

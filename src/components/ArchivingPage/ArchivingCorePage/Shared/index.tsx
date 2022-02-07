@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
+/* eslint-disable react/button-has-type */
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Book } from '../../../../assets/icons/ArchivingPage/ArchivingCorePage/book.svg';
-import './style.scss'; 
+import Card from '../Card';
+import './style.scss';
 
-function Shared() {
+type SharedProps = {
+  sharedInfo: any;
+};
+
+function Shared({ sharedInfo }: SharedProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (sharedInfo !== undefined) {
+      setFetchData(true);
+    }
+  }, [sharedInfo]);
+
   return (
     <div className="shared-wrapper">
-      {fetchData ? <> 불러온 데이터가 들어갈 영역 </>: <Book className="shared-book" />}
+      {fetchData ? (
+        sharedInfo.map((value: any) => {
+          // eslint-disable-next-line react/jsx-key
+          return (<Card info={value}/>);
+        })
+      ) : (
+        <Book className="shared-book" />
+      )}
     </div>
   );
 }

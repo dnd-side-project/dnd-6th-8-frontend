@@ -1,12 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as Book } from '../../../../assets/icons/ArchivingPage/ArchivingCorePage/book.svg';
+import Card from '../Card';
 import './style.scss';
 
-function Personal() {
+type PersonalProps = {
+  personalInfo: any;
+};
+
+function Personal({ personalInfo }: PersonalProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (personalInfo !== undefined) {
+      setFetchData(true);
+    }
+  }, [personalInfo]);
+
   return (
     <div className="personal-wrapper">
-      {fetchData ? <> 불러온 데이터가 들어갈 영역 </> : <Book className="personal-book" />}
+      {fetchData ? (
+        personalInfo.map((value: any) => {
+          // eslint-disable-next-line react/jsx-key
+          return <Card info={value} />;
+        })
+      ) : (
+        <Book className="personal-book" />
+      )}
     </div>
   );
 }

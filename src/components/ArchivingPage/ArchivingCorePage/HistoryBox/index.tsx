@@ -37,7 +37,8 @@ function HistoryBox({ sharedInfo, personalInfo }: HistoryBoxProps) {
                 <div className="icon-box" key={value}>
                   <div className="icon">🚄</div>
                   <div className="region">
-                    {value.region} {`(${1})`}
+                    {value.region}
+                    {`(${1})`}
                   </div>
                 </div>
               );
