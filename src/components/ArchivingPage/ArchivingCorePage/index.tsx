@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { ReactComponent as UpToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_up.svg';
 import { ReactComponent as DownToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_down.svg';
@@ -6,8 +6,17 @@ import { ReactComponent as AddBtn } from '../../../assets/icons/ArchivingPage/Ar
 import Personal from './Personal';
 import Shared from './Shared';
 import HistoryBox from './HistoryBox';
+import { archiveCorePageReadFetchData } from '../../../constants/index';
 
 function ArchivingCorePage() {
+  const [sharedInfo, setSharedInfo] = useState();
+  const [personalInfo, setPersonalInfo] = useState();
+
+  useEffect(() => {
+    setSharedInfo(archiveCorePageReadFetchData.sharedInfo);
+    setPersonalInfo(archiveCorePageReadFetchData.personalInfo);
+  }, []);
+
   const [sharedClick, setSharedClick] = useState<boolean>(true);
   const [personalClick, setPersonalClick] = useState<boolean>(true);
 
@@ -16,10 +25,10 @@ function ArchivingCorePage() {
 
   return (
     <div className="archivingCorePage-wrapper">
-      <HistoryBox />
+      <HistoryBox sharedInfo={sharedInfo} personalInfo={personalInfo} />
       <div className="travel-feed">
         <div className="feed-title-area">
-          <span>공유한 여행 피드</span> <span className='count'>0</span>
+          <span>공유한 여행 피드</span> <span className="count">0</span>
         </div>
         <div className="feed-toggle-area">
           {sharedClick ? <DownToggle onClick={onSharedClick} /> : <UpToggle onClick={onSharedClick} />}
@@ -28,7 +37,7 @@ function ArchivingCorePage() {
       {sharedClick && <Shared />}
       <div className="travel-feed">
         <div className="feed-title-area">
-          <span>개인소장 여행 피드</span> <span className='count'>0</span>
+          <span>개인소장 여행 피드</span> <span className="count">0</span>
         </div>
         <div className="feed-toggle-area">
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}
