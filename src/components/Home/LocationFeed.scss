@@ -1,0 +1,123 @@
+@import '../../styles/utils.scss';
+
+.locationFeed-wrapper{
+    margin-top:3.2rem;
+    width:100%;
+    .header{
+        display: flex;
+        justify-content: space-between;
+        h2{
+            font-family: Pretendard-SemiBold;
+            font-size:1.6rem;
+            line-height:2.4rem;
+            color:$black90;
+        }
+        .refresh{
+            display: flex;
+            align-items: center;
+            span{
+                font-family: Pretendard-SemiBold;
+                line-height:1.2rem;
+                color:$black40;
+                font-size:1rem;
+            }
+            img{
+                width:2rem;
+            }
+        }
+       
+    }
+    nav{
+        display:flex;
+        margin-top:1.6rem;
+        overflow:auto;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar { display: none; }
+        margin-bottom:1.6rem;
+        button{
+            font-family: Pretendard-Regular;
+            font-size:1.4rem;
+            line-height:2.2rem;
+            color:$black50;
+            background-color: $bg2;
+            padding:0.6rem 0.8rem;
+            border-radius: 1.8rem;
+            min-width:fit-content;
+            display: flex;
+            align-items: center;
+            border:0;
+            &.click{
+                background-color: $primaryPurple;
+                color:white;
+                font-family: Pretendard-SemiBold;
+            }
+            
+            img{
+                width:1.5rem;
+                margin-right:0.4rem;
+            }
+            +.nav{
+                margin-left:0.8rem;
+            }
+        }
+    }
+    article{
+        display: flex;
+        overflow: auto;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar { display: none; }
+        .feed{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            .img-container{
+                border-radius: 1.2rem;
+                margin-bottom: 0.8rem;
+                .category{
+                    box-sizing: border-box;
+                    position: absolute;
+                    top:0;
+                    left:0;
+                    width:2.8rem;
+                    height:2.8rem;
+                    padding:0.7rem 0.4rem;
+                    border-radius: 1.2rem 0;
+                    background-color: $warningOr;
+                    font-size:1rem;
+                    font-family: Pretendard-SemiBold;
+                    line-height:1.4rem;
+                    color:white;
+                    text-align: center;
+                    &.info{
+                        background-color: $infoBlu;
+                    }
+             
+                }
+                img{
+                    width:13rem;
+                }
+            }
+           
+            .date{
+                font-family: Pretendard-Medium;
+                font-size:1rem;
+                line-height:1.2rem;
+                color:$black60;
+                background-color: aqua;
+                padding:0.3rem 0.4rem;
+                border-radius: 1.2rem;
+                background-color: $bg2;
+            }
+            h4{
+                margin-top:0.4rem;
+                font-family: Pretendard-SemiBold;
+                font-size:1.2rem;
+                line-height:2rem;
+                color:$black90;
+            }
+            +.feed{
+                margin-left:1.6rem;
+            }
+        }
+    }
+}
