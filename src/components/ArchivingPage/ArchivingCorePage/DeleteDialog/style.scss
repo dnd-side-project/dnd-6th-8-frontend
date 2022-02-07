@@ -1,3 +1,13 @@
+%btn-inner-btn{
+    width : 50%;
+    height : 4.2rem;
+    font-size : 1.4rem; 
+    font-weight: 600;
+    line-height: 1.29;   
+    font-family: 'Pretendard-SemiBold';
+    padding-top : 1.2rem;
+}
+
 .deleteDialog-wrapper{
     width : 100vw; 
     height : 100vh; 
@@ -38,24 +48,12 @@
         display : flex; 
         cursor: pointer;
         .btn-left{
-            width : 50%;
-            height : 4.2rem;
-            font-family: 'Pretendard-SemiBold';
-            font-size : 1.4rem; 
-            font-weight: 600;
-            line-height: 1.29;           
+            @extend %btn-inner-btn; 
             color : #7f7d8a; 
             border-right: 1.3px solid #c4c7d3;
-            padding-top : 1.2rem;
         }
         .btn-right{
-            width : 50%;
-            height : 4.2rem;
-            font-family : 'Pretendard-SemiBold';
-            font-size: 1.4rem;
-            font-weight: 600;
-            line-height: 1.29;
-            padding-top : 1.2rem;
+            @extend %btn-inner-btn;
         }
     }
 
