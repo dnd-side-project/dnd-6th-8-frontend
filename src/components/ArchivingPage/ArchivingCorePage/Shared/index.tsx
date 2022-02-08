@@ -11,16 +11,18 @@ type SharedProps = {
 
 function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
+  const [fetchDataLength, setFetchDataLength] = useState<number>(0);
 
   useEffect(() => {
     if (sharedInfo !== undefined) {
       setFetchData(true);
+      setFetchDataLength(sharedInfo.length); 
     }
   }, [sharedInfo]);
 
   return (
     <div className="shared-wrapper">
-      {fetchData ? (
+      {fetchDataLength ? (
         sharedInfo.map((value: any) => {
           // eslint-disable-next-line react/jsx-key
           return <Card info={value} setDeleteClick={setDeleteClick}/>;

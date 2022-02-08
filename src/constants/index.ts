@@ -28,6 +28,7 @@ export const archiveCorePageReadFetchData: any = {
       completeArchive: '2022.02.12',
       title: '황홀한 아름다움, 러시아 궁전',
     },
+    
   ],
 };
 

@@ -19,7 +19,7 @@ function ArchivingCorePage({setDeleteClick} : ArchivingCorePage) {
   const [personalInfoLen, setPersonalInfoLen] = useState<number>(0); 
 
   useEffect(() => {
-    if (archiveCorePageReadFetchData !== undefined) {
+    if (archiveCorePageReadFetchData !== undefined || archiveCorePageReadFetchData !== null) {
       setSharedInfo(archiveCorePageReadFetchData.sharedInfo);
       setPersonalInfo(archiveCorePageReadFetchData.personalInfo);
       setSharedInfoLen(archiveCorePageReadFetchData.sharedInfo.length); 

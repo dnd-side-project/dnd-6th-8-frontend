@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import ArchivingLoadingPage from '../../components/ArchivingPage/ArchivingLoadingPage';
 import ArchivingCorePage from '../../components/ArchivingPage/ArchivingCorePage';
-import Home from '../../assets/icons/ArchivingPage/NavigationBar/ic_home_navigation.png';
-import Archiving from '../../assets/icons/ArchivingPage/NavigationBar/ic_archiving_navigation.png';
-import MyPage from '../../assets/icons/ArchivingPage/NavigationBar/ic_mypage_navigation.png';
 import './style.scss';
 import Header from '../../components/common/Header';
 import DeleteDialog from '../../components/ArchivingPage/ArchivingCorePage/DeleteDialog';
+import DeleteAgree from '../../components/ArchivingPage/ArchivingCorePage/DeleteAgree';
+import NavigationBar from '../../components/common/NavigationBar';
 
 function ArchivingPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [deleteClick, setDeleteClick] = useState<boolean>(false);
+  const [agreeClick, setAgreeClick] = useState<boolean>(false);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 100);
+    }, 1500);
     return () => {
       setLoading(true);
     };
@@ -23,23 +23,20 @@ function ArchivingPage() {
 
   return (
     <div className="archivingpage-wrapper">
-      {deleteClick && <DeleteDialog />}
+      {deleteClick && (
+        <DeleteDialog
+          deleteClick={deleteClick}
+          setDeleteClick={setDeleteClick}
+          agreeClick={agreeClick}
+          setAgreeClick={setAgreeClick}
+        />
+      )}
+      {agreeClick && <DeleteAgree />}
       <Header title="기록하기" />
-      <div className="archivingpage-main-area">{loading ? <ArchivingLoadingPage /> : <ArchivingCorePage setDeleteClick={setDeleteClick}/>}</div>
-      <div className="archivingpage-navigation">
-        <div className="nav-icon">
-          <img src={Home} alt="Home" />
-          <p>홈</p>
-        </div>
-        <div className="nav-icon">
-          <img src={Archiving} alt="Archiving" />
-          <p>기록하기</p>
-        </div>
-        <div className="nav-icon">
-          <img src={MyPage} alt="MyPage" />
-          <p>마이페이지</p>
-        </div>
+      <div className="archivingpage-main-area">
+        {loading ? <ArchivingLoadingPage /> : <ArchivingCorePage setDeleteClick={setDeleteClick} />}
       </div>
+      <NavigationBar />
     </div>
   );
 }
