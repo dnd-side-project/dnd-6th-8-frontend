@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import Location from './Location';
 import LocFeed from './LocFeed';
+import EmptyFeed from './EmptyFeed';
 import './LocationFeed.scss';
-import { HomeFeedsData, locationArr } from '../../constants';
+import { HomeLocFeedData, locationArr } from '../../constants';
 
 function LocationFeed() {
   const [clickLoc, setClickLoc] = useState<string | null>('busan');
@@ -37,16 +38,20 @@ function LocationFeed() {
         })}
       </nav>
       <article>
-        {HomeFeedsData.map((feed) => (
-          <LocFeed
-            category={feed.category}
-            title={feed.title}
-            date={feed.date}
-            image={feed.image}
-            location={feed.location}
-            key={feed.heart}
-          />
-        ))}
+        {HomeLocFeedData.length === 0 ? (
+          <EmptyFeed />
+        ) : (
+          HomeLocFeedData.map((feed) => (
+            <LocFeed
+              category={feed.category}
+              title={feed.title}
+              date={feed.date}
+              image={feed.image}
+              location={feed.location}
+              key={feed.heart}
+            />
+          ))
+        )}
       </article>
     </section>
   );

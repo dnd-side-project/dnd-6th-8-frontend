@@ -1,14 +1,14 @@
 import React from 'react';
 import './Recommend.scss';
 import RecFeed from './RecFeed';
-import { HomeFeedsData } from '../../constants/index';
+import { HomeRecFeedData } from '../../constants/index';
 
 function Recommend() {
   return (
     <section className="recommend-wrapper">
       <h2 className="h2">어느 지역의 여행 기록을 보고싶나요?</h2>
       <article>
-        {HomeFeedsData.map((feed) => (
+        {HomeRecFeedData.map((feed) => (
           <RecFeed
             category={feed.category}
             date={feed.date}

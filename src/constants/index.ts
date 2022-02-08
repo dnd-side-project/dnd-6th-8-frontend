@@ -28,7 +28,32 @@ export type HomeFeedsType = {
   heart?: number;
   scrap?: number;
 };
-export const HomeFeedsData: HomeFeedsType[] = [
+
+export const HomeLocFeedData: HomeFeedsType[] = [
+  // {
+  //   category: '감정',
+  //   date: '2박3일',
+  //   title: '나의 두 번째 부산',
+  //   image: 'imgs/Home/img_busan01_home.png',
+  //   location: 'busan',
+  // },
+  // {
+  //   category: '정보',
+  //   date: '1박2일',
+  //   title: '나만 알고 싶은 색다른 부산',
+  //   image: 'imgs/Home/img_busan01_home.png',
+  //   location: 'busan',
+  // },
+  // {
+  //   category: '감정',
+  //   date: '1박2일',
+  //   title: '나의 두 번째 부산',
+  //   image: 'imgs/Home/img_busan01_home.png',
+  //   location: 'busan',
+  // },
+];
+
+export const HomeRecFeedData: HomeFeedsType[] = [
   {
     category: '감정',
     date: '2박3일',
