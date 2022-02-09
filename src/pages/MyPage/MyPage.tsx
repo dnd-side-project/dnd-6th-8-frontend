@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../components/common/Header';
 import NavigationBar from '../../components/common/NavigationBar';
+import Sticker from '../../components/MyPage/Sticker';
 import UserInfo from '../../components/MyPage/UserInfo';
 import './MyPage.scss';
 
@@ -12,6 +13,7 @@ function MyPage() {
       </header>
       <main>
         <UserInfo />
+        <Sticker />
       </main>
       <footer>
         <NavigationBar />
