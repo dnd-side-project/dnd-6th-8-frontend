@@ -1,17 +1,12 @@
 import React from 'react';
+import { HomeFeedsType } from '../../constants/index';
 
-type FeedProps = {
-  category: string;
-  title: string;
-  date: string;
-};
-
-function LocFeed({ category, title, date }: FeedProps) {
+function LocFeed({ category, date, title, image, location }: HomeFeedsType) {
   return (
     <div className="feed">
       <div className="img-container">
         <span className={`category${category === '정보' ? ' info' : ''}`}>{category}</span>
-        <img src="imgs/LocationFeed/img_busan01_home.png" alt="busan" />
+        <img src={image} alt={location} />
       </div>
       <div>
         <span className="date">{date}</span>
