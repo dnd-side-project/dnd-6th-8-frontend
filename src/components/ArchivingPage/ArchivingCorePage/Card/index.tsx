@@ -1,20 +1,14 @@
 /* eslint-disable react/button-has-type */
 import React, { useCallback } from 'react';
 import './style.scss';
+import { archivingDataType } from '../../../../constants/index';
 
 type CardProps = {
-  info: {
-    archivingStyle: string;
-    region: string;
-    period : string; 
-    completeArchive: string;
-    title: string;
-  };
-  setDeleteClick: (click : boolean) => void;
+  info: archivingDataType;
+  setDeleteClick: (click: boolean) => void;
 };
 
 function Card({ info, setDeleteClick }: CardProps) {
-
   const onDeleteHandler = useCallback(() => {
     setDeleteClick(true);
   }, []);

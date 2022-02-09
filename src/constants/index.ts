@@ -1,9 +1,26 @@
-interface archiveCorePageReadFetchData {
-  sharedInfo: Array<object>;
-  personalInfo: Array<object>;
-}
+// action 모음
+// user
+export const SIGNUP_USER = 'user/SIGNUP_USER' as const;
+export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
 
-export const archiveCorePageReadFetchData: archiveCorePageReadFetchData | undefined | null = {
+// post
+export const CREATE_POST = 'post/CREATE_POST' as const;
+export const UPDATE_POST = 'post/CREATE_POST' as const;
+
+export type archivingDataType = {
+  archivingStyle: string;
+  region: string;
+  period: string;
+  completeArchive: string;
+  title: string;
+};
+
+export type archivingDataObject = {
+  sharedInfo: Array<archivingDataType>;
+  personalInfo: Array<archivingDataType>;
+};
+
+export const archiveCorePageReadFetchData: archivingDataObject = {
   sharedInfo: [
     {
       archivingStyle: '정보',
@@ -30,15 +47,6 @@ export const archiveCorePageReadFetchData: archiveCorePageReadFetchData | undefi
     },
   ],
 };
-
-// action 모음
-// user
-export const SIGNUP_USER = 'user/SIGNUP_USER' as const;
-export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
-
-// post
-export const CREATE_POST = 'post/CREATE_POST' as const;
-export const UPDATE_POST = 'post/CREATE_POST' as const;
 
 export const locationArr = [
   { location: 'busan', locationKR: '부산' },
