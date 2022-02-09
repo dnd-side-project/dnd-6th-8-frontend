@@ -17,8 +17,12 @@
         width : 13rem; 
         height : 13rem;
         border-radius : 1.3rem;
-        background: skyblue;
+        background-image: skyblue;
         position: relative;  
+        .imgs{
+            width : 100%; 
+            height : 100%;    
+        }
         .type-정보{
             @extend %info-type; 
             background: #3c38ff;
@@ -27,6 +31,7 @@
             @extend %info-type; 
             background: #fa8418;
         }
+        
     }
     .card-info{
         padding : 0.9rem 1.6rem 0.8rem 1.6rem;

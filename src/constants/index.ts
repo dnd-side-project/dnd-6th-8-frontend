@@ -13,6 +13,7 @@ export type archivingDataType = {
   period: string;
   completeArchive: string;
   title: string;
+  img : string; 
 };
 
 export type archivingDataObject = {
@@ -28,6 +29,7 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
       period: '4박5일',
       completeArchive: '2022.01.02',
       title: '대충 다녀도 아름다운 제주도',
+      img : 'imgs/ArchivingPage/ArchivingCorePage/img_jeju01_archiving.png',
     },
     {
       archivingStyle: '감정',
@@ -35,6 +37,7 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
       period: '2박3일',
       completeArchive: '2022.02.01',
       title: '강릉바다에 풍덩!',
+      img : 'imgs/ArchivingPage/ArchivingCorePage/img_gangneung01_archiving.png',
     },
   ],
   personalInfo: [
@@ -44,6 +47,7 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
       period: '5박6일',
       completeArchive: '2022.02.12',
       title: '황홀한 아름다움, 러시아 궁전',
+      img : 'imgs/ArchivingPage/ArchivingCorePage/img_russia01_archiving.png', 
     },
   ],
 };

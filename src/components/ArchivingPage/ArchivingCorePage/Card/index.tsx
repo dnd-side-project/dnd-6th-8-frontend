@@ -16,6 +16,7 @@ function Card({ info, setDeleteClick }: CardProps) {
   return (
     <div className="card-wrapper">
       <div className="card-img">
+        <img className="imgs" src={info.img} alt="" />
         <div className={`type-${info.archivingStyle}`}>{info.archivingStyle}</div>
       </div>
       <div className="card-info">
