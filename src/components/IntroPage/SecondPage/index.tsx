@@ -9,8 +9,8 @@ function SecondPage() {
 
   useEffect(() => {
     setTimeout(() => {
-      // navigate('/survey'); 
-    }, 5000);
+      navigate('/surveyStart'); 
+    }, 3000);
   }, []);
 
   return (

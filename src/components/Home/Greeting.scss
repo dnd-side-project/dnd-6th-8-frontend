@@ -1,0 +1,42 @@
+@import '../../styles/utils.scss';
+
+.greeting-wrapper{
+    padding-top:1.6rem;
+    padding-bottom:2.3rem;
+    border-bottom:0.1rem solid #d9d9d9;
+    .greeting{
+        font-family: Pretendard-Regular;
+        font-size: 2rem;
+        line-height: 3rem;
+        margin-bottom:2rem;
+        span{
+            font-family: Pretendard-SemiBold;
+            color:$primaryPurple;
+        }
+    }
+    .image-container{
+        display: flex;
+        justify-content: flex-end;
+        .image{
+            background-color: black;
+            border-color: white;
+            border-radius: 3.5rem;
+            border-width:0.5rem;
+            border-style: solid;
+            box-sizing: border-box;
+            width:7rem;
+            height:7rem;           
+        }
+        :first-child{
+            z-index: 2;
+            margin-right:-2rem;
+        }
+        :nth-child(2){
+            z-index: 1;
+            margin-right:-2rem;
+        }
+        img{
+            width:7rem;
+        }
+    }
+}

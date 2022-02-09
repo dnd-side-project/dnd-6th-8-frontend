@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Percentage from '../../components/Survey/Percentage';
 import Question from '../../components/Survey/Question';
 import Option from '../../components/Survey/Option';
@@ -9,6 +9,7 @@ function Survey() {
   const [finish, setFinish] = useState<boolean>(false);
   const [select, setSelect] = useState<number>(0);
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate(); 
   const number: string | null = searchParams.get('number');
 
   const onNextSurvey = () => {
@@ -30,6 +31,10 @@ function Survey() {
     }, 1000);
   };
 
+  const onSubmitHandler = useCallback(()=>{
+    navigate('/home'); 
+  }, []); 
+
   return (
     <div className="survey-wrapper">
       <div className="survey">
@@ -38,7 +43,7 @@ function Survey() {
         <Option number={number} onNextSurvey={onNextSurvey} select={select} setSelect={setSelect} />
       </div>
       {number === '3' && (
-        <button type="button" className={`button ${finish && 'finish'}`}>
+        <button type="button" className={`button ${finish && 'finish'}`} onClick ={onSubmitHandler}>
           트레셔스 시작하기
         </button>
       )}
