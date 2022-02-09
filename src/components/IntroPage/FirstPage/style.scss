@@ -1,6 +1,7 @@
 .firstpage-wrapper{
-    width: 36rem;
-    height : 76rem;
+    width : 100vw; 
+    height : 100vh;
+    // overflow: visible;
     animation : intropage-wrapper 0.5s forwards; 
     .intro-message{
         display: block;

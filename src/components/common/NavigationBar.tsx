@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NavigationBar.scss';
 
 function NavigationBar() {
   const [navigation, setNavigation] = useState<string | null>('home');
-
+  const navigate = useNavigate();
   const onChangeNavigation = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setNavigation(e.currentTarget.children[0].getAttribute('alt'));
+    navigate(`/${e.currentTarget.children[0].getAttribute('alt')}`); 
   };
 
   return (

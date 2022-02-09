@@ -1,0 +1,17 @@
+.personal-wrapper{
+    width : 100%;
+    animation: toggleon 0.5s forwards;
+    .personal-book{
+        width : 100%;
+        margin-top : 2.4rem; 
+    }
+}
+
+@keyframes toggleon {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}

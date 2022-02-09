@@ -1,0 +1,61 @@
+%flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+%box{
+    opacity: 0.8;
+    border-radius: 12px;
+    background: #e7eaf6;
+}
+
+.archivingloadingpage-wrapper{
+    width : 100%;
+    height : 100%;
+    div{
+        animation: loading 2s forwards;
+    }
+    .halfSmallRectangle-line{
+        margin-top : 3.2rem; 
+        margin-bottom : 2.4rem; 
+    }
+    .squareHalfBig1-line{
+        @extend %flex;
+    }
+    .squareHalfBig2-line{
+        @extend %flex;
+        margin-top : 1.6rem; 
+    }
+    .allRectangle{
+        width : 100%; 
+        height : 8.2rem; 
+        @extend %box; 
+    }
+    .halfSmallRectangle{
+        width : 45%; 
+        height : 3.2rem; 
+        @extend %box;
+    }
+    .square{
+        width : 40%; 
+        height : 13rem; 
+        @extend %box;
+    }
+    .halfBigRectangle{
+        width : 55%; 
+        height : 13rem; 
+        @extend %box;
+    }
+}
+
+@keyframes loading {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
