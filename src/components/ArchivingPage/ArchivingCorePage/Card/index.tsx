@@ -1,10 +1,15 @@
 /* eslint-disable react/button-has-type */
-import React, { useCallback, useState } from 'react';
-import DeleteDialog from '../DeleteDialog';
+import React, { useCallback } from 'react';
 import './style.scss';
 
 type CardProps = {
-  info: any;
+  info: {
+    archivingStyle: string;
+    region: string;
+    period : string; 
+    completeArchive: string;
+    title: string;
+  };
   setDeleteClick: (click : boolean) => void;
 };
 

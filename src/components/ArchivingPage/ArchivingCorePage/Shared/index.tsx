@@ -5,9 +5,23 @@ import Card from '../Card';
 import './style.scss';
 
 type SharedProps = {
-  sharedInfo: any;
+  sharedInfo: Array<{
+    archivingStyle: string;
+    region: string;
+    period : string; 
+    completeArchive: string;
+    title: string;
+  }>;
   setDeleteClick: (click: boolean) => void;
 };
+
+interface sharedMap {
+  archivingStyle: string;
+  region: string;
+  period : string;
+  completeArchive: string;
+  title: string;
+}
 
 function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
@@ -16,16 +30,15 @@ function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
   useEffect(() => {
     if (sharedInfo !== undefined) {
       setFetchData(true);
-      setFetchDataLength(sharedInfo.length); 
+      setFetchDataLength(sharedInfo.length);
     }
   }, [sharedInfo]);
 
   return (
     <div className="shared-wrapper">
       {fetchDataLength ? (
-        sharedInfo.map((value: any) => {
-          // eslint-disable-next-line react/jsx-key
-          return <Card info={value} setDeleteClick={setDeleteClick}/>;
+        sharedInfo.map((value: sharedMap) => {
+          return <Card info={value} setDeleteClick={setDeleteClick} key={value.title} />;
         })
       ) : (
         <Book className="shared-book" />

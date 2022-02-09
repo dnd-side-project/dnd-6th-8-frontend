@@ -3,7 +3,7 @@ interface archiveCorePageReadFetchData {
   personalInfo: Array<object>;
 }
 
-export const archiveCorePageReadFetchData: any = {
+export const archiveCorePageReadFetchData: archiveCorePageReadFetchData | undefined | null = {
   sharedInfo: [
     {
       archivingStyle: '정보',

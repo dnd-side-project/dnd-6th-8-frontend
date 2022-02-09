@@ -6,26 +6,61 @@ import { ReactComponent as AddBtn } from '../../../assets/icons/ArchivingPage/Ar
 import Personal from './Personal';
 import Shared from './Shared';
 import HistoryBox from './HistoryBox';
-import { archiveCorePageReadFetchData } from '../../../constants/index';
 
-type ArchivingCorePage= {
+type ArchivingCorePage = {
   setDeleteClick: (click: boolean) => void;
 };
 
-function ArchivingCorePage({setDeleteClick} : ArchivingCorePage) {
-  const [sharedInfo, setSharedInfo] = useState();
-  const [personalInfo, setPersonalInfo] = useState();
-  const [sharedInfoLen, setSharedInfoLen] = useState<number>(0); 
-  const [personalInfoLen, setPersonalInfoLen] = useState<number>(0); 
+interface data {
+  archivingStyle: string;
+  region: string;
+  period: string;
+  completeArchive: string;
+  title: string;
+}
+
+function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
+  const archiveCorePageReadFetchData = {
+    sharedInfo: [
+      {
+        archivingStyle: '정보',
+        region: '제주도',
+        period: '4박5일',
+        completeArchive: '2022.01.02',
+        title: '대충 다녀도 아름다운 제주도',
+      },
+      {
+        archivingStyle: '감정',
+        region: '강릉/속초',
+        period: '2박3일',
+        completeArchive: '2022.02.01',
+        title: '강릉바다에 풍덩!',
+      },
+    ],
+    personalInfo: [
+      {
+        archivingStyle: '감정',
+        region: '러시아',
+        period: '5박6일',
+        completeArchive: '2022.02.12',
+        title: '황홀한 아름다움, 러시아 궁전',
+      },
+      
+    ],
+  };
+  const [sharedInfo, setSharedInfo] = useState<data[]>([]);
+  const [personalInfo, setPersonalInfo] = useState<data[]>([]);
+  const [sharedInfoLen, setSharedInfoLen] = useState<number>(0);
+  const [personalInfoLen, setPersonalInfoLen] = useState<number>(0);
 
   useEffect(() => {
     if (archiveCorePageReadFetchData !== undefined || archiveCorePageReadFetchData !== null) {
       setSharedInfo(archiveCorePageReadFetchData.sharedInfo);
       setPersonalInfo(archiveCorePageReadFetchData.personalInfo);
-      setSharedInfoLen(archiveCorePageReadFetchData.sharedInfo.length); 
-      setPersonalInfoLen(archiveCorePageReadFetchData.personalInfo.length); 
+      setSharedInfoLen(archiveCorePageReadFetchData.sharedInfo.length);
+      setPersonalInfoLen(archiveCorePageReadFetchData.personalInfo.length);
     }
-  }, [archiveCorePageReadFetchData]);
+  }, []);
 
   const [sharedClick, setSharedClick] = useState<boolean>(true);
   const [personalClick, setPersonalClick] = useState<boolean>(true);
@@ -35,7 +70,6 @@ function ArchivingCorePage({setDeleteClick} : ArchivingCorePage) {
 
   return (
     <div className="archivingCorePage-wrapper">
-      
       <HistoryBox sharedInfo={sharedInfo} personalInfo={personalInfo} />
       <div className="travel-feed">
         <div className="feed-title-area">
@@ -45,7 +79,7 @@ function ArchivingCorePage({setDeleteClick} : ArchivingCorePage) {
           {sharedClick ? <DownToggle onClick={onSharedClick} /> : <UpToggle onClick={onSharedClick} />}
         </div>
       </div>
-      {sharedClick && <Shared sharedInfo={sharedInfo} setDeleteClick={setDeleteClick}/>}
+      {sharedClick && <Shared sharedInfo={sharedInfo} setDeleteClick={setDeleteClick} />}
       <div className="travel-feed">
         <div className="feed-title-area">
           <span>개인소장 여행 피드</span> <span className="count">{personalInfoLen && personalInfoLen}</span>
@@ -54,7 +88,7 @@ function ArchivingCorePage({setDeleteClick} : ArchivingCorePage) {
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}
         </div>
       </div>
-      {personalClick && <Personal personalInfo={personalInfo} setDeleteClick={setDeleteClick}/>}
+      {personalClick && <Personal personalInfo={personalInfo} setDeleteClick={setDeleteClick} />}
       <AddBtn className="add-btn" />
     </div>
   );

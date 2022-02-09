@@ -4,9 +4,23 @@ import Card from '../Card';
 import './style.scss';
 
 type PersonalProps = {
-  personalInfo: null | any;
+  personalInfo: Array<{
+    archivingStyle: string;
+    region: string;
+    period: string,
+    completeArchive: string;
+    title: string;
+  }>;
   setDeleteClick: (click: boolean) => void;
 };
+
+interface personalMap {
+  archivingStyle: string;
+  region: string;
+  period: string;
+  completeArchive: string;
+  title: string;
+}
 
 function Personal({ personalInfo, setDeleteClick }: PersonalProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
@@ -15,16 +29,15 @@ function Personal({ personalInfo, setDeleteClick }: PersonalProps) {
   useEffect(() => {
     if (personalInfo !== undefined) {
       setFetchData(true);
-      setFetchDataLength(personalInfo.length); 
+      setFetchDataLength(personalInfo.length);
     }
   }, [personalInfo]);
 
   return (
     <div className="personal-wrapper">
       {fetchDataLength ? (
-        personalInfo.map((value: any) => {
-          // eslint-disable-next-line react/jsx-key
-          return <Card info={value} setDeleteClick={setDeleteClick} />;
+        personalInfo.map((value: personalMap) => {
+          return <Card info={value} setDeleteClick={setDeleteClick} key={value.title} />;
         })
       ) : (
         <Book className="personal-book" />

@@ -2,14 +2,28 @@ import React, { useEffect, useState } from 'react';
 import './style.scss';
 
 type HistoryBoxProps = {
-  sharedInfo: any;
-  personalInfo: any;
+  sharedInfo: Array<{
+    archivingStyle : string,
+    region : string,
+    period: string; 
+    completeArchive : string, 
+    title : string, 
+  }>;
+  personalInfo: Array<{
+    archivingStyle : string,
+    region : string, 
+    period: string;
+    completeArchive : string, 
+    title : string, 
+  }>;
 };
 
 interface IconArray {
-  region: string;
-  period: string;
-  completeArchive: string;
+    archivingStyle: string;
+    region: string;
+    period: string;
+    completeArchive: string;
+    title : string;
 }
 
 function HistoryBox({ sharedInfo, personalInfo }: HistoryBoxProps) {
@@ -32,9 +46,9 @@ function HistoryBox({ sharedInfo, personalInfo }: HistoryBoxProps) {
       <div className="history-icon">
         {historyIcon ? (
           <>
-            {iconArray.map((value: any) => {
+            {iconArray.map((value: IconArray) => {
               return (
-                <div className="icon-box" key={value}>
+                <div className="icon-box" key={value.title}>
                   <div className="icon">🚄</div>
                   <div className="region">
                     {value.region}
