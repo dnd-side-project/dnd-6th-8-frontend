@@ -1,0 +1,32 @@
+@import '../../styles/utils.scss';
+
+.menu-wrapper{
+    width:100%;
+    margin-top:2.4rem;
+    padding:0.8rem 0.6rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
+    background-color: white;
+    .menu{
+        padding:0.6rem 0.6rem 1.4rem;
+        border-bottom:0.1rem solid $black30;
+        display: flex;
+        img{
+            width:2.4rem;
+            margin-right:1.2rem;
+        }
+        span{
+            font-family: Pretendard-Regular;
+            font-size:1.6rem;
+            line-height:2.4rem;
+            color:$greyishBrown;
+        }
+        &+.menu{
+            margin-top:0.8rem;
+        }
+        &:last-child{
+            border-bottom:none;
+            padding-bottom:0.7rem;
+        }
+    }
+}
