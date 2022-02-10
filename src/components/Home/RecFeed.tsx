@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import './Recommend.scss';
+import { useNavigate } from 'react-router-dom';
 import { HomeFeedsType } from '../../constants/index';
 
-function RecFeed({ category, date, title, image, location, locationKR, text, heart, scrap }: HomeFeedsType) {
+function RecFeed({ id, category, date, title, image, location, locationKR, text, heart, scrap }: HomeFeedsType) {
+  const navigate = useNavigate();
+  const gotoWallPaperHandler = useCallback(() => {
+    navigate(`/wallpaper/${id}`);
+  }, []);
   return (
     <div className="feed">
       <div className="img-container">
         <span className={`category${category === '정보' ? ' info' : ''}`}>{category}</span>
-        <img src={image} alt={location} />
+        <img src={image} alt={location} onClick={gotoWallPaperHandler} aria-hidden="true" />
       </div>
       <div className="detail-container">
         <div className="detail">
@@ -15,8 +20,8 @@ function RecFeed({ category, date, title, image, location, locationKR, text, hea
           <span className="kr">{locationKR}</span>
           <span className="date">{date}</span>
         </div>
-        <h4>{title}</h4>
-        <div className="text">{text}</div>
+        <h4 onClick={gotoWallPaperHandler} aria-hidden="true" >{title}</h4>
+        <div className="text" onClick={gotoWallPaperHandler} aria-hidden="true" >{text}</div>
         <div className="icon-container">
           <img src="imgs/Home/ic_redheart.png" alt="heart" />
           <span>{heart}</span>

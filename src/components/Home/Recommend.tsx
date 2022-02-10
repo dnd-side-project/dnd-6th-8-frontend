@@ -10,6 +10,7 @@ function Recommend() {
       <article>
         {HomeRecFeedData.map((feed) => (
           <RecFeed
+            id = {feed.id}
             category={feed.category}
             date={feed.date}
             title={feed.title}

@@ -8,6 +8,7 @@ export const CREATE_POST = 'post/CREATE_POST' as const;
 export const UPDATE_POST = 'post/CREATE_POST' as const;
 
 export type archivingDataType = {
+  id : number, 
   archivingStyle: string;
   region: string;
   period: string;
@@ -24,6 +25,7 @@ export type archivingDataObject = {
 export const archiveCorePageReadFetchData: archivingDataObject = {
   sharedInfo: [
     {
+      id : 0,
       archivingStyle: '정보',
       region: '제주도',
       period: '4박5일',
@@ -32,6 +34,7 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
       img : 'imgs/ArchivingPage/ArchivingCorePage/img_jeju01_archiving.png',
     },
     {
+      id : 1, 
       archivingStyle: '감정',
       region: '강릉/속초',
       period: '2박3일',
@@ -42,6 +45,7 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
   ],
   personalInfo: [
     {
+      id : 2, 
       archivingStyle: '감정',
       region: '러시아',
       period: '5박6일',
@@ -63,6 +67,7 @@ export const locationArr = [
 ];
 
 export type HomeFeedsType = {
+  id : number; 
   category: string;
   date: string;
   title: string;
@@ -100,6 +105,7 @@ export const HomeLocFeedData: HomeFeedsType[] = [
 
 export const HomeRecFeedData: HomeFeedsType[] = [
   {
+    id : 0, 
     category: '감정',
     date: '2박3일',
     title: '나의 두 번째 부산',
@@ -111,6 +117,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 21,
   },
   {
+    id : 1, 
     category: '정보',
     date: '1박2일',
     title: '나만 알고 싶은 색다른 부산',
@@ -122,6 +129,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 11,
   },
   {
+    id : 2, 
     category: '감정',
     date: '1박2일',
     title: '나의 두 번째 부산',

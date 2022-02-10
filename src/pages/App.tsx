@@ -6,17 +6,19 @@ import WelcomePage from './WelcomePage';
 import IntroPage from './IntroPage';
 import ArchivingPage from './ArchivingPage';
 import Home from './Home/Home';
+import WallPaper from './WallPaper';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<WelcomePage />} />
-        <Route path='/intro' element={<IntroPage />} />
-        <Route path='/archiving' element={<ArchivingPage />} />
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/intro" element={<IntroPage />} />
+        <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/wallpaper/:id" element={<WallPaper />} />
       </Routes>
     </Router>
   );
