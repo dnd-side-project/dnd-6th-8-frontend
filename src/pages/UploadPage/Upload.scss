@@ -1,1 +1,25 @@
 @import '../../styles/utils.scss';
+
+.upload-wrapper{
+
+    main{
+        padding:5.8rem 1.6rem 1.6rem;
+        .notice{
+            border-radius: 1.2rem;
+            box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
+            padding:1.4rem 1.6rem;
+            img{
+                width:1.8rem;
+                margin-right:0.8rem;
+            }
+            font-family: Pretendard-Medium;
+            font-size:1.4rem;
+            line-height:2.2rem;
+            color:$black90;
+            span{
+                color:$coral;
+            }
+
+        }
+    }
+}
