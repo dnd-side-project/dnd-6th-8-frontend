@@ -1,0 +1,20 @@
+@import '../../styles/utils.scss';
+
+.uploadQuestion-wrapper{
+    width:100%;
+    display: flex;
+    align-items: center;
+    .number{
+        width:2.2rem;
+        height:2.2rem;
+        background-color: $black10;
+        border-radius: 50%;
+        @include font-face(Pretendard-SemiBold, 1.4rem, 1.8rem, $primary60);
+        padding:0.2rem 0.75rem;
+        margin-right:1.2rem;
+    }
+    .title{
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black90)
+    }
+
+}

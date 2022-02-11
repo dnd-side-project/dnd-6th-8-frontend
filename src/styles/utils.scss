@@ -20,6 +20,13 @@ $infoBlu:#3c38ff;
 $coral:#ff4a4a;
 
 //font
+@mixin font-face($name, $size, $line, $color){
+    font-family:$name; 
+    font-size:$size;
+    line-height:$line;
+    color:$color;
+}
+
 @font-face {
     font-family: "Pretendard-SemiBold";
     src: url(../fonts/Pretendard-SemiBold.otf);

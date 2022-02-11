@@ -1,15 +1,15 @@
 import React from 'react';
-import './Header.scss';
+import './UploadHeader.scss';
 
-type HeaderProps = {
+type UploadHeaderProps = {
   isLeftButtonX: boolean;
   isRightButtonSave: boolean;
   title: string;
 };
 
-function Header({ isLeftButtonX, isRightButtonSave, title }: HeaderProps) {
+function UploadHeader({ isLeftButtonX, isRightButtonSave, title }: UploadHeaderProps) {
   return (
-    <header className="header-wrapper">
+    <header className="uploadHeader-wrapper">
       {isLeftButtonX ? <img src="imgs/UploadPage/ic_x.png" alt="x" /> : <button type="button">나가기</button>}
       <span>{title}</span>
       {isRightButtonSave ? (
@@ -23,4 +23,4 @@ function Header({ isLeftButtonX, isRightButtonSave, title }: HeaderProps) {
   );
 }
 
-export default Header;
+export default UploadHeader;
