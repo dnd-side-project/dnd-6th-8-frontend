@@ -10,9 +10,9 @@ function RecFeed({ id, category, date, title, image, location, locationKR, text,
   }, []);
   return (
     <div className="feed">
-      <div className="img-container">
+      <div className="img-container" onClick={gotoWallPaperHandler} aria-hidden="true">
         <span className={`category${category === '정보' ? ' info' : ''}`}>{category}</span>
-        <img src={image} alt={location} onClick={gotoWallPaperHandler} aria-hidden="true" />
+        <img src={image} alt={location} />
       </div>
       <div className="detail-container">
         <div className="detail">
@@ -20,8 +20,8 @@ function RecFeed({ id, category, date, title, image, location, locationKR, text,
           <span className="kr">{locationKR}</span>
           <span className="date">{date}</span>
         </div>
-        <h4 onClick={gotoWallPaperHandler} aria-hidden="true" >{title}</h4>
-        <div className="text" onClick={gotoWallPaperHandler} aria-hidden="true" >{text}</div>
+        <h4>{title}</h4>
+        <div className="text">{text}</div>
         <div className="icon-container">
           <img src="imgs/Home/ic_redheart.png" alt="heart" />
           <span>{heart}</span>

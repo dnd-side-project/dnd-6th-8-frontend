@@ -1,0 +1,43 @@
+@import '../../styles/utils.scss';
+
+.userInfo-wrapper{
+    width:100%;
+    .container{
+        display:grid;
+        grid-template-columns: 5.2rem 1fr;
+        column-gap:1.6rem;
+        row-gap:0.4rem;
+        align-items: center;
+        padding:2rem 1.2rem;
+        border-radius: 1.2rem;
+        box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
+        .profile{
+            width:5.2rem;
+            &:nth-child(1){
+                grid-row:1/3;
+            }
+        }
+        .name-container{
+            display: flex;
+            align-items: center;
+            .name{
+                font-family: Pretendard-Regular;
+                font-size:1.6rem;
+                line-height:2.2rem;
+                color:$black90;
+                margin-right:0.8rem;
+                
+            }
+            .arrow{
+                width:1.6rem;
+                height:1.6rem;
+            }
+        }
+        .archiving{
+            font-family: Pretendard-Regular;
+            font-size:1.4rem;
+            line-height:2.2rem;
+            color:$black70;
+        }
+    }
+}

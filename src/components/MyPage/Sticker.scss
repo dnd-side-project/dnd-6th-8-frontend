@@ -1,0 +1,76 @@
+@import '../../styles/utils.scss';
+
+.sticker-wrapper{
+    width:100%;
+    margin-top:2.4rem;
+    padding:1rem 1.2rem 0.8rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
+    background-color: white;
+    h2{
+        padding-bottom:1.2rem;
+        font-family: Pretendard-SemiBold;
+        font-size:1.6rem;
+        line-height: 2.4rem;
+        color:$black90;
+        border-bottom:0.1rem solid $black30;
+        margin-bottom:1.2rem;
+    }
+    .bgstyle-container{
+        display: flex;
+        margin-bottom:1.2rem;
+        h4{
+            font-family: Pretendard-Regular;
+            font-size:1.4rem;
+            line-height:1.8rem;
+            color:$black70;
+        }
+        .images{
+            margin-left:1.2rem;
+            display: flex;
+            img{
+                width:2rem;
+                &+img{
+                    margin-left:0.6rem;
+                }
+            }
+        }
+
+    }
+    .sticker-container{
+        width:30.4rem;
+        position: relative;
+        margin-bottom:1rem;
+        img{
+            width:100%;
+        }
+        .stickers{
+            position:absolute;
+            margin:1rem 1.2rem;
+            top:0;
+            img{
+                width:7rem;
+            }
+            .none{
+                width:6rem;
+                margin:0.5rem;
+            }
+        }
+    }
+    .pages-container{
+        text-align: center;
+        span{
+            width:1.7rem;
+            height:2.2rem;
+            font-family:Pretendard-Regular;
+            line-height:2.2rem;
+            font-size:1.4rem;
+            color:$black60;
+            background-color: $bg2;
+            padding:0.4rem 1rem;
+            border-radius: 1.2rem;
+            box-sizing: border-box;
+        
+        }
+    }
+}

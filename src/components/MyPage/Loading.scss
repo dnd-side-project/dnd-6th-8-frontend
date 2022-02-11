@@ -1,0 +1,12 @@
+@import '../../styles/utils.scss';
+
+.loading-wrapper{
+    width:100%;
+    background-color: $black20;
+    opacity: 0.8;
+    border-radius: 1.2rem;
+    display: block;
+    &+.loading-wrapper{
+        margin-top:2.4rem;
+    }
+}
