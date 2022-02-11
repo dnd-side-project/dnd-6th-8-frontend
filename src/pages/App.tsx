@@ -7,6 +7,7 @@ import IntroPage from './IntroPage';
 import ArchivingPage from './ArchivingPage';
 import Home from './Home/Home';
 import MyPage from './MyPage/MyPage';
+import Upload from './UploadPage/Upload';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/survey" element={<Survey />} />
         <Route path="/home" element={<Home />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/upload" element={<Upload />} />
       </Routes>
     </Router>
   );
