@@ -4,6 +4,7 @@
     width:100%;
     display: flex;
     align-items: center;
+    margin-bottom: 1.6rem;
     .number{
         width:2.2rem;
         height:2.2rem;
@@ -14,7 +15,12 @@
         margin-right:1.2rem;
     }
     .title{
-        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black90)
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black90);
+        margin-right:0.4rem;
+    }
+    span{
+        @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black60);
+        margin:0.2rem 0;
     }
 
 }

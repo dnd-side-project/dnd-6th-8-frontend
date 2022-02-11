@@ -11,6 +11,7 @@ function UploadQuestion({ number, title }: UploadQuestionProps) {
     <div className="uploadQuestion-wrapper">
       <div className="number">{number}</div>
       <div className="title">{title}</div>
+      {number === 1 && <span>(1장선택)</span>}
     </div>
   );
 }
