@@ -2,19 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WallPaperHeader from '../../components/WallPaper/WallPaperHeader';
 import WallPaperPreview from '../../components/WallPaper/WallPaperPreview';
-import { HomeRecFeedData } from '../../constants';
+import { HomeRecFeedData, HomeFeedsType } from '../../constants';
 import './style.scss';
 
 function WallPaper() {
   const { id } = useParams();
-  const [imgUrl, setImgUrl] = useState<string>();
+  const [fetchData, setFetchData] = useState<HomeFeedsType | undefined>();
+
   useEffect(() => {
-    setImgUrl(HomeRecFeedData[Number(id)].image);
-  }, []);
+    setFetchData(HomeRecFeedData[Number(id)]);
+  }, [HomeRecFeedData]);
+
   return (
     <div className="wallpaper-wrapper">
       <WallPaperHeader />
-      <WallPaperPreview />
+      <WallPaperPreview fetchData={fetchData} />
     </div>
   );
 }
