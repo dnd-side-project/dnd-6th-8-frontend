@@ -3,10 +3,10 @@
 .uploadWallPaper-wrapper{
 
     main{
-        padding:5.8rem 1.6rem 1.6rem;
+        padding:5.8rem 1.6rem 7rem;
         button{
             border:none;
-            background-color: transparent;
+            //background-color: transparent;
         }
         .notice{
             border-radius: 1.2rem;
@@ -76,6 +76,23 @@
             
         }
         .three{
+            .toggle+.toggle{
+                margin-top:1.2rem;
+            }
+            
+        }
+        .four{
+            .date-container{
+                display: flex;
+                align-items: center;
+                .line{
+                    width:1.6rem;
+                    display: inline-block;
+                    border-bottom:0.1rem solid $black60;
+                    margin:0 0.8rem;
+    
+                }
+            }
             
         }
         

@@ -1,8 +1,16 @@
 import React from 'react';
 import './UploadWallPaperToggle.scss';
 
-function UploadWallPaperToggle() {
-  return <div>hello</div>;
+type UploadWallPaperToggleProps = {
+  text: string;
+};
+
+function UploadWallPaperToggle({ text }: UploadWallPaperToggleProps) {
+  return (
+    <button type="button" className="uploadWallPaperToggle-wrapper">
+      {text}
+    </button>
+  );
 }
 
 export default UploadWallPaperToggle;
