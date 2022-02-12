@@ -7,9 +7,11 @@ import BottomButton from '../../components/common/BottomButton';
 
 function UploadWallPaper() {
   // 1번 질문
-  const [selected1, setSelected1] = useState<boolean>(false);
-  const onUploadImage = () => {
-    setSelected1(true);
+  const [selected1, setSelected1] = useState<File | null>(null);
+  const onUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target.files[0]);
+    if (!e.target.files) return;
+    setSelected1(e.target.files[0]);
   };
   // 2번 질문
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,13 +41,20 @@ function UploadWallPaper() {
         </div>
         <div className="one question">
           <UploadQuestion number={1} title="커버사진을 업로드해주세요." />
-          <button type="button" onClick={onUploadImage}>
+          <label htmlFor="upload">
             <img src="imgs/UploadPage/ic_camera.png" alt="camera" />
             <div>
               <span>{selected1 ? 1 : 0}</span>
               <span>/1</span>
             </div>
-          </button>
+          </label>
+          <input
+            type="file"
+            accept="image/x-png,image/jpeg,image/gif"
+            multiple={false}
+            onChange={(e) => onUploadImage(e)}
+            id="upload"
+          />
         </div>
         <div className="two question">
           <UploadQuestion number={2} title="제목을 입력해주세요." />

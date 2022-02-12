@@ -3,7 +3,7 @@ import './BottomButton.scss';
 
 type BottomButtonProps = {
   selected: [
-    selected1: boolean,
+    selected1: File | null,
     selected2: string,
     selected3: number,
     selected4: number,
@@ -15,7 +15,7 @@ type BottomButtonProps = {
 
 function BottomButton({ selected }: BottomButtonProps) {
   const complete: boolean =
-    selected[0] &&
+    selected[0] !== null &&
     selected[1] !== '' &&
     selected[2] > 0 &&
     selected[3] > 0 &&

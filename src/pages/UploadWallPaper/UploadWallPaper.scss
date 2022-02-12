@@ -23,12 +23,11 @@
 
         }
         .one{
-            button{
+            label{
                 width:9rem;
                 height:9rem;
                 border-radius: 1.2rem;
                 background-color: $bg2;
-                border:none;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -43,6 +42,16 @@
                         color:$black50;
                     }
                 }
+            }
+            input[type="file"]{
+                position: absolute; 
+                width: 1px; 
+                height: 1px; 
+                padding: 0; 
+                margin: -1px; 
+                overflow: hidden; 
+                clip:rect(0,0,0,0); 
+                border: 0;
             }
             
         }
