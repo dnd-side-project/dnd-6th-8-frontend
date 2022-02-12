@@ -1,13 +1,8 @@
 @import '../../styles/utils.scss';
 
 .uploadWallPaper-wrapper{
-
     main{
         padding:5.8rem 1.6rem 7rem;
-        button{
-            border:none;
-            //background-color: transparent;
-        }
         .notice{
             border-radius: 1.2rem;
             box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
@@ -33,6 +28,7 @@
                 height:9rem;
                 border-radius: 1.2rem;
                 background-color: $bg2;
+                border:none;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -66,12 +62,18 @@
                         color:$black50;
                     }
                 }
-                img{
+                button{
+                    border:none;
+                    background-color: transparent;
                     position:absolute;
+                    padding:0;
                     right:0;
                     bottom:0.3rem;
-                    width:2rem;
+                    img{
+                        width:2rem;
+                    }
                 }
+                
             }
             
         }
