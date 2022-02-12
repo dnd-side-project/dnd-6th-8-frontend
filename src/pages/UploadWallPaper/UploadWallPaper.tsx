@@ -1,11 +1,12 @@
 import React from 'react';
-import './Upload.scss';
-import UploadHeader from '../../components/UploadPage/UploadHeader';
-import UploadQuestion from '../../components/UploadPage/UploadQuestion';
+import './UploadWallPaper.scss';
+import UploadHeader from '../../components/UploadWallPaper/UploadWallPaperHeader';
+import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
+import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 
-function Upload() {
+function UploadWallPaper() {
   return (
-    <div className="upload-wrapper">
+    <div className="uploadWallPaper-wrapper">
       <UploadHeader isLeftButtonX={false} isRightButtonSave title="표지작성" />
       <main>
         <div className="notice">
@@ -31,10 +32,11 @@ function Upload() {
         </div>
         <div className="three question">
           <UploadQuestion number={3} title="여행 장소를 입력해주세요." />
+          <UploadToggle />
         </div>
       </main>
     </div>
   );
 }
 
-export default Upload;
+export default UploadWallPaper;
