@@ -1,36 +1,3 @@
-interface archiveCorePageReadFetchData {
-  sharedInfo: Array<object>;
-  personalInfo: Array<object>;
-}
-
-export const archiveCorePageReadFetchData: archiveCorePageReadFetchData | undefined | null = {
-  sharedInfo: [
-    {
-      archivingStyle: '정보',
-      region: '제주도',
-      period: '4박5일',
-      completeArchive: '2022.01.02',
-      title: '대충 다녀도 아름다운 제주도',
-    },
-    {
-      archivingStyle: '감정',
-      region: '강릉/속초',
-      period: '2박3일',
-      completeArchive: '2022.02.01',
-      title: '강릉바다에 풍덩!',
-    },
-  ],
-  personalInfo: [
-    {
-      archivingStyle: '감정',
-      region: '러시아',
-      period: '5박6일',
-      completeArchive: '2022.02.12',
-      title: '황홀한 아름다움, 러시아 궁전',
-    },
-  ],
-};
-
 // action 모음
 // user
 export const SIGNUP_USER = 'user/SIGNUP_USER' as const;
@@ -39,6 +6,55 @@ export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
 // post
 export const CREATE_POST = 'post/CREATE_POST' as const;
 export const UPDATE_POST = 'post/CREATE_POST' as const;
+
+export type archivingDataType = {
+  id : number, 
+  archivingStyle: string;
+  region: string;
+  period: string;
+  completeArchive: string;
+  title: string;
+  img : string; 
+};
+
+export type archivingDataObject = {
+  sharedInfo: Array<archivingDataType>;
+  personalInfo: Array<archivingDataType>;
+};
+
+export const archiveCorePageReadFetchData: archivingDataObject = {
+  sharedInfo: [
+    {
+      id : 0,
+      archivingStyle: '정보',
+      region: '제주도',
+      period: '4박5일',
+      completeArchive: '2022.01.02',
+      title: '대충 다녀도 아름다운 제주도',
+      img : 'imgs/ArchivingPage/ArchivingCorePage/img_jeju01_archiving.png',
+    },
+    {
+      id : 1, 
+      archivingStyle: '감정',
+      region: '강릉/속초',
+      period: '2박3일',
+      completeArchive: '2022.02.01',
+      title: '강릉바다에 풍덩!',
+      img : 'imgs/ArchivingPage/ArchivingCorePage/img_gangneung01_archiving.png',
+    },
+  ],
+  personalInfo: [
+    {
+      id : 2, 
+      archivingStyle: '감정',
+      region: '러시아',
+      period: '5박6일',
+      completeArchive: '2022.02.12',
+      title: '황홀한 아름다움, 러시아 궁전',
+      img : 'imgs/ArchivingPage/ArchivingCorePage/img_russia01_archiving.png', 
+    },
+  ],
+};
 
 export const locationArr = [
   { location: 'busan', locationKR: '부산' },
@@ -51,6 +67,7 @@ export const locationArr = [
 ];
 
 export type HomeFeedsType = {
+  id : number; 
   category: string;
   date: string;
   title: string;
@@ -88,6 +105,7 @@ export const HomeLocFeedData: HomeFeedsType[] = [
 
 export const HomeRecFeedData: HomeFeedsType[] = [
   {
+    id : 0, 
     category: '감정',
     date: '2박3일',
     title: '나의 두 번째 부산',
@@ -99,6 +117,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 21,
   },
   {
+    id : 1, 
     category: '정보',
     date: '1박2일',
     title: '나만 알고 싶은 색다른 부산',
@@ -110,6 +129,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 11,
   },
   {
+    id : 2, 
     category: '감정',
     date: '1박2일',
     title: '나의 두 번째 부산',

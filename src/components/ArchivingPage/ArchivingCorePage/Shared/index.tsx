@@ -3,25 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { ReactComponent as Book } from '../../../../assets/icons/ArchivingPage/ArchivingCorePage/book.svg';
 import Card from '../Card';
 import './style.scss';
+import { archivingDataType } from '../../../../constants/index';
 
 type SharedProps = {
-  sharedInfo: Array<{
-    archivingStyle: string;
-    region: string;
-    period : string; 
-    completeArchive: string;
-    title: string;
-  }>;
+  sharedInfo: archivingDataType[];
   setDeleteClick: (click: boolean) => void;
 };
-
-interface sharedMap {
-  archivingStyle: string;
-  region: string;
-  period : string;
-  completeArchive: string;
-  title: string;
-}
 
 function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
@@ -37,7 +24,7 @@ function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
   return (
     <div className="shared-wrapper">
       {fetchDataLength ? (
-        sharedInfo.map((value: sharedMap) => {
+        sharedInfo.map((value: archivingDataType) => {
           return <Card info={value} setDeleteClick={setDeleteClick} key={value.title} />;
         })
       ) : (

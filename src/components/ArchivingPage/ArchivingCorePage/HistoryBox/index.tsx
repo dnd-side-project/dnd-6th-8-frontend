@@ -1,34 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './style.scss';
+import { archivingDataType } from '../../../../constants/index';
 
 type HistoryBoxProps = {
-  sharedInfo: Array<{
-    archivingStyle : string,
-    region : string,
-    period: string; 
-    completeArchive : string, 
-    title : string, 
-  }>;
-  personalInfo: Array<{
-    archivingStyle : string,
-    region : string, 
-    period: string;
-    completeArchive : string, 
-    title : string, 
-  }>;
+  sharedInfo: archivingDataType[];
+  personalInfo: archivingDataType[];
 };
-
-interface IconArray {
-    archivingStyle: string;
-    region: string;
-    period: string;
-    completeArchive: string;
-    title : string;
-}
 
 function HistoryBox({ sharedInfo, personalInfo }: HistoryBoxProps) {
   const [historyIcon, setHistoryIcon] = useState<boolean>(false);
-  const [iconArray, setIconArray] = useState<IconArray[]>([]);
+  const [iconArray, setIconArray] = useState<archivingDataType[]>([]);
   useEffect(() => {
     if (sharedInfo !== undefined || personalInfo !== undefined) {
       setHistoryIcon(true);
@@ -46,7 +27,7 @@ function HistoryBox({ sharedInfo, personalInfo }: HistoryBoxProps) {
       <div className="history-icon">
         {historyIcon ? (
           <>
-            {iconArray.map((value: IconArray) => {
+            {iconArray.map((value: archivingDataType) => {
               return (
                 <div className="icon-box" key={value.title}>
                   <div className="icon">🚄</div>

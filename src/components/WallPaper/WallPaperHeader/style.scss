@@ -1,0 +1,42 @@
+%shared-text{
+    font-family: 'Pretendard-Regular';
+    font-size: 14px;
+    line-height: 1.57;
+    margin-right : 0.6rem; 
+}
+
+.wallpaperheader-wrapper{
+    position: fixed;
+    top : 0; 
+    left : 0; 
+    right : 0; 
+    // width : 100%; 
+    height : 4.2rem;
+    padding : 0.9rem 1.6rem; 
+    display : flex; 
+    justify-content: space-between;
+    background-color: white;
+    z-index: 5;
+    img {
+        height : 100%; 
+        cursor: pointer;
+    }
+    .header-left{
+
+    }
+    .header-right {
+        display: flex;
+        align-items: center;
+        .hamburger-logo {
+            margin-left: 1.6rem; 
+        }
+        .shared-text{
+            @extend %shared-text; 
+            color : #5b21ff;
+        }
+        .not-shared-text{
+            @extend %shared-text; 
+            color : #c4c7d3; 
+        }
+    }
+}

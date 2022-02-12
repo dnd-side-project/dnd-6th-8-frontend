@@ -43,6 +43,7 @@ function LocationFeed() {
         ) : (
           HomeLocFeedData.map((feed) => (
             <LocFeed
+              id = {feed.id}
               category={feed.category}
               title={feed.title}
               date={feed.date}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { HomeFeedsType } from '../../constants/index';
 
-function LocFeed({ category, date, title, image, location }: HomeFeedsType) {
+function LocFeed({ id, category, date, title, image, location }: HomeFeedsType) {
   return (
     <div className="feed">
       <div className="img-container">
