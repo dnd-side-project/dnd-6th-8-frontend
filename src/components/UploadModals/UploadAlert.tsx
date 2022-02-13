@@ -11,7 +11,7 @@ function UploadAlert({ emoji, text }: UploadAlertProps) {
     <div className="uploadAlert-wrapper">
       <div className="dimmed" />
       <div className="text">
-        <img src={`imgs/UploadPage/emoji_${emoji}_toast.png`} alt="file" />
+        <img src={`imgs/Upload/emoji_${emoji}_toast.png`} alt="file" />
         <span>{text}</span>
       </div>
     </div>

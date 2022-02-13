@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './UploadWallPaper.scss';
-import UploadHeader from '../../components/UploadWallPaper/UploadWallPaperHeader';
+import UploadHeader from '../../components/common/UploadHeader';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import BottomButton from '../../components/common/BottomButton';
@@ -34,16 +34,16 @@ function UploadWallPaper() {
   const [selected7, setSelected7] = useState<number>(0);
   return (
     <div className="uploadWallPaper-wrapper">
-      <UploadHeader isLeftButtonX={false} isRightButtonSave title="표지작성" />
+      <UploadHeader isCanGoBack={false} isRightButtonSave title="표지작성" />
       <main>
         <div className="notice">
-          <img src="imgs/UploadPage/emoji_light_archiving.png" alt="light" />
+          <img src="imgs/Upload/emoji_light_archiving.png" alt="light" />
           아래의 정보는 <span>필수</span>로 작성해주세요.
         </div>
         <div className="one question">
           <UploadQuestion number={1} title="커버사진을 업로드해주세요." />
           <label htmlFor="upload">
-            <img src="imgs/UploadPage/ic_camera.png" alt="camera" />
+            <img src="imgs/Upload/ic_camera.png" alt="camera" />
             <div>
               <span>{selected1 ? 1 : 0}</span>
               <span>/1</span>
@@ -68,7 +68,7 @@ function UploadWallPaper() {
             />
             {selected2 !== '' && (
               <button type="button" onClick={resetText}>
-                <img src="imgs/UploadPage/ic_x_small.png" alt="reset" />
+                <img src="imgs/Upload/ic_x_small.png" alt="reset" />
               </button>
             )}
           </div>

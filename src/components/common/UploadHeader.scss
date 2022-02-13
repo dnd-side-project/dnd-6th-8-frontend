@@ -1,0 +1,49 @@
+@import '../../styles/utils.scss';
+
+.uploadHeader-wrapper{
+    width:100%;
+    padding:0 1.6rem;
+    background-color: white;
+    height:4.2rem;
+    position:fixed;
+    z-index:10;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button{
+        padding:0;
+        background-color: transparent;
+        border:none;
+        font-family: Pretendard-Regular;
+        font-size:1.4rem;
+        line-height:2.2rem;
+        display: inline-block;
+        color:$black60;
+        &.select{
+            color:$primary60;
+        }
+        &.back{
+            height:2.4rem;
+            margin-right:0.8rem;
+        }
+    }
+    .left{
+        display: flex;
+        align-items: center;
+        width:33.33%;
+        img{
+            width:2.4rem;
+            height:2.4rem;
+        }
+    }
+    .title{
+        width:33.33%;
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black);
+        text-align: center;
+    }
+    .right{
+        width:33.33%;
+        text-align: right;
+    }
+}
