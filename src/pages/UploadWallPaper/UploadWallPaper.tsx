@@ -4,6 +4,7 @@ import UploadHeader from '../../components/UploadWallPaper/UploadWallPaperHeader
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import BottomButton from '../../components/common/BottomButton';
+import UploadAlert from '../../components/UploadModals/UploadAlert';
 
 function UploadWallPaper() {
   // 1번 질문
@@ -116,6 +117,7 @@ function UploadWallPaper() {
       <footer>
         <BottomButton selected={[selected1, selected2, selected3, selected4, selected5, selected6, selected7]} />
       </footer>
+      {/* <UploadAlert emoji="uploadfile" text={`여행기록이 성공적으로\n업로드되었습니다.`} /> */}
     </div>
   );
 }
