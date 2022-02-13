@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import WallPaperDetailView from '../../components/WallPaper/WallPaperDetailView';
 import WallPaperHeader from '../../components/WallPaper/WallPaperHeader';
 import WallPaperPreview from '../../components/WallPaper/WallPaperPreview';
 import { HomeRecFeedData, HomeFeedsType } from '../../constants';
@@ -16,7 +18,14 @@ function WallPaper() {
   return (
     <div className="wallpaper-wrapper">
       <WallPaperHeader />
-      <WallPaperPreview fetchData={fetchData} />
+      <Swiper spaceBetween={50} slidesPerView={1} >
+        <SwiperSlide>
+          <WallPaperPreview fetchData={fetchData} />
+        </SwiperSlide>
+        <SwiperSlide>
+          <WallPaperDetailView fetchData={fetchData}/>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 }
