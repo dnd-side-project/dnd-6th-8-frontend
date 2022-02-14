@@ -1,0 +1,30 @@
+@import '../../styles/utils.scss';
+
+.dayButton-wrapper{
+    display: flex;
+    button{
+        background-color: transparent;
+        border:none;
+        padding:0;
+    }
+    .dayButton{
+        @include font-face(Pretendard-Medium, 2rem, 3.2rem, $black30);
+        padding:0 0 0.5rem;
+        &.selected{
+            border-bottom:0.1rem solid $primary60;
+            color:$black;
+        }
+    }
+    img{
+        width:3rem;
+        padding-left:0.4rem;
+
+    }
+    .hidden{
+        display: none;
+    }
+    
+    &+.dayButton-wrapper{
+        margin-left:1.2rem;
+    }
+}

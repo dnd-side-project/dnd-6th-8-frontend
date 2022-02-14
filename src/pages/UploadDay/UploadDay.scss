@@ -1,1 +1,32 @@
 @import '../../styles/utils.scss';
+
+.uploadDay-wrapper{
+    main{ 
+        padding:5.8rem 0 7rem;
+        button{
+            border:none;
+            padding:0;
+            background-color: transparent;
+        }
+        .selected-day-container{
+            border-bottom:0.1rem solid $black20;
+            padding:0 1.6rem;
+            display: flex;
+            overflow: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+		    scrollbar-width: none; /* Firefox */
+		    &::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera*/ }
+            .day-plus-button{
+                margin-left:0.4rem;
+                img{
+                    width:3rem;
+                }
+            }
+
+            
+        }
+        .write-container{
+            padding: 0 1.6rem;
+        }
+    }
+}
