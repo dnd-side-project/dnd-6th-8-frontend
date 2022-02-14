@@ -8,7 +8,7 @@ import './UploadDay.scss';
 type WriteDataType = {
   day: number;
   date: string;
-  weather: number;
+  weather: string;
   images?: File[];
   location?: string[];
   diary: string;
@@ -20,8 +20,8 @@ function UploadDay() {
   const [writeData, setWriteData] = useState<WriteDataType[]>([
     {
       day: 1,
-      date: 'YYYY/MM/DD',
-      weather: 0,
+      date: '',
+      weather: '',
       diary: '',
       feeling: '',
     },
@@ -29,8 +29,13 @@ function UploadDay() {
   const [selectedDay, setSelectedDay] = useState<number>(1);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const day = searchParams.get('day');
-  // const data = !day ? writeData[0] : writeData[parseInt(day, 10) - 1];
+
+  const params: string | null = searchParams.get('day');
+  let day = 0;
+  if (params) {
+    day = parseInt(params, 10);
+  }
+
   const onChangeDay = (clickDay: number) => {
     setSelectedDay(clickDay);
     setSearchParams({ day: clickDay.toString() });
@@ -40,8 +45,8 @@ function UploadDay() {
     setWriteData(
       writeData.concat({
         day: writeData.length + 1,
-        date: 'YYYY/MM/DD',
-        weather: 0,
+        date: '',
+        weather: '',
         diary: '',
         feeling: '',
       }),
@@ -61,17 +66,16 @@ function UploadDay() {
     );
   };
 
-  // const changeData = (nowDay: string) => {
-  //   if (nowDay)
-  //     setWriteData(
-  //       writeData.map((cur, index) => {
-  //         if (parseInt(nowDay, 10) - 1 === index) {
-  //           return { ...cur, date: 'change!' };
-  //         }
-  //         return cur;
-  //       }),
-  //     );
-  // };
+  const onInputDate = (e: React.ChangeEvent<HTMLInputElement>, nowDay: number) => {
+    setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, date: e.target.value } : data)));
+  };
+
+  const onInputWeather = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number) => {
+    const newWeather = e.currentTarget.children[0].getAttribute('alt');
+    if (newWeather) {
+      setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, weather: newWeather } : data)));
+    }
+  };
 
   return (
     <div className="uploadDay-wrapper">
@@ -93,11 +97,52 @@ function UploadDay() {
           </button>
         </section>
         <section className="question-container">
-          <article className="question">
+          <article className="question one">
             <UploadDayQuestion text="기록할 하루의 날짜를 입력해주세요." necessary />
+            <input
+              type="text"
+              placeholder="YYYY/MM/DD"
+              className={writeData[day - 1].date ? 'input' : ''}
+              onChange={(e) => onInputDate(e, day)}
+              value={writeData[day - 1].date}
+            />
           </article>
-          <article className="question">
+          <article className="question two">
             <UploadDayQuestion text="그날 여행의 날씨는 어땠나요?" necessary />
+            <div className="weather-container">
+              <button
+                type="button"
+                onClick={(e) => onInputWeather(e, day)}
+                className={writeData[day - 1].weather === 'sun' ? 'selected' : ''}
+              >
+                <img src="imgs/Upload/illust_sun.png" alt="sun" />
+                <span>맑음</span>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => onInputWeather(e, day)}
+                className={writeData[day - 1].weather === 'cloud' ? 'selected' : ''}
+              >
+                <img src="imgs/Upload/illust_cloud.png" alt="cloud" />
+                <span>흐림</span>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => onInputWeather(e, day)}
+                className={writeData[day - 1].weather === 'rain' ? 'selected' : ''}
+              >
+                <img src="imgs/Upload/illust_rain.png" alt="rain" />
+                <span>비</span>
+              </button>
+              <button
+                type="button"
+                onClick={(e) => onInputWeather(e, day)}
+                className={writeData[day - 1].weather === 'snow' ? 'selected' : ''}
+              >
+                <img src="imgs/Upload/illust_snow.png" alt="snow" />
+                <span>눈</span>
+              </button>
+            </div>
           </article>
           <article className="question">
             <UploadDayQuestion text="여행에서 남긴 사진을 업로드해주세요." subtext="(3장선택)" />

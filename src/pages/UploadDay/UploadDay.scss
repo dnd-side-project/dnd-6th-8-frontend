@@ -28,6 +28,59 @@
         .question-container{
             padding:1.6rem;
             .question{
+                &.one{
+                    input{
+                        border:none;
+                        border-bottom:0.1rem solid $black50;
+                        @include font-face(Pretendard-Medium, 2rem, 3.2rem, $black90);
+                        width:12.9rem;
+                        padding:0;
+                        margin-top:1.6rem;
+                        &.input{
+                            border-bottom-color: $primary40;
+                        }
+                        &:focus{
+                            outline:none;
+                        }
+                        &::placeholder{
+                            color:$black50;
+                        }
+                    }
+                }
+                &.two{
+                    .weather-container{
+                        display:flex;
+                        margin-top:1.6rem;
+                        button{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            img{
+                                width:6rem;
+                            }
+                            span{
+                                @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $black60);
+                                margin-top:1.2rem;
+                            }
+                            +button{
+                                margin-left:2.4rem;
+                            }
+                            &.selected{
+                                span{
+                                    @include font-face(Pretendard-SemiBold, 1.6rem, 2.4rem, $primaryPurple);
+                                }
+                                img{
+                                    border:0.1rem solid $primaryPurple;
+                                    border-radius: 50%;
+                                    box-sizing: border-box;
+                                }
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                }
                 +.question{
                     margin-top:3.2rem;
                 }
