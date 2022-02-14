@@ -25,8 +25,13 @@
 
             
         }
-        .write-container{
-            padding: 0 1.6rem;
+        .question-container{
+            padding:1.6rem;
+            .question{
+                +.question{
+                    margin-top:3.2rem;
+                }
+            }
         }
     }
 }

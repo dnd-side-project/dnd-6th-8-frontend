@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import UploadHeader from '../../components/common/UploadHeader';
 import DayButton from '../../components/UploadDay/DayButton';
+import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
 import './UploadDay.scss';
 
 type WriteDataType = {
@@ -90,6 +91,29 @@ function UploadDay() {
           <button type="button" className="day-plus-button" onClick={onAddDay}>
             <img src="imgs/Upload/ic_plus_circle_upload.png" alt="Day Plus" />
           </button>
+        </section>
+        <section className="question-container">
+          <article className="question">
+            <UploadDayQuestion text="기록할 하루의 날짜를 입력해주세요." necessary />
+          </article>
+          <article className="question">
+            <UploadDayQuestion text="그날 여행의 날씨는 어땠나요?" necessary />
+          </article>
+          <article className="question">
+            <UploadDayQuestion text="여행에서 남긴 사진을 업로드해주세요." subtext="(3장선택)" />
+          </article>
+          <article className="question">
+            <UploadDayQuestion text="여행에서 다녀온 장소를 기록해보세요." subtext="(최대 3개)" />
+          </article>
+          <article className="question">
+            <UploadDayQuestion text="하루의 여정을 상세히 기록해보세요." necessary />
+          </article>
+          <article className="question">
+            <UploadDayQuestion text="느꼈던 감정을 상세히 기록해보세요." necessary />
+          </article>
+          <article className="question">
+            <UploadDayQuestion text="여행 꿀팁을 공유해주세요." emoji subtext="(숙소, 맛집 등)" />
+          </article>
         </section>
       </main>
     </div>
