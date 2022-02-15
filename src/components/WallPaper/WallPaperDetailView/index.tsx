@@ -20,12 +20,12 @@ function WallPaperDetailView({ fetchData }: WallPaperDetailViewProps) {
         <p className="detail-title">{fetchData && fetchData.title}</p>
         <p className="detail-date">2022.01.10 - 01.14</p>
       </div>
-      <Tabs selectedIndex={index} onSelect={(index) => setIndex(index)}>
+      <Tabs selectedIndex={index} onSelect={(index) => {setIndex(index)}}>
         <TabList className='tab-header'>
           {dayFeedData.map((value: DayFeedDataType) => {
             return (
               <Tab key={value.day}>
-                <TabHeader day={value.day}/>
+                <TabHeader day={value.day} index={index}/>
               </Tab>
             );
           })}
