@@ -12,7 +12,11 @@ type TabBodyProps = {
 function TabBody({ value }: TabBodyProps) {
   return (
     <div className="tabbody-wrapper">
-      <p className="body-date">{value.date}</p> 
+      <div className="date-weather">
+        <p className="body-date">{value.date}</p>
+        <div>{value.weather}</div>
+      </div>
+
       <div className="carousel-wrapper">
         <Swiper spaceBetween={150} slidesPerView={3}>
           {value.imgs.map((img, index) => {
@@ -53,21 +57,21 @@ function TabBody({ value }: TabBodyProps) {
         </Swiper>
         <div className="today-wrapper">
           <p>
-            <div className='today-line'>{}</div> 하루의 여정{' '}
+            <div className="today-line">{}</div> 하루의 여정{' '}
           </p>
-          <div className='archiving-wrapper'>{value.dayJourney}</div>
+          <div className="archiving-wrapper">{value.dayJourney}</div>
         </div>
         <div className="today-wrapper">
           <p>
-            <div className='today-line'>{}</div> 하루의 감정{' '}
+            <div className="today-line">{}</div> 하루의 감정{' '}
           </p>
-          <div className='archiving-wrapper'>{value.dayFeel}</div>
+          <div className="archiving-wrapper">{value.dayFeel}</div>
         </div>
         <div className="today-wrapper">
           <p>
-            <div className='today-line'>{}</div>여행 꿀팁{' '}
+            <div className="today-line">{}</div>여행 꿀팁{' '}
           </p>
-          <div className='archiving-wrapper'>{value.dayHoneyTip}</div>
+          <div className="archiving-wrapper">{value.dayHoneyTip}</div>
         </div>
       </div>
     </div>
