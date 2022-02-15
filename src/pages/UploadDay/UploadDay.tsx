@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import UploadHeader from '../../components/common/UploadHeader';
 import DayButton from '../../components/UploadDay/DayButton';
 import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
+import UploadDayTextArea from '../../components/UploadDay/UploadDayTextArea';
 import './UploadDay.scss';
 
 type WriteDataType = {
@@ -13,7 +14,7 @@ type WriteDataType = {
   location?: string[];
   diary: string;
   feeling: string;
-  tip?: string;
+  tip: string;
 };
 
 function UploadDay() {
@@ -24,6 +25,7 @@ function UploadDay() {
       weather: '',
       diary: '',
       feeling: '',
+      tip: '',
     },
   ]);
   const [selectedDay, setSelectedDay] = useState<number>(1);
@@ -49,6 +51,7 @@ function UploadDay() {
         weather: '',
         diary: '',
         feeling: '',
+        tip: '',
       }),
     );
     setSelectedDay(writeData.length + 1);
@@ -64,6 +67,8 @@ function UploadDay() {
           return data;
         }),
     );
+    setSelectedDay(deleteDay - 1);
+    setSearchParams({ day: (deleteDay - 1).toString() });
   };
 
   const onInputDate = (e: React.ChangeEvent<HTMLInputElement>, nowDay: number) => {
@@ -75,6 +80,18 @@ function UploadDay() {
     if (newWeather) {
       setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, weather: newWeather } : data)));
     }
+  };
+
+  const onInputDiary = (e: React.ChangeEvent<HTMLTextAreaElement>, nowDay: number) => {
+    setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, diary: e.target.value } : data)));
+  };
+
+  const onInputFeeling = (e: React.ChangeEvent<HTMLTextAreaElement>, nowDay: number) => {
+    setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, feeling: e.target.value } : data)));
+  };
+
+  const onInputTip = (e: React.ChangeEvent<HTMLTextAreaElement>, nowDay: number) => {
+    setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, tip: e.target.value } : data)));
   };
 
   return (
@@ -152,12 +169,15 @@ function UploadDay() {
           </article>
           <article className="question">
             <UploadDayQuestion text="하루의 여정을 상세히 기록해보세요." necessary />
+            <UploadDayTextArea long onInput={onInputDiary} day={day} value={writeData[day - 1].diary} />
           </article>
           <article className="question">
             <UploadDayQuestion text="느꼈던 감정을 상세히 기록해보세요." necessary />
+            <UploadDayTextArea onInput={onInputFeeling} day={day} value={writeData[day - 1].feeling} />
           </article>
           <article className="question">
             <UploadDayQuestion text="여행 꿀팁을 공유해주세요." emoji subtext="(숙소, 맛집 등)" />
+            <UploadDayTextArea onInput={onInputTip} day={day} value={writeData[day - 1].tip} />
           </article>
         </section>
       </main>
