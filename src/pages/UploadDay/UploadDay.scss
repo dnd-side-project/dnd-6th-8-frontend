@@ -28,7 +28,7 @@
         .question-container{
             padding:1.6rem;
             .question{
-                &.one{
+                &.date{
                     input{
                         border:none;
                         border-bottom:0.1rem solid $black50;
@@ -47,7 +47,7 @@
                         }
                     }
                 }
-                &.two{
+                &.weather{
                     .weather-container{
                         display:flex;
                         margin-top:1.6rem;
@@ -81,10 +81,202 @@
                         
                     }
                 }
+                &.location{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .plus-button{
+                        margin-top:2.4rem;
+                        background-color: $bg2;
+                        border-radius: 1rem;
+                        padding:0.8rem;
+                        display: flex;
+                        align-items: center;
+                        img{
+                            width:2rem;
+                            height:2rem;
+                            margin-right:0.4rem;
+                        }
+                        span{
+                            @include font-face(Pretendard-Regular, 1.4rem, 2rem, $black60);
+                        }
+                    }
+                }
+                &.images{
+                    .images-container{
+                        display: flex;
+                        margin-top:1.6rem;
+                        overflow: auto;
+                        -ms-overflow-style: none; /* IE and Edge */
+		    scrollbar-width: none; /* Firefox */
+		    &::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera*/ }
+                        label{
+                            width:9rem;
+                            height:9rem;
+                            border-radius: 1.2rem;
+                            background-color: $bg2;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            img{
+                                width:2.4rem;
+                                margin-bottom:0.4rem;
+                            }
+                            span{
+                                @include font-face(Pretendard-Medium, 1.6rem, 2.2rem, $black90);
+                                &+span{
+                                    color:$black50;
+                                }
+                            }
+                        }
+                        input[type="file"]{
+                            position: absolute; 
+                            width: 1px; 
+                            height: 1px; 
+                            padding: 0; 
+                            margin: -1px; 
+                            overflow: hidden; 
+                            clip:rect(0,0,0,0); 
+                            border: 0;
+                        }
+                        .image{
+                            margin-left:1.2rem;
+                            position:relative;
+                            img[alt="upload_img"]{
+                                width:9rem;
+                                height:9rem;
+                                border-radius: 1.2rem;
+                            }
+                            img[alt="delete"]{
+                                width:2.4rem;
+                                height:2.4rem;
+                                position:absolute;
+                                top:0.2rem;
+                                right:0.2rem;
+                            }
+                        }
+                    }
+                   
+                }
                 +.question{
                     margin-top:3.2rem;
                 }
+
             }
         }
+    }
+}
+
+.uploadPlace-wrapper{
+    width:100%;
+    border-radius: 1.2rem;
+  box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
+  padding:1.7rem 2.3rem 2.1rem 1.2rem;
+  margin-top:1.6rem;
+  position: relative;
+  .location-container{
+      display: flex;
+      align-items: center;
+      img{
+          width:2.4rem;
+          height:2.4rem;
+          margin-right:0.4rem;
+      }
+      span{
+          @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black70);
+          margin-right:1rem;
+      }
+      input{
+        @include font-face(Pretendard-Medium, 1.4rem, 2.2rem, $black80);
+        flex-grow: 1;
+        border:none;
+        border-bottom:0.1rem solid $black30;
+        &::placeholder{
+            @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black30);
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+    }
+  .detail-container{
+      @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black70);
+      margin:1rem 0 1rem 1.2rem;
+      border-left:0.1rem solid $black30;
+      padding:0.6rem 0 0.6rem 1.5rem;
+      span{
+          flex-shrink: 0;
+      }
+      .time{
+          display: flex;
+          align-items: center;
+          margin-bottom:1.6rem;
+          input{
+              border:none;
+              border-radius: 1.8rem;
+              border:0.1rem solid $black30;
+              padding:0.4rem 0.8rem;
+              margin-left:1rem;
+              height:2rem;
+              @include font-face(Pretendard-Medium, 1.2rem, 2.0rem, $black60);
+            &::placeholder{
+                color:$black50;
+            }
+            &:focus{
+                outline: none;
+                border-color: #7d4bff;  
+            }
+          }
+      }
+      .transportation{
+          display: flex;
+          align-items: center;
+          .buttons{
+              overflow: auto;
+              -ms-overflow-style: none; /* IE and Edge */
+		    scrollbar-width: none; /* Firefox */
+		    &::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera*/ }
+              display: flex;
+              margin-left:1rem;
+          }
+      }
+  }
+  .delete{
+      position:absolute;
+      top:0.4rem;
+      right:0.4rem;
+      img{
+          width:2.4rem;
+          height:2.4rem;
+      }
+  }
+}
+#transportation-wrapper{
+    display: flex;
+    align-items: center;
+    border-radius: 1.8rem;
+    border:0.1rem solid $black30;
+    padding:0.4rem 0.6rem;
+    flex-shrink: 0;
+    img{
+        width:1.6rem;
+        height:1.6rem;
+        margin-right:0.6rem
+    }
+    span{
+        @include font-face(Pretendard-Medium, 1.2rem, 2rem, $black70);
+        
+    }
+    &+#transportation-wrapper{
+        margin-left:0.6rem;
+    }
+    &.selected{
+        background-color: #7d4bff;
+        border-color:transparent;
+        span{
+            @include font-face(Pretendard-SemiBold, 1.2rem, 2rem, white);
+        }
+        
     }
 }

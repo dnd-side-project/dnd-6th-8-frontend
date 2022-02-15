@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import produce from 'immer';
 import UploadHeader from '../../components/common/UploadHeader';
 import DayButton from '../../components/UploadDay/DayButton';
 import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
@@ -10,8 +11,8 @@ type WriteDataType = {
   day: number;
   date: string;
   weather: string;
-  images?: File[];
-  location?: string[];
+  images: File[];
+  location: { id: number; start: string; time: string; transportation: string; end: string }[];
   diary: string;
   feeling: string;
   tip: string;
@@ -20,12 +21,14 @@ type WriteDataType = {
 function UploadDay() {
   const [writeData, setWriteData] = useState<WriteDataType[]>([
     {
-      day: 1,
-      date: '',
-      weather: '',
-      diary: '',
-      feeling: '',
-      tip: '',
+      day: 1, // Day
+      date: '', // 날짜
+      weather: '', // 날씨
+      images: [], // 이미지 배열
+      location: [{ id: 1, start: '', time: '', transportation: '', end: '' }], // 장소 경로
+      diary: '', // 여정
+      feeling: '', // 감정
+      tip: '', // 팁
     },
   ]);
   const [selectedDay, setSelectedDay] = useState<number>(1);
@@ -49,6 +52,8 @@ function UploadDay() {
         day: writeData.length + 1,
         date: '',
         weather: '',
+        images: [],
+        location: [{ id: 1, start: '', time: '', transportation: '', end: '' }],
         diary: '',
         feeling: '',
         tip: '',
@@ -71,8 +76,107 @@ function UploadDay() {
     setSearchParams({ day: (deleteDay - 1).toString() });
   };
 
+  // input받는 함수 하나로 합치기
   const onInputDate = (e: React.ChangeEvent<HTMLInputElement>, nowDay: number) => {
     setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, date: e.target.value } : data)));
+  };
+
+  const onInputStartLoc = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) nowData.location[id - 1].start = e.target.value;
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onInputEndLoc = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) nowData.location[id - 1].end = e.target.value;
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onInputTime = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) nowData.location[id - 1].time = e.target.value;
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onChangeTranport = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number, id: number) => {
+      const newTransport = e.currentTarget.children[0].getAttribute('alt');
+      if (newTransport)
+        setWriteData(
+          produce(writeData, (draft) => {
+            const nowData = draft.find((data) => data.day === nowDay);
+            if (nowData) nowData.location[id - 1].transportation = newTransport;
+          }),
+        );
+    },
+    [writeData],
+  );
+
+  const onAddLocation = useCallback(
+    (nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) nowData.location.push({ id: id + 1, start: '', time: '', transportation: '', end: '' });
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onDeleteLocation = useCallback(
+    (nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) {
+            nowData.location.splice(id - 1, 1); // 삭제
+            if (id === 2 && nowData.location.length > 1) nowData.location[1].id = 2; // 3번 id 2번으로 변경
+          }
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onInputImages = (e: React.ChangeEvent<HTMLInputElement>, nowDay: number) => {
+    // console.log(e.target.files);
+    if (!e.target.files) return;
+    const files: File[] = [];
+    for (let i = 0; i < e.target.files.length; i += 1) {
+      if (i > 2) break;
+      files.push(e.target.files[i]);
+    }
+    setWriteData(
+      writeData.map((data) => (data.day === nowDay ? { ...data, images: data.images.concat(files) } : data)),
+    );
+  };
+
+  const onDeleteImages = (image: File) => {
+    setWriteData(
+      writeData.map((data) =>
+        data.day === day ? { ...data, images: data.images.filter((img) => img !== image) } : data,
+      ),
+    );
   };
 
   const onInputWeather = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number) => {
@@ -114,7 +218,7 @@ function UploadDay() {
           </button>
         </section>
         <section className="question-container">
-          <article className="question one">
+          <article className="question date">
             <UploadDayQuestion text="기록할 하루의 날짜를 입력해주세요." necessary />
             <input
               type="text"
@@ -124,7 +228,7 @@ function UploadDay() {
               value={writeData[day - 1].date}
             />
           </article>
-          <article className="question two">
+          <article className="question weather">
             <UploadDayQuestion text="그날 여행의 날씨는 어땠나요?" necessary />
             <div className="weather-container">
               <button
@@ -161,11 +265,61 @@ function UploadDay() {
               </button>
             </div>
           </article>
-          <article className="question">
+          <article className="question images">
             <UploadDayQuestion text="여행에서 남긴 사진을 업로드해주세요." subtext="(3장선택)" />
+            <div className="images-container">
+              <div>
+                <label htmlFor="upload">
+                  <img src="imgs/Upload/ic_camera.png" alt="camera" />
+                  <div>
+                    <span>{writeData[day - 1].images.length}</span>
+                    <span>/3</span>
+                  </div>
+                </label>
+              </div>
+              <input
+                type="file"
+                accept="image/x-png,image/jpeg,image/gif"
+                onChange={(e) => onInputImages(e, day)}
+                multiple
+                id="upload"
+                disabled={writeData[day - 1].images.length >= 3 && true}
+              />
+              {writeData[day - 1].images.map((image) => {
+                const src = URL.createObjectURL(image);
+                return (
+                  <div key={image.name} className="image">
+                    <img src={src} alt="upload_img" />
+                    <button type="button" onClick={() => onDeleteImages(image)}>
+                      <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
           </article>
-          <article className="question">
+          <article className="question location">
             <UploadDayQuestion text="여행에서 다녀온 장소를 기록해보세요." subtext="(최대 3개)" />
+            {writeData[day - 1].location.map((loc) => (
+              <UploadPlace
+                onInputStart={onInputStartLoc}
+                day={day}
+                key={loc.id}
+                nowLocation={loc}
+                onInputEnd={onInputEndLoc}
+                onInputTime={onInputTime}
+                onChangeTranport={onChangeTranport}
+                onDeleteLocation={onDeleteLocation}
+              />
+            ))}
+            <button
+              type="button"
+              className="plus-button"
+              onClick={() => onAddLocation(day, writeData[day - 1].location.length)}
+            >
+              <img src="imgs/Upload/ic_plus_circle_route.png" alt="plus" />
+              <span>장소 경로 추가하기</span>
+            </button>
           </article>
           <article className="question">
             <UploadDayQuestion text="하루의 여정을 상세히 기록해보세요." necessary />
@@ -182,6 +336,132 @@ function UploadDay() {
         </section>
       </main>
     </div>
+  );
+}
+
+type UploadPlaceProps = {
+  onInputStart: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
+  day: number;
+  nowLocation: { id: number; start: string; time: string; transportation: string; end: string };
+  onInputEnd: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
+  onInputTime: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
+  onChangeTranport: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number, id: number) => void;
+  onDeleteLocation: (nowDay: number, id: number) => void;
+};
+
+function UploadPlace({
+  onInputStart,
+  day,
+  nowLocation,
+  onInputEnd,
+  onInputTime,
+  onChangeTranport,
+  onDeleteLocation,
+}: UploadPlaceProps) {
+  const startLocInputRef = useRef<HTMLInputElement>(null);
+  const endLocInputRef = useRef<HTMLInputElement>(null);
+
+  const resetText = (inputRef: React.RefObject<HTMLInputElement>) => {
+    if (!inputRef.current) return;
+    inputRef.current.value = '';
+  };
+
+  return (
+    <div className="uploadPlace-wrapper">
+      <article className="location-container">
+        <img src="imgs/Upload/ic_location_purple.png" alt="start location" />
+        <span>출발지</span>
+        <input
+          type="text"
+          placeholder="출발 장소를 입력해주세요."
+          ref={startLocInputRef}
+          onChange={(e) => onInputStart(e, day, nowLocation.id)}
+          value={nowLocation.start || ''}
+        />
+      </article>
+      <article className="detail-container">
+        <div className="time">
+          <span>걸린 시간</span>
+          <input
+            type="text"
+            placeholder="걸린 시간을 입력해주세요."
+            onChange={(e) => onInputTime(e, day, nowLocation.id)}
+            value={nowLocation.time || ''}
+          />
+        </div>
+        <div className="transportation">
+          <span>이동 수단</span>
+          <div className="buttons">
+            {['foot', 'car', 'bus', 'train', 'airplane'].map((transportation) => (
+              <TransportationButton
+                transportation={transportation}
+                key={transportation}
+                nowLocation={nowLocation}
+                day={day}
+                onChangeTransport={onChangeTranport}
+              />
+            ))}
+          </div>
+        </div>
+      </article>
+      <article className="location-container">
+        <img src="imgs/Upload/ic_location_purple.png" alt="end location" />
+        <span>도착지</span>
+        <input
+          type="text"
+          placeholder="도착 장소를 입력해주세요."
+          ref={endLocInputRef}
+          onChange={(e) => onInputEnd(e, day, nowLocation.id)}
+          value={nowLocation.end || ''}
+        />
+      </article>
+      {nowLocation.id > 1 && (
+        <button type="button" className="delete" onClick={() => onDeleteLocation(day, nowLocation.id)}>
+          <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
+        </button>
+      )}
+    </div>
+  );
+}
+
+type TransportationButtonProps = {
+  transportation: string;
+  nowLocation: { id: number; start: string; time: string; transportation: string; end: string };
+  day: number;
+  onChangeTransport: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number, id: number) => void;
+};
+
+function TransportationButton({ transportation, nowLocation, onChangeTransport, day }: TransportationButtonProps) {
+  let transportationKR = '';
+  switch (transportation) {
+    case 'foot':
+      transportationKR = '도보';
+      break;
+    case 'bus':
+      transportationKR = '버스';
+      break;
+    case 'train':
+      transportationKR = '전철';
+      break;
+    case 'car':
+      transportationKR = '자동차';
+      break;
+    case 'airplane':
+      transportationKR = '비행기';
+      break;
+    default:
+  }
+
+  return (
+    <button
+      id="transportation-wrapper"
+      type="button"
+      onClick={(e) => onChangeTransport(e, day, nowLocation.id)}
+      className={transportation === nowLocation.transportation ? 'selected' : ''}
+    >
+      <img src={`imgs/Upload/emoji_${transportation}.png`} alt={transportation} />
+      <span>{transportationKR}</span>
+    </button>
   );
 }
 
