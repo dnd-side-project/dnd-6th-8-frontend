@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-key */
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { DayFeedDataType } from '../../../../constants';
+import { DayFeedDataType, dayTripCourse } from '../../../../constants';
+import LocPin from '../../../../assets/icons/WallPaper/dayfeed/ic_location_purple 1.png';
 import './style.scss';
 
 type TabBodyProps = {
@@ -11,17 +12,64 @@ type TabBodyProps = {
 function TabBody({ value }: TabBodyProps) {
   return (
     <div className="tabbody-wrapper">
-      <p>{value.date}</p>
-      <Swiper spaceBetween={140} slidesPerView={value.imgs.length}  >
-        {value.imgs.map((img, index) => {
-          return (
+      <p className="body-date">{value.date}</p> 
+      <div className="carousel-wrapper">
+        <Swiper spaceBetween={150} slidesPerView={3}>
+          {value.imgs.map((img, index) => {
+            return (
+              <SwiperSlide>
+                <img src={img} alt="이미지캐루셀" width="150px" height="150px" />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+      <div className="content-wrapper">
+        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+          {value.dayCourse.map((course: dayTripCourse) => (
             <SwiperSlide>
-              <img src={img} alt="이미지캐루셀" width='150px' height='150px'/>
+              <div className="start-finish-wrapper">
+                <div className="start-finish-line">
+                  <img src={LocPin} alt="LocPin" style={{ display: 'block' }} /> <p className="gray-letter">출발지</p>
+                  <p className="black-letter">{course.start}</p>
+                </div>
+                <div className="start-finish-middle">
+                  <div className="start-finish-middle-line">
+                    <p className="gray-letter">걸린 시간</p>
+                    <p className="arrive-time">{course.arriveTime}분</p>
+                  </div>
+                  <div className="start-finish-middle-line">
+                    <p className="gray-letter">이동 수단</p>
+                    <p className="arrive-time">{course.goingBy}</p>
+                  </div>
+                </div>
+                <div className="start-finish-line">
+                  <img src={LocPin} alt="LocPin" style={{ display: 'block' }} /> <p className="gray-letter">도착지</p>
+                  <p className="black-letter">{course.finish}</p>
+                </div>
+              </div>
             </SwiperSlide>
-          );
-        })}
-        
-      </Swiper>
+          ))}
+        </Swiper>
+        <div className="today-wrapper">
+          <p>
+            <div className='today-line'>{}</div> 하루의 여정{' '}
+          </p>
+          <div className='archiving-wrapper'>{value.dayJourney}</div>
+        </div>
+        <div className="today-wrapper">
+          <p>
+            <div className='today-line'>{}</div> 하루의 감정{' '}
+          </p>
+          <div className='archiving-wrapper'>{value.dayFeel}</div>
+        </div>
+        <div className="today-wrapper">
+          <p>
+            <div className='today-line'>{}</div>여행 꿀팁{' '}
+          </p>
+          <div className='archiving-wrapper'>{value.dayHoneyTip}</div>
+        </div>
+      </div>
     </div>
   );
 }

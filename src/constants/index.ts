@@ -145,15 +145,19 @@ export const HomeRecFeedData: HomeFeedsType[] = [
   },
 ];
 
+export type dayTripCourse = {
+  arriveTime: number;
+  finish: string;
+  start: string;
+  goingBy: string;
+};
+
 export type DayFeedDataType = {
   day: number;
   date: string;
   weather: string;
   imgs: string[];
-  start: string;
-  arriveTime: number;
-  goingBy: string;
-  finish: string;
+  dayCourse: dayTripCourse[];
   dayJourney: string;
   dayFeel: string;
   dayHoneyTip: string;
@@ -164,32 +168,32 @@ export const dayFeedFetchData: DayFeedDataType[] = [
     day: 1,
     date: '2022.01.10(월)',
     weather: '맑음',
-    imgs: [Jeju1, Jeju2, Jeju3],
-    start: '함덕게스트하우스',
-    arriveTime: 40,
-    goingBy: '자동차',
-    finish: '참한간장게장',
+    imgs: [Jeju1, Jeju2, Jeju3, Jeju1, Jeju2, Jeju3],
+    dayCourse: [
+      { start: '함덕게스트하우스', arriveTime: 40, goingBy: '자동차', finish: '둘이먹다가죽어도모를만한킹받는맛집' },
+      { start: '애월게스트하우스', arriveTime: 70, goingBy: '지하철', finish: '나쁜양념게장' },
+      { start: '표선해비치리조트', arriveTime: 100, goingBy: '배', finish: '착한양념게장' },
+    ],
     dayJourney:
       '제주도의 인생 맛집을 찾았다! 간장게장과 꽃게 튀김이 일품인 곳이었다. 또한 제주도의 유명한 GD카페를 가봤는데, 역시 GD의 감성이 묻어있는 곳이었다. 오늘은 맛집과 카페를 방문하고 중간중간에 드라이브도 하니 제주도의 여행을 제대로 만끽할 수 있는 날이었던 것 같다.',
-    dayFeel : 
+    dayFeel:
       '가족과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
-    dayHoneyTip : 
-     '송악산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
+    dayHoneyTip: '송악산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
   },
   {
     day: 2,
     date: '2022.01.11(화)',
     weather: '흐림',
     imgs: [Jeju1, Jeju2, Jeju3],
-    start: '애월리',
-    arriveTime: 80,
-    goingBy: '버스',
-    finish: '못된 간장게장',
+    dayCourse: [
+      { start: '함덕게스트하우스', arriveTime: 40, goingBy: '자동차', finish: '둘이먹다가죽어도모를만한킹받는맛집' },
+      { start: '애월게스트하우스', arriveTime: 70, goingBy: '지하철', finish: '나쁜양념게장' },
+      { start: '표선해비치리조트', arriveTime: 100, goingBy: '배', finish: '착한양념게장' },
+    ],
     dayJourney:
       '제주도의 인생 맛집을 찾았다! 양념게장과 한라봉 튀김이 일품인 곳이었다. 또한 제주도의 유명한 GD카페를 가봤는데, 역시 GD의 감성이 묻어있는 곳이었다. 오늘은 맛집과 카페를 방문하고 중간중간에 드라이브도 하니 제주도의 여행을 제대로 만끽할 수 있는 날이었던 것 같다.',
-    dayFeel : 
+    dayFeel:
       '친구들과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
-    dayHoneyTip : 
-     '산방산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
+    dayHoneyTip: '산방산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
   },
 ];
