@@ -7,6 +7,7 @@ import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
 import UploadDayTextArea from '../../components/UploadDay/UploadDayTextArea';
 import UploadPlace from '../../components/UploadDay/UploadPlace';
 import ButtonModal from '../../components/UploadModals/ButtonModal';
+import ShareModal from '../../components/UploadModals/ShareModal';
 import './UploadDay.scss';
 
 type WriteDataType = {
@@ -342,6 +343,7 @@ function UploadDay() {
         subTitle={`나가시면 새로 고침된 데이터만\n개인소장 여행 피드에 저장돼요.`}
         rightButton="나가기"
       /> */}
+      {/* <ShareModal /> */}
     </div>
   );
 }

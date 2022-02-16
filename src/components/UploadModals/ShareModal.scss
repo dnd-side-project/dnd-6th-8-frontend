@@ -1,0 +1,111 @@
+@import '../../styles/utils.scss';
+
+.shareModal-wrapper{
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:15;
+    .dimmed{
+        //position: absolute;
+        width:100%;
+        height:100%;
+        background: #000;
+        opacity: 0.5;
+    }
+    .modal{
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        margin:auto;
+        background-color: white;
+        height:20.5rem;
+        width:30rem;
+        border-radius: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .text{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top:2.4rem;
+            img{
+                width:1.8rem;
+                height:1.8rem;
+                margin-bottom:0.8rem;
+            }
+            .title{
+                @include font-face(Pretendard-Medium, 1.6rem, 2.4rem, black);
+                white-space: pre;
+                text-align: center;
+                margin-bottom:2rem;
+            }
+            .share-container{
+                display: flex;
+                align-items: center;
+                :first-child{
+                    @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black40);
+                    margin-right:0.8rem;
+                    &.share{
+                        color:$primaryPurple;
+                    }
+                }
+                .switch{
+                    position: relative;
+                    display: inline-block;
+                    width: 3.8rem;
+                    height: 1.8rem;
+                    input{
+                        opacity: 0;
+                        width: 0;
+                        height: 0;
+                    }
+                    input:checked + .slider:before {
+                    -webkit-transform: translateX(1.9rem);
+                    -ms-transform: translateX(1.9rem);
+                    transform: translateX(1.9rem);
+                    background-color: $primaryPurple;
+                    }
+                    .slider{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: $black20;
+                        -webkit-transition: .4s;
+                        transition: .4s;
+                        border-radius: 1.2rem;
+                        &::before{
+                            position: absolute;
+                            content: "";
+                            height: 2.4rem;
+                            width: 2.4rem;
+                            left: -0.3rem;
+                            top:-0.3rem;
+                            background-color: $black40;
+                            -webkit-transition: .4s;
+                            transition: .4s;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+            }
+        }
+        button{
+            width:100%;
+            height:4.2rem;
+            padding:0;
+            background-color: transparent;
+            border:none;
+            @include font-face(Pretendard-Semibold, 1.4rem, 1.8rem, $black90);
+            border-top:0.1rem solid $black40;
+        }
+    }
+    
+}
