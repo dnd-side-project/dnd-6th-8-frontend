@@ -10,7 +10,7 @@ type WallPaperPreview = {
 
 function WallPaperPreview({ fetchData }: WallPaperPreview) {
   return (
-    <div className="wallpaperpreview-wrapper">
+    <div className="wallpaperpreview-wrapper" >
       <img className="wallpaperpreview-background" src={Jeju} alt="Background-img" />
       {/* <img className="wallpaperpreview-background" src={fetchData && fetchData.image} alt="Background-img" /> */}
       <div className="wallpaperpreview-main">
