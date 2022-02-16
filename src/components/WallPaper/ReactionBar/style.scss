@@ -9,6 +9,7 @@
         background: rgba(248, 249, 252, 0.95);
         display : flex; 
         gap : 0.5rem; 
+        animation: sererec 0.3s backwards;
         .heart{
             width : 7rem; 
         }
@@ -93,5 +94,14 @@
                 }
             }
         }
+    }
+}
+
+@keyframes sererec{
+    0%{
+        bottom : 0; 
+    }
+    100%{
+        bottom : 5.6rem; 
     }
 }
