@@ -9,6 +9,7 @@ import UploadPlace from '../../components/UploadDay/UploadPlace';
 import ButtonModal from '../../components/UploadModals/ButtonModal';
 import ShareModal from '../../components/UploadModals/ShareModal';
 import './UploadDay.scss';
+import EmotionModal from '../../components/UploadModals/EmotionModal';
 
 type WriteDataType = {
   day: number;
@@ -344,6 +345,7 @@ function UploadDay() {
         rightButton="나가기"
       /> */}
       {/* <ShareModal /> */}
+      <EmotionModal />
     </div>
   );
 }
