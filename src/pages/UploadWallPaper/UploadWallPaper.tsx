@@ -4,6 +4,7 @@ import UploadHeader from '../../components/common/UploadHeader';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import BottomButton from '../../components/common/BottomButton';
+import DateModal from '../../components/UploadModals/DateModal';
 import UploadAlert from '../../components/UploadModals/UploadAlert';
 
 function UploadWallPaper() {
@@ -92,11 +93,7 @@ function UploadWallPaper() {
         </div>
         <div className="four question">
           <UploadQuestion number={4} title="여행 기간을 입력해주세요." />
-          <div className="date-container">
-            <UploadToggle text="YYYY/MM/DD" id={1} selected={selected4} setSelected={setSelected4} />
-            <span className="line" />
-            <UploadToggle text="YYYY/MM/DD" id={2} selected={selected4} setSelected={setSelected4} />
-          </div>
+          <DateModal />
         </div>
         <div className="five question">
           <UploadQuestion number={5} title="동행 여부를 선택해주세요." />
