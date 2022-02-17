@@ -8,6 +8,8 @@ import ArchivingPage from './ArchivingPage';
 import Home from './Home/Home';
 import WallPaper from './WallPaper';
 import MyPage from './MyPage/MyPage';
+import UploadWallPaper from './UploadWallPaper/UploadWallPaper';
+import UploadDay from './UploadDay/UploadDay';
 import ScrollToTop from '../constants/ScrollToTop';
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/wallpaper/:id" element={<WallPaper />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/upload-wallpaper" element={<UploadWallPaper />} />
+        <Route path="/upload-day" element={<UploadDay />} />
       </Routes>
     </Router>
   );
