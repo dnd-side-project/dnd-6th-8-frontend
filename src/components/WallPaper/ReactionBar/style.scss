@@ -1,0 +1,107 @@
+.reactionbar-wrapper{
+    .reaction-click{
+        position: fixed;
+        bottom : 5.6rem; 
+        width : 100%; 
+        height : 4.4rem; 
+        padding : 0.8rem 1.6rem; 
+        z-index : 1; 
+        background: rgba(248, 249, 252, 0.95);
+        display : flex; 
+        gap : 0.5rem; 
+        animation: sererec 0.3s backwards;
+        .heart{
+            width : 7rem; 
+        }
+        .bag{
+            width : 12rem;
+            margin-left : -40px; 
+        }
+        .spark{
+            width : 14rem; 
+            margin-left : -3rem;
+        }
+        .eyes{
+            width : 13rem; 
+            margin-left : -1rem; 
+        }
+        .icon-introduce{
+            display: flex;
+            align-items: center;
+            // width : 20%;
+            height : 100%;
+            padding : 0.4rem 0.6rem; 
+            border-radius: 1.8rem;
+            background: white;
+            cursor : pointer; 
+            img{
+                height : 100%;
+            }
+            p{
+                height : 100%;
+                margin-left : 0.4rem; 
+                color : #595663;
+                font-family: 'Pretendard-Medium';
+                font-size: 1.2rem;
+                font-weight: 500;
+                line-height: 1.67;
+            }
+        }
+    } 
+    .reactionbar-inner-wrapper{
+        position: fixed;
+        bottom: 0;
+        background: white;
+        z-index: 1; 
+        width : 100%; 
+        height : 5.6rem; 
+        padding : 1.4rem 1.6rem; 
+        display : flex;
+        justify-content: space-between; 
+        .reaction-left{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            span{
+                margin-left : 0.6rem; 
+                font-weight: 600;
+                line-height: 1.57;
+                font-size: 1.4rem;
+                color : #3917b1; 
+                font-family: 'Pretendard-SemiBold';
+            }
+        }
+        .reaction-right{
+            display: flex;
+            gap: 0.8rem; 
+            .icon-box{
+                cursor: pointer;
+                padding: 0.4rem 0.6rem;
+                border-radius: 1.8rem;
+                background: #F8F9FC;
+                display: flex;
+                align-items: center;
+                img{
+                    height : 100%;
+                }
+                p{
+                    color : #7f7d8a; 
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    line-height: 1.67;
+                    font-family: 'Pretendard-Medium';
+                    margin-left : 0.4rem; 
+                }
+            }
+        }
+    }
+}
+
+@keyframes sererec{
+    0%{
+        bottom : 0; 
+    }
+    100%{
+        bottom : 5.6rem; 
+    }
+}

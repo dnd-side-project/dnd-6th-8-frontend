@@ -8,10 +8,12 @@ import ArchivingPage from './ArchivingPage';
 import Home from './Home/Home';
 import WallPaper from './WallPaper';
 import MyPage from './MyPage/MyPage';
+import ScrollToTop from '../constants/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/intro" element={<IntroPage />} />

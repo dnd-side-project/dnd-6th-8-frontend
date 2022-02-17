@@ -1,3 +1,6 @@
+import Jeju1 from '../assets/icons/WallPaper/dayfeed/img_jeju02.png';
+import Jeju2 from '../assets/icons/WallPaper/dayfeed/img_jeju03.png';
+import Jeju3 from '../assets/icons/WallPaper/dayfeed/img_jeju04.png';
 // action 모음
 // user
 export const SIGNUP_USER = 'user/SIGNUP_USER' as const;
@@ -8,13 +11,13 @@ export const CREATE_POST = 'post/CREATE_POST' as const;
 export const UPDATE_POST = 'post/CREATE_POST' as const;
 
 export type archivingDataType = {
-  id : number, 
+  id: number;
   archivingStyle: string;
   region: string;
   period: string;
   completeArchive: string;
   title: string;
-  img : string; 
+  img: string;
 };
 
 export type archivingDataObject = {
@@ -25,33 +28,33 @@ export type archivingDataObject = {
 export const archiveCorePageReadFetchData: archivingDataObject = {
   sharedInfo: [
     {
-      id : 0,
+      id: 0,
       archivingStyle: '정보',
       region: '제주도',
       period: '4박5일',
       completeArchive: '2022.01.02',
       title: '대충 다녀도 아름다운 제주도',
-      img : 'imgs/ArchivingPage/ArchivingCorePage/img_jeju01_archiving.png',
+      img: 'imgs/ArchivingPage/ArchivingCorePage/img_jeju01_archiving.png',
     },
     {
-      id : 1, 
+      id: 1,
       archivingStyle: '감정',
       region: '강릉/속초',
       period: '2박3일',
       completeArchive: '2022.02.01',
       title: '강릉바다에 풍덩!',
-      img : 'imgs/ArchivingPage/ArchivingCorePage/img_gangneung01_archiving.png',
+      img: 'imgs/ArchivingPage/ArchivingCorePage/img_gangneung01_archiving.png',
     },
   ],
   personalInfo: [
     {
-      id : 2, 
+      id: 2,
       archivingStyle: '감정',
       region: '러시아',
       period: '5박6일',
       completeArchive: '2022.02.12',
       title: '황홀한 아름다움, 러시아 궁전',
-      img : 'imgs/ArchivingPage/ArchivingCorePage/img_russia01_archiving.png', 
+      img: 'imgs/ArchivingPage/ArchivingCorePage/img_russia01_archiving.png',
     },
   ],
 };
@@ -67,7 +70,7 @@ export const locationArr = [
 ];
 
 export type HomeFeedsType = {
-  id : number; 
+  id: number;
   category: string;
   date: string;
   title: string;
@@ -105,7 +108,7 @@ export const HomeLocFeedData: HomeFeedsType[] = [
 
 export const HomeRecFeedData: HomeFeedsType[] = [
   {
-    id : 0, 
+    id: 0,
     category: '감정',
     date: '2박3일',
     title: '나의 두 번째 부산',
@@ -117,7 +120,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 21,
   },
   {
-    id : 1, 
+    id: 1,
     category: '정보',
     date: '1박2일',
     title: '나만 알고 싶은 색다른 부산',
@@ -129,7 +132,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 11,
   },
   {
-    id : 2, 
+    id: 2,
     category: '감정',
     date: '1박2일',
     title: '나의 두 번째 부산',
@@ -139,5 +142,58 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     text: '텍스트입니다텍스트입니다텍스트입니다텍스트입니다텍스트입니다텍스트입니다텍스트입니다텍스트입니다',
     heart: 2,
     scrap: 2,
+  },
+];
+
+export type dayTripCourse = {
+  arriveTime: number;
+  finish: string;
+  start: string;
+  goingBy: string;
+};
+
+export type DayFeedDataType = {
+  day: number;
+  date: string;
+  weather: string;
+  imgs: string[];
+  dayCourse: dayTripCourse[];
+  dayJourney: string;
+  dayFeel: string;
+  dayHoneyTip: string;
+};
+
+export const dayFeedFetchData: DayFeedDataType[] = [
+  {
+    day: 1,
+    date: '2022.01.10(월)',
+    weather: '맑음',
+    imgs: [Jeju1, Jeju2, Jeju3, Jeju1, Jeju2, Jeju3],
+    dayCourse: [
+      { start: '함덕게스트하우스', arriveTime: 40, goingBy: '자동차', finish: '둘이먹다가죽어도모를만한킹받는맛집' },
+      { start: '애월게스트하우스', arriveTime: 70, goingBy: '지하철', finish: '나쁜양념게장' },
+      { start: '표선해비치리조트', arriveTime: 100, goingBy: '배', finish: '착한양념게장' },
+    ],
+    dayJourney:
+      '제주도의 인생 맛집을 찾았다! 간장게장과 꽃게 튀김이 일품인 곳이었다. 또한 제주도의 유명한 GD카페를 가봤는데, 역시 GD의 감성이 묻어있는 곳이었다. 오늘은 맛집과 카페를 방문하고 중간중간에 드라이브도 하니 제주도의 여행을 제대로 만끽할 수 있는 날이었던 것 같다.',
+    dayFeel:
+      '가족과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
+    dayHoneyTip: '송악산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
+  },
+  {
+    day: 2,
+    date: '2022.01.11(화)',
+    weather: '흐림',
+    imgs: [Jeju1, Jeju2, Jeju3],
+    dayCourse: [
+      { start: '함덕게스트하우스', arriveTime: 40, goingBy: '자동차', finish: '둘이먹다가죽어도모를만한킹받는맛집' },
+      { start: '애월게스트하우스', arriveTime: 70, goingBy: '지하철', finish: '나쁜양념게장' },
+      { start: '표선해비치리조트', arriveTime: 100, goingBy: '배', finish: '착한양념게장' },
+    ],
+    dayJourney:
+      '제주도의 인생 맛집을 찾았다! 양념게장과 한라봉 튀김이 일품인 곳이었다. 또한 제주도의 유명한 GD카페를 가봤는데, 역시 GD의 감성이 묻어있는 곳이었다. 오늘은 맛집과 카페를 방문하고 중간중간에 드라이브도 하니 제주도의 여행을 제대로 만끽할 수 있는 날이었던 것 같다.',
+    dayFeel:
+      '친구들과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
+    dayHoneyTip: '산방산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
   },
 ];
