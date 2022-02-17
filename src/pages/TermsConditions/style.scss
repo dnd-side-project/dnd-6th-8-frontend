@@ -1,0 +1,23 @@
+.termsConditions-wrapper{
+    padding-bottom : 11.6rem; 
+    .termsConditions-inner-wrapper{
+        padding : 0 1.6rem; 
+        .box{
+            margin-top : 1.6rem;
+            margin-bottom : 2.4rem; 
+            p{
+                margin-bottom : 1.2rem; 
+                font-family: 'Pretendard-SemiBold';
+                font-size: 1.6rem;
+                font-weight: 600;
+                line-height: 1.25;
+            }
+            span{
+                font-family: 'Pretendard-Regular';
+                font-size: 1rem;
+                line-height: 2;
+                color : #7f7d8a;
+            }
+        }
+    }
+}

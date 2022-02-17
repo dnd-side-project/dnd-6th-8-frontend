@@ -10,6 +10,8 @@ import WallPaper from './WallPaper';
 import MyPage from './MyPage/MyPage';
 import ScrollToTop from '../constants/ScrollToTop';
 import UserProfile from './UserProfile';
+import TermsConditions from './TermsConditions';
+import PersonalInfoPolicy from './PersonalInfoPolicy';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path="/wallpaper/:id" element={<WallPaper />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/userProfile" element={<UserProfile />} />
+        <Route path="/termsConditions" element={<TermsConditions />} />
+        <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
       </Routes>
     </Router>
   );
