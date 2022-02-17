@@ -1,9 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './UserInfo.scss';
 
 function UserInfo() {
+  const navigate = useNavigate(); 
+  const gotoUserProfile = () => {
+    navigate('/userProfile'); 
+  }
   return (
-    <div className="userInfo-wrapper">
+    <div className="userInfo-wrapper" onClick={gotoUserProfile} aria-hidden='true'>
       <div className="container">
         <img src="imgs/MyPage/illust_profile_mypage.png" alt="profile" className="profile" />
         <div className="name-container">

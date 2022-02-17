@@ -11,6 +11,9 @@ import MyPage from './MyPage/MyPage';
 import UploadWallPaper from './UploadWallPaper/UploadWallPaper';
 import UploadDay from './UploadDay/UploadDay';
 import ScrollToTop from '../constants/ScrollToTop';
+import UserProfile from './UserProfile';
+import TermsConditions from './TermsConditions';
+import PersonalInfoPolicy from './PersonalInfoPolicy';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/wallpaper/:id" element={<WallPaper />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/userProfile" element={<UserProfile />} />
+        <Route path="/termsConditions" element={<TermsConditions />} />
+        <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
         <Route path="/upload-wallpaper" element={<UploadWallPaper />} />
         <Route path="/upload-day" element={<UploadDay />} />
       </Routes>

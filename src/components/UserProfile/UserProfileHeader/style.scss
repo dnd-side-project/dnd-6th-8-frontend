@@ -1,0 +1,15 @@
+.userProfileHeader-wrapper{
+    padding : 0.9rem 1.6rem; 
+    display: flex;
+    align-items: center;
+    img{
+        cursor: pointer;
+    }
+    .title{
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 1.44;
+        font-family: 'Pretendard-Medium';
+        margin: auto;
+    }
+}

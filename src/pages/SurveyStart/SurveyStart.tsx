@@ -1,8 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SurveyStart.scss';
 
 function SurveyStart() {
+  const navigate = useNavigate();
+  const gotoHome = () => {
+    navigate('/home');
+  };
   return (
     <div className="surveyStart-wrapper">
       <div className="middle">
@@ -12,7 +16,7 @@ function SurveyStart() {
           <span>으로</span>
           <div>취향에 맞는 피드를 제공해드릴게요!</div>
         </div>
-        <button type="button" className="skip-button">
+        <button type="button" className="skip-button" onClick={gotoHome} aria-hidden="true">
           다음에 할래요!
         </button>
       </div>
