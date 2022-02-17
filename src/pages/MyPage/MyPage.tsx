@@ -15,12 +15,12 @@ function MyPage() {
       </header>
       <main>
         {/* loading?<Loading/>:<UserInfo/> */}
-        <Loading height={9.2} />
+        {/* <Loading height={9.2} />
         <Loading height={29.4} />
-        <Loading height={15.9} />
-        {/* <UserInfo />
+        <Loading height={15.9} /> */}
+        <UserInfo />
         <Sticker />
-        <Menu /> */}
+        <Menu /> 
       </main>
       <footer>
         <NavigationBar />
