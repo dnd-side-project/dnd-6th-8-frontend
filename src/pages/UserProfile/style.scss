@@ -1,0 +1,89 @@
+%main-font {
+    font-family: 'Pretendard-Regular';
+    font-size: 1.8rem;
+    line-height: 1.44;
+}
+
+.userProfile-inner-wrapper{
+    padding : 1.6rem 1.6rem 9.8rem 1.6rem; 
+    .user-info-header{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 0.7rem;
+        border-bottom: 1px solid #d8dce8;
+        .info{
+            font-family: 'Pretendard-SemiBold';
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.44;
+            color : #292733; 
+        }
+        .withdrawal{
+            color : #a19fad; 
+            @extend %main-font; 
+            cursor: pointer;
+        }
+    }
+    .user-info-main{
+        padding-top : 1.6rem; 
+        .name-area{
+            display: flex;
+            .name{
+                flex : 1; 
+                @extend %main-font; 
+                color : #7f7d8a;
+            }
+            .real-name{
+                flex: 1.5;
+                @extend %main-font; 
+            }
+        }
+        .email-area{
+            margin-top : 1.2rem; 
+            display: flex;
+            .email{
+                flex : 1; 
+                @extend %main-font; 
+                color : #7f7d8a;
+            }
+            .real-email{
+                flex: 1.5;
+                @extend %main-font; 
+            }
+        }
+    }
+    .survey-info{
+        padding-top : 3.2rem; 
+        .survey-info-main{
+            p{
+                @extend %main-font; 
+                color : #7f7d8a;
+                margin-top : 1.6rem; 
+                margin-bottom: 1.2rem;
+            }
+            .label-wrapper{
+                display: flex;
+                flex-wrap: wrap;
+                div{
+                    font-family: 'Pretendard-Regular';
+                    font-size: 1.6rem;
+                    line-height: 1.44;
+                    padding: 1rem 1.4rem;
+                    border-radius: 2.4rem;
+                    background: #f8f9fc;
+                    color : #7f7d8a;
+                    &:nth-child(2){
+                        margin-left : 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width : 448px){
+    .long-sentence{
+        margin-top : 1rem; 
+        margin-left : 0rem !important;
+    }
+}

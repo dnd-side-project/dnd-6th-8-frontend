@@ -9,6 +9,7 @@ import Home from './Home/Home';
 import WallPaper from './WallPaper';
 import MyPage from './MyPage/MyPage';
 import ScrollToTop from '../constants/ScrollToTop';
+import UserProfile from './UserProfile';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/wallpaper/:id" element={<WallPaper />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/userProfile" element={<UserProfile />} />
       </Routes>
     </Router>
   );
