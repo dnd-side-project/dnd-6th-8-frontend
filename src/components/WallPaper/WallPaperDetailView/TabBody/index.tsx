@@ -57,19 +57,21 @@ function TabBody({ value }: TabBodyProps) {
         </Swiper>
         <div className="today-wrapper">
           <p>
-            <div className="today-line">{}</div> 하루의 여정{' '}
+            <div className="today-line" />
+            하루의 여정
           </p>
           <div className="archiving-wrapper">{value.dayJourney}</div>
         </div>
         <div className="today-wrapper">
           <p>
-            <div className="today-line">{}</div> 하루의 감정{' '}
+            <div className="today-line" /> 하루의 감정
           </p>
           <div className="archiving-wrapper">{value.dayFeel}</div>
         </div>
         <div className="today-wrapper">
           <p>
-            <div className="today-line">{}</div>여행 꿀팁{' '}
+            <div className="today-line" />
+            여행 꿀팁
           </p>
           <div className="archiving-wrapper">{value.dayHoneyTip}</div>
         </div>

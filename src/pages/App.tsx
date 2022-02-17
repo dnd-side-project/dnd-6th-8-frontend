@@ -8,6 +8,8 @@ import ArchivingPage from './ArchivingPage';
 import Home from './Home/Home';
 import WallPaper from './WallPaper';
 import MyPage from './MyPage/MyPage';
+import UploadWallPaper from './UploadWallPaper/UploadWallPaper';
+import UploadDay from './UploadDay/UploadDay';
 import ScrollToTop from '../constants/ScrollToTop';
 import UserProfile from './UserProfile';
 import TermsConditions from './TermsConditions';
@@ -29,6 +31,8 @@ function App() {
         <Route path="/userProfile" element={<UserProfile />} />
         <Route path="/termsConditions" element={<TermsConditions />} />
         <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
+        <Route path="/upload-wallpaper" element={<UploadWallPaper />} />
+        <Route path="/upload-day" element={<UploadDay />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,28 @@
+@import '../../styles/utils.scss';
+
+.uploadDayQuestion-wrapper{
+    display: flex;
+    align-items: center;
+    .text{
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black90);
+    }
+    .necessary{
+        width:4.1rem;
+        @include font-face(Pretendard-Regular, 1.4rem, 2.4rem, $coral);
+        background-color:#ffe5e5;
+        border-radius: 1.4rem;
+        text-align: center;
+        height:2.4rem;
+        margin-left:0.8rem;
+    }
+    .subtext{
+        margin-left:0.3rem;
+        @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black60);
+    }
+
+    img{
+        width:1.8rem;
+        height:1.8rem;
+        margin-right:0.8rem;
+    }
+}

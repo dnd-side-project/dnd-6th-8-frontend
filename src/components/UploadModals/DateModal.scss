@@ -1,0 +1,161 @@
+@import '../../styles/utils.scss';
+
+// .react-datepicker {
+//     font-size: 1.5em;
+// }
+// .react-datepicker__header {
+// padding-top: 0.8em;
+// }
+// .react-datepicker__month {
+// margin: 0.4em 1em;
+// }
+// .react-datepicker__day-name,
+// .react-datepicker__day {
+// width: 1.9em;
+// line-height: 1.9em;
+// margin: 0.166em;
+// }
+// .react-datepicker__current-month {
+// font-size: 1em;
+// }
+// .react-datepicker__navigation {
+// top: 1em;
+// line-height: 1.7em;
+// border: 0.45em solid transparent;
+// }
+// .react-datepicker__navigation--previous {
+// border-right-color: #ccc;
+// left: 1em;
+// }
+// .react-datepicker__navigation--next {
+// border-left-color: #ccc;
+// right: 1em;
+// }
+.dateModal-wrapper{
+    display: flex;
+    align-items: center;
+    .react-datepicker-wrapper{
+        width:auto;
+        .react-datepicker__input-container {
+            button{
+                background-color: $bg2;
+                border:0.1rem solid transparent;
+                @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $black60);
+                padding:1rem 1.4rem;
+                border-radius: 2.4rem;
+                &.selected{
+                    background-color: $black10;
+                    border:0.1rem solid $primaryPurple;
+                    color:$primaryPurple;
+                }
+            }
+        }
+        
+    }  
+    .react-datepicker-popper{
+        z-index: 20;
+        background-color: white;
+        position: fixed !important;
+        transform: none !important;
+        margin:0 auto;
+        left:50% !important;
+        transform: translateX( -50% ) translateY(-50%) !important;
+        top:50% !important;
+        border-radius: 1.2rem;
+        padding-bottom:1.2rem;
+        box-sizing: border-box;
+        .react-datepicker{
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            border:none;
+            height:40rem;
+            width:30rem;
+            padding:0;
+            .react-datepicker__navigation--previous{
+                top:1.6rem;
+                left:5.8rem;
+            }
+            .react-datepicker__navigation--next{
+                top:1.6rem;
+                right:5.8rem;
+            }
+           .react-datepicker__month-container{
+                display: flex;
+                flex-direction: column;
+                height:100%;
+               .react-datepicker__header{
+                    width:100%;
+                    height:9.9rem;
+                    background-color: white;
+                    border-color:$black20;
+                    padding:1.6rem 1.8rem 0.7rem;
+                    .react-datepicker__current-month{
+                        @include font-face(Pretendard-Medium, 2rem, 3.2rem, #3a13c1);
+                        margin-bottom:2.4rem;
+                    }
+                    .react-datepicker__day-names{
+                        @include font-face(Pretendard-Medium, 1.2rem, 2rem, #555555);
+                        display: flex;
+                        justify-content: space-between;
+                    }
+               }
+               .react-datepicker__month{
+                   width:100%;
+                   margin:0;
+                   flex-grow: 1;
+                   @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black70);
+                   padding:2.4rem 1.2rem 1.7rem;
+                   display: flex;
+                   flex-direction: column;
+                   justify-content: space-around;
+                   .react-datepicker__week{
+                       display: flex;
+                       justify-content: space-around;
+                       height:3rem;
+                       align-items: center;
+                       .react-datepicker__day{
+                           text-align: center;
+                            width:3rem;
+                            
+                       }
+                       .react-datepicker__day--selected{
+                           background-color: $primaryPurple;
+                           border-radius: 50%;
+                           width:3rem;
+                           height:3rem;
+                            line-height:3rem;
+                       }
+                   }
+               }
+           }
+           .closeBtn{
+               background-color: white;
+               border:none;
+               padding:0;
+               height:3rem;
+               border-top:0.1rem solid $black40;
+               @include font-face(Pretendard-SemiBold, 1.4rem, 1.8rem, $black60);
+               padding-top:1.2rem;
+           }
+
+        }
+    } 
+    .line{
+        width:1.6rem;
+        display: inline-block;
+        border-bottom:0.1rem solid $black60;
+        margin:0 0.8rem;
+
+    }
+    .dimmed{
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        background-color: black;
+        opacity: 0.5;
+        z-index: 15;
+    }
+}

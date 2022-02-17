@@ -1,0 +1,169 @@
+@import '../../styles/utils.scss';
+
+.uploadDay-wrapper{
+    main{ 
+        padding:5.8rem 0 7rem;
+        button{
+            border:none;
+            padding:0;
+            background-color: transparent;
+        }
+        .selected-day-container{
+            border-bottom:0.1rem solid $black20;
+            padding:0 1.6rem;
+            display: flex;
+            overflow: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+		    scrollbar-width: none; /* Firefox */
+		    &::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera*/ }
+            .day-plus-button{
+                margin-left:0.4rem;
+                img{
+                    width:3rem;
+                }
+            }
+
+            
+        }
+        .question-container{
+            padding:1.6rem;
+            .question{
+                &.date{
+                    input{
+                        border:none;
+                        border-bottom:0.1rem solid $black50;
+                        @include font-face(Pretendard-Medium, 2rem, 3.2rem, $black90);
+                        width:12.9rem;
+                        padding:0;
+                        margin-top:1.6rem;
+                        &.input{
+                            border-bottom-color: $primary40;
+                        }
+                        &:focus{
+                            outline:none;
+                        }
+                        &::placeholder{
+                            color:$black50;
+                        }
+                    }
+                }
+                &.weather{
+                    .weather-container{
+                        display:flex;
+                        margin-top:1.6rem;
+                        button{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            img{
+                                width:6rem;
+                            }
+                            span{
+                                @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $black60);
+                                margin-top:1.2rem;
+                            }
+                            +button{
+                                margin-left:2.4rem;
+                            }
+                            &.selected{
+                                span{
+                                    @include font-face(Pretendard-SemiBold, 1.6rem, 2.4rem, $primaryPurple);
+                                }
+                                img{
+                                    border:0.1rem solid $primaryPurple;
+                                    border-radius: 50%;
+                                    box-sizing: border-box;
+                                }
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                }
+                &.location{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    .plus-button{
+                        margin-top:2.4rem;
+                        background-color: $bg2;
+                        border-radius: 1rem;
+                        padding:0.8rem;
+                        display: flex;
+                        align-items: center;
+                        img{
+                            width:2rem;
+                            height:2rem;
+                            margin-right:0.4rem;
+                        }
+                        span{
+                            @include font-face(Pretendard-Regular, 1.4rem, 2rem, $black60);
+                        }
+                    }
+                }
+                &.images{
+                    .images-container{
+                        display: flex;
+                        margin-top:1.6rem;
+                        overflow: auto;
+                        -ms-overflow-style: none; /* IE and Edge */
+		    scrollbar-width: none; /* Firefox */
+		    &::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera*/ }
+                        label{
+                            width:9rem;
+                            height:9rem;
+                            border-radius: 1.2rem;
+                            background-color: $bg2;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            img{
+                                width:2.4rem;
+                                margin-bottom:0.4rem;
+                            }
+                            span{
+                                @include font-face(Pretendard-Medium, 1.6rem, 2.2rem, $black90);
+                                &+span{
+                                    color:$black50;
+                                }
+                            }
+                        }
+                        input[type="file"]{
+                            position: absolute; 
+                            width: 1px; 
+                            height: 1px; 
+                            padding: 0; 
+                            margin: -1px; 
+                            overflow: hidden; 
+                            clip:rect(0,0,0,0); 
+                            border: 0;
+                        }
+                        .image{
+                            margin-left:1.2rem;
+                            position:relative;
+                            img[alt="upload_img"]{
+                                width:9rem;
+                                height:9rem;
+                                border-radius: 1.2rem;
+                            }
+                            img[alt="delete"]{
+                                width:2.4rem;
+                                height:2.4rem;
+                                position:absolute;
+                                top:0.2rem;
+                                right:0.2rem;
+                            }
+                        }
+                    }
+                   
+                }
+                +.question{
+                    margin-top:3.2rem;
+                }
+
+            }
+        }
+    }
+}

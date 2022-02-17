@@ -7,7 +7,7 @@ function NavigationBar() {
   const navigate = useNavigate();
   const onChangeNavigation = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setNavigation(e.currentTarget.children[0].getAttribute('alt'));
-    navigate(`/${e.currentTarget.children[0].getAttribute('alt')}`); 
+    navigate(`/${e.currentTarget.children[0].getAttribute('alt')}`);
   };
 
   return (

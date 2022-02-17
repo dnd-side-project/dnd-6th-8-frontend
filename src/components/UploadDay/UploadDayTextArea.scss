@@ -1,0 +1,35 @@
+@import '../../styles/utils.scss';
+
+.uploadDayTextArea-wrapper{
+    margin-top:1.6rem;
+    textarea{
+        box-sizing: border-box;
+        width:100%;
+        padding:1.2rem 1.2rem 0;
+        height:19rem;
+        border:0.1rem solid $black20;
+        border-radius: 1.2rem;
+        @include font-face(Pretendard-Regular, 1.4rem, 2.4rem, $black80);
+        resize:none;
+        &:focus{
+            outline:none;
+        }
+        &::placeholder{
+            color:$black50;
+        }
+        &.long{
+            height:25rem;
+        }
+    }
+    .count{
+        margin-top:0.8rem;
+        text-align: right;
+        span{
+            @include font-face(Pretendard-Regular, 1.4rem, 1.8rem, $black40);
+        }
+        :first-child{
+            color:$black90;
+        }
+    }
+    
+}
