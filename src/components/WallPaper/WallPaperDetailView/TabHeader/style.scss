@@ -1,0 +1,22 @@
+%tab{
+    font-family: 'Pretendard-Medium';
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.6;
+    padding-bottom : 4.4px;
+    cursor: pointer;
+}
+.tabheader-wrapper{
+    width : 100%; 
+    padding-left : 1.6rem ; 
+    .click-tab{
+        @extend %tab; 
+        border-bottom : 1.5px solid #4d1cf8; 
+        color : #060213; 
+    }
+    .non-click-tab{
+        @extend %tab; 
+        padding-bottom : 4.4px;
+        color : #d8dce8; 
+    }
+}

@@ -6,13 +6,16 @@ import WelcomePage from './WelcomePage';
 import IntroPage from './IntroPage';
 import ArchivingPage from './ArchivingPage';
 import Home from './Home/Home';
+import WallPaper from './WallPaper';
 import MyPage from './MyPage/MyPage';
 import UploadWallPaper from './UploadWallPaper/UploadWallPaper';
 import UploadDay from './UploadDay/UploadDay';
+import ScrollToTop from '../constants/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/intro" element={<IntroPage />} />
@@ -20,6 +23,7 @@ function App() {
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/wallpaper/:id" element={<WallPaper />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/upload-wallpaper" element={<UploadWallPaper />} />
         <Route path="/upload-day" element={<UploadDay />} />

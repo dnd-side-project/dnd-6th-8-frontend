@@ -2,25 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { ReactComponent as Book } from '../../../../assets/icons/ArchivingPage/ArchivingCorePage/book.svg';
 import Card from '../Card';
 import './style.scss';
+import { archivingDataType } from '../../../../constants/index';
 
 type PersonalProps = {
-  personalInfo: Array<{
-    archivingStyle: string;
-    region: string;
-    period: string,
-    completeArchive: string;
-    title: string;
-  }>;
+  personalInfo: archivingDataType[];
   setDeleteClick: (click: boolean) => void;
 };
-
-interface personalMap {
-  archivingStyle: string;
-  region: string;
-  period: string;
-  completeArchive: string;
-  title: string;
-}
 
 function Personal({ personalInfo, setDeleteClick }: PersonalProps) {
   const [fetchData, setFetchData] = useState<boolean>(false);
@@ -36,7 +23,7 @@ function Personal({ personalInfo, setDeleteClick }: PersonalProps) {
   return (
     <div className="personal-wrapper">
       {fetchDataLength ? (
-        personalInfo.map((value: personalMap) => {
+        personalInfo.map((value: archivingDataType) => {
           return <Card info={value} setDeleteClick={setDeleteClick} key={value.title} />;
         })
       ) : (

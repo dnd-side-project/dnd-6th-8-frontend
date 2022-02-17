@@ -1,0 +1,23 @@
+.wallpaperdetailview-wrapper{
+    padding-top : 8.2rem ;
+    .detail-title-box{
+        padding : 0 1.6rem 1.6rem 1.6rem; 
+        .detail-title{
+            font-family : 'Pretendard-SemiBold'; 
+            font-size : 1.8rem; 
+            font-weight: 600;
+            line-height: 1.44;
+            color : #292733; 
+        }
+        .detail-date{
+            font-family : 'Pretendard-Regular'; 
+            font-size: 1.6rem;
+            line-height: 1.5;
+            color : #a19fad; 
+        }
+    } 
+    .tab-header{
+        display: flex;
+        border-bottom : 1.5px solid #e7eaf6; 
+    }
+}
