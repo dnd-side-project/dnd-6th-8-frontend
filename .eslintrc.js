@@ -25,6 +25,10 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/no-unresolved': [
+      'error',
+      { "caseSensitive": false }
+    ],   
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
   },
   settings: {
