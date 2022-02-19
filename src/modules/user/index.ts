@@ -1,39 +1,52 @@
-export {}
-// import { produce } from 'immer';
-// import { SIGNUP_USER, SIGNIN_USER } from '../../constants';
+import axios from 'axios';
+import { produce } from 'immer';
+import { SIGNUP_USER, SIGNIN_USER } from '../../constants';
 
-// export const signupUser = (data: object) => ({
-//   type: SIGNUP_USER,
-//   data,
-// });
+// 액션 생성 함수
+export const signupUser = async (data: any) => {
+  const response = await axios.post(`api/user/signup`, data);
+  return {
+    type: SIGNUP_USER,
+    payload : response.data, 
+  };
+};
 
-// export const signinUser = (data: object) => ({
-//   type: SIGNIN_USER,
-//   data,
-// });
+export const signinUser = async(data: any) => {
+  const response = await axios.post(`api/user/login`, data);
+  return {
+    type: SIGNIN_USER,
+    payload : response.data, 
+  };
+};
 
-// // 액션 객체들에 대한 타입을 선언
+// 액션 객체들에 대한 타입을 선언
 // type UserAction = ReturnType<typeof signupUser> | ReturnType<typeof signinUser>;
 
-// type UserState = {
-//   me: null | object;
-// };
+type me = {
+  name: string;
+  id: number;
+};
 
-// export const initailState: UserState = {
-//   me: null,
-// };
+type UserState = {
+  me: me | undefined;
+};
 
-// export const user = (action: UserAction, state: UserState = initailState): UserState => {
-//   // eslint-disable-next-line consistent-return
-//   return produce(state, draft => {
-//     switch (action.type) {
-//       case SIGNUP_USER:
-//         draft.me = null; 
-//         break;
-//       case SIGNIN_USER:
-//         break;
-//       default:
-//         return state;
-//     }
-//   });
-// };
+export const initailState: UserState = {
+  me: undefined,
+};
+
+// User Reducer
+export const user = (action: any, state: UserState = initailState): any => {
+  return produce(state, (draft) => {
+    switch (action && action.type) {
+      case SIGNUP_USER:
+        draft.me = action.payload;
+        break;
+      case SIGNIN_USER:
+        draft.me = action.payload; 
+        break;
+      default:
+        break;
+    }
+  });
+};

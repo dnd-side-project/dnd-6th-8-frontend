@@ -1,13 +1,12 @@
-export {}
-// import { combineReducers } from "redux";
-// import {user} from './user'; 
-// import {post} from './post'; 
+import { combineReducers } from 'redux';
+import { user } from './user';
+import { post } from './post';
 
-// const rootReducer = combineReducers({
-//     user, 
-//     post,
-// })
+const rootReducer = combineReducers({
+  user,
+  post,
+});
 
-// export default rootReducer; 
+export default rootReducer;
 
-// export type RootState = ReturnType<typeof rootReducer>; 
+export type RootState = ReturnType<typeof rootReducer>;
