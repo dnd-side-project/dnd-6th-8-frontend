@@ -4,13 +4,17 @@ import { ReactComponent as IntroMessage } from '../../../assets/icons/IntroPage/
 import { ReactComponent as IntroStanding } from '../../../assets/icons/IntroPage/SecondPage/Intro_secondPage_standing.svg';
 import './style.scss';
 
-function SecondPage() {
+type SecondPageProps = {
+  sec : number; 
+}
+
+function SecondPage({sec} : SecondPageProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
       navigate('/surveyStart'); 
-    }, 3000);
+    }, sec);
   }, []);
 
   return (
