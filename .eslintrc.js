@@ -13,7 +13,6 @@ module.exports = {
   rules: {
     'no-use-before-define': 'off',
     'no-param-reassign': 0,
-    // '@typescript-eslint/no-use-before-define': ['error'],
     'prettier/prettier': 0,
     'import/extensions': [
       'error',

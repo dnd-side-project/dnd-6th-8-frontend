@@ -6,6 +6,7 @@
     animation-duration: 2s ;
     animation-fill-mode: forwards;
     padding-top : 15rem;  
+    padding-bottom : 12.8rem; 
     .text-logo{
         width : 18.4rem;
         height : 4.5rem; 
@@ -51,6 +52,9 @@
     .see-long-term-wrapper{
         margin-top : 1.6rem;
         .see-long-term{
+            width: max-content;
+            margin: auto; 
+            border-bottom : 1px solid #996eff; 
             cursor : pointer; 
             text-align: center;
             font-family: 'Pretendard-Medium';
