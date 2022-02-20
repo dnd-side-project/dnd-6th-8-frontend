@@ -35,21 +35,3 @@ function IntroPage() {
 }
 
 export default IntroPage;
-
-// const [activeIndex, setActiveIndex] = useState<number>(0);
-// {activeIndex === 0 ? (
-//   <Swiper
-//     spaceBetween={50}
-//     slidesPerView={1}
-//     onSlideChange={(swiper) => setTimeout(() => setActiveIndex(swiper.activeIndex), 500)}
-//   >
-//     <SwiperSlide>
-//       <WallPaperPreview fetchData={fetchData} />
-//     </SwiperSlide>
-//     <SwiperSlide>
-//       <WallPaperDetailView fetchData={fetchData} />
-//     </SwiperSlide>
-//   </Swiper>
-// ) : (
-//   <WallPaperDetailView fetchData={fetchData} />
-// )}
