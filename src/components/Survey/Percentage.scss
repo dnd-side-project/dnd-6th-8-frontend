@@ -4,17 +4,19 @@
     background-color: $black20;
     height:1rem;
     border-radius: 0.65rem;
-    width:90vw;
+    width:100%;
     .percentage{
         background-color: $primaryPurple;
-        width:33%;
+        width:33.33%;
         border-radius: 0.65rem;
         height:100%;
         &.two{
-            width:66%
+            width:66.66%;
+            transition:width 0.3s;
         }
         &.three{
-            width:100%
+            width:100%;
+            transition:width 0.3s;
         }
     }
 }

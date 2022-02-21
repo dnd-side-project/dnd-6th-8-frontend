@@ -3,34 +3,34 @@ import './Option.scss';
 
 type OptionProps = {
   number: string | null;
-  onNextSurvey: () => void;
   select: number;
   setSelect: React.Dispatch<React.SetStateAction<number>>;
+  onSelectSurvey: (type: string, options: string | boolean) => void;
 };
 
-function Option({ number, onNextSurvey, select, setSelect }: OptionProps) {
-  let text1 = '';
-  let text2 = '';
-  let src1 = '';
-  let src2 = '';
+function Option({ number, onSelectSurvey, select, setSelect }: OptionProps) {
+  let text: string[] = [];
+  let src: string[] = [];
+  let option: string[] | boolean[] = [];
+  let type = '';
   switch (number) {
     case '1':
-      text1 = '혼자 여행';
-      text2 = '동행과의 여행';
-      src1 = 'emoji_person_survey.png';
-      src2 = 'emoji_group_survey.png';
+      type = 'haveCompanion';
+      text = ['혼자 여행', '동행과의 여행'];
+      src = ['emoji_person_survey.png', 'emoji_group_survey.png'];
+      option = [false, true];
       break;
     case '2':
-      text1 = '최소한으로 준비';
-      text2 = '넉넉하게 준비';
-      src1 = 'emoji_moneydown_survey.png';
-      src2 = 'emoji_moneyup_survey.png';
+      type = 'budget';
+      text = ['최소한으로 준비', '넉넉하게 준비'];
+      src = ['emoji_moneydown_survey.png', 'emoji_moneyup_survey.png'];
+      option = ['최소한', '넉넉'];
       break;
     case '3':
-      text1 = '여행에 대한 실용적인 정보';
-      text2 = '여행에서 느낀 감정 위주의 글';
-      src1 = 'emoji_info_survey.png';
-      src2 = 'emoji_feeling_survey.png';
+      type = 'archivingStyle';
+      text = ['여행에 대한 실용적인 정보', '여행에서 느낀 감정 위주의 글'];
+      src = ['emoji_info_survey.png', 'emoji_feeling_survey.png'];
+      option = ['정보', '감성'];
       break;
     default:
   }
@@ -38,25 +38,25 @@ function Option({ number, onNextSurvey, select, setSelect }: OptionProps) {
     <div className="option-wrapper">
       <button
         type="button"
-        className={`option-container ${select === 1 && 'select'}`}
+        className={`option-container${select === 0 ? ' select' : ''}`}
         onClick={() => {
-          onNextSurvey();
-          setSelect(1);
+          onSelectSurvey(type, option[0]);
+          setSelect(0);
         }}
       >
-        <img src={`/imgs/Survey/${src1}`} alt="icon" className="icon" />
-        <div className="text">{text1}</div>
+        <img src={`/imgs/Survey/${src[0]}`} alt="icon" className="icon" />
+        <div className="text">{text[0]}</div>
       </button>
       <button
         type="button"
-        className={`option-container ${select === 2 && 'select'}`}
+        className={`option-container ${select === 1 && 'select'}`}
         onClick={() => {
-          onNextSurvey();
-          setSelect(2);
+          setSelect(1);
+          onSelectSurvey(type, option[1]);
         }}
       >
-        <img src={`/imgs/Survey/${src2}`} alt="icon" className="icon" />
-        <div className="text">{text2}</div>
+        <img src={`/imgs/Survey/${src[1]}`} alt="icon" className="icon" />
+        <div className="text">{text[1]}</div>
       </button>
     </div>
   );
