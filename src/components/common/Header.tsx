@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Header.scss';
 
 type HeaderProps = {
@@ -10,6 +11,7 @@ Header.defaultProps = {
 };
 
 function Header({ title }: HeaderProps) {
+  const navigate = useNavigate();
   return (
     <header className="header-wrapper">
       {title ? (
@@ -17,7 +19,9 @@ function Header({ title }: HeaderProps) {
       ) : (
         <img src="imgs/common/text_logo.png" alt="logo" className="logo" />
       )}
-      <img src="imgs/common/ic_scrap.png" alt="scrap" className="scrap" />
+      <button type="button" onClick={() => navigate('/scrap')}>
+        <img src="imgs/common/ic_scrap.png" alt="scrap" className="scrap" />
+      </button>
     </header>
   );
 }

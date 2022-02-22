@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './SurveyStart.scss';
 
 function SurveyStart() {
@@ -20,11 +20,9 @@ function SurveyStart() {
           다음에 할래요!
         </button>
       </div>
-      <Link to="/survey?number=1" className="link">
-        <button type="button" className="start-button">
-          간단한 응답 시작하기
-        </button>
-      </Link>
+      <button type="button" className="start-button" onClick={() => navigate('/survey?number=1')}>
+        간단한 응답 시작하기
+      </button>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import TermsConditions from './TermsConditions';
 import PersonalInfoPolicy from './PersonalInfoPolicy';
 import Header from '../components/common/Header';
 import NavigationBar from '../components/common/NavigationBar';
+import Scrap from './Scrap/Scrap';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
         <Route path="/upload-wallpaper" element={<UploadWallPaper />} />
         <Route path="/upload-day" element={<UploadDay />} />
+        <Route path="/scrap" element={<Scrap />} />
       </Routes>
     </Router>
   );

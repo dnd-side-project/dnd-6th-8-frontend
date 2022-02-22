@@ -197,3 +197,42 @@ export const dayFeedFetchData: DayFeedDataType[] = [
     dayHoneyTip: '산방산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
   },
 ];
+
+export const ScrapData = [
+  {
+    id: 1,
+    title: '나의 두 번째 부산',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 2,
+    title: '제주도에서 한달 살기',
+    cateogry: '정보',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 3,
+    title: '프라하에서 체스키어쩌구저쩌구',
+    cateogry: '정보',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 4,
+    title: '강릉에서 적는 회고록',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 5,
+    title: '나의 두 번째 부산',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 6,
+    title: '나의 두 번째 부산',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+];
