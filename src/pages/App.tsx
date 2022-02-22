@@ -39,7 +39,16 @@ function App() {
           }
         />
         <Route path="/wallpaper/:id" element={<WallPaper />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route
+          path="/mypage"
+          element={
+            <>
+              <Header />
+              <MyPage />
+              <NavigationBar />
+            </>
+          }
+        />
         <Route path="/userProfile" element={<UserProfile />} />
         <Route path="/termsConditions" element={<TermsConditions />} />
         <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />

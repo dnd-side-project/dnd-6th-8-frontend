@@ -14,15 +14,11 @@
         margin-bottom:0.2rem;
     }
     button{
+        width:8.9rem;
         display:flex;
         flex-direction: column;
         align-items: center;
-        background-color: $white;
-        border:0;
-        font-family: Pretendard-Medium;
-        font-size:1.4rem;
-        line-height: 1.8rem;
-        color:$black50;
+        @include font-face(Pretendard-Medium, 1.4rem, 1.8rem, $black50);
         &.click{
             color:$primaryPurple;
             font-family: Pretendard-SemiBold;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { HomeFeedsType } from '../../constants/index';
 
-function LocFeed({ id, category, date, title, image, location }: HomeFeedsType) {
+function LocFeed({ category, date, title, image, location }: HomeFeedsType) {
   return (
-    <div className="feed">
+    <div className="locFeed-wrapper">
       <div className="img-container">
         <span className={`category${category === '정보' ? ' info' : ''}`}>{category}</span>
         <img src={image} alt={location} />

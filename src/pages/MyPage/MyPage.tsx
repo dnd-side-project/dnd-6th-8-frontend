@@ -10,9 +10,6 @@ import './MyPage.scss';
 function MyPage() {
   return (
     <div className="mypage-wrapper">
-      <header>
-        <Header title="마이페이지" />
-      </header>
       <main>
         {/* loading?<Loading/>:<UserInfo/> */}
         {/* <Loading height={9.2} />
@@ -20,11 +17,8 @@ function MyPage() {
         <Loading height={15.9} /> */}
         <UserInfo />
         <Sticker />
-        <Menu /> 
+        <Menu />
       </main>
-      <footer>
-        <NavigationBar />
-      </footer>
     </div>
   );
 }

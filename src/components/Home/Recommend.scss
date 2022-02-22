@@ -2,10 +2,7 @@
 
 .recommend-wrapper{
     .h2{
-        font-family: Pretendard-SemiBold;
-        font-size:1.6rem;
-        line-height:2.4rem;
-        color:$black90;
+        @include font-face(Pretendard-SemiBold, 1.6rem, 2.4rem, $black90);
         margin-bottom:1.6rem;
     }
     article{
@@ -17,6 +14,8 @@
             .img-container{
                 border-radius: 1.2rem;
                 margin-bottom: 0.8rem;
+                width:13rem;
+                flex-shrink: 0;
                 .category{
                     box-sizing: border-box;
                     position: absolute;
@@ -27,10 +26,7 @@
                     padding:0.7rem 0.4rem;
                     border-radius: 1.2rem 0;
                     background-color: $warningOr;
-                    font-size:1rem;
-                    font-family: Pretendard-SemiBold;
-                    line-height:1.4rem;
-                    color:white;
+                    @include font-face(Pretendard-SemiBold, 1rem, 1.4rem, white);
                     text-align: center;
                     &.info{
                         background-color: $infoBlu;
@@ -38,7 +34,7 @@
              
                 }
                 img{
-                    width:13rem;
+                    width:100%;
                 }
             }
             .detail-container{
@@ -54,35 +50,21 @@
                         margin-right:0.6rem;
                     }
                     .kr{
-                        font-family: Pretendard-Medium;
-                        font-size: 1.2rem;
-                        line-height: 2rem;
-                        color:$black80;
+                        @include font-face(Pretendard-Medium, 1.2rem, 2rem, $black80);
                         margin-right:1rem;
                     }
                     .date{
-                        font-family: Pretendard-Medium;
-                        font-size:1rem;
-                        line-height:1.2rem;
-                        color:$black60;
-                        background-color: aqua;
+                        @include font-face(Pretendard-Medium, 1rem, 1.2rem, $black60);
                         padding:0.3rem 0.4rem;
                         border-radius: 1.2rem;
                         background-color: $bg2;
                     }
                 }
-                
                 h4{
-                    font-family: Pretendard-SemiBold;
-                    font-size:1.4rem;
-                    line-height:2.2rem;
-                    color:$black90;
+                    @include font-face(Pretendard-SemiBold, 1.4rem, 2.2rem, $black90);
                 }
                 .text{
-                    font-family: Pretendard-Regular;
-                    font-size:1rem;
-                    line-height: 1.5rem;
-                    color:$black60;
+                    @include font-face(Pretendard-Regular, 1rem, 1.5rem, $black60);
                     overflow:hidden;
                     text-overflow: ellipsis;
                     -webkit-line-clamp: 2;
@@ -97,17 +79,11 @@
                         width:1.6rem;
                     }
                     span{
-                        font-family: Pretendard-SemiBold;
-                        font-size:1rem;
-                        line-height: 1.2rem;
-                        color:$black70;
+                        @include font-face(Pretendard-SemiBold, 1rem, 1.2rem, $black70);
                         margin: 0 0.4rem;
                     }
                 }
             }
-          
-           
-            
         }
     }
     

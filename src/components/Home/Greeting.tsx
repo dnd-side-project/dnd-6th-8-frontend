@@ -13,8 +13,7 @@ function Greeting() {
       <div className="image-container">
         <div className="image" />
         <div className="image" />
-        <div className="image" />
-        {/* <img src="imgs/Greeting/img_cricle1_home.png" alt="scrap" /> */}
+        <img src="imgs/Home/img_cricle1_home.png" alt="scrap" className="image" />
       </div>
     </div>
   );
