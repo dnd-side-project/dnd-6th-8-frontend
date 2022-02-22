@@ -5,17 +5,11 @@
     padding: 0 1.4rem;
     margin-bottom:6.2rem;
     .step{
-        font-family: Pretendard-Medium;
-        font-size:1.8rem;
-        line-height: 2.6rem;
-        color:$black50;
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black50);
         margin-bottom:1.6rem;
     }
     .question{
-        font-family: Pretendard-Medium;
-        font-size:2rem;
-        line-height: 3.2rem;
-        color:$black90;
+        @include font-face(Pretendard-Medium, 2rem, 3.2rem, $black90);
         white-space: pre-wrap;
     }
 }
