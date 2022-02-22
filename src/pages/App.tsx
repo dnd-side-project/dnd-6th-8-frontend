@@ -14,6 +14,8 @@ import ScrollToTop from '../constants/ScrollToTop';
 import UserProfile from './UserProfile';
 import TermsConditions from './TermsConditions';
 import PersonalInfoPolicy from './PersonalInfoPolicy';
+import Header from '../components/common/Header';
+import NavigationBar from '../components/common/NavigationBar';
 
 function App() {
   return (
@@ -25,7 +27,16 @@ function App() {
         <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <>
+              <Header />
+              <Home />
+              <NavigationBar />
+            </>
+          }
+        />
         <Route path="/wallpaper/:id" element={<WallPaper />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/userProfile" element={<UserProfile />} />
