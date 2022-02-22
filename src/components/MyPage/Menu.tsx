@@ -2,7 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Menu.scss';
 
-function Menu() {
+type MenuProps = {
+  logOutHandler: () => void;
+}
+
+function Menu({logOutHandler} : MenuProps) {
 
   const navigate = useNavigate(); 
 
@@ -23,7 +27,7 @@ function Menu() {
         <img src="imgs/MyPage/ic_Personal information.png" alt="personal information" />
         <span>개인정보 처리방침</span>
       </div>
-      <div className="menu">
+      <div className="menu" onClick={logOutHandler} aria-hidden='true'>
         <img src="imgs/MyPage/ic_loginout.png" alt="logout" />
         <span>로그아웃</span>
       </div>

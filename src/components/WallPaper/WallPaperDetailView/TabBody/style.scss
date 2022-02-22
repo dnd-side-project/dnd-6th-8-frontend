@@ -1,3 +1,27 @@
+.tabbody-swiper-pagination-bullet { 
+    width: 1rem; 
+    height: 1rem;
+    flex-grow: 0;
+    margin: 0 5rem 0 0;
+    transform: rotate(-180deg);
+    background-color: red;
+    border-radius: 4rem;
+    position : fixed;
+    bottom : -4rem;
+}
+
+.tabbody-swiper-pagination-bullet-active {     
+    width: 2rem;
+    height: 1rem;
+    flex-grow: 0;
+    margin: 0 0 0 5rem;
+    transform: rotate(-180deg);
+    border-radius: 0.5rem;
+    background: blue;
+    border-radius: 4rem;
+    // position : fixed;
+    // bottom : -4rem;
+}
 
 .tabbody-wrapper{
     padding : 1.6rem 0 11rem 1.6rem;
@@ -77,7 +101,7 @@
             }
         }
         .today-wrapper{
-            margin-top : 3.2rem;
+            margin-top : 7rem;
             p{
                 display: flex;
                 align-items: center;

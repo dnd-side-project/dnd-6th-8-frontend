@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { HomeFeedsType, DayFeedDataType, dayFeedFetchData } from '../../../constants';
 import ReactionBar from '../ReactionBar';
 import './style.scss';

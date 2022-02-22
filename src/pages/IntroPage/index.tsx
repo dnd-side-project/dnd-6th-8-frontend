@@ -17,7 +17,11 @@ function IntroPage() {
         <Swiper
           spaceBetween={50}
           slidesPerView={1}
-          pagination={{ clickable: true }}
+          pagination={{
+            clickable: true,
+            bulletClass: `intro-swiper-pagination-bullet`,
+            bulletActiveClass: `intro-swiper-pagination-bullet-active`,
+          }}
           onSlideChange={(swiper) => setTimeout(() => setActiveIndex(swiper.activeIndex), 500)}
         >
           <SwiperSlide>
