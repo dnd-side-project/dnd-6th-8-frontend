@@ -13,7 +13,6 @@ module.exports = {
   rules: {
     'no-use-before-define': 'off',
     'no-param-reassign': 0,
-    // '@typescript-eslint/no-use-before-define': ['error'],
     'prettier/prettier': 0,
     'import/extensions': [
       'error',
@@ -25,6 +24,10 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'import/no-unresolved': [
+      'error',
+      { "caseSensitive": false }
+    ],   
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
   },
   settings: {

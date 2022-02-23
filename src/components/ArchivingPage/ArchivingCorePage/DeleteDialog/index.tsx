@@ -30,10 +30,10 @@ function DeleteDialog({ deleteClick, setDeleteClick, agreeClick, setAgreeClick }
           <br /> 복구하실 수 없어요 ㅠㅠ
         </div>
         <div className="box-btn">
-          <div className="btn-left" onClick={onCancelClick} aria-hidden="true">
+          <div role="button" tabIndex={0} className="btn-left" onClick={onCancelClick} onKeyDown={onCancelClick}>
             <span>취소</span>
           </div>
-          <div className="btn-right" onClick={onAgreeClick} aria-hidden="true">
+          <div role="button" tabIndex={0} className="btn-right" onClick={onAgreeClick} onKeyDown={onAgreeClick}>
             <span>확인</span>
           </div>
         </div>

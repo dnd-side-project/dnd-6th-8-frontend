@@ -10,7 +10,7 @@ function RecFeed({ id, category, date, title, image, location, locationKR, text,
   }, []);
   return (
     <div className="feed">
-      <div className="img-container" onClick={gotoWallPaperHandler} aria-hidden="true">
+      <div role="button" tabIndex={0} className="img-container" onClick={gotoWallPaperHandler} onKeyDown={gotoWallPaperHandler}>
         <span className={`category${category === '정보' ? ' info' : ''}`}>{category}</span>
         <img src={image} alt={location} />
       </div>

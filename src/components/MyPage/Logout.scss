@@ -8,38 +8,32 @@
     padding-top : 1.2rem;
 }
 
-.deleteDialog-wrapper{
+.logout-wrapper{
     width : 100vw; 
     height : 100vh; 
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
-    z-index: 11;
+    top : 0; 
+    z-index : 1000;
     display: flex;
     align-items: center;
     justify-content: center;
-    .delete-alert{
+    .logout-alert{
         width : 30rem; 
-        height : 16.2rem; 
+        height : 11.4rem; 
         padding-top: 2.2rem;
         background: white;
         border-radius: 1.5rem;
         text-align: center;
+        .main-text{
+            color : #292733; 
+            font-family: 'Pretendard-Medium';
+            font-size: 1.8rem;
+            font-weight: 500;
+            line-height: 1.44;
+        }
     }
-    .main-text{
-        color : #292733; 
-        font-family: 'Pretendard-Medium';
-        font-size: 1.8rem;
-        font-weight: 500;
-        line-height: 1.44;
-        
-    }
-    .sub-text{
-        margin-top : 1.2rem; 
-        color : #595663; 
-        font-family: 'Pretendard-Regular';
-        font-size: 1.4rem;
-        line-height: 1.29;
-    }
+    
     .box-btn{
         width : 100%;
         margin-top : 2.3rem; 
@@ -56,5 +50,4 @@
             @extend %btn-inner-btn;
         }
     }
-
 }

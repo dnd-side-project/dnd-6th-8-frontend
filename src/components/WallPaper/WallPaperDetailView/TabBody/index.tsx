@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Pagination } from 'swiper';
 import { DayFeedDataType, dayTripCourse } from '../../../../constants';
 import LocPin from '../../../../assets/icons/WallPaper/dayfeed/ic_location_purple 1.png';
 import './style.scss';
@@ -10,6 +11,8 @@ type TabBodyProps = {
 };
 
 function TabBody({ value }: TabBodyProps) {
+  const [imgClick, setImgClick] = useState(true);
+  SwiperCore.use([Pagination]);
   return (
     <div className="tabbody-wrapper">
       <div className="date-weather">
@@ -22,14 +25,25 @@ function TabBody({ value }: TabBodyProps) {
           {value.imgs.map((img, index) => {
             return (
               <SwiperSlide>
-                <img src={img} alt="이미지캐루셀" width="150px" height="150px" />
+                <img
+                  src={img}
+                  alt="이미지캐루셀"
+                  width="150px"
+                  height="150px"
+                />
               </SwiperSlide>
             );
           })}
         </Swiper>
       </div>
       <div className="content-wrapper">
-        <Swiper slidesPerView={1} pagination={{ clickable: true }}>
+        <Swiper
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+          }}
+          style={{ overflow: 'visible' }}
+        >
           {value.dayCourse.map((course: dayTripCourse) => (
             <SwiperSlide>
               <div className="start-finish-wrapper">
