@@ -11,10 +11,10 @@ function Logout({ logOutHandler }: LogoutProps) {
       <div className="logout-alert">
         <div className="main-text">로그아웃 하시겠어요?</div>
         <div className="box-btn">
-          <div className="btn-left" aria-hidden="true">
+          <div className="btn-left">
             <span>취소</span>
           </div>
-          <div className="btn-right" onClick={logOutHandler} aria-hidden="true">
+          <div role="button" tabIndex={0} className="btn-right" onClick={logOutHandler} onKeyDown={logOutHandler}>
             <span>로그아웃</span>
           </div>
         </div>

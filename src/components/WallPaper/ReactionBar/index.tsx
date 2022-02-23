@@ -43,7 +43,7 @@ function ReactionBar() {
         </div>
       )}
       <div className="reactionbar-inner-wrapper">
-        <div className="reaction-left" onClick={reactionHandler} aria-hidden="true">
+        <div className="reaction-left" role="button" tabIndex={0} onClick={reactionHandler} onKeyDown={reactionHandler}>
           <img src={ReactionGood} alt="엄지" />
           <span>반응 남기기</span>
         </div>
