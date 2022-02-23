@@ -8,7 +8,7 @@ function UserInfo() {
     navigate('/userProfile');
   };
   return (
-    <div className="userInfo-wrapper" onClick={gotoUserProfile} aria-hidden="true">
+    <div className="userInfo-wrapper" role="button" tabIndex={0} onClick={gotoUserProfile} onKeyDown={gotoUserProfile}>
       <div className="container">
         <img src="imgs/MyPage/illust_profile_mypage.png" alt="프로필 이미지" className="profile" />
         <div className="name-container">

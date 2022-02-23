@@ -1,3 +1,23 @@
+.swiper-pagination-bullet { 
+    width: 1rem;
+    height: 1rem;
+    flex-grow: 0;
+    margin: 0 1rem 0 0;
+    transform: rotate(-180deg);
+    background-color: #d8dce8;
+    position : relative; 
+    bottom : -5rem;
+}
+
+.swiper-pagination-bullet-active {     
+    width: 2rem;
+    height: 1rem;
+    flex-grow: 0;
+    margin: 0 0 0 1rem;
+    transform: rotate(-180deg);
+    border-radius: 0.5rem;
+    background: #a19fad;
+}
 
 .tabbody-wrapper{
     padding : 1.6rem 0 11rem 1.6rem;
@@ -77,7 +97,7 @@
             }
         }
         .today-wrapper{
-            margin-top : 3.2rem;
+            margin-top : 7rem;
             p{
                 display: flex;
                 align-items: center;

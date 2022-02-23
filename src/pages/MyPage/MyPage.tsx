@@ -4,9 +4,12 @@ import Sticker from '../../components/MyPage/Sticker';
 import UserInfo from '../../components/MyPage/UserInfo';
 import Loading from '../../components/MyPage/Loading';
 import './MyPage.scss';
+import Logout from '../../components/MyPage/Logout';
 
 function MyPage() {
   const [loading, setLoading] = useState(true);
+  const [logOut, setLogOut] = useState<boolean>(false);
+  const logOutHandler = (): void => setLogOut((prev) => !prev);
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -15,6 +18,7 @@ function MyPage() {
 
   return (
     <div className="mypage-wrapper">
+      {logOut && <Logout logOutHandler={logOutHandler} />}
       {loading ? (
         <>
           <Loading height={9.2} />
@@ -25,7 +29,7 @@ function MyPage() {
         <>
           <UserInfo />
           <Sticker />
-          <Menu />
+          <Menu logOutHandler={logOutHandler} />
         </>
       )}
     </div>
