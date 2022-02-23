@@ -27,7 +27,7 @@ function ButtonModal({ title, subTitle, rightButton, closeModal }: ButtonModalPr
             type="button"
             onClick={() => {
               closeModal(false);
-              if (rightButton === '나가기') navigate(-1);
+              if (rightButton === '나가기') navigate('/archiving');
             }}
           >
             {rightButton}

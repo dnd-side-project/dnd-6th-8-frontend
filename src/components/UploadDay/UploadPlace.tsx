@@ -9,6 +9,8 @@ type UploadPlaceProps = {
   onInputTime: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
   onChangeTranport: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number, id: number) => void;
   onDeleteLocation: (nowDay: number, id: number) => void;
+  onResetStartLoc: (nowDay: number, id: number) => void;
+  onResetEndLoc: (nowDay: number, id: number) => void;
 };
 
 function UploadPlace({
@@ -19,6 +21,8 @@ function UploadPlace({
   onInputTime,
   onChangeTranport,
   onDeleteLocation,
+  onResetEndLoc,
+  onResetStartLoc,
 }: UploadPlaceProps) {
   const startLocInputRef = useRef<HTMLInputElement>(null);
   const endLocInputRef = useRef<HTMLInputElement>(null);
@@ -33,17 +37,33 @@ function UploadPlace({
       <article className="location-container">
         <img src="imgs/Upload/ic_location_purple.png" alt="start location" />
         <span>출발지</span>
-        <input
-          type="text"
-          placeholder="출발 장소를 입력해주세요."
-          ref={startLocInputRef}
-          onChange={(e) => onInputStart(e, day, nowLocation.id)}
-          value={nowLocation.start || ''}
-        />
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="출발 장소를 입력해주세요."
+            ref={startLocInputRef}
+            onChange={(e) => {
+              onInputStart(e, day, nowLocation.id);
+            }}
+            value={nowLocation.start || ''}
+          />
+          {nowLocation.start !== '' && (
+            <button
+              type="button"
+              onClick={() => {
+                resetText(startLocInputRef);
+                onResetStartLoc(day, nowLocation.id);
+              }}
+            >
+              <img src="imgs/Upload/ic_x_small.png" alt="reset" />
+            </button>
+          )}
+        </div>
       </article>
       <article className="detail-container">
         <div className="time">
           <span>걸린 시간</span>
+
           <input
             type="text"
             placeholder="걸린 시간을 입력해주세요."
@@ -69,13 +89,28 @@ function UploadPlace({
       <article className="location-container">
         <img src="imgs/Upload/ic_location_purple.png" alt="end location" />
         <span>도착지</span>
-        <input
-          type="text"
-          placeholder="도착 장소를 입력해주세요."
-          ref={endLocInputRef}
-          onChange={(e) => onInputEnd(e, day, nowLocation.id)}
-          value={nowLocation.end || ''}
-        />
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="도착 장소를 입력해주세요."
+            ref={endLocInputRef}
+            onChange={(e) => {
+              onInputEnd(e, day, nowLocation.id);
+            }}
+            value={nowLocation.end || ''}
+          />
+          {nowLocation.end !== '' && (
+            <button
+              type="button"
+              onClick={() => {
+                resetText(endLocInputRef);
+                onResetEndLoc(day, nowLocation.id);
+              }}
+            >
+              <img src="imgs/Upload/ic_x_small.png" alt="reset" />
+            </button>
+          )}
+        </div>
       </article>
       {nowLocation.id > 1 && (
         <button type="button" className="delete" onClick={() => onDeleteLocation(day, nowLocation.id)}>

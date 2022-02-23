@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './UploadHeader.scss';
 import ButtonModal from '../UploadModals/ButtonModal';
 import UploadAlert from '../UploadModals/UploadAlert';
@@ -12,12 +13,14 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
   const [isOpenBackModal, setIsOpenBackModal] = useState<boolean>(false);
   const [isOpenSaveModal, setIsOpenSaveModal] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <header className="uploadHeader-wrapper">
         <div className="left">
           {isCanGoBack && (
-            <button type="button" className="back">
+            <button type="button" className="back" onClick={() => navigate('/upload-wallpaper')}>
               <img src="imgs/Upload/ic_back.png" alt="x" />
             </button>
           )}
