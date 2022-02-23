@@ -6,10 +6,8 @@ import DayButton from '../../components/UploadDay/DayButton';
 import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
 import UploadDayTextArea from '../../components/UploadDay/UploadDayTextArea';
 import UploadPlace from '../../components/UploadDay/UploadPlace';
-import ButtonModal from '../../components/UploadModals/ButtonModal';
-import ShareModal from '../../components/UploadModals/ShareModal';
 import './UploadDay.scss';
-import EmotionModal from '../../components/UploadModals/EmotionModal';
+import BottomButton from '../../components/common/BottomButton';
 
 type WriteDataType = {
   day: number;
@@ -204,7 +202,7 @@ function UploadDay() {
 
   return (
     <div className="uploadDay-wrapper">
-      <UploadHeader title="기록 작성" isCanGoBack isRightButtonSave />
+      <UploadHeader title="기록 작성" isCanGoBack />
       <main>
         <section className="selected-day-container">
           {writeData.map((data) => (
@@ -345,7 +343,7 @@ function UploadDay() {
         rightButton="나가기"
       /> */}
       {/* <ShareModal /> */}
-      <EmotionModal />
+      {/* <EmotionModal /> */}
     </div>
   );
 }

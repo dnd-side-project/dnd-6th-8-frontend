@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './UploadWallPaper.scss';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import DateModal from '../../components/UploadModals/DateModal';
-import BottomButton from '../../components/common/BottomButton';
 import UploadAlert from '../../components/UploadModals/UploadAlert';
 
 type UploadWallPaperDataType = {
@@ -30,8 +30,17 @@ function UploadWallPaper() {
     archivingStyle: '',
   });
 
+  const [isImageSizeOK, setIsImageSizeOK] = useState<boolean>(true);
+
   const onUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
+    if (e.target.files[0].size > 1024 * 1024 * 5) {
+      setIsImageSizeOK(false);
+      setTimeout(() => {
+        setIsImageSizeOK(true);
+      }, 1200);
+      return;
+    }
     setWallPaperData({ ...wallPaperData, coverImage: e.target.files[0] });
   };
 
@@ -56,6 +65,26 @@ function UploadWallPaper() {
   const onClickToggle = (type: string, value: string | boolean) => {
     setWallPaperData({ ...wallPaperData, [type]: value });
   };
+
+  // 작성 완료
+  const [complete, setComplete] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (
+      wallPaperData.archivingStyle !== '' &&
+      wallPaperData.budget !== '' &&
+      wallPaperData.coverImage !== null &&
+      wallPaperData.firstDay !== '' &&
+      wallPaperData.haveCompanion !== null &&
+      wallPaperData.lastDay !== '' &&
+      wallPaperData.place !== '' &&
+      wallPaperData.title !== ''
+    ) {
+      setComplete(true);
+    }
+  }, [wallPaperData]);
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -188,9 +217,16 @@ function UploadWallPaper() {
             value="정보"
           />
         </div>
-        {/* <UploadAlert emoji="uploadfile" text={`여행기록이 성공적으로\n업로드되었습니다.`} /> */}
       </main>
-      <BottomButton data={wallPaperData} />
+      <button
+        type="button"
+        className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
+        disabled={!complete}
+        onClick={() => navigate('/upload-day?day=1')}
+      >
+        다음으로
+      </button>
+      {!isImageSizeOK && <UploadAlert text={`사진 용량은 5mb가 넘을 시\n업로드가 불가합니다.`} emoji="crying" />}
     </div>
   );
 }

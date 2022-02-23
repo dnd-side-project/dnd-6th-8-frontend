@@ -1,33 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './BottomButton.scss';
+import EmotionModal from '../UploadModals/EmotionModal';
+import ShareModal from '../UploadModals/ShareModal';
 
-type BottomButtonProps = {
-  data: {
-    coverImage: File | null;
-    title: string;
-    place: string;
-    firstDay: string;
-    lastDay: string;
-    haveCompanion: boolean | null;
-    budget: string;
-    archivingStyle: string;
+function BottomButton() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const nowPage = location.pathname;
+
+  const [isStickerModalOpen, setIsStickerModalOpen] = useState<boolean>(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
+
+  const onComplete = () => {
+    if (location.pathname === '/upload-wallpaper') {
+      navigate('/upload-day?day=1');
+    } else {
+      setIsStickerModalOpen(true);
+    }
   };
-};
 
-function BottomButton({ data }: BottomButtonProps) {
-  const complete: boolean =
-    data.coverImage !== null &&
-    data.title !== '' &&
-    data.place !== '' &&
-    data.firstDay !== '' &&
-    data.lastDay !== '' &&
-    data.haveCompanion !== null &&
-    data.budget !== '' &&
-    data.archivingStyle !== '';
   return (
-    <button type="button" className={`bottomButton-wrapper${complete ? ' complete' : ''}`}>
-      다음으로
-    </button>
+    <>
+      <button type="button" onClick={() => navigate('/upload-day?day=1')}>
+        {location.pathname === '/upload-wallpaper' ? '다음으로' : '업로드'}
+      </button>
+      {isStickerModalOpen && <EmotionModal />}
+      {isShareModalOpen && <ShareModal />}
+    </>
   );
 }
 

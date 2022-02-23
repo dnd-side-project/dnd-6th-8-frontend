@@ -57,7 +57,7 @@ function App() {
           path="/upload-wallpaper"
           element={
             <>
-              <UploadHeader isCanGoBack={false} isRightButtonSave title="표지작성" />
+              <UploadHeader isCanGoBack={false} title="표지작성" />
               <UploadWallPaper />
             </>
           }
