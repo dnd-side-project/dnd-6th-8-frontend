@@ -1,28 +1,30 @@
 @import '../../styles/utils.scss';
 
 .uploadWallPaper-wrapper{
-    main{
-        padding:5.8rem 1.6rem 7rem;
-        .notice{
-            border-radius: 1.2rem;
-            box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
-            padding:1.4rem 1.6rem;
-            margin-bottom:2.4rem;
-            img{
-                width:1.8rem;
-                margin-right:0.8rem;
-            }
+    padding:5.8rem 1.6rem 7.4rem;
+    .notice{
+        border-radius: 1.2rem;
+        box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
+        padding:1.4rem 1.6rem;
+        margin-bottom:2.4rem;
+        display: flex;
+        img{
+            width:1.8rem;
+            height:1.8rem;
+            margin-right:0.8rem;
+        }
+        span{
             @include font-face(Pretendard-Medium, 1.4rem, 2.2rem, $black90);
-            span{
-                color:$coral;
-            }
-
+            span{color:$coral;}
         }
-        .question+.question{
-            margin-top:3.2rem;
+    }
+    .question+.question{
+        margin-top:3.2rem;
 
-        }
-        .one{
+    }
+    .one{
+        .images-container{
+            display: flex;
             label{
                 width:9rem;
                 height:9rem;
@@ -53,58 +55,72 @@
                 clip:rect(0,0,0,0); 
                 border: 0;
             }
-            
-        }
-        .two{
-            .inputText{
-                position: relative;
-                input{
-                    border:none;
-                    padding:0.3em 0;
-                    border-bottom:0.1rem solid $black30;
+            .image{
+                width:9rem;
+                height:9rem;
+                border-radius: 1.2rem;
+                position:relative;
+                margin-left:1.2rem;
+                img[alt="upload_img"]{
                     width:100%;
-                    @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $black80);
-                    &:focus{
-                        outline:none;
-                    }
-                    &::placeholder{
-                        color:$black50;
-                    }
+                    height:100%;
+                    border-radius: 1.2rem;
                 }
-                button{
-                    border:none;
-                    background-color: transparent;
+                img[alt="delete"]{
+                    width:2.4rem;
+                    height:2.4rem;
                     position:absolute;
-                    padding:0;
-                    right:0;
-                    bottom:0.3rem;
-                    img{
-                        width:2rem;
-                    }
-                }
-                
-            }
-            
-        }
-        .three{
-            .toggle+.toggle{
-                margin-top:1.2rem;
-            }
-            
-        }
-        .four{
-            .date-container{
-                display: flex;
-                align-items: center;
-                .line{
-                    width:1.6rem;
-                    display: inline-block;
-                    border-bottom:0.1rem solid $black60;
-                    margin:0 0.8rem;
-    
+                    top:0.2rem;
+                    right:0.2rem;
                 }
             }
-            
+        }
+    }
+    .two{
+        .inputText{
+            position: relative;
+            input{
+                border:none;
+                padding:0.3em 0;
+                border-bottom:0.1rem solid $black30;
+                width:100%;
+                @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $black80);
+                &:focus{
+                    outline:none;
+                }
+                &::placeholder{
+                    color:$black50;
+                }
+            }
+            button{
+                border:none;
+                background-color: transparent;
+                position:absolute;
+                padding:0;
+                right:0;
+                bottom:0.3rem;
+                img{
+                    width:2rem;
+                }
+            }
+        }
+    }
+    .three{
+        .toggle+.toggle{
+            margin-top:1.2rem;
+        }
+    }
+    .four{
+        .date-container{
+            display: flex;
+            align-items: center;
+            .line{
+                width:1.6rem;
+                display: inline-block;
+                border-bottom:0.1rem solid $black60;
+                margin:0 0.8rem;
+
+            }
         }
         
     }

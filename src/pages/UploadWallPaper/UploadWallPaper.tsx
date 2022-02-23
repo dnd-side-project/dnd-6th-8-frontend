@@ -1,62 +1,98 @@
 import React, { useState, useRef } from 'react';
 import './UploadWallPaper.scss';
-import UploadHeader from '../../components/common/UploadHeader';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
-import BottomButton from '../../components/common/BottomButton';
 import DateModal from '../../components/UploadModals/DateModal';
+import BottomButton from '../../components/common/BottomButton';
 import UploadAlert from '../../components/UploadModals/UploadAlert';
 
+type UploadWallPaperDataType = {
+  coverImage: File | null;
+  title: string;
+  place: string;
+  firstDay: string;
+  lastDay: string;
+  haveCompanion: boolean | null;
+  budget: string;
+  archivingStyle: string;
+};
+
 function UploadWallPaper() {
-  // 1번 질문
-  const [selected1, setSelected1] = useState<File | null>(null);
+  // 표지작성 데이터
+  const [wallPaperData, setWallPaperData] = useState<UploadWallPaperDataType>({
+    coverImage: null,
+    title: '',
+    place: '',
+    firstDay: '',
+    lastDay: '',
+    haveCompanion: null,
+    budget: '',
+    archivingStyle: '',
+  });
+
   const onUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // console.log(e.target.files[0]);
     if (!e.target.files) return;
-    setSelected1(e.target.files[0]);
+    setWallPaperData({ ...wallPaperData, coverImage: e.target.files[0] });
   };
+
+  const onDeleteImage = () => {
+    setWallPaperData({ ...wallPaperData, coverImage: null });
+  };
+
   // 2번 질문
   const inputRef = useRef<HTMLInputElement>(null);
-  const [selected2, setSelected2] = useState<string>('');
+
   const onInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelected2(e.target.value);
+    setWallPaperData({ ...wallPaperData, title: e.target.value });
   };
+
   const resetText = () => {
     if (!inputRef.current) return;
     inputRef.current.value = '';
-    setSelected2('');
+    setWallPaperData({ ...wallPaperData, title: '' });
   };
 
-  // 각 질문 당 선택된 버튼의 id 저장
-  const [selected3, setSelected3] = useState<number>(0);
-  const [selected4, setSelected4] = useState<number>(0);
-  const [selected5, setSelected5] = useState<number>(0);
-  const [selected6, setSelected6] = useState<number>(0);
-  const [selected7, setSelected7] = useState<number>(0);
+  // 3~7번 질문
+  const onClickToggle = (type: string, value: string | boolean) => {
+    setWallPaperData({ ...wallPaperData, [type]: value });
+  };
+
   return (
-    <div className="uploadWallPaper-wrapper">
-      <UploadHeader isCanGoBack={false} isRightButtonSave title="표지작성" />
-      <main>
+    <div>
+      <main className="uploadWallPaper-wrapper">
         <div className="notice">
           <img src="imgs/Upload/emoji_light_archiving.png" alt="light" />
-          아래의 정보는 <span>필수</span>로 작성해주세요.
+          <span>
+            아래의 정보는 <span>필수</span>로 작성해주세요.
+          </span>
         </div>
         <div className="one question">
           <UploadQuestion number={1} title="커버사진을 업로드해주세요." />
-          <label htmlFor="upload">
-            <img src="imgs/Upload/ic_camera.png" alt="camera" />
-            <div>
-              <span>{selected1 ? 1 : 0}</span>
-              <span>/1</span>
-            </div>
-          </label>
-          <input
-            type="file"
-            accept="image/x-png,image/jpeg,image/gif"
-            multiple={false}
-            onChange={(e) => onUploadImage(e)}
-            id="upload"
-          />
+          <div className="images-container">
+            <label htmlFor="upload">
+              <img src="imgs/Upload/ic_camera.png" alt="camera" />
+              <div>
+                <span>{wallPaperData.coverImage !== null ? 1 : 0}</span>
+                <span>/1</span>
+              </div>
+            </label>
+            <input
+              type="file"
+              accept="image/x-png,image/jpeg,image/gif"
+              multiple={false}
+              onChange={(e) => onUploadImage(e)}
+              id="upload"
+              disabled={wallPaperData.coverImage !== null}
+            />
+            {wallPaperData.coverImage && (
+              <div className="image">
+                <img src={URL.createObjectURL(wallPaperData.coverImage)} alt="upload_img" />
+                <button type="button" onClick={() => onDeleteImage()}>
+                  <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         <div className="two question">
           <UploadQuestion number={2} title="제목을 입력해주세요." />
@@ -67,7 +103,7 @@ function UploadWallPaper() {
               onChange={(e) => onInputText(e)}
               ref={inputRef}
             />
-            {selected2 !== '' && (
+            {wallPaperData.title !== '' && (
               <button type="button" onClick={resetText}>
                 <img src="imgs/Upload/ic_x_small.png" alt="reset" />
               </button>
@@ -77,44 +113,84 @@ function UploadWallPaper() {
         <div className="three question">
           <UploadQuestion number={3} title="여행 장소를 입력해주세요." />
           <div className="toggle">
-            <UploadToggle text="부산" id={1} selected={selected3} setSelected={setSelected3} />
-            <UploadToggle text="제주도" id={2} selected={selected3} setSelected={setSelected3} />
-            <UploadToggle text="강릉/속초" id={3} selected={selected3} setSelected={setSelected3} />
+            <UploadToggle text="부산" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle text="제주도" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle text="강릉/속초" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
           </div>
           <div className="toggle">
-            <UploadToggle text="여수" id={4} selected={selected3} setSelected={setSelected3} />
-            <UploadToggle text="유럽" id={5} selected={selected3} setSelected={setSelected3} />
-            <UploadToggle text="휴양지" id={6} selected={selected3} setSelected={setSelected3} />
+            <UploadToggle text="여수" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle text="유럽" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle text="휴양지" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
           </div>
           <div className="toggle">
-            <UploadToggle text="미국" id={7} selected={selected3} setSelected={setSelected3} />
-            <UploadToggle text="그외 (직접입력)" id={8} selected={selected3} setSelected={setSelected3} />
+            <UploadToggle text="미국" selected={wallPaperData.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle
+              text="그외(직접입력)"
+              selected={wallPaperData.place}
+              setSelected={onClickToggle}
+              type="place"
+              value="그외"
+            />
           </div>
         </div>
         <div className="four question">
           <UploadQuestion number={4} title="여행 기간을 입력해주세요." />
-          <DateModal />
+          <DateModal setSelected={onClickToggle} />
         </div>
         <div className="five question">
           <UploadQuestion number={5} title="동행 여부를 선택해주세요." />
-          <UploadToggle text="혼자여행" id={1} selected={selected5} setSelected={setSelected5} />
-          <UploadToggle text="동행과의 여행" id={2} selected={selected5} setSelected={setSelected5} />
+          <UploadToggle
+            text="혼자여행"
+            selected={wallPaperData.haveCompanion}
+            setSelected={onClickToggle}
+            type="haveCompanion"
+            value="혼자"
+          />
+          <UploadToggle
+            text="동행과의 여행"
+            selected={wallPaperData.haveCompanion}
+            setSelected={onClickToggle}
+            type="haveCompanion"
+            value="동행"
+          />
         </div>
         <div className="six question">
           <UploadQuestion number={6} title="예산 계획에 대해 알려주세요." />
-          <UploadToggle text="최소한으로 준비" id={1} selected={selected6} setSelected={setSelected6} />
-          <UploadToggle text="넉넉하게 준비" id={2} selected={selected6} setSelected={setSelected6} />
+          <UploadToggle
+            text="최소한으로 준비"
+            selected={wallPaperData.budget}
+            setSelected={onClickToggle}
+            type="budget"
+            value="최소한"
+          />
+          <UploadToggle
+            text="넉넉하게 준비"
+            selected={wallPaperData.budget}
+            setSelected={onClickToggle}
+            type="budget"
+            value="넉넉"
+          />
         </div>
         <div className="seven question">
           <UploadQuestion number={7} title="해당 기록의 스타일을 선택해주세요." />
-          <UploadToggle text="감성 아카이빙" id={1} selected={selected7} setSelected={setSelected7} />
-          <UploadToggle text="정보 아카이빙" id={2} selected={selected7} setSelected={setSelected7} />
+          <UploadToggle
+            text="감성 아카이빙"
+            selected={wallPaperData.archivingStyle}
+            setSelected={onClickToggle}
+            type="archivingStyle"
+            value="감성"
+          />
+          <UploadToggle
+            text="정보 아카이빙"
+            selected={wallPaperData.archivingStyle}
+            setSelected={onClickToggle}
+            type="archivingStyle"
+            value="정보"
+          />
         </div>
+        {/* <UploadAlert emoji="uploadfile" text={`여행기록이 성공적으로\n업로드되었습니다.`} /> */}
       </main>
-      <footer>
-        <BottomButton selected={[selected1, selected2, selected3, selected4, selected5, selected6, selected7]} />
-      </footer>
-      {/* <UploadAlert emoji="uploadfile" text={`여행기록이 성공적으로\n업로드되었습니다.`} /> */}
+      <BottomButton data={wallPaperData} />
     </div>
   );
 }

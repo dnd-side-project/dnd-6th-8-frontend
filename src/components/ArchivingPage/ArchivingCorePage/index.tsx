@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.scss';
 import { ReactComponent as UpToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_up.svg';
 import { ReactComponent as DownToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_down.svg';
@@ -33,6 +34,8 @@ function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
   const onSharedClick = (): void => setSharedClick((prev) => !prev);
   const onPersonalClick = (): void => setPersonalClick((prev) => !prev);
 
+  const navigate = useNavigate();
+
   return (
     <div className="archivingCorePage-wrapper">
       <HistoryBox sharedInfo={sharedInfo} personalInfo={personalInfo} />
@@ -54,7 +57,7 @@ function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
         </div>
       </div>
       {personalClick && <Personal personalInfo={personalInfo} setDeleteClick={setDeleteClick} />}
-      <AddBtn className="add-btn" />
+      <AddBtn className="add-btn" onClick={() => navigate('/upload-wallpaper')} />
     </div>
   );
 }

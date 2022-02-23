@@ -3,20 +3,24 @@ import './UploadWallPaperToggle.scss';
 
 type UploadWallPaperToggleProps = {
   text: string;
-  id: number; // 클릭한 버튼의 index로 css 지정
-  selected: number;
-  setSelected: React.Dispatch<React.SetStateAction<number>>;
+  value?: string;
+  selected: string | boolean | null;
+  setSelected: (type: string, value: string | boolean) => void;
+  type: string;
 };
 
-function UploadWallPaperToggle({ text, id, selected, setSelected }: UploadWallPaperToggleProps) {
-  const changeSelected = (clickID: number) => {
-    setSelected(clickID);
-  };
+UploadWallPaperToggle.defaultProps = {
+  value: '',
+};
+
+function UploadWallPaperToggle({ text, value, selected, setSelected, type }: UploadWallPaperToggleProps) {
+  const data = value || text;
+
   return (
     <button
       type="button"
-      className={`uploadWallPaperToggle-wrapper${selected === id ? ' selected' : ''}`}
-      onClick={() => changeSelected(id)}
+      className={`uploadWallPaperToggle-wrapper${selected === data ? ' selected' : ''}`}
+      onClick={() => setSelected(type, data)}
     >
       {text}
     </button>
