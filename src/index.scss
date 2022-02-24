@@ -64,3 +64,11 @@ html {
 div {
 	box-sizing: border-box;
 }
+
+@media screen and (max-width:340px){
+	html {font-size:60%};
+}
+
+@media screen and (max-width:320px){
+	html{font-size:55%};
+}
