@@ -59,6 +59,7 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
   ],
 };
 
+// 지역 별로 한글 매칭
 export const locationArr = [
   { location: 'busan', locationKR: '부산' },
   { location: 'jeju', locationKR: '제주도' },
@@ -69,46 +70,76 @@ export const locationArr = [
   { location: 'usa', locationKR: '미국' },
 ];
 
+// [Home] 지역 별 추천, 사용자 취향 별 추천 피드 타입
 export type HomeFeedsType = {
-  id: number;
-  category: string;
-  date: string;
-  title: string;
-  image: string;
-  location: string;
-  locationKR?: string;
-  text?: string;
-  heart?: number;
-  scrap?: number;
+  id: number; // 피드 번호
+  category: string; // 카테고리 (감성/정보)
+  date: string; // 여행기간
+  title: string; // 여행 제목
+  image: string; // 표지 이미지
+  location: string; // 여행 지역 영어
+  locationKR?: string; // 여행 지역 한글
+  text?: string; // 여행 여정 텍스트
+  heart?: number; // 좋아요 수
+  scrap?: number; // 스크랩 수
 };
 
+// 지역 별 추천 데이터
 export const HomeLocFeedData: HomeFeedsType[] = [
-  // {
-  //   category: '감정',
-  //   date: '2박3일',
-  //   title: '나의 두 번째 부산',
-  //   image: 'imgs/Home/img_busan01_home.png',
-  //   location: 'busan',
-  // },
-  // {
-  //   category: '정보',
-  //   date: '1박2일',
-  //   title: '나만 알고 싶은 색다른 부산',
-  //   image: 'imgs/Home/img_busan01_home.png',
-  //   location: 'busan',
-  // },
-  // {
-  //   category: '감정',
-  //   date: '1박2일',
-  //   title: '나의 두 번째 부산',
-  //   image: 'imgs/Home/img_busan01_home.png',
-  //   location: 'busan',
-  // },
+  {
+    id: 1,
+    category: '감정',
+    date: '2박3일',
+    title: '나의 두 번째 부산',
+    image: 'imgs/Home/img_busan01_home.png',
+    location: 'busan',
+  },
+  {
+    id: 2,
+    category: '정보',
+    date: '1박2일',
+    title: '나만 알고 싶은 색다른 부산',
+    image: 'imgs/Home/img_busan01_home.png',
+    location: 'busan',
+  },
+  {
+    id: 3,
+    category: '감정',
+    date: '1박2일',
+    title: '나의 두 번째 여수',
+    image: 'imgs/Home/img_busan01_home.png',
+    location: 'yeosu',
+  },
+  {
+    id: 4,
+    category: '정보',
+    date: '1박2일',
+    title: '나의 두 번째 여수',
+    image: 'imgs/Home/img_busan01_home.png',
+    location: 'yeosu',
+  },
+  {
+    id: 5,
+    category: '정보',
+    date: '1박2일',
+    title: '나의 두 번째 여수 나의 두 번째 여수',
+    image: 'imgs/Home/img_busan01_home.png',
+    location: 'yeosu',
+  },
+  {
+    id: 6,
+    category: '정보',
+    date: '1박2일',
+    title: '나의 두 번째 여수',
+    image: 'imgs/Home/img_busan01_home.png',
+    location: 'yeosu',
+  },
 ];
 
+// 취향 맞춤 추천 피드 데이터
 export const HomeRecFeedData: HomeFeedsType[] = [
   {
-    id: 0,
+    id: 21,
     category: '감정',
     date: '2박3일',
     title: '나의 두 번째 부산',
@@ -120,7 +151,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 21,
   },
   {
-    id: 1,
+    id: 22,
     category: '정보',
     date: '1박2일',
     title: '나만 알고 싶은 색다른 부산',
@@ -132,7 +163,7 @@ export const HomeRecFeedData: HomeFeedsType[] = [
     scrap: 11,
   },
   {
-    id: 2,
+    id: 23,
     category: '감정',
     date: '1박2일',
     title: '나의 두 번째 부산',
@@ -195,5 +226,44 @@ export const dayFeedFetchData: DayFeedDataType[] = [
     dayFeel:
       '친구들과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
     dayHoneyTip: '산방산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
+  },
+];
+
+export const ScrapData = [
+  {
+    id: 1,
+    title: '나의 두 번째 부산',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 2,
+    title: '제주도에서 한달 살기',
+    cateogry: '정보',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 3,
+    title: '프라하에서 체스키어쩌구저쩌구',
+    cateogry: '정보',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 4,
+    title: '강릉에서 적는 회고록',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 5,
+    title: '나의 두 번째 부산',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
+  },
+  {
+    id: 6,
+    title: '나의 두 번째 부산',
+    cateogry: '감정',
+    image: 'imgs/Home/img_busan01_home.png',
   },
 ];

@@ -1,13 +1,10 @@
 @import '../../styles/utils.scss';
 
 .greeting-wrapper{
-    padding-top:1.6rem;
-    padding-bottom:2.3rem;
+    padding:1.6rem 0 2.3rem;
     border-bottom:0.1rem solid #d9d9d9;
     .greeting{
-        font-family: Pretendard-Regular;
-        font-size: 2rem;
-        line-height: 3rem;
+        @include font-face(Pretendard-Regular, 2rem, 3rem, $black90);
         margin-bottom:2rem;
         span{
             font-family: Pretendard-SemiBold;
@@ -21,7 +18,7 @@
             background-color: black;
             border-color: white;
             border-radius: 3.5rem;
-            border-width:0.5rem;
+            border-width:0.4rem;
             border-style: solid;
             box-sizing: border-box;
             width:7rem;

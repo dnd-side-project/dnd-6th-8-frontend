@@ -14,6 +14,10 @@ import ScrollToTop from '../constants/ScrollToTop';
 import UserProfile from './UserProfile';
 import TermsConditions from './TermsConditions';
 import PersonalInfoPolicy from './PersonalInfoPolicy';
+import Header from '../components/common/Header';
+import NavigationBar from '../components/common/NavigationBar';
+import Scrap from './Scrap/Scrap';
+import UploadHeader from '../components/common/UploadHeader';
 
 function App() {
   return (
@@ -25,14 +29,41 @@ function App() {
         <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <>
+              <Header />
+              <Home />
+              <NavigationBar />
+            </>
+          }
+        />
         <Route path="/wallpaper/:id" element={<WallPaper />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route
+          path="/mypage"
+          element={
+            <>
+              <Header />
+              <MyPage />
+              <NavigationBar />
+            </>
+          }
+        />
         <Route path="/userProfile" element={<UserProfile />} />
         <Route path="/termsConditions" element={<TermsConditions />} />
         <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
-        <Route path="/upload-wallpaper" element={<UploadWallPaper />} />
+        <Route
+          path="/upload-wallpaper"
+          element={
+            <>
+              <UploadHeader isCanGoBack={false} title="표지작성" />
+              <UploadWallPaper />
+            </>
+          }
+        />
         <Route path="/upload-day" element={<UploadDay />} />
+        <Route path="/scrap" element={<Scrap />} />
       </Routes>
     </Router>
   );

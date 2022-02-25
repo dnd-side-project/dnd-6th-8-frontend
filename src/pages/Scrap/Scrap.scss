@@ -1,0 +1,29 @@
+@import '../../styles/utils.scss';
+
+.scrap-wrapper{
+    main{
+        padding:5.8rem 1.6rem;
+        .subtitle{
+            display: flex;
+            align-items: center;
+            margin-bottom:2.4rem;
+            img{
+                width:2.4rem;
+            }
+            h4{
+                @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $black80);
+                margin-left:0.8rem;
+                margin-right:0.6rem;
+            }
+            span{
+                @include font-face(Pretendard-SemiBold, 1.6rem, 2.4rem, $black80);
+            }
+        }
+        .scrap-container{
+            display: grid;
+            row-gap: 2.4rem;
+            column-gap: 1.6rem;
+            grid-template-columns: repeat(auto-fill, minmax(13rem, auto));
+        }
+    }
+}

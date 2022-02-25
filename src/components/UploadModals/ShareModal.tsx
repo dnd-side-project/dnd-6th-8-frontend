@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './ShareModal.scss';
 
-function ShareModal() {
+type ShareModalProps = {
+  closeModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function ShareModal({ closeModal }: ShareModalProps) {
   const [share, setShare] = useState<boolean>(false);
   return (
     <div className="shareModal-wrapper">
@@ -18,7 +22,9 @@ function ShareModal() {
             </label>
           </div>
         </div>
-        <button type="button">업로드하기</button>
+        <button type="button" onClick={() => closeModal(false)}>
+          업로드하기
+        </button>
       </div>
     </div>
   );

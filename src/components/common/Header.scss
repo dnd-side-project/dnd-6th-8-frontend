@@ -5,7 +5,6 @@
     position:fixed;
     width:100%;
     padding:0.8rem 1.6rem;
-    //margin-top:2.4rem;
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
@@ -15,14 +14,14 @@
         height:2.6rem;
     }
     .title{
-        font-family: Pretendard-Medium;
-        font-size:1.8rem;
-        line-height: 2.6rem;
-        color:black;
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black);
     }
-
-    .scrap{
-        width:2.4rem;
+    button{
+        border:none;
+        background-color: transparent;
+        padding:0;
+        .scrap{
+            width:2.4rem;
+        }
     }
-
 }

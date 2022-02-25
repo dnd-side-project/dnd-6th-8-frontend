@@ -20,19 +20,34 @@
           @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black70);
           margin-right:1rem;
       }
-      input{
-        @include font-face(Pretendard-Medium, 1.4rem, 2.2rem, $black80);
-        flex-grow: 1;
-        border:none;
-        border-bottom:0.1rem solid $black30;
-        &::placeholder{
-            @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black30);
+      .input-container{
+          position:relative;
+        input{
+            @include font-face(Pretendard-Medium, 1.4rem, 2.2rem, $black80);
+            flex-grow: 1;
+            border:none;
+            border-bottom:0.1rem solid $black30;
+            &::placeholder{
+                @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black30);
+            }
+            &:focus{
+                outline: none;
+            }
         }
-        &:focus{
-            outline: none;
+        button{
+            border:none;
+            background-color: transparent;
+            position:absolute;
+            padding:0;
+            right:0;
+            img{
+                width:2rem;
+                height:2rem;
+            }
         }
-    }
-    }
+      }
+      
+}
   .detail-container{
       @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black70);
       margin:1rem 0 1rem 1.2rem;

@@ -8,11 +8,8 @@
     box-shadow: 0 0.2rem 1rem 0 rgba(224, 224, 224, 0.5);
     background-color: white;
     h2{
+        @include font-face(Pretendard-SemiBold, 1.6rem, 2.4rem, $black90);
         padding-bottom:1.2rem;
-        font-family: Pretendard-SemiBold;
-        font-size:1.6rem;
-        line-height: 2.4rem;
-        color:$black90;
         border-bottom:0.1rem solid $black30;
         margin-bottom:1.2rem;
     }
@@ -20,57 +17,73 @@
         display: flex;
         margin-bottom:1.2rem;
         h4{
-            font-family: Pretendard-Regular;
-            font-size:1.4rem;
-            line-height:1.8rem;
-            color:$black70;
+            @include font-face(Pretendard-Regular, 1.4rem, 1.8rem, $black70);
         }
         .images{
             margin-left:1.2rem;
             display: flex;
-            img{
+            button{
                 width:2rem;
-                &+img{
+                height:2rem;
+                border-radius: 50%;
+                box-sizing: border-box;
+                &.selected{
+                    border:0.15rem solid $black80;
+                }
+                img{
+                    width:100%;
+                }
+                &+button{
                     margin-left:0.6rem;
                 }
             }
+            
         }
 
     }
     .sticker-container{
-        width:30.4rem;
-        position: relative;
+        display: grid;
+        width:100%;
         margin-bottom:1rem;
+        border-radius: 1.2rem;
+        background-size:100%;
+        grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+        padding:1rem 1.2rem;
+        align-items: center;
+        justify-items: center;
         img{
-            width:100%;
+            width:7rem;
         }
-        .stickers{
-            position:absolute;
-            margin:1rem 1.2rem;
-            top:0;
-            img{
-                width:7rem;
-            }
-            .none{
-                width:6rem;
-                margin:0.5rem;
-            }
+        img[alt~="없음"]{
+            width:5rem;
+            margin:1rem;
         }
+        
     }
     .pages-container{
         text-align: center;
         span{
             width:1.7rem;
             height:2.2rem;
-            font-family:Pretendard-Regular;
-            line-height:2.2rem;
-            font-size:1.4rem;
-            color:$black60;
+            @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black60);
             background-color: $bg2;
             padding:0.4rem 1rem;
             border-radius: 1.2rem;
             box-sizing: border-box;
         
         }
+    }
+    .swiper-container{
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+    .swiper-pagination-fraction{
+        @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black60);
+        background-color: $bg2;
+        width:auto;
+        padding:0.4rem 1rem;
+        border-radius: 1.2rem;
+        box-sizing: border-box;
+        position:static;
     }
 }

@@ -1,0 +1,79 @@
+@import '../../styles/utils.scss';
+
+.scrapHeader{
+    padding: 0.9rem 1.6rem;
+    width:100%;
+    box-sizing: border-box;
+    position:fixed;
+    background-color: white;
+    z-index: 10;
+    button{
+        border:none;
+        background-color: transparent;
+        padding:0;
+        position:absolute;
+        width:2.4rem;
+        height:2.4rem;
+        img{
+            width:2.4rem;
+            height:2.4rem;
+        }
+    }
+    h1{
+        @include font-face(Pretendard-Medium, 1.8rem, 2.6rem, $black);
+        display: inline-block;
+        width:100%;
+        text-align: center;
+    }
+}
+
+.scrapFeed{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width:13rem;
+    .img-container{
+        border-radius: 1.2rem;
+        margin-bottom: 0.8rem;
+        height:13rem;
+        .category{
+            box-sizing: border-box;
+            position: absolute;
+            top:0;
+            left:0;
+            width:2.8rem;
+            height:2.8rem;
+            padding:0.7rem 0.4rem;
+            border-radius: 1.2rem 0;
+            background-color: $warningOr;
+            @include font-face(Pretendard-SemiBold, 1rem, 1.4rem, $white);
+            text-align: center;
+            &.info{
+                background-color: $infoBlu;
+            }
+        }
+        img{
+            width:100%;
+            height:100%;
+        }
+    }
+    .title-container{
+        display: flex;
+        justify-content: space-between;
+        h4{
+            @include font-face(Pretendard-SemiBold, 1.4rem, 2.2rem, $black90);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        button{
+            border:none;
+            padding:0;
+            background-color: transparent;
+            img{
+                width:2rem;
+            }
+        }
+    }
+    
+}

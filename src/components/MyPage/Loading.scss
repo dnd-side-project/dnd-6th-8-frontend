@@ -1,12 +1,20 @@
 @import '../../styles/utils.scss';
 
+@keyframes loading {
+    0%{
+        background-color: $black20;
+    }
+    100%{
+        background-color: $black10;
+    }
+}
+
 .loading-wrapper{
     width:100%;
     background-color: $black20;
     opacity: 0.8;
     border-radius: 1.2rem;
     display: block;
-    &+.loading-wrapper{
-        margin-top:2.4rem;
-    }
+    margin-top:2.4rem;
+    animation: loading 1s ease 0s infinite alternate none;
 }

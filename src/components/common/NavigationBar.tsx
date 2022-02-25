@@ -1,29 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './NavigationBar.scss';
 
 function NavigationBar() {
-  const [navigation, setNavigation] = useState<string | null>('home');
   const navigate = useNavigate();
-  const onChangeNavigation = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setNavigation(e.currentTarget.children[0].getAttribute('alt'));
-    navigate(`/${e.currentTarget.children[0].getAttribute('alt')}`);
+  const location = useLocation();
+
+  const onChangeNavigation = (newNavigaton: string) => {
+    navigate(`/${newNavigaton}`);
   };
 
   return (
     <div className="navigation-wrapper">
-      <button type="button" className={navigation === 'home' ? ' click' : ''} onClick={onChangeNavigation}>
-        <img src={`imgs/common/ic_home_navigation${navigation === 'home' ? '_click' : ''}.png`} alt="home" />홈
+      <button
+        type="button"
+        className={location.pathname === '/home' ? ' click' : ''}
+        onClick={() => onChangeNavigation('home')}
+      >
+        <img src={`imgs/common/ic_home_navigation${location.pathname === '/home' ? '_click' : ''}.png`} alt="home" />홈
       </button>
-      <button type="button" className={navigation === 'archiving' ? 'click' : ''} onClick={onChangeNavigation}>
+      <button
+        type="button"
+        className={location.pathname === '/archiving' ? 'click' : ''}
+        onClick={() => onChangeNavigation('archiving')}
+      >
         <img
-          src={`imgs/common/ic_archiving_navigation${navigation === 'archiving' ? '_click' : ''}.png`}
+          src={`imgs/common/ic_archiving_navigation${location.pathname === '/archiving' ? '_click' : ''}.png`}
           alt="archiving"
         />
         기록하기
       </button>
-      <button type="button" className={navigation === 'mypage' ? 'click' : ''} onClick={onChangeNavigation}>
-        <img src={`imgs/common/ic_mypage_navigation${navigation === 'mypage' ? '_click' : ''}.png`} alt="mypage" />
+      <button
+        type="button"
+        className={location.pathname === '/mypage' ? 'click' : ''}
+        onClick={() => onChangeNavigation('mypage')}
+      >
+        <img
+          src={`imgs/common/ic_mypage_navigation${location.pathname === '/mypage' ? '_click' : ''}.png`}
+          alt="mypage"
+        />
         마이페이지
       </button>
     </div>

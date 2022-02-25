@@ -6,11 +6,11 @@ import { HomeRecFeedData } from '../../constants/index';
 function Recommend() {
   return (
     <section className="recommend-wrapper">
-      <h2 className="h2">어느 지역의 여행 기록을 보고싶나요?</h2>
+      <h2 className="h2">나의 취향 저격, 기록 피드를 추천드려요</h2>
       <article>
         {HomeRecFeedData.map((feed) => (
           <RecFeed
-            id = {feed.id}
+            id={feed.id}
             category={feed.category}
             date={feed.date}
             title={feed.title}

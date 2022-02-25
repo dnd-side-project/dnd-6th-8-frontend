@@ -7,19 +7,13 @@
         display: flex;
         justify-content: space-between;
         h2{
-            font-family: Pretendard-SemiBold;
-            font-size:1.6rem;
-            line-height:2.4rem;
-            color:$black90;
+            @include font-face(Pretendard-SemiBold, 1.6rem, 2.4rem, $black90);
         }
         .refresh{
             display: flex;
             align-items: center;
             span{
-                font-family: Pretendard-SemiBold;
-                line-height:1.2rem;
-                color:$black40;
-                font-size:1rem;
+                @include font-face(Pretendard-SemiBold, 1rem, 1.2rem, $black40);
             }
             img{
                 width:2rem;
@@ -34,29 +28,24 @@
         -ms-overflow-style: none;
         &::-webkit-scrollbar { display: none; }
         margin-bottom:1.6rem;
-        button{
-            font-family: Pretendard-Regular;
-            font-size:1.4rem;
-            line-height:2.2rem;
-            color:$black50;
+        .location-wrapper{
+            @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black50);
             background-color: $bg2;
             padding:0.6rem 0.8rem;
             border-radius: 1.8rem;
-            min-width:fit-content;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
-            border:0;
             &.click{
                 background-color: $primaryPurple;
                 color:white;
                 font-family: Pretendard-SemiBold;
             }
-            
             img{
                 width:1.5rem;
                 margin-right:0.4rem;
             }
-            +.nav{
+            +.location-wrapper{
                 margin-left:0.8rem;
             }
         }
@@ -67,13 +56,16 @@
         overflow: auto;
         -ms-overflow-style: none;
         &::-webkit-scrollbar { display: none; }
-        .feed{
+        .locFeed-wrapper{
             display: flex;
             flex-direction: column;
             position: relative;
+            flex-shrink: 0;
+            width:13rem;
             .img-container{
                 border-radius: 1.2rem;
                 margin-bottom: 0.8rem;
+                width:100%;
                 .category{
                     box-sizing: border-box;
                     position: absolute;
@@ -84,39 +76,30 @@
                     padding:0.7rem 0.4rem;
                     border-radius: 1.2rem 0;
                     background-color: $warningOr;
-                    font-size:1rem;
-                    font-family: Pretendard-SemiBold;
-                    line-height:1.4rem;
-                    color:white;
+                    @include font-face(Pretendard-SemiBold, 1rem, 1.4rem, white);
                     text-align: center;
                     &.info{
                         background-color: $infoBlu;
                     }
-             
                 }
                 img{
-                    width:13rem;
+                    width:100%;
                 }
             }
-           
             .date{
-                font-family: Pretendard-Medium;
-                font-size:1rem;
-                line-height:1.2rem;
-                color:$black60;
-                background-color: aqua;
+                @include font-face(Pretendard-Medium, 1rem, 1.2rem, $black60);
                 padding:0.3rem 0.4rem;
                 border-radius: 1.2rem;
                 background-color: $bg2;
             }
             h4{
                 margin-top:0.4rem;
-                font-family: Pretendard-SemiBold;
-                font-size:1.2rem;
-                line-height:2rem;
-                color:$black90;
+                @include font-face(Pretendard-SemiBold, 1.2rem, 2rem, $black90);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
-            +.feed{
+            +.locFeed-wrapper{
                 margin-left:1.6rem;
             }
         }
@@ -124,17 +107,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width:100vw;
+            width:100%;
             padding:4.8rem 0 1.6rem;
             img{
                 width:8rem;
                 margin-bottom:1.6rem;
             }
             div{
-                font-family: Pretendard-Regular;
-                font-size:1.4rem;
-                line-height:1.8rem;
-                color:$black50;
+                @include font-face(Pretendard-Regular, 1.4rem, 1.8rem, $black50);
                 white-space: pre;
             }
         }

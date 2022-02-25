@@ -22,8 +22,14 @@ function Menu({ logOutHandler }: MenuProps) {
         <img src="imgs/MyPage/ic_terms.png" alt="terms" />
         <span>이용약관 보기</span>
       </div>
-      <div className="menu" role="button" tabIndex={0} onClick={gotoPersonalInfoPolicy} onKeyDown={gotoPersonalInfoPolicy}>
-        <img src="imgs/MyPage/ic_Personal information.png" alt="personal information" />
+      <div
+        className="menu"
+        role="button"
+        tabIndex={0}
+        onClick={gotoPersonalInfoPolicy}
+        onKeyDown={gotoPersonalInfoPolicy}
+      >
+        <img src="imgs/MyPage/ic_Personal_information.png" alt="personal information" />
         <span>개인정보 처리방침</span>
       </div>
       <div className="menu" role="button" tabIndex={0} onClick={logOutHandler} onKeyDown={logOutHandler}>

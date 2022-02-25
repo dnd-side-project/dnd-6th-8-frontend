@@ -1,15 +1,15 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import produce from 'immer';
 import UploadHeader from '../../components/common/UploadHeader';
 import DayButton from '../../components/UploadDay/DayButton';
 import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
 import UploadDayTextArea from '../../components/UploadDay/UploadDayTextArea';
 import UploadPlace from '../../components/UploadDay/UploadPlace';
-import ButtonModal from '../../components/UploadModals/ButtonModal';
-import ShareModal from '../../components/UploadModals/ShareModal';
 import './UploadDay.scss';
 import EmotionModal from '../../components/UploadModals/EmotionModal';
+import ShareModal from '../../components/UploadModals/ShareModal';
+import UploadAlert from '../../components/UploadModals/UploadAlert';
 
 type WriteDataType = {
   day: number;
@@ -23,6 +23,9 @@ type WriteDataType = {
 };
 
 function UploadDay() {
+  const navigate = useNavigate();
+  const dayRef = useRef<HTMLElement>(null);
+
   const [writeData, setWriteData] = useState<WriteDataType[]>([
     {
       day: 1, // Day
@@ -76,8 +79,13 @@ function UploadDay() {
           return data;
         }),
     );
-    setSelectedDay(deleteDay - 1);
-    setSearchParams({ day: (deleteDay - 1).toString() });
+    if (deleteDay === 1) {
+      setSelectedDay(1);
+      setSearchParams({ day: '1' });
+    } else {
+      setSelectedDay(deleteDay - 1);
+      setSearchParams({ day: (deleteDay - 1).toString() });
+    }
   };
 
   // input받는 함수 하나로 합치기
@@ -103,6 +111,30 @@ function UploadDay() {
         produce(writeData, (draft) => {
           const nowData = draft.find((data) => data.day === nowDay);
           if (nowData) nowData.location[id - 1].end = e.target.value;
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onResetStartLoc = useCallback(
+    (nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) nowData.location[id - 1].start = '';
+        }),
+      );
+    },
+    [writeData],
+  );
+
+  const onResetEndLoc = useCallback(
+    (nowDay: number, id: number) => {
+      setWriteData(
+        produce(writeData, (draft) => {
+          const nowData = draft.find((data) => data.day === nowDay);
+          if (nowData) nowData.location[id - 1].end = '';
         }),
       );
     },
@@ -168,7 +200,14 @@ function UploadDay() {
     const files: File[] = [];
     for (let i = 0; i < e.target.files.length; i += 1) {
       if (i > 2) break;
-      files.push(e.target.files[i]);
+      if (e.target.files[i].size >= 1024 * 1024 * 5) {
+        setIsImageAlertOpen(true);
+        setTimeout(() => {
+          setIsImageAlertOpen(false);
+        }, 1200);
+      } else {
+        files.push(e.target.files[i]);
+      }
     }
     setWriteData(
       writeData.map((data) => (data.day === nowDay ? { ...data, images: data.images.concat(files) } : data)),
@@ -202,11 +241,48 @@ function UploadDay() {
     setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, tip: e.target.value } : data)));
   };
 
+  // 작성 완료
+  const [complete, setComplete] = useState<boolean>(false);
+
+  useEffect(() => {
+    setComplete(true);
+    for (let i = 0; i < writeData.length; i += 1) {
+      if (
+        writeData[i].date === '' ||
+        writeData[i].weather === '' ||
+        writeData[i].diary === '' ||
+        writeData[i].feeling === ''
+      ) {
+        setComplete(false);
+        break;
+      }
+    }
+  }, [writeData]);
+
+  const [isStickerModalOpen, setIsStickerModalOpen] = useState<boolean>(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+  const [isLocationAlertOpen, setIsLocationAlertOpen] = useState<boolean>(false);
+  const [isImageAlertOpen, setIsImageAlertOpen] = useState<boolean>(false);
+
+  const isInitialMount = useRef(true);
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else if (!isShareModalOpen) {
+      setIsSaveModalOpen(true);
+      setTimeout(() => {
+        setIsSaveModalOpen(false);
+        navigate('/archiving');
+      }, 1200);
+    }
+  }, [isShareModalOpen]);
+
   return (
     <div className="uploadDay-wrapper">
-      <UploadHeader title="기록 작성" isCanGoBack isRightButtonSave />
+      <UploadHeader title="기록 작성" isCanGoBack />
       <main>
-        <section className="selected-day-container">
+        <section className="selected-day-container" ref={dayRef}>
           {writeData.map((data) => (
             <DayButton
               day={data.day}
@@ -217,9 +293,11 @@ function UploadDay() {
               key={data.day}
             />
           ))}
-          <button type="button" className="day-plus-button" onClick={onAddDay}>
-            <img src="imgs/Upload/ic_plus_circle_upload.png" alt="Day Plus" />
-          </button>
+          {writeData.length < 30 && (
+            <button type="button" className="day-plus-button" onClick={onAddDay}>
+              <img src="imgs/Upload/ic_plus_circle_upload.png" alt="Day Plus" />
+            </button>
+          )}
         </section>
         <section className="question-container">
           <article className="question date">
@@ -314,12 +392,23 @@ function UploadDay() {
                 onInputTime={onInputTime}
                 onChangeTranport={onChangeTranport}
                 onDeleteLocation={onDeleteLocation}
+                onResetStartLoc={onResetStartLoc}
+                onResetEndLoc={onResetEndLoc}
               />
             ))}
             <button
               type="button"
               className="plus-button"
-              onClick={() => onAddLocation(day, writeData[day - 1].location.length)}
+              onClick={() => {
+                if (writeData[day - 1].location.length === 3) {
+                  setIsLocationAlertOpen(true);
+                  setTimeout(() => {
+                    setIsLocationAlertOpen(false);
+                  }, 1200);
+                } else {
+                  onAddLocation(day, writeData[day - 1].location.length);
+                }
+              }}
             >
               <img src="imgs/Upload/ic_plus_circle_route.png" alt="plus" />
               <span>장소 경로 추가하기</span>
@@ -339,13 +428,19 @@ function UploadDay() {
           </article>
         </section>
       </main>
-      {/* <ButtonModal
-        title="나가시겠어요?"
-        subTitle={`나가시면 새로 고침된 데이터만\n개인소장 여행 피드에 저장돼요.`}
-        rightButton="나가기"
-      /> */}
-      {/* <ShareModal /> */}
-      <EmotionModal />
+      <button
+        type="button"
+        className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
+        disabled={!complete}
+        onClick={() => setIsStickerModalOpen(true)}
+      >
+        업로드
+      </button>
+      {isStickerModalOpen && <EmotionModal closeModal={setIsStickerModalOpen} openModal={setIsShareModalOpen} />}
+      {isShareModalOpen && <ShareModal closeModal={setIsShareModalOpen} />}
+      {isSaveModalOpen && <UploadAlert text={`여행기록이 성공적으로\n업로드되었습니다!`} emoji="uploadfile" />}
+      {isLocationAlertOpen && <UploadAlert text={`최대로 저장 가능한 경로는\n3개 입니다.`} emoji="warning" />}
+      {isImageAlertOpen && <UploadAlert text={`사진 용량은 5mb가 넘을 시\n업로드가 불가합니다.`} emoji="crying" />}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 .userInfo-wrapper{
     width:100%;
-    cursor: pointer;
+    margin-top:1.6rem;
     .container{
         display:grid;
         grid-template-columns: 5.2rem 1fr;
@@ -22,12 +22,8 @@
             display: flex;
             align-items: center;
             .name{
-                font-family: Pretendard-Regular;
-                font-size:1.6rem;
-                line-height:2.2rem;
-                color:$black90;
+                @include font-face(Pretendard-Regular, 1.6rem, 2.2rem, $black90);
                 margin-right:0.8rem;
-                
             }
             .arrow{
                 width:1.6rem;
@@ -35,10 +31,7 @@
             }
         }
         .archiving{
-            font-family: Pretendard-Regular;
-            font-size:1.4rem;
-            line-height:2.2rem;
-            color:$black70;
+            @include font-face(Pretendard-Regular, 1.4rem, 2.2rem, $black70);
         }
     }
 }

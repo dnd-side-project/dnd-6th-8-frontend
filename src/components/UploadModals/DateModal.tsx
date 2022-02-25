@@ -4,13 +4,20 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateModal.scss';
 
-function DateModal() {
+type DateModalProps = {
+  setSelected: (type: string, value: string | boolean) => void;
+};
+
+function DateModal({ setSelected }: DateModalProps) {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [hidden, setHidden] = useState<boolean>(true);
+
   const ref = React.createRef();
   const startRef = useRef<DatePicker>(null);
   const endRef = useRef<DatePicker>(null);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomDateInput = forwardRef(({ onClick, value }: any, refs: any) => (
     <button onClick={onClick} value={value} onChange={onClick} type="button" className={value && 'selected'} ref={refs}>
       {value || 'YYYY/MM/DD'}
@@ -23,10 +30,12 @@ function DateModal() {
     if (nowRef.current) nowRef.current.setOpen(true);
     setHidden(false);
   };
+
   const closeDatePicker = (nowRef: React.RefObject<DatePicker>) => {
     if (nowRef.current) nowRef.current.setOpen(false);
     setHidden(true);
   };
+
   return (
     <div className="dateModal-wrapper">
       <DatePicker
@@ -42,7 +51,15 @@ function DateModal() {
         onCalendarOpen={() => openDatePicker(startRef)}
         ref={startRef}
       >
-        <button type="button" className="closeBtn" onClick={() => closeDatePicker(startRef)}>
+        <button
+          type="button"
+          className="closeBtn"
+          onClick={() => {
+            closeDatePicker(startRef);
+            if (startDate !== null)
+              setSelected('firstDay', `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`);
+          }}
+        >
           선택 완료
         </button>
       </DatePicker>
@@ -60,7 +77,15 @@ function DateModal() {
         onCalendarOpen={() => openDatePicker(endRef)}
         ref={endRef}
       >
-        <button type="button" className="closeBtn" onClick={() => closeDatePicker(endRef)}>
+        <button
+          type="button"
+          className="closeBtn"
+          onClick={() => {
+            closeDatePicker(endRef);
+            if (endDate !== null)
+              setSelected('lastDay', `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`);
+          }}
+        >
           선택 완료
         </button>
       </DatePicker>

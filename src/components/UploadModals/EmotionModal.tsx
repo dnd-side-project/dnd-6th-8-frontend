@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './EmotionModal.scss';
 
-function EmotionModal() {
+type EmotionModalProps = {
+  closeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  openModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function EmotionModal({ closeModal, openModal }: EmotionModalProps) {
   const [selectedID, setSelectedID] = useState<number>(0);
 
   return (
@@ -62,7 +67,14 @@ function EmotionModal() {
             </button>
           </div>
         </div>
-        <button type="button" className="closeBtn">
+        <button
+          type="button"
+          className="closeBtn"
+          onClick={() => {
+            closeModal(false);
+            openModal(true);
+          }}
+        >
           선택 완료
         </button>
       </div>
