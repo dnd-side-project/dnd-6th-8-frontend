@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -14,7 +16,12 @@ function WallPaper() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
-    setFetchData(HomeRecFeedData[Number(id)]);
+      HomeRecFeedData.map((value) => {
+        if (value.id === Number(id)) {
+          return setFetchData(value); 
+        }
+      }
+    );
   }, [HomeRecFeedData]);
 
   return (

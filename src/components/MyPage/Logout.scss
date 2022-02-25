@@ -10,11 +10,12 @@
 
 .logout-wrapper{
     width : 100vw; 
-    height : 100vh; 
+    height : 100vh;
+    margin-left: -16px;  // 이거 나중에 수정해야함
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     top : 0; 
-    z-index : 1000;
+    z-index : 10;
     display: flex;
     align-items: center;
     justify-content: center;

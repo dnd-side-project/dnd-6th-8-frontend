@@ -32,7 +32,7 @@ function IntroPage() {
           </SwiperSlide>
         </Swiper>
       ) : (
-        <SecondPage sec={2500} />
+        <SecondPage sec={1500} />
       )}
     </div>
   );

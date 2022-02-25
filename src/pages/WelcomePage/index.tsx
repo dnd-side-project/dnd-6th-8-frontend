@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
+import axios from 'axios'; 
 import { ReactComponent as TextLogo } from '../../assets/icons/WelcomePage/tracious_text_logo.svg';
 import { ReactComponent as TalkBox } from '../../assets/icons/WelcomePage/talk_box.svg';
 import { ReactComponent as Kakao } from '../../assets/icons/WelcomePage/ic_login_kakao.svg';
@@ -8,6 +9,12 @@ import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login
 import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 function WelcomePage() {
+
+  const KakaoLogIn = async() => {
+    const response = await axios.get('/token');
+    console.log(response);  
+  }
+
   return (
     <div className="welcomepage-wrapper">
       <TextLogo className="text-logo" />
@@ -18,9 +25,9 @@ function WelcomePage() {
       <div className="frame">
         <TalkBox className="talk-box" />
         <div className="social-wrap">
-          <Link to="/intro">
-            <Kakao />
-          </Link>
+          {/* <Link to="/intro"> */}
+            <Kakao onClick= {KakaoLogIn}/>
+          {/* </Link> */}
           <Link to="/intro">
             <Naver />
           </Link>

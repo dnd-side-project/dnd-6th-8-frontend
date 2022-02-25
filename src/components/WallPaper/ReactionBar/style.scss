@@ -2,7 +2,7 @@
     .reaction-click{
         position: fixed;
         bottom : 5.6rem; 
-        width : 100%; 
+        width : 100vw; 
         height : 4.4rem; 
         padding : 0.8rem 1.6rem; 
         z-index : 1; 
@@ -28,7 +28,6 @@
         .icon-introduce{
             display: flex;
             align-items: center;
-            // width : 20%;
             height : 100%;
             padding : 0.4rem 0.6rem; 
             border-radius: 1.8rem;
@@ -52,8 +51,8 @@
         position: fixed;
         bottom: 0;
         background: white;
-        z-index: 1; 
-        width : 100%; 
+        z-index: 2; 
+        width : 100vw; 
         height : 5.6rem; 
         padding : 1.4rem 1.6rem; 
         display : flex;
