@@ -12,14 +12,14 @@ function ArchivingPage() {
   const [deleteClick, setDeleteClick] = useState<boolean>(false);
   const [agreeClick, setAgreeClick] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 150000);
-  //   return () => {
-  //     setLoading(true);
-  //   };
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => {
+      setLoading(true);
+    };
+  }, []);
 
   return (
     <div className="archivingpage-wrapper">
