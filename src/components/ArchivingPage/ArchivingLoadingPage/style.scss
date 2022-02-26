@@ -1,19 +1,19 @@
 %flex{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 %box{
     opacity: 0.8;
-    border-radius: 12px;
-    background: #e7eaf6;
+    border-radius: 1.2rem;
+    background-color: #e7eaf6;
 }
 
 .archivingloadingpage-wrapper{
     width : 100%;
     height : 100%;
     div{
-        animation: loading 2s forwards;
+        animation: archiving-loading 2s forwards;
     }
     .halfSmallRectangle-line{
         margin-top : 3.2rem; 
@@ -32,23 +32,23 @@
         @extend %box; 
     }
     .halfSmallRectangle{
-        width : 45%; 
+        width : 14.2rem; 
         height : 3.2rem; 
         @extend %box;
     }
     .square{
-        width : 40%; 
+        width : 13rem; 
         height : 13rem; 
         @extend %box;
     }
     .halfBigRectangle{
-        width : 55%; 
+        width : 18.2rem; 
         height : 13rem; 
         @extend %box;
     }
 }
 
-@keyframes loading {
+@keyframes archiving-loading {
     0% {
         opacity: 0;
     }
