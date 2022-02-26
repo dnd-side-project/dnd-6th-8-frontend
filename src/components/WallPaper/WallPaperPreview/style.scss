@@ -3,6 +3,7 @@
     height : 100vh;
     padding-top : 4.2rem; 
     position: relative;
+    
     .wallpaperpreview-background{
         width : 100%; 
         height : 100%;
@@ -11,7 +12,7 @@
     }
     .wallpaperpreview-main{
         width : 100vw;
-        height : 100vh; 
+        height : 100vh;
         z-index: 2;
         position: absolute;
         padding-left:  1.6rem;
@@ -20,7 +21,7 @@
         .arrow-wrapper{
             animation: arrow 4s infinite;
             position: absolute;
-            top : 35%; 
+            top : 55%; 
             right : 1.6rem;
             text-align: right;
             p{
@@ -32,7 +33,8 @@
         }
         
         .line-top{
-            margin-top : 41.8rem;
+            position: absolute;
+            bottom : 16.8rem; 
             span{
                 color : #ffffff;
                 font-family: 'Pretendard-Regular';
@@ -49,13 +51,15 @@
             }
         }
         .line{
-            width : 100%;
+            width :92%;
             height : 0.1rem;
             border-top : 1px solid white;
-            margin-top : 1.5rem; 
+            position: absolute;
+            bottom : 15.2rem; 
         }
         .line-bottom{
-            margin-top : 1.2rem; 
+            position: absolute;
+            bottom : 7.4rem;
             p{
                 color : #e7eaf6;
                 font-family: 'Pretendard-Regular';

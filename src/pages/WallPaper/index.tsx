@@ -16,32 +16,35 @@ function WallPaper() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
-      HomeRecFeedData.map((value) => {
-        if (value.id === Number(id)) {
-          return setFetchData(value); 
-        }
+    HomeRecFeedData.map((value) => {
+      if (value.id === Number(id)) {
+        return setFetchData(value);
       }
-    );
+    });
   }, [HomeRecFeedData]);
 
   return (
     <div className="wallpaper-wrapper">
       <WallPaperHeader />
       {activeIndex === 0 ? (
-        <Swiper
-          spaceBetween={50}
-          slidesPerView={1}
-          onSlideChange={(swiper) => setTimeout(() => setActiveIndex(swiper.activeIndex), 500)}
-        >
-          <SwiperSlide>
-            <WallPaperPreview fetchData={fetchData} />
-          </SwiperSlide>
-          <SwiperSlide>
-            <WallPaperDetailView fetchData={fetchData} />
-          </SwiperSlide>
-        </Swiper>
+        <div className="preview">
+          <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={(swiper) => setTimeout(() => setActiveIndex(swiper.activeIndex), 500)}
+          >
+            <SwiperSlide>
+              <WallPaperPreview fetchData={fetchData} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <WallPaperDetailView fetchData={fetchData} />
+            </SwiperSlide>
+          </Swiper>
+        </div>
       ) : (
-        <WallPaperDetailView fetchData={fetchData} />
+        <div className="detail">
+          <WallPaperDetailView fetchData={fetchData} />
+        </div>
       )}
     </div>
   );
