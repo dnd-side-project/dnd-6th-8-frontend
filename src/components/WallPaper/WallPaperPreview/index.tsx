@@ -24,7 +24,7 @@ function WallPaperPreview({ fetchData }: WallPaperPreview) {
           <span>🍊</span> <span>{fetchData && fetchData.locationKR}</span>
           <p>{fetchData && fetchData.title}</p>
         </div>
-        <div className="line">{}</div>
+        <div className="line" />
         <div className="line-bottom">
           <p>{fetchData && fetchData.date}일 간의 여정</p>
           <div className="info-box">
