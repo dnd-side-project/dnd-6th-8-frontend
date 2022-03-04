@@ -18,12 +18,14 @@ import Header from '../components/common/Header';
 import NavigationBar from '../components/common/NavigationBar';
 import Scrap from './Scrap/Scrap';
 import UploadHeader from '../components/common/UploadHeader';
+import LogInProcess from './LogInProcess';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
       <Routes>
+        <Route path="/oauth2/:accessToken/:refreshToken/:signupCheck" element={<LogInProcess />} />
         <Route path="/" element={<WelcomePage />} />
         <Route path="/intro" element={<IntroPage />} />
         <Route path="/archiving" element={<ArchivingPage />} />
