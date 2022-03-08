@@ -25,7 +25,7 @@ function App() {
     <Router>
       <ScrollToTop />
       <Routes>
-        <Route path="/oauth2/:accessToken/:refreshToken/:signupCheck" element={<LogInProcess />} />
+        <Route path="/callback/:accessToken/:refreshToken/*" element={<LogInProcess />} />
         <Route path="/" element={<WelcomePage />} />
         <Route path="/intro" element={<IntroPage />} />
         <Route path="/archiving" element={<ArchivingPage />} />
