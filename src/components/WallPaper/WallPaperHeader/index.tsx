@@ -11,7 +11,7 @@ import ClickScrap from '../../../assets/icons/WallPaper/Hamburger/ic_scrap_navig
 import HamburgerMenu from '../HamburgerMenu';
 
 function WallPaperHeader() {
-  const [me, setMe] = useState<boolean>(true);
+  const [me, setMe] = useState<boolean>(false);
   const [sharedToggle, setSharedToggle] = useState<boolean>(true);
   const [scrapToggle, setScrapToggle] = useState<boolean>(false);
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);

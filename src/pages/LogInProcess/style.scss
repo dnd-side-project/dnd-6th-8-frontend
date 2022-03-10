@@ -1,0 +1,33 @@
+.loginprocess-wrapper{
+    width : 100vw; 
+    height : 100vh;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .loginprocess-logo{
+        width : 50%;
+        height : 50%;
+        fill : #5b21ff;
+        animation: loginloading 3s backwards;
+    }
+    
+}
+
+@keyframes loginloading {
+    0% {
+        opacity: 0;
+    }
+    25%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    75%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+

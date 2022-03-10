@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import axios from 'axios';
@@ -9,11 +9,17 @@ import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login
 import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 function WelcomePage() {
-  const KakaoLogIn = () => {
-    axios.get('/token')
-    .then((res)=> console.log(res))
-    .catch((e)=> console.log(e)); 
-  };
+  const KakaoLogIn = useCallback( async() => {
+    const kakaoSignIn = async () => {
+      const kakao = await axios.get('/auth/kakao', {
+        params: {
+          loginType: 'kakao',
+        },
+      });
+      window.location.replace(kakao.data); 
+    };
+    kakaoSignIn(); 
+  }, []);
 
   return (
     <div className="welcomepage-wrapper">
