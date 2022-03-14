@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
 function SignUpPage() {
+  const navigate = useNavigate(); 
   const [nickName, setNickName] = useState<string>('');
   const [nickNameOver, setNickNameOver] = useState<boolean>(false);
 
@@ -19,7 +21,8 @@ function SignUpPage() {
 
   const onSubmitHandler = useCallback((e) => {
     e.preventDefault();
-    console.log(nickName);
+    localStorage.setItem('userName', nickName); 
+    navigate('/intro');
   }, [nickName]);
 
   return (
