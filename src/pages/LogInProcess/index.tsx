@@ -14,7 +14,7 @@ function LogInProcess() {
   useEffect(() => {
     if (accessToken !== undefined) {
       localStorage.setItem('accessToken', accessToken);
-      axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`; 
       if (signupCheck === '0') {
         window.location.replace('/home');
       } else {

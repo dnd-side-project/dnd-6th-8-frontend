@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SurveyStart from './SurveyStart/SurveyStart';
 import Survey from './Survey/Survey';
@@ -22,21 +22,25 @@ import LogInProcess from './LogInProcess';
 import SignUpPage from './SignUpPage';
 
 function App() {
+  const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));
 
-  useEffect(()=>{
+  useEffect(() => {
     if (localStorage.getItem('accessToken') !== null) {
       setTimeout(() => {
         localStorage.removeItem('accessToken');
-      }, 3000);
+        setAccessToken('');
+        alert('사용자 세션이 만료되었습니다.');
+        window.location.replace('/');
+      }, 10800000);
     }
-  },[]); 
+  }, [accessToken]);
 
   return (
     <Router>
       <ScrollToTop />
       <Routes>
-        <Route path="/callback/:accessToken/:signupCheck" element={<LogInProcess />} />
         <Route path="/" element={<WelcomePage />} />
+        <Route path="/callback/:accessToken/:signupCheck" element={<LogInProcess />} />
         <Route path="/intro" element={<IntroPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/archiving" element={<ArchivingPage />} />
