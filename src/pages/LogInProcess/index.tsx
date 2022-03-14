@@ -18,7 +18,7 @@ function LogInProcess() {
       if (signupCheck === '0') {
         window.location.replace('/home');
       } else {
-        window.location.replace('/intro');
+        window.location.replace('/signup');
       }
     }
   }, []);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SurveyStart from './SurveyStart/SurveyStart';
 import Survey from './Survey/Survey';
@@ -19,8 +19,18 @@ import NavigationBar from '../components/common/NavigationBar';
 import Scrap from './Scrap/Scrap';
 import UploadHeader from '../components/common/UploadHeader';
 import LogInProcess from './LogInProcess';
+import SignUpPage from './SignUpPage';
 
 function App() {
+
+  useEffect(()=>{
+    if (localStorage.getItem('accessToken') !== null) {
+      setTimeout(() => {
+        localStorage.removeItem('accessToken');
+      }, 3000);
+    }
+  },[]); 
+
   return (
     <Router>
       <ScrollToTop />
@@ -28,6 +38,7 @@ function App() {
         <Route path="/callback/:accessToken/:signupCheck" element={<LogInProcess />} />
         <Route path="/" element={<WelcomePage />} />
         <Route path="/intro" element={<IntroPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
