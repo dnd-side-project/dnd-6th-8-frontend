@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import UserProfileHeader from '../../components/UserProfile/UserProfileHeader';
 import './style.scss';
 
@@ -10,7 +11,7 @@ function UserProfile() {
         <div className="user-info">
           <div className="user-info-header">
             <p className="info">회원 정보</p>
-            <p className="withdrawal">탈퇴하기</p>
+            <Link to ='/withdrawal' style={{textDecoration: 'none'}}><p className="withdrawal">탈퇴하기</p></Link>
           </div>
           <div className="user-info-main">
             <div className="name-area">

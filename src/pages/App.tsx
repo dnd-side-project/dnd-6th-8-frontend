@@ -20,6 +20,7 @@ import Scrap from './Scrap/Scrap';
 import UploadHeader from '../components/common/UploadHeader';
 import LogInProcess from './LogInProcess';
 import SignUpPage from './SignUpPage';
+import Withdrawal from './Withdrawal';
 
 function App() {
   const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));
@@ -81,6 +82,7 @@ function App() {
         />
         <Route path="/upload-day" element={<UploadDay />} />
         <Route path="/scrap" element={<Scrap />} />
+        <Route path="/withdrawal" element={<Withdrawal />} />
       </Routes>
     </Router>
   );
