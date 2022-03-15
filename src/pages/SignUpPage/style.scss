@@ -1,0 +1,66 @@
+.signuppage-wrapper{
+    height : 100vh; 
+    padding : 6rem 3rem; 
+    position: relative;
+    p:nth-child(1){
+        color : #E5E5E5; 
+        font-family: 'Pretendard-Medium';
+        font-size : 1.8rem;
+    }
+    p:nth-child(2){
+        font-family: 'Pretendard-Medium';
+        font-weight: 400;
+        font-size : 2rem; 
+        line-height: 3.2rem;
+        color: #292733;
+        margin-top : 1.6rem; 
+    }
+    input{
+        margin-top : 15rem; 
+        width : 100%;
+        border:none; 
+        padding-bottom : 0.4rem;
+        border-bottom: 1px solid #D8DCE8;
+    }
+    input::placeholder{
+        font-family: 'Pretendard';
+        color : #D8DCE8; 
+    }
+
+    .red-alert{
+        border-bottom: 1px solid red;
+        color : red; 
+        margin-bottom : 0.5rem; 
+    }
+    .red-text{
+        color : red; 
+    }
+
+    button{
+        margin-top: 28.6rem;
+        padding : 1.6rem 0; 
+    }
+    .gray{
+        width : 100%;
+        background: #C4C7D3;
+        border-radius: 1.2rem;
+        font-family: 'Pretendard-Medium';
+        color : white;
+        font-weight: 400;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        border-radius: 1.2rem;
+    }
+    .blue{
+        width : 100%;
+        background: blue;
+        border-radius: 1.2rem;
+        font-family: 'Pretendard-Medium';
+        color : white;
+        font-weight: 400;
+        font-size: 1.6rem;
+        line-height: 2.4rem;
+        border-radius: 1.2rem;
+        cursor: pointer;
+    }
+}

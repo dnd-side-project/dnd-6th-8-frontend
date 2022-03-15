@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SurveyStart from './SurveyStart/SurveyStart';
 import Survey from './Survey/Survey';
@@ -19,15 +19,31 @@ import NavigationBar from '../components/common/NavigationBar';
 import Scrap from './Scrap/Scrap';
 import UploadHeader from '../components/common/UploadHeader';
 import LogInProcess from './LogInProcess';
+import SignUpPage from './SignUpPage';
+import Withdrawal from './Withdrawal';
 
 function App() {
+  const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken') !== null) {
+      setTimeout(() => {
+        localStorage.removeItem('accessToken');
+        setAccessToken('');
+        alert('사용자 세션이 만료되었습니다.');
+        window.location.replace('/');
+      }, 10800000);
+    }
+  }, [accessToken]);
+
   return (
     <Router>
       <ScrollToTop />
       <Routes>
-        <Route path="/callback/:accessToken/:refreshToken/*" element={<LogInProcess />} />
         <Route path="/" element={<WelcomePage />} />
+        <Route path="/callback/:accessToken/:signupCheck" element={<LogInProcess />} />
         <Route path="/intro" element={<IntroPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
         <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
@@ -66,6 +82,7 @@ function App() {
         />
         <Route path="/upload-day" element={<UploadDay />} />
         <Route path="/scrap" element={<Scrap />} />
+        <Route path="/withdrawal" element={<Withdrawal />} />
       </Routes>
     </Router>
   );

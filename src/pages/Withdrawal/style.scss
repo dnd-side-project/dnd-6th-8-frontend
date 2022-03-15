@@ -1,0 +1,39 @@
+.withdrawal-wrapper{
+    .text {
+        width : 100%;
+        margin-top : 5.2rem; 
+    }
+    .background{
+        width : 100%;
+        margin-top : 3.2rem; 
+    }
+    .btn-wrapper{
+        width : 100%;
+        margin-top : 12rem; 
+        padding : 0 1.6rem; 
+        display: flex;
+        gap: 1.6rem;
+        .btn-gray{
+            flex : 1; 
+            padding : 1.6rem 0; 
+            background: #595663;
+            border-radius: 1.2rem;
+            color : white; 
+            font-family: 'Pretendard-SemiBold';
+            font-weight: 300;
+            font-size: 1.6rem;
+            line-height: 2.4rem;
+        }
+        .btn-blue{
+            flex : 1; 
+            padding : 1.6rem 0; 
+            background: #5B21FF;;
+            border-radius: 1.2rem;
+            color : white; 
+            font-family: 'Pretendard-SemiBold';
+            font-weight: 300;
+            font-size: 1.6rem;
+            line-height: 2.4rem;
+        }
+    }
+}

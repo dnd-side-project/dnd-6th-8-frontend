@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import axios from 'axios';
@@ -9,16 +9,47 @@ import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login
 import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 function WelcomePage() {
-  const KakaoLogIn = useCallback( async() => {
+  
+  useEffect(()=>{
+    localStorage.removeItem('accessToken'); 
+  },[]); 
+
+  const KakaoLogIn = useCallback(async () => {
     const kakaoSignIn = async () => {
       const kakao = await axios.get('/auth/kakao', {
         params: {
           loginType: 'kakao',
         },
       });
-      window.location.replace(kakao.data); 
+      window.location.replace(kakao.data);
     };
-    kakaoSignIn(); 
+    kakaoSignIn();
+  }, []);
+
+  const NaverLogIn = useCallback(async () => {
+    const naverSignIn = async () => {
+      const naver = await axios.get('/auth/naver', {
+        params: {
+          loginType: 'naver',
+        },
+      });
+      console.log(naver); 
+      // window.location.replace(naver.data);
+    };
+    naverSignIn();
+  }, []);
+
+  const GoogleLogIn = useCallback(async () => {
+    const googleSignIn = async () => {
+      const google = await axios.get('/auth/google', {
+        params: {
+          loginType: 'google',
+        },
+      });
+      console.log(google); 
+      // window.location.replace(google.data);
+    };
+    googleSignIn();
   }, []);
 
   return (
@@ -31,15 +62,9 @@ function WelcomePage() {
       <div className="frame">
         <TalkBox className="talk-box" />
         <div className="social-wrap">
-          {/* <Link to="/intro"> */}
           <Kakao onClick={KakaoLogIn} />
-          {/* </Link> */}
-          <Link to="/intro">
-            <Naver />
-          </Link>
-          <Link to="/intro">
-            <Google />
-          </Link>
+          <Naver onClick={NaverLogIn}/>
+          <Google onClick={GoogleLogIn}/>
         </div>
       </div>
       <p>가입시 트레셔스의 이용약관에 동의하는 것으로 간주합니다.</p>
