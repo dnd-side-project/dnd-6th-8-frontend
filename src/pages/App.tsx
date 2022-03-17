@@ -41,7 +41,7 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/callback/:accessToken/:signupCheck" element={<LogInProcess />} />
+        <Route path="/callback/:accessToken/:signupCheck/:nickName" element={<LogInProcess />} />
         <Route path="/intro" element={<IntroPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/archiving" element={<ArchivingPage />} />
