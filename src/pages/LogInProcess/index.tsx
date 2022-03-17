@@ -14,13 +14,12 @@ function LogInProcess() {
   const { accessToken, signupCheck, nickName } = useParams<params>();
   useEffect(() => {
     if (accessToken !== undefined) {
-      console.log(signupCheck); 
       localStorage.setItem('accessToken', accessToken);
       axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`; 
       if (signupCheck === '1') {
         window.location.replace('/home');
       } else {
-        window.location.replace('/signup');
+        window.location.replace('/intro');
       }
     }
   }, []);
