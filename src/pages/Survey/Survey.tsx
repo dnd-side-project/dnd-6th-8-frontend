@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
+import instance from '../../lib/axios';
 import Percentage from '../../components/Survey/Percentage';
 import Question from '../../components/Survey/Question';
 import Option from '../../components/Survey/Option';
@@ -57,12 +57,7 @@ function Survey() {
   }, []);
 
   const postSurvey = async () => {
-    try {
-      await axios.post('/api/v1/user/survey', userSurvey);
-      // console.log(response);
-    } catch (e) {
-      // console.log(e);
-    }
+    await instance.post('/api/v1/user/survey', userSurvey).then().catch();
     onSubmitHandler();
   };
 
