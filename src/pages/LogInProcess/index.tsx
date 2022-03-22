@@ -1,13 +1,12 @@
-import React, {  useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import './style.scss';
 import { ReactComponent as Tracious } from '../../assets/icons/WelcomePage/tracious_text_logo.svg';
 
 type params = {
   accessToken: string;
   signupCheck: string;
-  nickName : string; 
+  nickName: string;
 };
 
 function LogInProcess() {
@@ -15,7 +14,6 @@ function LogInProcess() {
   useEffect(() => {
     if (accessToken !== undefined) {
       localStorage.setItem('accessToken', accessToken);
-      axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`; 
       if (signupCheck === '1') {
         window.location.replace('/home');
       } else {

@@ -32,6 +32,7 @@
     "react-tabs": "^3.2.3",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
     "serve": "^13.0.2",
     "swiper": "^6.8.4",
     "use-swiper": "^1.2.1",
@@ -61,7 +62,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "http://3.37.253.113:8080/",
   "browserslist": {
     "production": [
       ">0.2%",
