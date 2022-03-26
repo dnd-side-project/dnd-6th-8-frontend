@@ -20,6 +20,21 @@ export type archivingDataType = {
   img: string;
 };
 
+export type UploadWallPaperDataType = {
+  data: {
+    coverImage: File | null;
+    title: string;
+    place: string;
+    firstDay: string;
+    lastDay: string;
+    haveCompanion: boolean | null;
+    budget: string;
+    archivingStyle: string;
+  };
+  loading: boolean;
+  error: null | Error;
+};
+
 export type archivingDataObject = {
   sharedInfo: Array<archivingDataType>;
   personalInfo: Array<archivingDataType>;

@@ -30,19 +30,18 @@ export const initailState: PostState = {
   posts: null,
 };
 
-
 // Post Reducer
 export const post = (action: any, state: PostState = initailState): PostState => {
   return produce(state, (draft) => {
     switch (action && action.type) {
       case CREATE_POST:
-        draft.posts = action.payload; 
+        draft.posts = action.payload;
         break;
       case UPDATE_POST:
         draft.posts = action.payload;
         break;
       default:
-        break; 
+        break;
     }
   });
 };
