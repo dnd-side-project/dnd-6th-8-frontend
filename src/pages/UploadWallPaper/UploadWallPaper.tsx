@@ -1,25 +1,13 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './UploadWallPaper.scss';
-import { UploadWallPaperDataType } from '../../constants/index';
-import { changeTitle, postWallpaper } from '../../modules/post/wallpaper';
+import { changeTitle, deleteImage, uploadImage } from '../../modules/post/wallpaper';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import DateModal from '../../components/UploadModals/DateModal';
 import UploadAlert from '../../components/UploadModals/UploadAlert';
 import { RootState } from '../../modules';
-
-// type UploadWallPaperDataType = {
-//   coverImage: File | null;
-//   title: string;
-//   place: string;
-//   firstDay: string;
-//   lastDay: string;
-//   haveCompanion: boolean | null;
-//   budget: string;
-//   archivingStyle: string;
-// };
 
 function UploadWallPaper() {
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
@@ -50,9 +38,26 @@ function UploadWallPaper() {
   //   setWallPaperData({ ...wallPaperData, coverImage: e.target.files[0] });
   // };
 
+  const onUploadImage = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.files) return;
+      if (e.target.files[0].size > 1024 * 1024 * 5) {
+        setIsImageSizeOK(false);
+        setTimeout(() => {
+          setIsImageSizeOK(true);
+        }, 1200);
+        return;
+      }
+      dispatch(uploadImage(e.target.files[0]));
+    },
+    [dispatch],
+  );
+
   // const onDeleteImage = () => {
   //   setWallPaperData({ ...wallPaperData, coverImage: null });
   // };
+
+  const onDeleteImage = useCallback(() => dispatch(deleteImage()), [dispatch]);
 
   // 2번 질문
   const inputRef = useRef<HTMLInputElement>(null);
@@ -110,7 +115,7 @@ function UploadWallPaper() {
             <label htmlFor="upload">
               <img src="imgs/Upload/ic_camera.png" alt="camera" />
               <div>
-                <span>{wallpaper.coverImage !== null ? 1 : 0}</span>
+                <span>{wallpaper.coverPicture !== null ? 1 : 0}</span>
                 <span>/1</span>
               </div>
             </label>
@@ -118,17 +123,14 @@ function UploadWallPaper() {
               type="file"
               accept="image/x-png,image/jpeg,image/gif"
               multiple={false}
-              // onChange={(e) => dispatch(changeImage(e))}
+              onChange={(e) => onUploadImage(e)}
               id="upload"
-              disabled={wallpaper.coverImage !== null}
+              disabled={wallpaper.coverPicture !== null}
             />
-            {wallpaper.coverImage && (
+            {wallpaper.coverPicture && (
               <div className="image">
-                <img src={URL.createObjectURL(wallpaper.coverImage)} alt="upload_img" />
-                <button
-                  type="button"
-                  // onClick={() => onDeleteImage()}
-                >
+                <img src={URL.createObjectURL(wallpaper.coverPicture)} alt="upload_img" />
+                <button type="button" onClick={() => onDeleteImage()}>
                   <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
                 </button>
               </div>

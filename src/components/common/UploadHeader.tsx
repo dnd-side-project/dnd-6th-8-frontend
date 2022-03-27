@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { postWallpaper } from '../../modules/post/wallpaper';
 import './UploadHeader.scss';
 import ButtonModal from '../UploadModals/ButtonModal';
 import UploadAlert from '../UploadModals/UploadAlert';
+import { RootState } from '../../modules';
 
 type UploadHeaderProps = {
   isCanGoBack: boolean;
@@ -14,6 +17,12 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
   const [isOpenSaveModal, setIsOpenSaveModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const dispatch = useDispatch();
+  const onSave = useCallback(() => {
+    console.log(wallpaper);
+    dispatch(postWallpaper(wallpaper));
+  }, [dispatch, wallpaper]);
 
   return (
     <>
@@ -33,6 +42,7 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
           type="button"
           className="right select"
           onClick={() => {
+            onSave();
             setIsOpenSaveModal(true);
             setTimeout(() => {
               setIsOpenSaveModal(false);

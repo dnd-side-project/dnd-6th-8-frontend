@@ -20,9 +20,9 @@ export type archivingDataType = {
   img: string;
 };
 
-export type UploadWallPaperDataType = {
+export type WallPaperModuleType = {
   data: {
-    coverImage: File | null;
+    coverPicture: File | null;
     title: string;
     place: string;
     firstDay: string;
@@ -33,6 +33,17 @@ export type UploadWallPaperDataType = {
   };
   loading: boolean;
   error: null | Error;
+};
+
+export type WallPaperDatatType = {
+  coverPicture: File | null;
+  title: string;
+  place: string;
+  firstDay: string;
+  lastDay: string;
+  haveCompanion: boolean | null;
+  budget: string;
+  archivingStyle: string;
 };
 
 export type archivingDataObject = {
