@@ -1,5 +1,7 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../lib/axios';
 import './UserInfo.scss';
 
 function UserInfo() {
@@ -7,6 +9,14 @@ function UserInfo() {
   const gotoUserProfile = () => {
     navigate('/userProfile');
   };
+  useEffect(() => {
+    const userInfo = async() => {
+      await instance.get('/api/v1/user/info')
+      .then((res) => console.log(res))
+      .catch((e) => console.log('에러입니다', e));
+    }
+    userInfo(); 
+  }, []);
   return (
     <div className="userInfo-wrapper" role="button" tabIndex={0} onClick={gotoUserProfile} onKeyDown={gotoUserProfile}>
       <div className="container">

@@ -46,6 +46,18 @@ export type WallPaperDatatType = {
   archivingStyle: string;
 };
 
+export type UserInfoModuleType = {
+  surveyResponse: {
+    archivingStyle: string;
+    budget: string;
+    haveCompanion: boolean | null;
+  };
+  userEmail: string;
+  userName: string;
+  loading : boolean; 
+  error : boolean; 
+};
+
 export type archivingDataObject = {
   sharedInfo: Array<archivingDataType>;
   personalInfo: Array<archivingDataType>;

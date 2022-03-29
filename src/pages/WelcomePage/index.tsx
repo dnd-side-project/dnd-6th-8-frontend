@@ -12,6 +12,7 @@ import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_logi
 function WelcomePage() {
   useEffect(() => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('userName'); 
   }, []);
 
   const KakaoLogIn = useCallback(async () => {
@@ -47,7 +48,6 @@ function WelcomePage() {
         },
       });
       console.log(google);
-      // window.location.replace(google.data);
     };
     googleSignIn();
   }, []);

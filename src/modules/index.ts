@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import { user } from './user';
+import userInfoReducer from './user/userinfo';
 import wallpaper from './post/wallpaper';
 
 const rootReducer = combineReducers({
   wallpaper,
+  userInfoReducer
 });
 
 export default rootReducer;
