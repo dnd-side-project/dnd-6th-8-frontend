@@ -1,9 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import UserProfileHeader from '../../components/UserProfile/UserProfileHeader';
+import { RootState } from '../../modules';
 import './style.scss';
 
 function UserProfile() {
+  const {userName, userEmail} = useSelector((state: RootState) => state.userInfoReducer.data);
   return (
     <div className="userProfile-wrapper">
       <UserProfileHeader />
@@ -16,11 +19,11 @@ function UserProfile() {
           <div className="user-info-main">
             <div className="name-area">
               <div className="name">이름</div>
-              <div className="real-name">이경서</div>
+              <div className="real-name">{userName}</div>
             </div>
             <div className="email-area">
               <div className="email">가입된 이메일</div>
-              <div className="real-email">1209lks@naver.com</div>
+              <div className="real-email">{userEmail}</div>
             </div>
           </div>
         </div>

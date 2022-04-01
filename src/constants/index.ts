@@ -47,15 +47,17 @@ export type WallPaperDatatType = {
 };
 
 export type UserInfoModuleType = {
-  surveyResponse: {
-    archivingStyle: string;
-    budget: string;
-    haveCompanion: boolean | null;
+  data: {
+    surveyResponse: {
+      archivingStyle: string;
+      budget: string;
+      haveCompanion: boolean | null;
+    };
+    userEmail: string;
+    userName: string;
   };
-  userEmail: string;
-  userName: string;
-  loading : boolean; 
-  error : boolean; 
+  loading: boolean;
+  error: boolean | Error;
 };
 
 export type archivingDataObject = {

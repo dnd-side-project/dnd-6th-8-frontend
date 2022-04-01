@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
+import axios from 'axios';
 import instance from '../../lib/axios';
-import { UserInfoModuleType,  } from '../../constants/index';
+import { UserInfoModuleType } from '../../constants/index';
 import { RootState } from '..';
 
 // 액션 타입
@@ -25,11 +26,8 @@ type userInfoAction =
 export const userInfo = (): ThunkAction<void, RootState, null, userInfoAction> => async (dispatch) => {
   try {
     dispatch(userInfoPending());
-    const response = await instance.get(`/api/v1/user/info`,{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
+    const response = await instance.get(`/api/v1/user/info`);
+    console.log(response);
     dispatch(userInfoSuccess(response));
   } catch (e) {
     dispatch(userInfoFailure(e));
@@ -39,15 +37,17 @@ export const userInfo = (): ThunkAction<void, RootState, null, userInfoAction> =
 
 // 초기 상태
 const initailState: UserInfoModuleType = {
-  surveyResponse: {
-    archivingStyle: '',
-    budget: '',
-    haveCompanion: null,
+  data: {
+    surveyResponse: {
+      archivingStyle: '',
+      budget: '',
+      haveCompanion: null,
+    },
+    userEmail: '',
+    userName: '',
   },
-  userEmail: '',
-  userName: '',
-  loading : false, 
-  error : false, 
+  loading: false,
+  error: false,
 };
 
 // 리듀서
@@ -57,7 +57,7 @@ function userInfoReducer(state: UserInfoModuleType = initailState, action: userI
     case USER_USERINFO_PENDING:
       return { ...state, loading: true };
     case USER_USERINFO_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, data: { ...action.payload }, loading: false };
     case USER_USERINFO_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
