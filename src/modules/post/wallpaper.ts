@@ -9,6 +9,8 @@ import { RootState } from '..';
 const UPLOAD_IMAGE = 'wallpaper/UPLOAD_IMAGE' as const;
 const DELETE_IMAGE = 'wallpaper/DELETE_IMAGE' as const;
 const CHANGE_TITLE = 'wallpaper/CHANGE_TITLE' as const;
+const RESET_TITLE = 'wallpaper/RESET_TITLE' as const;
+const CHANGE_TOGGLE = 'wallpaper/CHANGE_TOGGLE' as const;
 
 const POST_WALLPAPER_PENDING = 'wallpaper/POST_WALLPAPER_PENDING' as const;
 const POST_WALLPAPER_SUCCESS = 'wallpaper/POST_WALLPAPER_SUCCESS' as const;
@@ -31,6 +33,16 @@ export const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => ({
   payload: e.target.value,
 });
 
+export const resetTitle = () => ({
+  type: RESET_TITLE,
+  payload: '',
+});
+
+export const changeToggle = (name: string, value: string | boolean) => ({
+  type: CHANGE_TOGGLE,
+  payload: { name, value },
+});
+
 const postWallpaperPending = () => ({ type: POST_WALLPAPER_PENDING });
 const postWallpaperSuccess = (payload: any) => ({ type: POST_WALLPAPER_SUCCESS, payload });
 const postWallpaperFailure = (payload: any) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
@@ -39,6 +51,8 @@ type wallpaperAction =
   | ReturnType<typeof uploadImage>
   | ReturnType<typeof deleteImage>
   | ReturnType<typeof changeTitle>
+  | ReturnType<typeof resetTitle>
+  | ReturnType<typeof changeToggle>
   | ReturnType<typeof postWallpaperPending>
   | ReturnType<typeof postWallpaperSuccess>
   | ReturnType<typeof postWallpaperFailure>;
@@ -61,12 +75,12 @@ export const postWallpaper =
 // 초기 상태
 const initailState: WallPaperModuleType = {
   data: {
-    coverPicture: null, // null
+    coverPicture: null,
     title: '',
     place: '',
     firstDay: '',
     lastDay: '',
-    haveCompanion: false, // null
+    haveCompanion: null,
     budget: '',
     archivingStyle: '',
   },
@@ -84,6 +98,10 @@ function wallpaper(state: WallPaperModuleType = initailState, action: wallpaperA
       return { ...state, data: { ...state.data, coverPicture: action.payload } };
     case CHANGE_TITLE:
       return { ...state, data: { ...state.data, title: action.payload } };
+    case RESET_TITLE:
+      return { ...state, data: { ...state.data, title: action.payload } };
+    case CHANGE_TOGGLE:
+      return { ...state, data: { ...state.data, [action.payload.name]: action.payload.value } }; // key object 변수 설정할때는 [key]:value 형태 사용
     case POST_WALLPAPER_PENDING:
       return { ...state, loading: true };
     case POST_WALLPAPER_SUCCESS:

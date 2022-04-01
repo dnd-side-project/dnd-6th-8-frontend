@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './UploadWallPaper.scss';
-import { changeTitle, deleteImage, uploadImage } from '../../modules/post/wallpaper';
+import { changeTitle, deleteImage, uploadImage, resetTitle, changeToggle } from '../../modules/post/wallpaper';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import DateModal from '../../components/UploadModals/DateModal';
@@ -12,31 +12,9 @@ import { RootState } from '../../modules';
 function UploadWallPaper() {
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
   const dispatch = useDispatch();
-  // 표지작성 데이터
-  // const [wallPaperData, setWallPaperData] = useState<UploadWallPaperDataType>({
-  //   coverImage: null,
-  //   title: '',
-  //   place: '',
-  //   firstDay: '',
-  //   lastDay: '',
-  //   haveCompanion: null,
-  //   budget: '',
-  //   archivingStyle: '',
-  // });
 
+  // 1번 질문
   const [isImageSizeOK, setIsImageSizeOK] = useState<boolean>(true);
-
-  // const onUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!e.target.files) return;
-  //   if (e.target.files[0].size > 1024 * 1024 * 5) {
-  //     setIsImageSizeOK(false);
-  //     setTimeout(() => {
-  //       setIsImageSizeOK(true);
-  //     }, 1200);
-  //     return;
-  //   }
-  //   setWallPaperData({ ...wallPaperData, coverImage: e.target.files[0] });
-  // };
 
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,50 +31,38 @@ function UploadWallPaper() {
     [dispatch],
   );
 
-  // const onDeleteImage = () => {
-  //   setWallPaperData({ ...wallPaperData, coverImage: null });
-  // };
-
   const onDeleteImage = useCallback(() => dispatch(deleteImage()), [dispatch]);
 
   // 2번 질문
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // const onInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setWallPaperData({ ...wallPaperData, title: e.target.value });
-  // };
-
   const onInputText = useCallback((e) => dispatch(changeTitle(e)), [dispatch]);
 
-  // const resetText = () => {
-  //   if (!inputRef.current) return;
-  //   inputRef.current.value = '';
-  //   setWallPaperData({ ...wallPaperData, title: '' });
-  // };
+  const onResetText = useCallback(() => dispatch(resetTitle()), [dispatch]);
 
   // 3~7번 질문
-  const onClickToggle = (type: string, value: string | boolean) => {
-    console.log('click');
-    // setWallPaperData({ ...wallPaperData, [type]: value });
-  };
+  const onClickToggle = useCallback(
+    (name: string, value: string | boolean) => dispatch(changeToggle(name, value)),
+    [dispatch],
+  );
 
   // 작성 완료
   const [complete, setComplete] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   if (
-  //     wallPaperData.archivingStyle !== '' &&
-  //     wallPaperData.budget !== '' &&
-  //     wallPaperData.coverImage !== null &&
-  //     wallPaperData.firstDay !== '' &&
-  //     wallPaperData.haveCompanion !== null &&
-  //     wallPaperData.lastDay !== '' &&
-  //     wallPaperData.place !== '' &&
-  //     wallPaperData.title !== ''
-  //   ) {
-  //     setComplete(true);
-  //   }
-  // }, [wallPaperData]);
+  useEffect(() => {
+    if (
+      wallpaper.archivingStyle !== '' &&
+      wallpaper.budget !== '' &&
+      wallpaper.coverPicture !== null &&
+      wallpaper.firstDay !== '' &&
+      wallpaper.haveCompanion !== null &&
+      wallpaper.lastDay !== '' &&
+      wallpaper.place !== '' &&
+      wallpaper.title !== ''
+    ) {
+      setComplete(true);
+    }
+  }, [wallpaper]);
 
   const navigate = useNavigate();
 
@@ -147,10 +113,7 @@ function UploadWallPaper() {
               ref={inputRef}
             />
             {wallpaper.title !== '' && (
-              <button
-                type="button"
-                // onClick={resetText}
-              >
+              <button type="button" onClick={onResetText}>
                 <img src="imgs/Upload/ic_x_small.png" alt="reset" />
               </button>
             )}
