@@ -4,7 +4,7 @@ import { RootState } from '../../modules';
 import './Greeting.scss';
 
 function Greeting() {
-  const { userName } = useSelector((state: RootState) => state.userInfoReducer.data);
+  const { userName } = useSelector((state: RootState) => state.userInformation.data);
 
   return (
     <div className="greeting-wrapper">

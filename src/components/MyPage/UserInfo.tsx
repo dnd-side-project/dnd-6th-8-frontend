@@ -7,7 +7,7 @@ import './UserInfo.scss';
 
 function UserInfo() {
   const navigate = useNavigate();
-  const { userName } = useSelector((state: RootState) => state.userInfoReducer.data);
+  const { userName } = useSelector((state: RootState) => state.userInformation.data);
   const gotoUserProfile = () => {
     navigate('/userProfile');
   };

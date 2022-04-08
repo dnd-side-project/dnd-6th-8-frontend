@@ -1,5 +1,4 @@
 import { ThunkAction } from 'redux-thunk';
-import axios from 'axios';
 import instance from '../../lib/axios';
 import { UserInfoModuleType } from '../../constants/index';
 import { RootState } from '..';
@@ -9,9 +8,6 @@ import { RootState } from '..';
 const USER_USERINFO_PENDING = 'userinfo/USER_USERINFO_PENDING' as const;
 const USER_USERINFO_SUCCESS = 'userinfo/USER_USERINFO_SUCCESS' as const;
 const USER_USERINFO_FAILURE = 'userinfo/USER_USERINFO_FAILURE' as const;
-
-// 액션 생성 함수
-// File object -> redux dev tools에서 {}로 표시됨(https://stackoverflow.com/questions/67137855/how-could-i-handle-a-file-upload-with-react-and-redux)
 
 const userInfoPending = () => ({ type: USER_USERINFO_PENDING });
 const userInfoSuccess = (payload: any) => ({ type: USER_USERINFO_SUCCESS, payload });
@@ -27,10 +23,11 @@ export const userInfo = (): ThunkAction<void, RootState, null, userInfoAction> =
   try {
     dispatch(userInfoPending());
     const response = await instance.get(`/api/v1/user/info`);
-    console.log(response);
     dispatch(userInfoSuccess(response));
+    console.log('요청 성공'); 
   } catch (e) {
     dispatch(userInfoFailure(e));
+    console.log('요청 실패'); 
     throw e;
   }
 };
@@ -52,7 +49,7 @@ const initailState: UserInfoModuleType = {
 
 // 리듀서
 // eslint-disable-next-line default-param-last
-function userInfoReducer(state: UserInfoModuleType = initailState, action: userInfoAction) {
+function userInfomation(state: UserInfoModuleType = initailState, action: userInfoAction) {
   switch (action.type) {
     case USER_USERINFO_PENDING:
       return { ...state, loading: true };
@@ -65,4 +62,4 @@ function userInfoReducer(state: UserInfoModuleType = initailState, action: userI
   }
 }
 
-export default userInfoReducer;
+export default userInfomation;
