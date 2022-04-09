@@ -20,6 +20,46 @@ export type archivingDataType = {
   img: string;
 };
 
+export type WallPaperModuleType = {
+  data: {
+    coverPicture: File | null;
+    title: string;
+    place: string;
+    firstDay: string;
+    lastDay: string;
+    haveCompanion: boolean | null;
+    budget: string;
+    archivingStyle: string;
+  };
+  loading: boolean;
+  error: null | Error;
+};
+
+export type WallPaperDatatType = {
+  coverPicture: File | null;
+  title: string;
+  place: string;
+  firstDay: string;
+  lastDay: string;
+  haveCompanion: boolean | null;
+  budget: string;
+  archivingStyle: string;
+};
+
+export type UserInfoModuleType = {
+  data: {
+    surveyResponse: {
+      archivingStyle: string;
+      budget: string;
+      haveCompanion: boolean | null;
+    };
+    userEmail: string;
+    userName: string;
+  };
+  loading: boolean;
+  error: boolean | Error;
+};
+
 export type archivingDataObject = {
   sharedInfo: Array<archivingDataType>;
   personalInfo: Array<archivingDataType>;

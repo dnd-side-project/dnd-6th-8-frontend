@@ -7,7 +7,6 @@ import HomeLoading from '../../components/Home/HomeLoading';
 
 function Home() {
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
     return () => setLoading(false);
