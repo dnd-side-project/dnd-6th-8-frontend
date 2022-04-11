@@ -13,7 +13,7 @@ function UploadWallPaper() {
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
   const dispatch = useDispatch();
 
-  // 1번 질문
+  // 1번 질문 : 커버사진
   const [isImageSizeOK, setIsImageSizeOK] = useState<boolean>(true);
 
   const onUploadImage = useCallback(
@@ -33,20 +33,20 @@ function UploadWallPaper() {
 
   const onDeleteImage = useCallback(() => dispatch(deleteImage()), [dispatch]);
 
-  // 2번 질문
+  // 2번 질문 : 제목
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onInputText = useCallback((e) => dispatch(changeTitle(e)), [dispatch]);
 
   const onResetText = useCallback(() => dispatch(resetTitle()), [dispatch]);
 
-  // 3~7번 질문
+  // 3~7번 질문 : 여행장소, 여행기간, 동행여부, 예산계획, 스타일
   const onClickToggle = useCallback(
     (name: string, value: string | boolean) => dispatch(changeToggle(name, value)),
     [dispatch],
   );
 
-  // 작성 완료
+  // 작성 완료 확인
   const [complete, setComplete] = useState<boolean>(false);
 
   useEffect(() => {
@@ -153,14 +153,14 @@ function UploadWallPaper() {
             selected={wallpaper.haveCompanion}
             setSelected={onClickToggle}
             type="haveCompanion"
-            value="혼자"
+            value="false"
           />
           <UploadToggle
             text="동행과의 여행"
             selected={wallpaper.haveCompanion}
             setSelected={onClickToggle}
             type="haveCompanion"
-            value="동행"
+            value="true"
           />
         </div>
         <div className="six question">

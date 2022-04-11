@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import instance from '../../lib/axios';
-import { WallPaperModuleType, WallPaperDatatType } from '../../constants/index';
+import { WallPaperModuleType, WallPaperDataType } from '../../constants/index';
 import { RootState } from '..';
 
 // 액션 타입
@@ -44,8 +45,8 @@ export const changeToggle = (name: string, value: string | boolean) => ({
 });
 
 const postWallpaperPending = () => ({ type: POST_WALLPAPER_PENDING });
-const postWallpaperSuccess = (payload: any) => ({ type: POST_WALLPAPER_SUCCESS, payload });
-const postWallpaperFailure = (payload: any) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
+const postWallpaperSuccess = (payload: AxiosResponse) => ({ type: POST_WALLPAPER_SUCCESS, payload });
+const postWallpaperFailure = (payload: AxiosError) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
 
 type wallpaperAction =
   | ReturnType<typeof uploadImage>
@@ -59,15 +60,33 @@ type wallpaperAction =
 
 // thunk 함수
 export const postWallpaper =
-  (data: WallPaperDatatType): ThunkAction<void, RootState, null, wallpaperAction> =>
+  (data: WallPaperDataType): ThunkAction<void, RootState, null, wallpaperAction> =>
   async (dispatch) => {
     try {
       dispatch(postWallpaperPending());
-      console.log(data.coverPicture);
-      const response = await instance.post(`/api/v1/archives`, data);
+      const formData = new FormData();
+      if (data.coverPicture) formData.append('coverImage', data.coverPicture);
+      formData.append(
+        'archivesSaveRequestDto',
+        new Blob(
+          [
+            JSON.stringify({
+              firstDay: data.firstDay,
+              lastDay: data.lastDay,
+              place: data.place,
+              title: data.title,
+              archivingStyle: data.archivingStyle,
+              haveCompanion: data.haveCompanion,
+              budget: data.budget,
+            }),
+          ],
+          { type: 'application/json' },
+        ),
+      );
+      const response = await instance.post(`/api/v1/archives`, formData);
       dispatch(postWallpaperSuccess(response));
-    } catch (e) {
-      dispatch(postWallpaperFailure(e));
+    } catch (e: AxiosError | unknown) {
+      if (axios.isAxiosError(e)) dispatch(postWallpaperFailure(e));
       throw e;
     }
   };

@@ -57,7 +57,13 @@ function DateModal({ setSelected }: DateModalProps) {
           onClick={() => {
             closeDatePicker(startRef);
             if (startDate !== null)
-              setSelected('firstDay', `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`);
+              setSelected(
+                'firstDay',
+                `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate
+                  .getDate()
+                  .toString()
+                  .padStart(2, '0')}`,
+              );
           }}
         >
           선택 완료
@@ -83,7 +89,13 @@ function DateModal({ setSelected }: DateModalProps) {
           onClick={() => {
             closeDatePicker(endRef);
             if (endDate !== null)
-              setSelected('lastDay', `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`);
+              setSelected(
+                'lastDay',
+                `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate
+                  .getDate()
+                  .toString()
+                  .padStart(2, '0')}`,
+              );
           }}
         >
           선택 완료
