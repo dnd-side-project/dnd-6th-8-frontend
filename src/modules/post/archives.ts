@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
+import { archivingModuleType, archivingType } from '../../constants/index';
 import instance from '../../lib/axios';
-import { UserInfoModuleType } from '../../constants/index';
 import { RootState } from '..';
 
 // 액션 타입
@@ -24,32 +24,24 @@ export const myArchives = (): ThunkAction<void, RootState, null, myArchivesActio
     dispatch(myArchivesPending());
     const response = await instance.get(`/api/v1/user/achives`);
     dispatch(myArchivesSuccess(response));
-    console.log('myArchives 요청 성공'); 
+    console.log('myArchives 요청 성공');
   } catch (e) {
     dispatch(myArchivesFailure(e));
-    console.log('myArchives 요청 실패'); 
+    console.log('myArchives 요청 실패');
     throw e;
   }
 };
 
 // 초기 상태
-const initailState: UserInfoModuleType = {
-  data: {
-    surveyResponse: {
-      archivingStyle: '',
-      budget: '',
-      haveCompanion: null,
-    },
-    userEmail: '',
-    userName: '',
-  },
+const initailState: archivingModuleType = {
+  data: [],
   loading: false,
   error: false,
 };
 
 // 리듀서
 // eslint-disable-next-line default-param-last
-function myArchivesReducer(state: UserInfoModuleType = initailState, action: myArchivesAction) {
+function myArchivesReducer(state: archivingModuleType = initailState, action: myArchivesAction) {
   switch (action.type) {
     case POST_MYARCHIVES_PENDING:
       return { ...state, loading: true };
