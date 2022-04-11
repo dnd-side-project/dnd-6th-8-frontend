@@ -4,7 +4,7 @@ const token = localStorage.getItem('accessToken');
 // axios instance 생성
 const instance = axios.create({
   baseURL: 'http://3.37.253.113:8080',
-  timeout: 10000,
+  timeout: 1000,
   headers: {
     Authorization: `Bearer ${token}`,
   },

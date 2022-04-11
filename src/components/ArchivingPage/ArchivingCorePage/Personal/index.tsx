@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ReactComponent as Book } from '../../../../assets/icons/ArchivingPage/ArchivingCorePage/book.svg';
 import Card from '../Card';
 import './style.scss';
-import { archivingDataType } from '../../../../constants/index';
+import { archivingType } from '../../../../constants/index';
+import { RootState } from '../../../../modules';
 
 type PersonalProps = {
-  personalInfo: archivingDataType[];
   setDeleteClick: (click: boolean) => void;
 };
 
-function Personal({ personalInfo, setDeleteClick }: PersonalProps) {
-  const [fetchData, setFetchData] = useState<boolean>(false);
-  const [fetchDataLength, setFetchDataLength] = useState<number>(0);
-
-  useEffect(() => {
-    if (personalInfo !== undefined) {
-      setFetchData(true);
-      setFetchDataLength(personalInfo.length);
-    }
-  }, [personalInfo]);
+function Personal({ setDeleteClick }: PersonalProps) {
+  const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
 
   return (
     <div className="personal-wrapper">
-      {fetchDataLength ? (
-        personalInfo.map((value: archivingDataType) => {
-          return <Card info={value} setDeleteClick={setDeleteClick} key={value.title} />;
+      {privateData ? (
+        privateData.map((value: archivingType) => {
+          return <Card info={value} setDeleteClick={setDeleteClick} key={value.id} />;
         })
       ) : (
         <Book className="personal-book" />

@@ -36,7 +36,8 @@ export type archivingType = {
 
 // 아카이빙 Real Data 실제 Redux initialState
 export type archivingModuleType = {
-  data: Array<archivingType>;
+  sharedData: archivingType[];
+  privateData : archivingType[];
   loading: boolean;
   error: boolean | Error;
 };

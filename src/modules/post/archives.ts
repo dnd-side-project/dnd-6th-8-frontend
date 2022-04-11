@@ -5,35 +5,46 @@ import { RootState } from '..';
 
 // 액션 타입
 // change -> local에서 바뀔때마다 변경
-const POST_MYARCHIVES_PENDING = 'archives/POST_MYARCHIVES_PENDING' as const;
-const POST_MYARCHIVES_SUCCESS = 'archives/POST_MYARCHIVES_SUCCESS' as const;
-const POST_MYARCHIVES_FAILURE = 'archives/POST_MYARCHIVES_FAILURE' as const;
+const POST_MYARCHIVES_ISSHARED_PENDING = 'archives/POST_MYARCHIVES_ISSHARED_PENDING' as const;
+const POST_MYARCHIVES_ISSHARED_SUCCESS = 'archives/POST_MYARCHIVES_ISSHARED_SUCCESS' as const;
+const POST_MYARCHIVES_ISSHARED_FAILURE = 'archives/POST_MYARCHIVES_ISSHARED_FAILURE' as const;
 
-const myArchivesPending = () => ({ type: POST_MYARCHIVES_PENDING });
-const myArchivesSuccess = (payload: any) => ({ type: POST_MYARCHIVES_SUCCESS, payload });
-const myArchivesFailure = (payload: any) => ({ type: POST_MYARCHIVES_FAILURE, error: true, payload });
+const POST_MYARCHIVES_PRIVATE_PENDING = 'archives/POST_MYARCHIVES_PRIVATE_PENDING' as const;
+const POST_MYARCHIVES_PRIVATE_SUCCESS = 'archives/POST_MYARCHIVES_PRIVATE_SUCCESS' as const;
+const POST_MYARCHIVES_PRIVATE_FAILURE = 'archives/POST_MYARCHIVES_PRIVATE_FAILURE' as const;
+
+const myArchivesIsSharedPending = () => ({ type: POST_MYARCHIVES_ISSHARED_PENDING });
+const myArchivesIsSharedSuccess = (payload: any) => ({ type: POST_MYARCHIVES_ISSHARED_SUCCESS, payload });
+const myArchivesIsSharedFailure = (payload: any) => ({ type: POST_MYARCHIVES_ISSHARED_FAILURE, error: true, payload });
+
+const myArchivesPrivatePending = () => ({ type: POST_MYARCHIVES_PRIVATE_PENDING });
+const myArchivesPrivateSuccess = (payload: any) => ({ type: POST_MYARCHIVES_PRIVATE_SUCCESS, payload });
+const myArchivesPrivateFailure = (payload: any) => ({ type: POST_MYARCHIVES_PRIVATE_FAILURE, error: true, payload });
 
 type myArchivesAction =
-  | ReturnType<typeof myArchivesPending>
-  | ReturnType<typeof myArchivesSuccess>
-  | ReturnType<typeof myArchivesFailure>;
+  | ReturnType<typeof myArchivesIsSharedPending>
+  | ReturnType<typeof myArchivesIsSharedSuccess>
+  | ReturnType<typeof myArchivesIsSharedFailure>
+  | ReturnType<typeof myArchivesPrivatePending>
+  | ReturnType<typeof myArchivesPrivateSuccess>
+  | ReturnType<typeof myArchivesPrivateFailure>;
 
 // thunk 함수
 
 // 공유 피드
 export const myArchivesIsShared = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
   try {
-    dispatch(myArchivesPending());
-    const response = await instance.get(`/api/v1/user/achives`, {
+    dispatch(myArchivesIsSharedPending());
+    const response = await instance.get(`/api/v1/my/archives/places/on`, {
       params: {
         isShare: true,
       },
     });
-    dispatch(myArchivesSuccess(response));
-    console.log('IsShared 요청 성공');
+    console.log('IsShared 요청 성공', response);
+    dispatch(myArchivesIsSharedSuccess(response));
   } catch (e) {
-    dispatch(myArchivesFailure(e));
-    console.log('IsShared 요청 실패');
+    dispatch(myArchivesIsSharedFailure(e));
+    console.log('IsShared 요청 실패', e);
     throw e;
   }
 };
@@ -41,16 +52,16 @@ export const myArchivesIsShared = (): ThunkAction<void, RootState, null, myArchi
 // 개인 소장 피드
 export const myArchivesPrivate = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
   try {
-    dispatch(myArchivesPending());
-    const response = await instance.get(`/api/v1/user/achives`, {
+    dispatch(myArchivesPrivatePending());
+    const response = await instance.get(`/api/v1/my/archives/places/on`, {
       params: {
         isShare: false,
       },
     });
-    dispatch(myArchivesSuccess(response));
-    console.log('Private 요청 성공');
+    dispatch(myArchivesPrivateSuccess(response));
+    console.log('Private 요청 성공', response);
   } catch (e) {
-    dispatch(myArchivesFailure(e));
+    dispatch(myArchivesPrivateFailure(e));
     console.log('Private 요청 실패');
     throw e;
   }
@@ -58,7 +69,8 @@ export const myArchivesPrivate = (): ThunkAction<void, RootState, null, myArchiv
 
 // 초기 상태
 const initailState: archivingModuleType = {
-  data: [],
+  sharedData: [],
+  privateData: [],
   loading: false,
   error: false,
 };
@@ -67,11 +79,17 @@ const initailState: archivingModuleType = {
 // eslint-disable-next-line default-param-last
 function myArchivesReducer(state: archivingModuleType = initailState, action: myArchivesAction) {
   switch (action.type) {
-    case POST_MYARCHIVES_PENDING:
+    case POST_MYARCHIVES_ISSHARED_PENDING:
       return { ...state, loading: true };
-    case POST_MYARCHIVES_SUCCESS:
-      return { ...state, data: { ...action.payload }, loading: false };
-    case POST_MYARCHIVES_FAILURE:
+    case POST_MYARCHIVES_ISSHARED_SUCCESS:
+      return { ...state, sharedData: [...action.payload]  , loading: false };
+    case POST_MYARCHIVES_ISSHARED_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case POST_MYARCHIVES_PRIVATE_PENDING:
+      return { ...state, loading: true };
+    case POST_MYARCHIVES_PRIVATE_SUCCESS:
+      return { ...state, privateData: [...action.payload], loading: false };
+    case POST_MYARCHIVES_PRIVATE_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
