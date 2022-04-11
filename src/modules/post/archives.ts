@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { archivingModuleType, archivingType } from '../../constants/index';
+import { archivingModuleType } from '../../constants/index';
 import instance from '../../lib/axios';
 import { RootState } from '..';
 
@@ -19,15 +19,39 @@ type myArchivesAction =
   | ReturnType<typeof myArchivesFailure>;
 
 // thunk 함수
-export const myArchives = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
+
+// 공유 피드
+export const myArchivesIsShared = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
   try {
     dispatch(myArchivesPending());
-    const response = await instance.get(`/api/v1/user/achives`);
+    const response = await instance.get(`/api/v1/user/achives`, {
+      params: {
+        isShare: true,
+      },
+    });
     dispatch(myArchivesSuccess(response));
-    console.log('myArchives 요청 성공');
+    console.log('IsShared 요청 성공');
   } catch (e) {
     dispatch(myArchivesFailure(e));
-    console.log('myArchives 요청 실패');
+    console.log('IsShared 요청 실패');
+    throw e;
+  }
+};
+
+// 개인 소장 피드
+export const myArchivesPrivate = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
+  try {
+    dispatch(myArchivesPending());
+    const response = await instance.get(`/api/v1/user/achives`, {
+      params: {
+        isShare: false,
+      },
+    });
+    dispatch(myArchivesSuccess(response));
+    console.log('Private 요청 성공');
+  } catch (e) {
+    dispatch(myArchivesFailure(e));
+    console.log('Private 요청 실패');
     throw e;
   }
 };
