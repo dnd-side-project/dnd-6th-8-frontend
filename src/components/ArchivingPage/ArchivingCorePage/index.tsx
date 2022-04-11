@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import './style.scss';
 import { ReactComponent as UpToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_up.svg';
 import { ReactComponent as DownToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_down.svg';
@@ -8,9 +8,7 @@ import { ReactComponent as AddBtn } from '../../../assets/icons/ArchivingPage/Ar
 import Personal from './Personal';
 import Shared from './Shared';
 import HistoryBox from './HistoryBox';
-import { archivingDataType, archivingType } from '../../../constants/index';
 
-import { myArchivesIsShared, myArchivesPrivate } from '../../../modules/post/archives';
 import { RootState } from '../../../modules';
 
 type ArchivingCorePage = {
@@ -18,21 +16,8 @@ type ArchivingCorePage = {
 };
 
 function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
-  const dispatch = useDispatch();
   const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
   const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
-
-  // const [sharedInfo, setSharedInfo] = useState<archivingType[]>([]);
-  // const [personalInfo, setPersonalInfo] = useState<archivingType[]>([]);
-  // const [sharedInfoLen, setSharedInfoLen] = useState<number>(0);
-  // const [personalInfoLen, setPersonalInfoLen] = useState<number>(0);
-
-  useEffect(() => {
-    dispatch(myArchivesIsShared());
-    dispatch(myArchivesPrivate());
-    console.log('세어드데이터', sharedData);
-  }, []);
-
   const [sharedClick, setSharedClick] = useState<boolean>(true);
   const [personalClick, setPersonalClick] = useState<boolean>(true);
 

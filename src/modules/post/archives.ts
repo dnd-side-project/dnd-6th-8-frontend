@@ -82,7 +82,7 @@ function myArchivesReducer(state: archivingModuleType = initailState, action: my
     case POST_MYARCHIVES_ISSHARED_PENDING:
       return { ...state, loading: true };
     case POST_MYARCHIVES_ISSHARED_SUCCESS:
-      return { ...state, sharedData: [...action.payload]  , loading: false };
+      return { ...state, sharedData: [...action.payload], loading: false };
     case POST_MYARCHIVES_ISSHARED_FAILURE:
       return { ...state, loading: false, error: action.payload };
     case POST_MYARCHIVES_PRIVATE_PENDING:
