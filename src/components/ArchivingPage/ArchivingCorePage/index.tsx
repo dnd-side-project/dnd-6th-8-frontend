@@ -28,7 +28,7 @@ function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
 
   return (
     <div className="archivingCorePage-wrapper">
-      {/* <HistoryBox sharedInfo={sharedInfo} personalInfo={personalInfo} /> */}
+      <HistoryBox />
       <div className="travel-feed">
         <div className="feed-title-area">
           <span>공유한 여행 피드</span> <span className="count">{sharedData && sharedData.length}</span>
