@@ -9,15 +9,16 @@ import { RootState } from '../../../../modules';
 
 type SharedProps = {
   setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
 };
 
-function Shared({ setDeleteClick }: SharedProps) {
+function Shared({ setDeleteClick, setDeleteId }: SharedProps) {
   const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
   return (
     <div className="shared-wrapper">
       {sharedData ? (
         sharedData.map((value: archivingType) => {
-          return <Card info={value} setDeleteClick={setDeleteClick} key={value.id} />;
+          return <Card info={value} setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} key={value.id} />;
         })
       ) : (
         <Book className="shared-book" />
