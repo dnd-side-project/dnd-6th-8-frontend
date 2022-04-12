@@ -39,7 +39,7 @@ export const resetTitle = () => ({
   payload: '',
 });
 
-export const changeToggle = (name: string, value: string | boolean) => ({
+export const changeToggle = (name: string, value: string) => ({
   type: CHANGE_TOGGLE,
   payload: { name, value },
 });
@@ -99,7 +99,7 @@ const initailState: WallPaperModuleType = {
     place: '',
     firstDay: '',
     lastDay: '',
-    haveCompanion: null,
+    haveCompanion: '',
     budget: '',
     archivingStyle: '',
   },

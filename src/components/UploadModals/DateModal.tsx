@@ -1,17 +1,18 @@
-import React, { forwardRef, useState, useRef } from 'react';
+import React, { forwardRef, useState, useRef, useCallback } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
+import { useDispatch } from 'react-redux';
+import { changeToggle } from '../../modules/post/wallpaper';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateModal.scss';
 
-type DateModalProps = {
-  setSelected: (type: string, value: string | boolean) => void;
-};
-
-function DateModal({ setSelected }: DateModalProps) {
+function DateModal() {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [hidden, setHidden] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
+  const onClickToggle = useCallback((name: string, data: string) => dispatch(changeToggle(name, data)), [dispatch]);
 
   const ref = React.createRef();
   const startRef = useRef<DatePicker>(null);
@@ -57,7 +58,7 @@ function DateModal({ setSelected }: DateModalProps) {
           onClick={() => {
             closeDatePicker(startRef);
             if (startDate !== null)
-              setSelected(
+              onClickToggle(
                 'firstDay',
                 `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate
                   .getDate()
@@ -89,7 +90,7 @@ function DateModal({ setSelected }: DateModalProps) {
           onClick={() => {
             closeDatePicker(endRef);
             if (endDate !== null)
-              setSelected(
+              onClickToggle(
                 'lastDay',
                 `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate
                   .getDate()

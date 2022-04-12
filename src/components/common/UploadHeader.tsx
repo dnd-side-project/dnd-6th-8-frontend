@@ -20,7 +20,6 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
   const dispatch = useDispatch();
   const onSave = useCallback(() => {
-    console.log(wallpaper);
     dispatch(postWallpaper(wallpaper));
   }, [dispatch, wallpaper]);
 

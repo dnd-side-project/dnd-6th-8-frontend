@@ -21,12 +21,13 @@ export type archivingDataType = {
 };
 
 export type WallPaperDataType = {
+  [index: string]: string | File | null;
   coverPicture: File | null;
   title: string;
   place: string;
   firstDay: string;
   lastDay: string;
-  haveCompanion: boolean | null;
+  haveCompanion: string;
   budget: string;
   archivingStyle: string;
 };
