@@ -5,9 +5,9 @@ import LocationFeed from '../../components/Home/LocationFeed';
 import Recommend from '../../components/Home/Recommend';
 import HomeLoading from '../../components/Home/HomeLoading';
 
-function Home() {
+function Home() { 
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
+  useEffect(() => {   
     setTimeout(() => setLoading(false), 1000);
     return () => setLoading(false);
   }, []);

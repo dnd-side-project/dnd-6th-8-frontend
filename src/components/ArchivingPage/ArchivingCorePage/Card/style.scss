@@ -22,12 +22,13 @@
         .imgs{
             width : 13rem; 
             height : 13rem;    
+            border-radius : 1.3rem;
         }
         .type-정보{
             @extend %info-type; 
             background: #3c38ff;
         }
-        .type-감정{
+        .type-감성{
             @extend %info-type; 
             background: #fa8418;
         }

@@ -1,10 +1,10 @@
 /* eslint-disable react/button-has-type */
 import React, { useCallback } from 'react';
 import './style.scss';
-import { archivingDataType } from '../../../../constants/index';
+import { archivingType } from '../../../../constants/index';
 
 type CardProps = {
-  info: archivingDataType;
+  info: archivingType;
   setDeleteClick: (click: boolean) => void;
 };
 
@@ -16,14 +16,14 @@ function Card({ info, setDeleteClick }: CardProps) {
   return (
     <div className="card-wrapper">
       <div className="card-img">
-        <img className="imgs" src={info.img} alt="메인이미지" />
+        <img className="imgs" src={info.coverPicture} alt="메인이미지" />
         <div className={`type-${info.archivingStyle}`}>{info.archivingStyle}</div>
       </div>
       <div className="card-info">
         <div className="info-header">
           <span>🚄</span>
-          <span className="region">{info.region}</span>
-          <span className="day-box">{info.period}</span>
+          <span className="region">{info.places}</span>
+          <span className="day-box">{info.travelDuration}</span>
         </div>
         <div className="info-title">{info.title}</div>
         <div className="info-btn">
@@ -32,7 +32,7 @@ function Card({ info, setDeleteClick }: CardProps) {
         </div>
         <div className="info-date">
           <p>
-            게시완료 <span>{info.completeArchive}</span>
+            게시완료 <span>2022.03.03</span>
           </p>
         </div>
       </div>

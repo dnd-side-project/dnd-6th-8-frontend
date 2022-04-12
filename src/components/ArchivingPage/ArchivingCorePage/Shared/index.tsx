@@ -1,31 +1,23 @@
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { ReactComponent as Book } from '../../../../assets/icons/ArchivingPage/ArchivingCorePage/book.svg';
 import Card from '../Card';
 import './style.scss';
-import { archivingDataType } from '../../../../constants/index';
+import { archivingType } from '../../../../constants/index';
+import { RootState } from '../../../../modules';
 
 type SharedProps = {
-  sharedInfo: archivingDataType[];
   setDeleteClick: (click: boolean) => void;
 };
 
-function Shared({ sharedInfo, setDeleteClick }: SharedProps) {
-  const [fetchData, setFetchData] = useState<boolean>(false);
-  const [fetchDataLength, setFetchDataLength] = useState<number>(0);
-
-  useEffect(() => {
-    if (sharedInfo !== undefined) {
-      setFetchData(true);
-      setFetchDataLength(sharedInfo.length);
-    }
-  }, [sharedInfo]);
-
+function Shared({ setDeleteClick }: SharedProps) {
+  const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
   return (
     <div className="shared-wrapper">
-      {fetchDataLength ? (
-        sharedInfo.map((value: archivingDataType) => {
-          return <Card info={value} setDeleteClick={setDeleteClick} key={value.title} />;
+      {sharedData ? (
+        sharedData.map((value: archivingType) => {
+          return <Card info={value} setDeleteClick={setDeleteClick} key={value.id} />;
         })
       ) : (
         <Book className="shared-book" />

@@ -1,39 +1,52 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './style.scss';
-import { archivingDataType } from '../../../../constants/index';
+import { archivingType } from '../../../../constants/index';
+import { RootState } from '../../../../modules';
 
-type HistoryBoxProps = {
-  sharedInfo: archivingDataType[];
-  personalInfo: archivingDataType[];
-};
+function HistoryBox() {
+  const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
+  const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
+  const [tempData, setTempData] = useState<archivingType[]>();
+  const [myArchivingData, setMyArchivingData] = useState([] as any);
 
-function HistoryBox({ sharedInfo, personalInfo }: HistoryBoxProps) {
-  const [historyIcon, setHistoryIcon] = useState<boolean>(false);
-  const [iconArray, setIconArray] = useState<archivingDataType[]>([]);
-  useEffect(() => {
-    if (sharedInfo !== undefined || personalInfo !== undefined) {
-      setHistoryIcon(true);
-      setIconArray([...sharedInfo, ...personalInfo]);
+  const filterPlaces = () => {
+    if (tempData !== undefined) {
+      const placeCount = tempData.reduce((acc: any, cur: any) => {
+        const temp = acc[cur.places];
+        const count = temp || 0;
+        return {
+          ...acc,
+          [cur.places]: count + 1,
+        };
+      }, {});
+      setMyArchivingData(Object.entries(placeCount));
     }
-  }, [sharedInfo, personalInfo]);
+  };
+
+  useEffect(() => {
+    setTempData([...sharedData, ...privateData]);
+    filterPlaces();
+  }, [sharedData, privateData]);
+
   return (
     <div className="historybox-wrapper">
       <div className="history-inner-box">
         <img className="pencil" src="/imgs/ArchivingPage/ArchivingCorePage/emoji_pencil.png" alt="연필" />
         <div className="history-box-number">
-          <span>지금까지 기록한 여행</span> <span className="count">{iconArray.length}</span>
+          <span>지금까지 기록한 여행</span> <span className="count">{tempData && tempData.length}</span>
         </div>
       </div>
       <div className="history-icon">
-        {historyIcon ? (
+        {myArchivingData ? (
           <>
-            {iconArray.map((value: archivingDataType) => {
+            {myArchivingData.map((value: any) => {
               return (
-                <div className="icon-box" key={value.title}>
+                <div className="icon-box" key={value[0]}>
                   <div className="icon">🚄</div>
                   <div className="region">
-                    {value.region}
-                    {`(${1})`}
+                    {value[0]}
+                    {`(${value[1]})`}
                   </div>
                 </div>
               );
