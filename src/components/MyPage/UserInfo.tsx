@@ -8,6 +8,8 @@ import './UserInfo.scss';
 function UserInfo() {
   const navigate = useNavigate();
   const { userName } = useSelector((state: RootState) => state.userInformation.data);
+  const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
+  const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
   const gotoUserProfile = () => {
     navigate('/userProfile');
   };
@@ -20,7 +22,7 @@ function UserInfo() {
           <span className="name">{userName}</span>
           <img src="imgs/MyPage/ic_arrow_right_mypage.png" alt="오른쪽 화살표 아이콘" className="arrow" />
         </div>
-        <div className="archiving">기록한 여행 아카이빙(6)</div>
+        <div className="archiving">기록한 여행 아카이빙({`${sharedData.length + privateData.length}`})</div>
       </div>
     </div>
   );

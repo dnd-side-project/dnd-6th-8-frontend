@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './style.scss';
 import { archivingType } from '../../../../constants/index';
@@ -10,8 +10,8 @@ function HistoryBox() {
   const [tempData, setTempData] = useState<archivingType[]>();
   const [myArchivingData, setMyArchivingData] = useState([] as any);
 
-  const filterPlaces = () => {
-    if (tempData !== undefined) {
+  const filterPlaces = ()=>{
+    if (tempData !== undefined && sharedData.length !== 0 && privateData.length !== 0) {
       const placeCount = tempData.reduce((acc: any, cur: any) => {
         const temp = acc[cur.places];
         const count = temp || 0;
