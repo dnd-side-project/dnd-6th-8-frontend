@@ -8,16 +8,17 @@ import { RootState } from '../../../../modules';
 
 type PersonalProps = {
   setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
 };
 
-function Personal({ setDeleteClick }: PersonalProps) {
+function Personal({ setDeleteClick, setDeleteId }: PersonalProps) {
   const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
 
   return (
     <div className="personal-wrapper">
       {privateData ? (
         privateData.map((value: archivingType) => {
-          return <Card info={value} setDeleteClick={setDeleteClick} key={value.id} />;
+          return <Card info={value} setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} key={value.id} />;
         })
       ) : (
         <Book className="personal-book" />

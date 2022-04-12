@@ -13,9 +13,10 @@ import { RootState } from '../../../modules';
 
 type ArchivingCorePage = {
   setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
 };
 
-function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
+function ArchivingCorePage({ setDeleteClick, setDeleteId }: ArchivingCorePage) {
   const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
   const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
   const [sharedClick, setSharedClick] = useState<boolean>(true);
@@ -37,7 +38,7 @@ function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
           {sharedClick ? <DownToggle onClick={onSharedClick} /> : <UpToggle onClick={onSharedClick} />}
         </div>
       </div>
-      {sharedClick && <Shared setDeleteClick={setDeleteClick} />}
+      {sharedClick && <Shared setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} />}
       <div className="travel-feed">
         <div className="feed-title-area">
           <span>개인소장 여행 피드</span> <span className="count">{privateData && privateData.length}</span>
@@ -46,7 +47,7 @@ function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}
         </div>
       </div>
-      {personalClick && <Personal setDeleteClick={setDeleteClick} />}
+      {personalClick && <Personal setDeleteClick={setDeleteClick} setDeleteId={setDeleteId}/>}
       <AddBtn className="add-btn" onClick={() => navigate('/upload-wallpaper')} />
     </div>
   );

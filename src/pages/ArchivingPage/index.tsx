@@ -11,16 +11,15 @@ import { RootState } from '../../modules';
 import { myArchivesIsShared, myArchivesPrivate } from '../../modules/post/archives';
 
 function ArchivingPage() {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.myArchivesReducer.loading);
   const [deleteClick, setDeleteClick] = useState<boolean>(false);
   const [agreeClick, setAgreeClick] = useState<boolean>(false);
-
+  const [deleteId, setDeleteId] = useState<number>();
   useEffect(() => {
     dispatch(myArchivesIsShared());
     dispatch(myArchivesPrivate());
   }, []);
-
 
   return (
     <div className="archivingpage-wrapper">
@@ -30,12 +29,14 @@ function ArchivingPage() {
           setDeleteClick={setDeleteClick}
           agreeClick={agreeClick}
           setAgreeClick={setAgreeClick}
+          deleteId={deleteId}
+          setDeleteId={setDeleteId}
         />
       )}
       {agreeClick && <DeleteAgree />}
       <Header title="기록하기" />
       <div className="archivingpage-main-area">
-        {loading ? <ArchivingLoadingPage /> : <ArchivingCorePage setDeleteClick={setDeleteClick} />}
+        {loading ? <ArchivingLoadingPage /> : <ArchivingCorePage setDeleteClick={setDeleteClick} setDeleteId={setDeleteId}/>}
       </div>
       <NavigationBar />
     </div>

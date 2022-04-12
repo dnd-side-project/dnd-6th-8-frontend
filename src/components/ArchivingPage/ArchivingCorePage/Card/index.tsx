@@ -6,11 +6,13 @@ import { archivingType } from '../../../../constants/index';
 type CardProps = {
   info: archivingType;
   setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
 };
 
-function Card({ info, setDeleteClick }: CardProps) {
+function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
   const onDeleteHandler = useCallback(() => {
     setDeleteClick(true);
+    setDeleteId(info.id);
   }, []);
 
   return (
