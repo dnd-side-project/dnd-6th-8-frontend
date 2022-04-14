@@ -24,7 +24,7 @@ function LogInProcess() {
       if (signupCheck) {
         navigate('/home');
       } else {
-        navigate('/survey');
+        navigate('/surveyStart');
       }
     }
   }, []);
