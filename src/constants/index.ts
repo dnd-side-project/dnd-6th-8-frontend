@@ -42,6 +42,7 @@ export type archivingModuleType = {
   error: boolean | Error;
 };
 
+
 export type WallPaperModuleType = {
   data: {
     coverPicture: File | null;

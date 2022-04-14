@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable react/button-has-type */
 import React, { useCallback } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './style.scss';
 import { archivingType } from '../../../../constants/index';
 
@@ -10,15 +12,29 @@ type CardProps = {
 };
 
 function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
+  const navigate = useNavigate();
+
   const onDeleteHandler = useCallback(() => {
     setDeleteClick(true);
     setDeleteId(info.id);
   }, []);
 
+  const gotoWallPaper = () => {
+    navigate(`/wallpaper/${info.id}`);
+  };
+
   return (
     <div className="card-wrapper">
       <div className="card-img">
-        <img className="imgs" src={info.coverPicture} alt="메인이미지" />
+        <img
+          role="button"
+          tabIndex={0}
+          className="imgs"
+          src={info.coverPicture}
+          alt="메인이미지"
+          onClick={gotoWallPaper}
+          onKeyDown={gotoWallPaper}
+        />
         <div className={`type-${info.archivingStyle}`}>{info.archivingStyle}</div>
       </div>
       <div className="card-info">

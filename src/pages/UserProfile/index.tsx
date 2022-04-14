@@ -7,14 +7,7 @@ import { RootState } from '../../modules';
 import './style.scss';
 
 function UserProfile() {
-  useEffect(()=>{
-    const fetchUser = async() =>{
-      const response = await instance.get(`/api/v1/user/info`);
-      // console.log(response); 
-    }
-    fetchUser(); 
-  }, []); 
-  const { userName, userEmail } = useSelector((state: RootState) => state.userInformation.data);
+  const { userName, userEmail, surveyResponse } = useSelector((state: RootState) => state.userInformation.data);
   return (
     <div className="userProfile-wrapper">
       <UserProfileHeader />
@@ -41,23 +34,47 @@ function UserProfile() {
           <div className="user-info-header">
             <p className="info">서베이 정보</p>
           </div>
-          <div className="survey-info-main">
-            <p>어떤 여행을 즐기시는 편인가요?</p>
-            <div className="label-wrapper">
-              <div>혼자여행</div>
-              <div>동행과의 여행</div>
+          {surveyResponse ? (
+            <div className="survey-info-main">
+              <p>어떤 여행을 즐기시는 편인가요?</p>
+              <div className="label-wrapper">
+                <div className={`${surveyResponse.haveCompanion === false && 'choice'}`}>혼자여행</div>
+                <div className={`${surveyResponse.haveCompanion === true && 'choice'}`}>동행과의 여행</div>
+              </div>
+              <p>여행을 준비할 때, 예산은 어떻게 계획하시나요?</p>
+              <div className="label-wrapper">
+                <div className={`${surveyResponse.budget === '최소한' && 'choice'}`}>최소한으로 준비</div>
+                <div className={`${surveyResponse.budget === '넉넉' && 'choice'}`}>넉넉하게 준비</div>
+              </div>
+              <p>여행에 대한 기록을 볼 때, 어떤 글을 보고 싶으신가요?</p>
+              <div className="label-wrapper">
+                <div className={`${surveyResponse.archivingStyle === '정보' && 'choice'}`}>
+                  여행에 대한 실용적인 정보
+                </div>
+                <div className={`long-sentence ${surveyResponse.archivingStyle === '감성' && 'choice'}`}>
+                  여행에서 느낀 감정 위주의 글
+                </div>
+              </div>
             </div>
-            <p>여행을 준비할 때, 예산은 어떻게 계획하시나요?</p>
-            <div className="label-wrapper">
-              <div>최소한으로 준비</div>
-              <div>넉넉하게 준비</div>
+          ) : (
+            <div className="survey-info-main">
+              <p>어떤 여행을 즐기시는 편인가요?</p>
+              <div className="label-wrapper">
+                <div>혼자여행</div>
+                <div>동행과의 여행</div>
+              </div>
+              <p>여행을 준비할 때, 예산은 어떻게 계획하시나요?</p>
+              <div className="label-wrapper">
+                <div>최소한으로 준비</div>
+                <div>넉넉하게 준비</div>
+              </div>
+              <p>여행에 대한 기록을 볼 때, 어떤 글을 보고 싶으신가요?</p>
+              <div className="label-wrapper">
+                <div>여행에 대한 실용적인 정보</div>
+                <div className="long-sentence">여행에서 느낀 감정 위주의 글</div>
+              </div>
             </div>
-            <p>여행에 대한 기록을 볼 때, 어떤 글을 보고 싶으신가요?</p>
-            <div className="label-wrapper">
-              <div>여행에 대한 실용적인 정보</div>
-              <div className="long-sentence">여행에서 느낀 감정 위주의 글</div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
