@@ -1,20 +1,20 @@
 import { combineReducers } from 'redux';
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import userInformation from './user/userinfomation';
 import wallpaper from './post/wallpaper';
 import myArchivesReducer from './post/archives';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
-  whitelist: ["userInformation"]
+  whitelist: ['userInformation'],
 };
 
 const rootReducer = combineReducers({
   wallpaper,
-  userInformation, 
-  myArchivesReducer, 
+  userInformation,
+  myArchivesReducer,
 });
 
 // export default rootReducer;

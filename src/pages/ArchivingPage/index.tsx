@@ -7,18 +7,19 @@ import Header from '../../components/common/Header';
 import DeleteDialog from '../../components/ArchivingPage/ArchivingCorePage/DeleteDialog';
 import DeleteAgree from '../../components/ArchivingPage/ArchivingCorePage/DeleteAgree';
 import NavigationBar from '../../components/common/NavigationBar';
-import { RootState } from '../../modules';
 import { myArchivesIsShared, myArchivesPrivate } from '../../modules/post/archives';
 
 function ArchivingPage() {
   const dispatch = useDispatch();
-  const loading = useSelector((state: RootState) => state.myArchivesReducer.loading);
+  const [loading, setLoading] = useState(true);
   const [deleteClick, setDeleteClick] = useState<boolean>(false);
   const [agreeClick, setAgreeClick] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<number>();
   useEffect(() => {
     dispatch(myArchivesIsShared());
     dispatch(myArchivesPrivate());
+    setTimeout(() => setLoading(false), 1000);
+    return () => setLoading(false);
   }, []);
 
   return (
