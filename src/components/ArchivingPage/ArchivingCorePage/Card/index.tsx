@@ -50,7 +50,7 @@ function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
         </div>
         <div className="info-date">
           <p>
-            게시완료 <span>2022.03.03</span>
+            게시완료 <span>{info.createdAt}</span>
           </p>
         </div>
       </div>
