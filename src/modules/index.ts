@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import userInformation from './user/userinfomation';
 import wallpaper from './post/wallpaper';
 import myArchivesReducer from './post/archives';
+import mypage from './user/mypage';
 
 const persistConfig = {
   key: 'root',
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   wallpaper,
   userInformation,
   myArchivesReducer,
+  mypage,
 });
 
 // export default rootReducer;

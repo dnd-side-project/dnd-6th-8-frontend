@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Menu from '../../components/MyPage/Menu';
 import Sticker from '../../components/MyPage/Sticker';
 import UserInfo from '../../components/MyPage/UserInfo';
@@ -7,17 +7,21 @@ import Loading from '../../components/MyPage/Loading';
 import './MyPage.scss';
 import Logout from '../../components/MyPage/Logout';
 import { myArchivesIsShared, myArchivesPrivate } from '../../modules/post/archives';
+import { getMyPage } from '../../modules/user/mypage';
+import { RootState } from '../../modules';
 
 function MyPage() {
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const mypage = useSelector((state: RootState) => state.mypage);
+
+  const [loading, setLoading] = useState<boolean>(mypage.loading);
   const [logOut, setLogOut] = useState<boolean>(false);
   const logOutHandler = (): void => setLogOut((prev) => !prev);
 
   useEffect(() => {
     dispatch(myArchivesIsShared());
     dispatch(myArchivesPrivate());
-    setTimeout(() => setLoading(false), 1000);
+    dispatch(getMyPage());
     return () => setLoading(false);
   }, []);
 

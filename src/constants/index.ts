@@ -10,7 +10,6 @@ export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
 export const CREATE_POST = 'post/CREATE_POST' as const;
 export const UPDATE_POST = 'post/CREATE_POST' as const;
 
-
 // 더미데이터
 export type archivingDataType = {
   id: number;
@@ -37,11 +36,10 @@ export type archivingType = {
 // 아카이빙 Real Data 실제 Redux initialState
 export type archivingModuleType = {
   sharedData: archivingType[];
-  privateData : archivingType[];
+  privateData: archivingType[];
   loading: boolean;
   error: boolean | Error;
 };
-
 
 export type WallPaperModuleType = {
   data: {
@@ -330,3 +328,16 @@ export const ScrapData = [
     image: 'imgs/Home/img_busan01_home.png',
   },
 ];
+
+export type MyPageData = {
+  archiveNumber: number;
+  badgesList: string[];
+  diaryColor: string;
+  userName: string;
+};
+
+export type MyPageModule = {
+  data: MyPageData;
+  loading: boolean;
+  error: null | Error;
+};
