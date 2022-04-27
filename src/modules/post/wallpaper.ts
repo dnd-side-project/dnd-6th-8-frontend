@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import instance from '../../lib/axios';
-import { WallPaperModuleType, WallPaperDatatType } from '../../constants/index';
+import { WallPaperModuleType, WallPaperDataType } from '../../constants/index';
 import { RootState } from '..';
 
 // 액션 타입
@@ -45,7 +45,7 @@ type wallpaperAction =
 
 // thunk 함수
 export const postWallpaper =
-  (data: WallPaperDatatType): ThunkAction<void, RootState, null, wallpaperAction> =>
+  (data: WallPaperDataType): ThunkAction<void, RootState, null, wallpaperAction> =>
   async (dispatch) => {
     try {
       dispatch(postWallpaperPending());

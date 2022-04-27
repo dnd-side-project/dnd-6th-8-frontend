@@ -42,6 +42,7 @@ export type archivingModuleType = {
   error: boolean | Error;
 };
 
+// 더미데이터
 export type WallPaperModuleType = {
   data: {
     coverPicture: File | null;
@@ -57,7 +58,8 @@ export type WallPaperModuleType = {
   error: null | Error;
 };
 
-export type WallPaperDatatType = {
+// 더미데이터
+export type WallPaperDataType = {
   coverPicture: File | null;
   title: string;
   place: string;
@@ -66,6 +68,27 @@ export type WallPaperDatatType = {
   haveCompanion: boolean | null;
   budget: string;
   archivingStyle: string;
+};
+
+// real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
+export type ReadWallPaperDataType ={
+  archivingStyle: string,
+  coverPicture: string,
+  createdAt: string,
+  emojiNum: number,
+  id: number,
+  places: string,
+  scrapNum: number,
+  shortContent: string,
+  title: string,
+  travelDuration: string,
+};
+
+// wallPaper InitailState
+export type ReadWallPaperModuleType = {
+  data: ReadWallPaperDataType;
+  loading: boolean;
+  error: boolean | Error;
 };
 
 export type UserInfoModuleType = {

@@ -13,7 +13,6 @@ type CardProps = {
 
 function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
   const navigate = useNavigate();
-
   const onDeleteHandler = useCallback(() => {
     setDeleteClick(true);
     setDeleteId(info.id);
