@@ -5,17 +5,14 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'use-swiper/lib/swiper.min.css';
-import WallPaperDetailView from '../../components/WallPaper/WallPaperDetailView';
 import WallPaperHeader from '../../components/WallPaper/WallPaperHeader';
 import WallPaperPreview from '../../components/WallPaper/WallPaperPreview';
-import { HomeRecFeedData, HomeFeedsType } from '../../constants';
 import { readWallPaper } from '../../modules/post/readwallpaper';
 import './style.scss';
 
 function WallPaper() {
   const { id } = useParams();
   const dispatch = useDispatch(); 
-  // const [fetchData, setFetchData] = useState<HomeFeedsType | undefined>();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(()=>{
@@ -23,13 +20,6 @@ function WallPaper() {
       dispatch(readWallPaper(id));
     }
   },[]); 
-  // useEffect(() => {
-  //   HomeRecFeedData.map((value) => {
-  //     if (value.id === Number(id)) {
-  //       return setFetchData(value);
-  //     }
-  //   });
-  // }, [HomeRecFeedData]);
 
   return (
     <div className="wallpaper-wrapper">
@@ -45,13 +35,13 @@ function WallPaper() {
               <WallPaperPreview />
             </SwiperSlide>
             <SwiperSlide>
-              <WallPaperDetailView />
+              {/* <WallPaperDetailView /> */}
             </SwiperSlide>
           </Swiper>
         </div>
       ) : (
         <div className="detail">
-          <WallPaperDetailView />
+          {/* <WallPaperDetailView /> */}
         </div>
       )}
     </div>
