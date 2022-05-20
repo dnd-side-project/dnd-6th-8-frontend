@@ -24,7 +24,7 @@ export type archivingDataType = {
 // 아카이빙 Real Data 정의
 export type archivingType = {
   archivingStyle: string;
-  coverPicture: string;
+  coverImage: any;
   createdAt: string;
   emojiNum: number;
   id: number;
@@ -71,17 +71,17 @@ export type WallPaperDataType = {
 };
 
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
-export type ReadWallPaperDataType ={
-  archivingStyle: string,
-  coverPicture: string,
-  createdAt: string,
-  emojiNum: number,
-  id: number,
-  places: string,
-  scrapNum: number,
-  shortContent: string,
-  title: string,
-  travelDuration: string,
+export type ReadWallPaperDataType = {
+  archivingStyle: string;
+  coverPicture: string;
+  createdAt: string;
+  emojiNum: number;
+  id: number;
+  places: string;
+  scrapNum: number;
+  shortContent: string;
+  title: string;
+  travelDuration: string;
 };
 
 // wallPaper InitailState

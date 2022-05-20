@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable react/button-has-type */
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './style.scss';
 import { archivingType } from '../../../../constants/index';
+import defaultImg from '../../../../assets/icons/ArchivingPage/Card/defaultImg.png';
 
 type CardProps = {
   info: archivingType;
@@ -22,6 +23,7 @@ function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
     navigate(`/wallpaper/${info.id}`);
   };
 
+
   return (
     <div className="card-wrapper">
       <div className="card-img">
@@ -29,7 +31,7 @@ function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
           role="button"
           tabIndex={0}
           className="imgs"
-          src={info.coverPicture}
+          src={info.coverImage === null ? defaultImg : info.coverImage}
           alt="메인이미지"
           onClick={gotoWallPaper}
           onKeyDown={gotoWallPaper}
