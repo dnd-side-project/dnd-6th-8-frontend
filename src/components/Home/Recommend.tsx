@@ -15,10 +15,13 @@ function Recommend() {
             key={recommend.id}
             id={recommend.id}
             archivingStyle={recommend.archivingStyle}
-            coverPicture={recommend.coverPicture}
+            coverImage={recommend.coverImage}
+            emojiNum={recommend.emojiNum}
+            scrapNum={recommend.scrapNum}
             places={recommend.places}
             title={recommend.title}
             travelDuration={recommend.travelDuration}
+            shortContent={recommend.shortContent}
           />
         ))}
       </article>

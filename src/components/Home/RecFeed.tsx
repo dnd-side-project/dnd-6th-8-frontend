@@ -5,13 +5,26 @@ import { useNavigate } from 'react-router-dom';
 type RecFeedProps = {
   id: number;
   archivingStyle: string;
-  coverPicture: string;
+  coverImage: string;
   places: string;
   title: string;
   travelDuration: string;
+  emojiNum: number;
+  scrapNum: number;
+  shortContent: string;
 };
 
-function RecFeed({ id, archivingStyle, coverPicture, places, title, travelDuration }: RecFeedProps) {
+function RecFeed({
+  id,
+  archivingStyle,
+  coverImage,
+  places,
+  title,
+  travelDuration,
+  emojiNum,
+  scrapNum,
+  shortContent,
+}: RecFeedProps) {
   const navigate = useNavigate();
   const gotoWallPaperHandler = useCallback(() => {
     navigate(`/wallpaper/${id}`);
@@ -27,7 +40,7 @@ function RecFeed({ id, archivingStyle, coverPicture, places, title, travelDurati
         onKeyDown={gotoWallPaperHandler}
       >
         <span className={`category${archivingStyle === '정보' ? ' info' : ''}`}>{archivingStyle}</span>
-        <img src={coverPicture} alt={`${title} 피드 표지사진`} />
+        <img src={coverImage} alt={`${title} 피드 표지사진`} />
       </div>
       <div className="detail-container">
         <div className="detail">
@@ -36,12 +49,12 @@ function RecFeed({ id, archivingStyle, coverPicture, places, title, travelDurati
           <span className="date">{travelDuration}</span>
         </div>
         <h4>{title}</h4>
-        <div className="text">미리보기 글</div>
+        <div className="text">{shortContent}</div>
         <div className="icon-container">
           <img src="imgs/Home/ic_redheart.png" alt="좋아요 아이콘" />
-          <span>10</span>
+          <span>{emojiNum}</span>
           <img src="imgs/Home/ic_scrap.png" alt="스크랩 아이콘" />
-          <span>11</span>
+          <span>{scrapNum}</span>
         </div>
       </div>
     </div>

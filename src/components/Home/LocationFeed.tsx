@@ -8,6 +8,7 @@ import './LocationFeed.scss';
 import { RootState } from '../../modules';
 
 function LocationFeed() {
+  // 지역별 추천 피드 데이터
   const locationData = useSelector((state: RootState) => state.home.location.data);
 
   const [clickLoc, setClickLoc] = useState<string>('부산'); // 선택된 지역 버튼
@@ -41,7 +42,7 @@ function LocationFeed() {
             <LocFeed
               archivingStyle={feed.archivingStyle}
               title={feed.title}
-              coverPicture={feed.coverPicture}
+              coverImage={feed.coverImage}
               places={feed.places}
               key={feed.id}
             />
