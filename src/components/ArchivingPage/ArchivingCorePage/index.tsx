@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './style.scss';
 import { ReactComponent as UpToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_up.svg';
 import { ReactComponent as DownToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_down.svg';
@@ -7,27 +8,17 @@ import { ReactComponent as AddBtn } from '../../../assets/icons/ArchivingPage/Ar
 import Personal from './Personal';
 import Shared from './Shared';
 import HistoryBox from './HistoryBox';
-import { archiveCorePageReadFetchData, archivingDataType } from '../../../constants/index';
+
+import { RootState } from '../../../modules';
 
 type ArchivingCorePage = {
   setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
 };
 
-function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
-  const [sharedInfo, setSharedInfo] = useState<archivingDataType[]>([]);
-  const [personalInfo, setPersonalInfo] = useState<archivingDataType[]>([]);
-  const [sharedInfoLen, setSharedInfoLen] = useState<number>(0);
-  const [personalInfoLen, setPersonalInfoLen] = useState<number>(0);
-
-  useEffect(() => {
-    if (archiveCorePageReadFetchData !== undefined || archiveCorePageReadFetchData !== null) {
-      setSharedInfo(archiveCorePageReadFetchData.sharedInfo);
-      setPersonalInfo(archiveCorePageReadFetchData.personalInfo);
-      setSharedInfoLen(archiveCorePageReadFetchData.sharedInfo.length);
-      setPersonalInfoLen(archiveCorePageReadFetchData.personalInfo.length);
-    }
-  }, []);
-
+function ArchivingCorePage({ setDeleteClick, setDeleteId }: ArchivingCorePage) {
+  const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
+  const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
   const [sharedClick, setSharedClick] = useState<boolean>(true);
   const [personalClick, setPersonalClick] = useState<boolean>(true);
 
@@ -38,25 +29,25 @@ function ArchivingCorePage({ setDeleteClick }: ArchivingCorePage) {
 
   return (
     <div className="archivingCorePage-wrapper">
-      <HistoryBox sharedInfo={sharedInfo} personalInfo={personalInfo} />
+      <HistoryBox />
       <div className="travel-feed">
         <div className="feed-title-area">
-          <span>공유한 여행 피드</span> <span className="count">{sharedInfoLen && sharedInfoLen}</span>
+          <span>공유한 여행 피드</span> <span className="count">{sharedData && sharedData.length}</span>
         </div>
         <div className="feed-toggle-area">
           {sharedClick ? <DownToggle onClick={onSharedClick} /> : <UpToggle onClick={onSharedClick} />}
         </div>
       </div>
-      {sharedClick && <Shared sharedInfo={sharedInfo} setDeleteClick={setDeleteClick} />}
+      {sharedClick && <Shared setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} />}
       <div className="travel-feed">
         <div className="feed-title-area">
-          <span>개인소장 여행 피드</span> <span className="count">{personalInfoLen && personalInfoLen}</span>
+          <span>개인소장 여행 피드</span> <span className="count">{privateData && privateData.length}</span>
         </div>
         <div className="feed-toggle-area">
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}
         </div>
       </div>
-      {personalClick && <Personal personalInfo={personalInfo} setDeleteClick={setDeleteClick} />}
+      {personalClick && <Personal setDeleteClick={setDeleteClick} setDeleteId={setDeleteId}/>}
       <AddBtn className="add-btn" onClick={() => navigate('/upload-wallpaper')} />
     </div>
   );

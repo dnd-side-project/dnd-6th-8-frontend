@@ -10,6 +10,7 @@ export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
 export const CREATE_POST = 'post/CREATE_POST' as const;
 export const UPDATE_POST = 'post/CREATE_POST' as const;
 
+// 더미데이터
 export type archivingDataType = {
   id: number;
   archivingStyle: string;
@@ -20,8 +21,42 @@ export type archivingDataType = {
   img: string;
 };
 
-export type WallPaperDataType = {
-  [index: string]: string | File | null;
+// 아카이빙 Real Data 정의
+export type archivingType = {
+  archivingStyle: string;
+  coverPicture: string;
+  emojiNum: number;
+  id: number;
+  places: string;
+  scrapNum: number;
+  title: string;
+  travelDuration: string;
+};
+
+// 아카이빙 Real Data 실제 Redux initialState
+export type archivingModuleType = {
+  sharedData: archivingType[];
+  privateData: archivingType[];
+  loading: boolean;
+  error: boolean | Error;
+};
+
+export type WallPaperModuleType = {
+  data: {
+    coverPicture: File | null;
+    title: string;
+    place: string;
+    firstDay: string;
+    lastDay: string;
+    haveCompanion: boolean | null;
+    budget: string;
+    archivingStyle: string;
+  };
+  loading: boolean;
+  error: null | Error;
+};
+
+export type WallPaperDatatType = {
   coverPicture: File | null;
   title: string;
   place: string;
@@ -32,10 +67,18 @@ export type WallPaperDataType = {
   archivingStyle: string;
 };
 
-export type WallPaperModuleType = {
-  data: WallPaperDataType;
+export type UserInfoModuleType = {
+  data: {
+    surveyResponse: {
+      archivingStyle: string;
+      budget: string;
+      haveCompanion: boolean | null;
+    };
+    userEmail: string;
+    userName: string;
+  };
   loading: boolean;
-  error: null | Error;
+  error: boolean | Error;
 };
 
 export type archivingDataObject = {

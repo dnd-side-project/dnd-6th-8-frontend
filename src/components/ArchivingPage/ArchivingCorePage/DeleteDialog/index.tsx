@@ -1,4 +1,6 @@
+/* eslint-disable no-restricted-globals */
 import React, { useCallback, useState } from 'react';
+import instance from '../../../../lib/axios';
 import './style.scss';
 
 type DeleteDialog = {
@@ -6,9 +8,11 @@ type DeleteDialog = {
   setDeleteClick: (click: boolean) => void;
   agreeClick: boolean;
   setAgreeClick: (click: boolean) => void;
+  deleteId: number | undefined;
+  setDeleteId: (number: number) => void;
 };
 
-function DeleteDialog({ deleteClick, setDeleteClick, agreeClick, setAgreeClick }: DeleteDialog) {
+function DeleteDialog({ deleteClick, setDeleteClick, agreeClick, setAgreeClick, deleteId, setDeleteId }: DeleteDialog) {
   const onCancelClick = useCallback(() => {
     setDeleteClick(false);
   }, []);
@@ -16,6 +20,13 @@ function DeleteDialog({ deleteClick, setDeleteClick, agreeClick, setAgreeClick }
   const onAgreeClick = useCallback(() => {
     setDeleteClick(false);
     setAgreeClick(true);
+    console.log(deleteId);
+    instance.delete(`/api/v1/archives/${deleteId}`).then((res) => {
+      setDeleteId(-1);
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    });
     setTimeout(() => {
       setAgreeClick(false);
     }, 2000);

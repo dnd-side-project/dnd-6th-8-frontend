@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userInfo } from '../../modules/user/userinfomation';
 import './style.scss';
 import { ReactComponent as Tracious } from '../../assets/icons/WelcomePage/tracious_text_logo.svg';
+
 
 type params = {
   accessToken: string;
@@ -10,17 +13,22 @@ type params = {
 };
 
 function LogInProcess() {
+  const navigate = useNavigate();
   const { accessToken, signupCheck, nickName } = useParams<params>();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (accessToken !== undefined) {
       localStorage.setItem('accessToken', accessToken);
-      if (signupCheck === '1') {
-        window.location.replace('/home');
+      dispatch(userInfo());
+      if (signupCheck) {
+        navigate('/home');
       } else {
-        window.location.replace('/intro');
+        navigate('/intro');
       }
     }
   }, []);
+
   return (
     <div className="loginprocess-wrapper">
       <Tracious className="loginprocess-logo" />
