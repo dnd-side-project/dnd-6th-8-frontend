@@ -114,7 +114,7 @@ export type HomeMainType = {
   firstArchiveImage: string;
   secondArchiveImage: string;
   thirdArchiveImage: string;
-  totalArchiveImage: number;
+  totalArchiveNum: number;
   userNickName: string;
 };
 

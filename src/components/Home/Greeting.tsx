@@ -6,6 +6,12 @@ import './Greeting.scss';
 function Greeting() {
   const homeData = useSelector((state: RootState) => state.home.home.data);
 
+  // 이미지 null값 처리
+  const images = [];
+  if (homeData?.firstArchiveImage) images.push(homeData.firstArchiveImage);
+  if (homeData?.secondArchiveImage) images.push(homeData.secondArchiveImage);
+  if (homeData?.thirdArchiveImage) images.push(homeData.thirdArchiveImage);
+
   return (
     <div className="greeting-wrapper">
       <div className="greeting">
@@ -15,11 +21,16 @@ function Greeting() {
         </div>
       </div>
       <div className="image-container">
-        <div className="image">
-          <img src={homeData?.firstArchiveImage} alt="첫번째 이미지" />
-        </div>
-        <div className="image" />
-        <img src="imgs/Home/img_cricle1_home.png" alt="scrap" className="image" />
+        {images.map((image, index) => (
+          <div className="image" key={image} style={{ zIndex: 3 - index }}>
+            <img
+              src={image}
+              alt={`${index}번째 이미지`}
+              style={{ filter: index === images.length - 1 ? 'brightness(0.5)' : '' }}
+            />
+            {index === images.length - 1 && <span>+{homeData?.totalArchiveNum}</span>}
+          </div>
+        ))}
       </div>
     </div>
   );
