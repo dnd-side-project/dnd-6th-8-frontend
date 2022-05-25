@@ -12,11 +12,13 @@ type SharedProps = {
   setDeleteId: (number: number) => void;
 };
 
+
 function Shared({ setDeleteClick, setDeleteId }: SharedProps) {
   const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
+  console.log(sharedData);
   return (
     <div className="shared-wrapper">
-      {sharedData ? (
+      {sharedData.length !== 0 ? (
         sharedData.map((value: archivingType) => {
           return <Card info={value} setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} key={value.id} />;
         })

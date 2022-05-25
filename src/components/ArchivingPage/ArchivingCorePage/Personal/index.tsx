@@ -16,7 +16,7 @@ function Personal({ setDeleteClick, setDeleteId }: PersonalProps) {
 
   return (
     <div className="personal-wrapper">
-      {privateData ? (
+      {privateData.length !== 0 ? (
         privateData.map((value: archivingType) => {
           return <Card info={value} setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} key={value.id} />;
         })

@@ -38,7 +38,7 @@ function HistoryBox() {
         </div>
       </div>
       <div className="history-icon">
-        {myArchivingData ? (
+        {myArchivingData.length !== 0 ? (
           <>
             {myArchivingData.map((value: any) => {
               return (
