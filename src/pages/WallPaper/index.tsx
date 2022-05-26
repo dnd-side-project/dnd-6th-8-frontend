@@ -5,21 +5,23 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'use-swiper/lib/swiper.min.css';
+import WallPaperDetailView from '../../components/WallPaper/WallPaperDetailView';
 import WallPaperHeader from '../../components/WallPaper/WallPaperHeader';
 import WallPaperPreview from '../../components/WallPaper/WallPaperPreview';
 import { readWallPaper } from '../../modules/post/readwallpaper';
 import './style.scss';
 
 function WallPaper() {
+  // 해당 게시물에 대한 id
   const { id } = useParams();
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  useEffect(()=>{
-    if (id !== undefined){
+  useEffect(() => { 
+    if (id !== undefined) {
       dispatch(readWallPaper(id));
     }
-  },[]); 
+  }, []);
 
   return (
     <div className="wallpaper-wrapper">
@@ -35,13 +37,13 @@ function WallPaper() {
               <WallPaperPreview />
             </SwiperSlide>
             <SwiperSlide>
-              {/* <WallPaperDetailView /> */}
+              <WallPaperDetailView />
             </SwiperSlide>
           </Swiper>
         </div>
       ) : (
         <div className="detail">
-          {/* <WallPaperDetailView /> */}
+          <WallPaperDetailView />
         </div>
       )}
     </div>

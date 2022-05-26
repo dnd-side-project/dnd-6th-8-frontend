@@ -5,11 +5,12 @@ import userInformation from './user/userinfomation';
 import wallpaper from './post/wallpaper';
 import myArchivesReducer from './post/archives';
 import readWallPaperReducer from './post/readwallpaper';
+import dayFeed from './post/dayfeed';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['userInformation'],
+  whitelist: ['userInformation', 'readWallPaperReducer', 'myArchivesReducer', 'wallpaper', 'dayFeed'],
 };
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   userInformation,
   myArchivesReducer,
   readWallPaperReducer,
+  dayFeed,
 });
 
 // export default rootReducer;

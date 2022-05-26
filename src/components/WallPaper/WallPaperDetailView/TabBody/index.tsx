@@ -15,7 +15,7 @@ function TabBody({ value }: TabBodyProps) {
   SwiperCore.use([Pagination]);
   return (
     <div className="tabbody-wrapper">
-      <div className="date-weather">
+      {/* <div className="date-weather">
         <p className="body-date">{value.date}</p>
         <div>{value.weather}</div>
       </div>
@@ -89,7 +89,7 @@ function TabBody({ value }: TabBodyProps) {
           </p>
           <div className="archiving-wrapper">{value.dayHoneyTip}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

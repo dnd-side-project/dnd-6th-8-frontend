@@ -1,18 +1,18 @@
-import React from 'react';
+/* eslint-disable import/no-unresolved */
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './style.scss';
 import Arrow from '../../../assets/icons/WallPaper/chevron_duo_left.png';
-import Jeju from '../../../assets/icons/WallPaper/img_jeju01_wallpaper.png';
+import defaultImg from '../../../assets/icons/WallPaper/defaultImg.png';
 import { RootState } from '../../../modules';
 
 function WallPaperPreview() {
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
   return (
     <div className="wallpaperpreview-wrapper">
-      {/* <img className="wallpaperpreview-background" src={Jeju} alt="Background-img" /> */}
       <img
         className="wallpaperpreview-background"
-        src={readWallPaperData && readWallPaperData.coverPicture}
+        src={readWallPaperData.coverImage === null ? defaultImg : readWallPaperData.coverPicture}
         alt="Background-img"
       />
       <div className="wallpaperpreview-main">
@@ -28,10 +28,13 @@ function WallPaperPreview() {
         </div>
         <div className="line" />
         <div className="line-bottom">
-          <p>{readWallPaperData && readWallPaperData.travelDuration}일 간의 여정</p>
+          <p>
+            {/* <img src={} alt="" /> */}
+            {readWallPaperData && readWallPaperData.travelDuration}일 간의 여정
+          </p>
           <div className="info-box">
             <p>{readWallPaperData && readWallPaperData.archivingStyle} 위주</p>
-            <p>{readWallPaperData.haveCompanion ? <p>동료와</p> : <p>혼자</p> }</p>
+            <p>{readWallPaperData.haveCompanion ? <p>동료와</p> : <p>혼자</p>}</p>
             <p>{readWallPaperData && readWallPaperData.budget} 준비</p>
           </div>
         </div>
