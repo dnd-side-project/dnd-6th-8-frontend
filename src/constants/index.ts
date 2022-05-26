@@ -10,7 +10,6 @@ export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
 export const CREATE_POST = 'post/CREATE_POST' as const;
 export const UPDATE_POST = 'post/CREATE_POST' as const;
 
-
 // 더미데이터
 export type archivingDataType = {
   id: number;
@@ -37,7 +36,7 @@ export type archivingType = {
 // 아카이빙 Real Data 실제 Redux initialState
 export type archivingModuleType = {
   sharedData: archivingType[];
-  privateData : archivingType[];
+  privateData: archivingType[];
   loading: boolean;
   error: boolean | Error;
 };
@@ -67,6 +66,57 @@ export type WallPaperDatatType = {
   haveCompanion: boolean | null;
   budget: string;
   archivingStyle: string;
+};
+
+// Home
+// 지역 별로 한글 매칭
+export const locationNames = [
+  { title: '부산', en: 'busan', param: '부산' },
+  { title: '제주도', en: 'jeju', param: '제주' },
+  { title: '강릉/속초', en: 'gangneung', param: '강릉속초' },
+  { title: '여수', en: 'yeosu', param: '여수' },
+  { title: '유럽', en: 'europe', param: '유럽' },
+  { title: '휴양지', en: 'vacation', param: '휴양지' },
+  { title: '미국', en: 'usa', param: '미국' },
+];
+
+export type HomeFeedType = {
+  archivingStyle: string;
+  coverImage: string;
+  emojiNum: number;
+  id: number;
+  places: string;
+  scrapNum: number;
+  title: string;
+  travelDuration: string;
+  createdAt: string;
+  shortContent: string;
+};
+
+export type HomeModuleType = {
+  home: {
+    data: HomeMainType | null;
+    loading: boolean;
+    error: null | Error;
+  };
+  location: {
+    data: HomeFeedType[];
+    loading: boolean;
+    error: null | Error;
+  };
+  recommend: {
+    data: HomeFeedType[];
+    loading: boolean;
+    error: null | Error;
+  };
+};
+
+export type HomeMainType = {
+  firstArchiveImage: string;
+  secondArchiveImage: string;
+  thirdArchiveImage: string;
+  totalArchiveNum: number;
+  userNickName: string;
 };
 
 export type UserInfoModuleType = {
@@ -121,17 +171,6 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
     },
   ],
 };
-
-// 지역 별로 한글 매칭
-export const locationArr = [
-  { location: 'busan', locationKR: '부산' },
-  { location: 'jeju', locationKR: '제주도' },
-  { location: 'gangneung', locationKR: '강릉/속초' },
-  { location: 'yeosu', locationKR: '여수' },
-  { location: 'europe', locationKR: '유럽' },
-  { location: 'vacation', locationKR: '휴양지' },
-  { location: 'usa', locationKR: '미국' },
-];
 
 // [Home] 지역 별 추천, 사용자 취향 별 추천 피드 타입
 export type HomeFeedsType = {

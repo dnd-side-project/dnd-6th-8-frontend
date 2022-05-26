@@ -22,18 +22,24 @@
             border-style: solid;
             box-sizing: border-box;
             width:7rem;
-            height:7rem;           
+            height:7rem;
+            overflow: hidden;  
+            position:relative;
+            margin-right:-2rem; 
         }
-        :first-child{
-            z-index: 2;
-            margin-right:-2rem;
-        }
-        :nth-child(2){
-            z-index: 1;
-            margin-right:-2rem;
+        :last-child{
+            margin-right:0;
         }
         img{
-            width:7rem;
+            width:100%;
+            height:100%;
+        }
+        span{
+            position:absolute;
+            @include font-face(Pretendard-Medium, 1.4rem, 1.8rem, white);
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
         }
     }
 }
