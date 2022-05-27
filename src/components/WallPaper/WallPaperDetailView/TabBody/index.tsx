@@ -18,26 +18,21 @@ function TabBody({ value }: TabBodyProps) {
       {/* <div className="date-weather">
         <p className="body-date">{value.date}</p>
         <div>{value.weather}</div>
-      </div>
+      </div> */}
 
-      <div className="carousel-wrapper">
+      {/* <div className="carousel-wrapper">
         <Swiper spaceBetween={150} slidesPerView={3}>
           {value.imgs.map((img, index) => {
             return (
               <SwiperSlide>
-                <img
-                  src={img}
-                  alt="이미지캐루셀"
-                  width="150px"
-                  height="150px"
-                />
+                <img src={img} alt="이미지캐루셀" width="150px" height="150px" />
               </SwiperSlide>
             );
           })}
         </Swiper>
-      </div>
+      </div> */}
       <div className="content-wrapper">
-        <Swiper
+        {/* <Swiper
           slidesPerView={1}
           pagination={{
             clickable: true,
@@ -68,28 +63,28 @@ function TabBody({ value }: TabBodyProps) {
               </div>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper> */}
         <div className="today-wrapper">
           <p>
             <div className="today-line" />
             하루의 여정
           </p>
-          <div className="archiving-wrapper">{value.dayJourney}</div>
+          <div className="archiving-wrapper">{value.travelDescription}</div>
         </div>
         <div className="today-wrapper">
           <p>
             <div className="today-line" /> 하루의 감정
           </p>
-          <div className="archiving-wrapper">{value.dayFeel}</div>
+          <div className="archiving-wrapper">{value.emotionDescription}</div>
         </div>
         <div className="today-wrapper">
           <p>
             <div className="today-line" />
             여행 꿀팁
           </p>
-          <div className="archiving-wrapper">{value.dayHoneyTip}</div>
+          <div className="archiving-wrapper">{value.tipDescription}</div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -55,9 +55,9 @@ function WallPaperHeader() {
             </>
           )
         ) : scrapToggle ? (
-          <img className="scrap-logo" src={ClickScrap} alt="scrap" onClick={onScrapToggle} aria-hidden='true'/>
+          <img className="scrap-logo" src={ClickScrap} alt="scrap" onClick={onScrapToggle} aria-hidden="true" />
         ) : (
-          <img className="scrap-logo" src={Scrap} alt="scrap" onClick={onScrapToggle} aria-hidden='true'/>
+          <img className="scrap-logo" src={Scrap} alt="scrap" onClick={onScrapToggle} aria-hidden="true" />
         )}
         <img
           className="hamburger-logo"

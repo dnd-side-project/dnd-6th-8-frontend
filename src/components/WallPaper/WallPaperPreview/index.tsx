@@ -1,13 +1,18 @@
 /* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
 import Arrow from '../../../assets/icons/WallPaper/chevron_duo_left.png';
 import defaultImg from '../../../assets/icons/WallPaper/defaultImg.png';
 import { RootState } from '../../../modules';
+import { readDayFeed } from '../../../modules/post/dayfeed';
 
 function WallPaperPreview() {
+  const dispatch = useDispatch();
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
+  useEffect(() => {
+    dispatch(readDayFeed(readWallPaperData.id, '1'));
+  }, []);
   return (
     <div className="wallpaperpreview-wrapper">
       <img

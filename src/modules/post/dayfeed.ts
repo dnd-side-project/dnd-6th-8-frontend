@@ -38,12 +38,7 @@ export const readDayFeed =
 
 // 초기 상태
 const initailState: DayFeedModuleType = {
-  data: {
-    archiveId: '',
-    emotionDescription: '',
-    tipDescription: '',
-    travelDescription: '',
-  },
+  data: [],
   loading: false,
   error: false,
 };
@@ -56,7 +51,7 @@ function dayFeed(state: DayFeedModuleType = initailState, action: readDayFeedAct
       return { ...state, loading: true };
     case POST_READ_DAYFEED_SUCCESS:
       console.log(action.payload);
-      return { ...state, data: { ...action.payload }, loading: false };
+      return { ...state, data: [...action.payload], loading: false };
     case POST_READ_DAYFEED_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:

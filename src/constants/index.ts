@@ -83,17 +83,17 @@ export type ReadWallPaperModuleType = {
 };
 
 export type DayFeedDataType = {
-  archiveId: string;
+  archiveId: number | null;
   emotionDescription: string;
   tipDescription: string;
   travelDescription: string;
 };
 
-export type DayFeedModuleType= {
-  data : DayFeedDataType;
-  loading : boolean; 
-  error : boolean | Error; 
-}
+export type DayFeedModuleType = {
+  data: DayFeedDataType[];
+  loading: boolean;
+  error: boolean | Error;
+};
 
 export type UserInfoModuleType = {
   data: {
