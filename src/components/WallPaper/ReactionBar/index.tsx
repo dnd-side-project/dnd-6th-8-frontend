@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './style.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ReactionGood from '../../../assets/icons/WallPaper/ReactionBar/ic_thumbs_purple 1.png';
