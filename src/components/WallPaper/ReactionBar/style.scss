@@ -2,28 +2,33 @@
     .reaction-click{
         position: fixed;
         bottom : 5.6rem; 
-        width : 100vw; 
+        width : 100vw;
+        min-width : 36rem; 
         height : 4.4rem; 
-        padding : 0.8rem 1.6rem; 
+        padding : 0.8rem 0; 
         z-index : 1; 
         background: rgba(248, 249, 252, 0.95);
         display : flex; 
-        gap : 0.5rem; 
+        // justify-content: space-between;
         animation: sererec 0.3s backwards;
+        overflow: hidden;
         .heart{
-            width : 7rem; 
+            min-width : 6.5rem;
+            max-width: 7rem;
+            margin-left : 0.8rem;  
         }
         .bag{
-            width : 12rem;
-            margin-left : -40px; 
+            min-width : 12rem;
+            width : 12rem; 
+            margin-left : -2rem; 
         }
         .spark{
             width : 14rem; 
-            margin-left : -3rem;
+            margin-left : -rem;
         }
         .eyes{
             width : 13rem; 
-            margin-left : -1rem; 
+            margin-left : 4rem; 
         }
         .icon-introduce{
             display: flex;
@@ -37,6 +42,7 @@
                 height : 100%;
             }
             p{
+                white-space: nowrap;
                 height : 100%;
                 margin-left : 0.4rem; 
                 color : #595663;
@@ -48,6 +54,7 @@
         }
     } 
     .reactionbar-inner-wrapper{
+        min-width : 36rem; 
         position: fixed;
         bottom: 0;
         background: white;

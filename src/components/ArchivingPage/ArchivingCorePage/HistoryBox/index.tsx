@@ -7,11 +7,11 @@ import { RootState } from '../../../../modules';
 function HistoryBox() {
   const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
   const privateData = useSelector((state: RootState) => state.myArchivesReducer.privateData);
-  const [tempData, setTempData] = useState<archivingType[]>();
   const [myArchivingData, setMyArchivingData] = useState([] as any);
 
-  const filterPlaces = ()=>{
-    if (tempData !== undefined && sharedData.length !== 0 && privateData.length !== 0) {
+  const filterPlaces = (tempData: archivingType[]) => {
+    console.log('템프', tempData);
+    if (tempData !== undefined) {
       const placeCount = tempData.reduce((acc: any, cur: any) => {
         const temp = acc[cur.places];
         const count = temp || 0;
@@ -25,16 +25,15 @@ function HistoryBox() {
   };
 
   useEffect(() => {
-    setTempData([...sharedData, ...privateData]);
-    filterPlaces();
-  }, [sharedData, privateData]);
+    filterPlaces([...sharedData, ...privateData]);
+  }, []);
 
   return (
     <div className="historybox-wrapper">
       <div className="history-inner-box">
         <img className="pencil" src="/imgs/ArchivingPage/ArchivingCorePage/emoji_pencil.png" alt="연필" />
         <div className="history-box-number">
-          <span>지금까지 기록한 여행</span> <span className="count">{tempData && tempData.length}</span>
+          <span>지금까지 기록한 여행</span> <span className="count">{sharedData.length + privateData.length}</span>
         </div>
       </div>
       <div className="history-icon">
