@@ -1,21 +1,17 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Location from './Location';
 import LocFeed from './LocFeed';
 import EmptyFeed from './EmptyFeed';
+import { locationNames } from '../../constants/index';
 import './LocationFeed.scss';
-import { HomeLocFeedData, locationArr } from '../../constants';
+import { RootState } from '../../modules';
 
 function LocationFeed() {
-  // 선택된 지역 버튼
-  const [clickLoc, setClickLoc] = useState<string>('busan');
+  // 지역별 추천 피드 데이터
+  const locationData = useSelector((state: RootState) => state.home.location.data);
 
-  // 지역 버튼 클릭
-  const onClickLoc = useCallback((location: string) => {
-    setClickLoc(location);
-  }, []);
-
-  // API 연동 후 삭제할 임시배열
-  const tempArr = HomeLocFeedData.filter((feed) => feed.location === clickLoc);
+  const [clickLoc, setClickLoc] = useState<string>('부산'); // 선택된 지역 버튼
 
   return (
     <section className="locationFeed-wrapper">
@@ -27,30 +23,27 @@ function LocationFeed() {
         </button>
       </div>
       <nav>
-        {locationArr.map((location) => {
-          return (
-            <Location
-              location={location.location}
-              locationKR={location.locationKR}
-              key={location.location}
-              onClickLoc={onClickLoc}
-              clickLoc={clickLoc}
-            />
-          );
-        })}
+        {locationNames.map((location) => (
+          <Location
+            title={location.title}
+            en={location.en}
+            param={location.param}
+            key={location.en}
+            click={clickLoc}
+            setClick={setClickLoc}
+          />
+        ))}
       </nav>
       <article>
-        {tempArr.length === 0 ? (
+        {locationData.length === 0 ? (
           <EmptyFeed />
         ) : (
-          tempArr.map((feed) => (
+          locationData.map((feed) => (
             <LocFeed
-              id={feed.id}
-              category={feed.category}
+              archivingStyle={feed.archivingStyle}
               title={feed.title}
-              date={feed.date}
-              image={feed.image}
-              location={feed.location}
+              coverImage={feed.coverImage}
+              places={feed.places}
               key={feed.id}
             />
           ))

@@ -4,9 +4,9 @@ import { DayFeedDataType, DayFeedModuleType } from '../../constants/index';
 import instance from '../../lib/axios';
 import { RootState } from '..';
 
-const POST_READ_DAYFEED_PENDING = 'readwallpaper/POST_READ_DAYFEED_PENDING' as const;
-const POST_READ_DAYFEED_SUCCESS = 'readwallpaper/POST_READ_DAYFEED_SUCCESS' as const;
-const POST_READ_DAYFEED_FAILURE = 'readwallpaper/POST_READ_DAYFEED_FAILURE' as const;
+const POST_READ_DAYFEED_PENDING = 'dayfeed/POST_READ_DAYFEED_PENDING' as const;
+const POST_READ_DAYFEED_SUCCESS = 'dayfeed/POST_READ_DAYFEED_SUCCESS' as const;
+const POST_READ_DAYFEED_FAILURE = 'dayfeed/POST_READ_DAYFEED_FAILURE' as const;
 
 const readDayFeedPending = () => ({ type: POST_READ_DAYFEED_PENDING });
 const readDayFeedSuccess = (payload: any) => ({ type: POST_READ_DAYFEED_SUCCESS, payload });
@@ -18,16 +18,11 @@ type readDayFeedAction =
   | ReturnType<typeof readDayFeedFailure>;
 
 export const readDayFeed =
-  (id: string, day: string): ThunkAction<void, RootState, null, readDayFeedAction> =>
+  (id: string): ThunkAction<void, RootState, null, readDayFeedAction> =>
   async (dispatch) => {
     try {
       dispatch(readDayFeedPending());
-      const response = await instance.get(`/api/v1/archives/days/${id}`, {
-        params: {
-          archives: id,
-          dayNumber: day,
-        },
-      });
+      const response = await instance.get(`/api/v1/archives/${id}/days/1`);
       console.log('데이피드 읽기', response.data);
       dispatch(readDayFeedSuccess(response));
     } catch (e) {
@@ -50,7 +45,6 @@ function dayFeed(state: DayFeedModuleType = initailState, action: readDayFeedAct
     case POST_READ_DAYFEED_PENDING:
       return { ...state, loading: true };
     case POST_READ_DAYFEED_SUCCESS:
-      console.log(action.payload);
       return { ...state, data: [...action.payload], loading: false };
     case POST_READ_DAYFEED_FAILURE:
       return { ...state, loading: false, error: action.payload };

@@ -6,6 +6,7 @@ import wallpaper from './post/wallpaper';
 import myArchivesReducer from './post/archives';
 import readWallPaperReducer from './post/readwallpaper';
 import dayFeed from './post/dayfeed';
+import home from './post/home';
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   myArchivesReducer,
   readWallPaperReducer,
   dayFeed,
+  home,
 });
 
 // export default rootReducer;

@@ -11,7 +11,7 @@ function WallPaperPreview() {
   const dispatch = useDispatch();
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
   useEffect(() => {
-    dispatch(readDayFeed(readWallPaperData.id, '1'));
+    dispatch(readDayFeed(readWallPaperData.id));
   }, []);
   return (
     <div className="wallpaperpreview-wrapper">
