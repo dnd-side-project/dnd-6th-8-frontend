@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ReactionGood from '../../../assets/icons/WallPaper/ReactionBar/ic_thumbs_purple 1.png';
@@ -10,13 +10,14 @@ import ReactionEyes from '../../../assets/icons/WallPaper/ReactionBar/emoji_eye.
 function ReactionBar() {
   const [reactionClick, setReactionClick] = useState<boolean>(false);
   const reactionHandler = (): void => setReactionClick((prev) => !prev);
+
   return (
     <div className="reactionbar-wrapper">
       {reactionClick && (
         <div className="reaction-click">
-          <Swiper spaceBetween={2} slidesPerView={3.1}>
+          <Swiper slidesPerView={3} spaceBetween={8} slidesOffsetBefore={8} slidesOffsetAfter={80}>
             <SwiperSlide>
-              <div className="icon-introduce heart" style={{width : '7rem', marginLeft : '-20px !important'}}>
+              <div className="icon-introduce heart">
                 <img src={ReactionHeart} alt="하트" />
                 <p>좋아요</p>
               </div>
@@ -35,7 +36,7 @@ function ReactionBar() {
             </SwiperSlide>
             <SwiperSlide>
               <div className="icon-introduce eyes">
-              <img src={ReactionEyes} alt="눈" />
+                <img src={ReactionEyes} alt="눈" />
                 <p>도움이 많이 됐어요</p>
               </div>
             </SwiperSlide>
