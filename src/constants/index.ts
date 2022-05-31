@@ -41,22 +41,23 @@ export type archivingModuleType = {
   error: boolean | Error;
 };
 
-export type WallPaperModuleType = {
-  data: {
-    coverPicture: File | null;
-    title: string;
-    place: string;
-    firstDay: string;
-    lastDay: string;
-    haveCompanion: boolean | null;
-    budget: string;
-    archivingStyle: string;
-  };
-  loading: boolean;
-  error: null | Error;
-};
+// export type WallPaperModuleType = {
+//   data: {
+//     coverPicture: File | null;
+//     title: string;
+//     place: string;
+//     firstDay: string;
+//     lastDay: string;
+//     haveCompanion: boolean | null;
+//     budget: string;
+//     archivingStyle: string;
+//   };
+//   loading: boolean;
+//   error: null | Error;
+// };
 
-export type WallPaperDatatType = {
+export type WallPaperDataType = {
+  [index: string]: string | File | null;
   coverPicture: File | null;
   title: string;
   place: string;
@@ -65,6 +66,12 @@ export type WallPaperDatatType = {
   haveCompanion: string;
   budget: string;
   archivingStyle: string;
+};
+
+export type WallPaperModuleType = {
+  data: WallPaperDataType;
+  loading: boolean;
+  error: null | Error;
 };
 
 export type UserInfoModuleType = {
