@@ -1,99 +1,69 @@
-export {}
-// import { ThunkAction } from 'redux-thunk';
-// import { archivingModuleType } from '../../constants/index';
-// import instance from '../../lib/axios';
-// import { RootState } from '..';
+import { ThunkAction } from 'redux-thunk';
+import { ReadWallPaperModuleType } from '../../constants/index';
 
-// // 액션 타입
-// // change -> local에서 바뀔때마다 변경
-// const POST_MYARCHIVES_ISSHARED_PENDING = 'archives/POST_MYARCHIVES_ISSHARED_PENDING' as const;
-// const POST_MYARCHIVES_ISSHARED_SUCCESS = 'archives/POST_MYARCHIVES_ISSHARED_SUCCESS' as const;
-// const POST_MYARCHIVES_ISSHARED_FAILURE = 'archives/POST_MYARCHIVES_ISSHARED_FAILURE' as const;
+import instance from '../../lib/axios';
+import { RootState } from '..';
 
-// const POST_MYARCHIVES_PRIVATE_PENDING = 'archives/POST_MYARCHIVES_PRIVATE_PENDING' as const;
-// const POST_MYARCHIVES_PRIVATE_SUCCESS = 'archives/POST_MYARCHIVES_PRIVATE_SUCCESS' as const;
-// const POST_MYARCHIVES_PRIVATE_FAILURE = 'archives/POST_MYARCHIVES_PRIVATE_FAILURE' as const;
+// 액션 타입
+const POST_READ_WALLPAPER_PENDING = 'readwallpaper/POST_READ_WALLPAPER_PENDING' as const;
+const POST_READ_WALLPAPER_SUCCESS = 'readwallpaper/POST_READ_WALLPAPER_SUCCESS' as const;
+const POST_READ_WALLPAPER_FAILURE = 'readwallpaper/POST_READ_WALLPAPER_FAILURE' as const;
 
-// const myArchivesIsSharedPending = () => ({ type: POST_MYARCHIVES_ISSHARED_PENDING });
-// const myArchivesIsSharedSuccess = (payload: any) => ({ type: POST_MYARCHIVES_ISSHARED_SUCCESS, payload });
-// const myArchivesIsSharedFailure = (payload: any) => ({ type: POST_MYARCHIVES_ISSHARED_FAILURE, error: true, payload });
+const readWallPaperPending = () => ({ type: POST_READ_WALLPAPER_PENDING });
+const readWallPaperSuccess = (payload: any) => ({ type: POST_READ_WALLPAPER_SUCCESS, payload });
+const readWallPaperFailure = (payload: any) => ({ type: POST_READ_WALLPAPER_FAILURE, error: true, payload });
 
-// const myArchivesPrivatePending = () => ({ type: POST_MYARCHIVES_PRIVATE_PENDING });
-// const myArchivesPrivateSuccess = (payload: any) => ({ type: POST_MYARCHIVES_PRIVATE_SUCCESS, payload });
-// const myArchivesPrivateFailure = (payload: any) => ({ type: POST_MYARCHIVES_PRIVATE_FAILURE, error: true, payload });
+type readWallPaperAction =
+  | ReturnType<typeof readWallPaperPending>
+  | ReturnType<typeof readWallPaperSuccess>
+  | ReturnType<typeof readWallPaperFailure>;
 
-// type myArchivesAction =
-//   | ReturnType<typeof myArchivesIsSharedPending>
-//   | ReturnType<typeof myArchivesIsSharedSuccess>
-//   | ReturnType<typeof myArchivesIsSharedFailure>
-//   | ReturnType<typeof myArchivesPrivatePending>
-//   | ReturnType<typeof myArchivesPrivateSuccess>
-//   | ReturnType<typeof myArchivesPrivateFailure>;
+export const readWallPaper =
+  (id: string): ThunkAction<void, RootState, null, readWallPaperAction> =>
+  async (dispatch) => {
+    try {
+      dispatch(readWallPaperPending());
+      const response = await instance.get(`/api/v1/archives/${id}`);
+      console.log('데이터 읽기', response.data);
+      dispatch(readWallPaperSuccess(response));
+    } catch (e) {
+      dispatch(readWallPaperFailure(e));
+      throw e;
+    }
+  };
 
-// // thunk 함수
+// 초기 상태
+const initailState: ReadWallPaperModuleType = {
+  data: {
+    archivingStyle: '',
+    coverPicture: '',
+    createdAt: '',
+    emojiNum: null,
+    id: null,
+    places: '',
+    scrapNum: null,
+    shortContent: '',
+    title: '',
+    travelDuration: '',
+  },
+  loading: false,
+  error: false,
+};
 
-// // 공유 피드
-// export const myArchivesIsShared = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
-//   try {
-//     dispatch(myArchivesIsSharedPending());
-//     const response = await instance.get(`/api/v1/my/archives/places/on`, {
-//       params: {
-//         isShare: true,
-//       },
-//     });
-//     console.log('IsShared 요청 성공', response);
-//     dispatch(myArchivesIsSharedSuccess(response));
-//   } catch (e) {
-//     dispatch(myArchivesIsSharedFailure(e));
-//     console.log('IsShared 요청 실패', e);
-//     throw e;
-//   }
-// };
+// 리듀서
+// eslint-disable-next-line default-param-last
+function readWallPaperReducer(state: ReadWallPaperModuleType = initailState, action: readWallPaperAction) {
+  switch (action.type) {
+    case POST_READ_WALLPAPER_PENDING:
+      return { ...state, loading: true };
+    case POST_READ_WALLPAPER_SUCCESS:
+      console.log(action.payload);
+      return { ...state, data: { ...action.payload }, loading: false };
+    case POST_READ_WALLPAPER_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+}
 
-// // 개인 소장 피드
-// export const myArchivesPrivate = (): ThunkAction<void, RootState, null, myArchivesAction> => async (dispatch) => {
-//   try {
-//     dispatch(myArchivesPrivatePending());
-//     const response = await instance.get(`/api/v1/my/archives/places/on`, {
-//       params: {
-//         isShare: false,
-//       },
-//     });
-//     dispatch(myArchivesPrivateSuccess(response));
-//     console.log('Private 요청 성공', response);
-//   } catch (e) {
-//     dispatch(myArchivesPrivateFailure(e));
-//     console.log('Private 요청 실패');
-//     throw e;
-//   }
-// };
-
-// // 초기 상태
-// const initailState: any = {
-//   data : [],
-//   loading: false,
-//   error: false,
-// };
-
-// // 리듀서
-// // eslint-disable-next-line default-param-last
-// function myArchivesReducer(state: archivingModuleType = initailState, action: myArchivesAction) {
-//   switch (action.type) {
-//     case POST_MYARCHIVES_ISSHARED_PENDING:
-//       return { ...state, loading: true };
-//     case POST_MYARCHIVES_ISSHARED_SUCCESS:
-//       return { ...state, sharedData: [...action.payload], loading: false };
-//     case POST_MYARCHIVES_ISSHARED_FAILURE:
-//       return { ...state, loading: false, error: action.payload };
-//     case POST_MYARCHIVES_PRIVATE_PENDING:
-//       return { ...state, loading: true };
-//     case POST_MYARCHIVES_PRIVATE_SUCCESS:
-//       return { ...state, privateData: [...action.payload], loading: false };
-//     case POST_MYARCHIVES_PRIVATE_FAILURE:
-//       return { ...state, loading: false, error: action.payload };
-//     default:
-//       return state;
-//   }
-// }
-
-// export default myArchivesReducer;
+export default readWallPaperReducer;

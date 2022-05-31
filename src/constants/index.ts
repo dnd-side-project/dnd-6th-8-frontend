@@ -1,15 +1,3 @@
-import Jeju1 from '../assets/icons/WallPaper/dayfeed/img_jeju02.png';
-import Jeju2 from '../assets/icons/WallPaper/dayfeed/img_jeju03.png';
-import Jeju3 from '../assets/icons/WallPaper/dayfeed/img_jeju04.png';
-// action 모음
-// user
-export const SIGNUP_USER = 'user/SIGNUP_USER' as const;
-export const SIGNIN_USER = 'user/SIGNIN_USER' as const;
-
-// post
-export const CREATE_POST = 'post/CREATE_POST' as const;
-export const UPDATE_POST = 'post/CREATE_POST' as const;
-
 // 더미데이터
 export type archivingDataType = {
   id: number;
@@ -24,7 +12,8 @@ export type archivingDataType = {
 // 아카이빙 Real Data 정의
 export type archivingType = {
   archivingStyle: string;
-  coverPicture: string;
+  coverImage: any;
+  createdAt: string;
   emojiNum: number;
   id: number;
   places: string;
@@ -40,21 +29,6 @@ export type archivingModuleType = {
   loading: boolean;
   error: boolean | Error;
 };
-
-// export type WallPaperModuleType = {
-//   data: {
-//     coverPicture: File | null;
-//     title: string;
-//     place: string;
-//     firstDay: string;
-//     lastDay: string;
-//     haveCompanion: boolean | null;
-//     budget: string;
-//     archivingStyle: string;
-//   };
-//   loading: boolean;
-//   error: null | Error;
-// };
 
 export type WallPaperDataType = {
   [index: string]: string | File | null;
@@ -72,6 +46,89 @@ export type WallPaperModuleType = {
   data: WallPaperDataType;
   loading: boolean;
   error: null | Error;
+};
+// real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
+export type ReadWallPaperDataType = {
+  archivingStyle: string;
+  coverPicture: string;
+  createdAt: string;
+  emojiNum: number | null;
+  id: number | null;
+  places: string;
+  scrapNum: number | null;
+  shortContent: string;
+  title: string;
+  travelDuration: string;
+};
+
+// wallPaper InitailState
+export type ReadWallPaperModuleType = {
+  data: ReadWallPaperDataType;
+  loading: boolean;
+  error: boolean | Error;
+};
+
+export type DayFeedDataType = {
+  archiveId: number | null;
+  emotionDescription: string;
+  tipDescription: string;
+  travelDescription: string;
+};
+
+export type DayFeedModuleType = {
+  data: DayFeedDataType[];
+  loading: boolean;
+  error: boolean | Error;
+};
+// Home
+// 지역 별로 한글 매칭
+export const locationNames = [
+  { title: '부산', en: 'busan', param: '부산' },
+  { title: '제주도', en: 'jeju', param: '제주' },
+  { title: '강릉/속초', en: 'gangneung', param: '강릉속초' },
+  { title: '여수', en: 'yeosu', param: '여수' },
+  { title: '유럽', en: 'europe', param: '유럽' },
+  { title: '휴양지', en: 'vacation', param: '휴양지' },
+  { title: '미국', en: 'usa', param: '미국' },
+];
+
+export type HomeFeedType = {
+  archivingStyle: string;
+  coverImage: string;
+  emojiNum: number;
+  id: number;
+  places: string;
+  scrapNum: number;
+  title: string;
+  travelDuration: string;
+  createdAt: string;
+  shortContent: string;
+};
+
+export type HomeModuleType = {
+  home: {
+    data: HomeMainType | null;
+    loading: boolean;
+    error: null | Error;
+  };
+  location: {
+    data: HomeFeedType[];
+    loading: boolean;
+    error: null | Error;
+  };
+  recommend: {
+    data: HomeFeedType[];
+    loading: boolean;
+    error: null | Error;
+  };
+};
+
+export type HomeMainType = {
+  firstArchiveImage: string;
+  secondArchiveImage: string;
+  thirdArchiveImage: string;
+  totalArchiveNum: number;
+  userNickName: string;
 };
 
 export type UserInfoModuleType = {
@@ -126,17 +183,6 @@ export const archiveCorePageReadFetchData: archivingDataObject = {
     },
   ],
 };
-
-// 지역 별로 한글 매칭
-export const locationArr = [
-  { location: 'busan', locationKR: '부산' },
-  { location: 'jeju', locationKR: '제주도' },
-  { location: 'gangneung', locationKR: '강릉/속초' },
-  { location: 'yeosu', locationKR: '여수' },
-  { location: 'europe', locationKR: '유럽' },
-  { location: 'vacation', locationKR: '휴양지' },
-  { location: 'usa', locationKR: '미국' },
-];
 
 // [Home] 지역 별 추천, 사용자 취향 별 추천 피드 타입
 export type HomeFeedsType = {
@@ -250,52 +296,6 @@ export type dayTripCourse = {
   start: string;
   goingBy: string;
 };
-
-export type DayFeedDataType = {
-  day: number;
-  date: string;
-  weather: string;
-  imgs: string[];
-  dayCourse: dayTripCourse[];
-  dayJourney: string;
-  dayFeel: string;
-  dayHoneyTip: string;
-};
-
-export const dayFeedFetchData: DayFeedDataType[] = [
-  {
-    day: 1,
-    date: '2022.01.10(월)',
-    weather: '맑음',
-    imgs: [Jeju1, Jeju2, Jeju3, Jeju1, Jeju2, Jeju3],
-    dayCourse: [
-      { start: '함덕게스트하우스', arriveTime: 40, goingBy: '자동차', finish: '둘이먹다가죽어도모를만한킹받는맛집' },
-      { start: '애월게스트하우스', arriveTime: 70, goingBy: '지하철', finish: '나쁜양념게장' },
-      { start: '표선해비치리조트', arriveTime: 100, goingBy: '배', finish: '착한양념게장' },
-    ],
-    dayJourney:
-      '제주도의 인생 맛집을 찾았다! 간장게장과 꽃게 튀김이 일품인 곳이었다. 또한 제주도의 유명한 GD카페를 가봤는데, 역시 GD의 감성이 묻어있는 곳이었다. 오늘은 맛집과 카페를 방문하고 중간중간에 드라이브도 하니 제주도의 여행을 제대로 만끽할 수 있는 날이었던 것 같다.',
-    dayFeel:
-      '가족과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
-    dayHoneyTip: '송악산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
-  },
-  {
-    day: 2,
-    date: '2022.01.11(화)',
-    weather: '흐림',
-    imgs: [Jeju1, Jeju2, Jeju3],
-    dayCourse: [
-      { start: '함덕게스트하우스', arriveTime: 40, goingBy: '자동차', finish: '둘이먹다가죽어도모를만한킹받는맛집' },
-      { start: '애월게스트하우스', arriveTime: 70, goingBy: '지하철', finish: '나쁜양념게장' },
-      { start: '표선해비치리조트', arriveTime: 100, goingBy: '배', finish: '착한양념게장' },
-    ],
-    dayJourney:
-      '제주도의 인생 맛집을 찾았다! 양념게장과 한라봉 튀김이 일품인 곳이었다. 또한 제주도의 유명한 GD카페를 가봤는데, 역시 GD의 감성이 묻어있는 곳이었다. 오늘은 맛집과 카페를 방문하고 중간중간에 드라이브도 하니 제주도의 여행을 제대로 만끽할 수 있는 날이었던 것 같다.',
-    dayFeel:
-      '친구들과 오랜만에 갔던 여행이라 더 좋았다. 가족과의 소중한 추억의 한 페이지로 남을 수 있을 것 같은 하루였다. 부모님이 함께 손 잡고 바다를 걷는 모습을 보면서 괜히 뭉클하기도 했다.',
-    dayHoneyTip: '산방산 둘레길 갈 때 네이버 지도 참고하고하고 가기! 그리고, 제주 ‘참한간장게장’ 꼭 가보기!!',
-  },
-];
 
 export const ScrapData = [
   {

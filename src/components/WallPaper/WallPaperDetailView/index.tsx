@@ -1,39 +1,57 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-shadow */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { HomeFeedsType, DayFeedDataType, dayFeedFetchData } from '../../../constants';
+import { DayFeedDataType } from '../../../constants';
+import { RootState } from '../../../modules';
+import { readDayFeed } from '../../../modules/post/dayfeed';
 import ReactionBar from '../ReactionBar';
 import './style.scss';
 import TabBody from './TabBody';
 import TabHeader from './TabHeader';
 
-type WallPaperDetailViewProps = {
-  fetchData: HomeFeedsType | undefined;
-};
-
-function WallPaperDetailView({ fetchData }: WallPaperDetailViewProps) {
-  const [dayFeedData, setDayFeedData] = useState<DayFeedDataType[]>(dayFeedFetchData);
+function WallPaperDetailView() {
+  const dispatch = useDispatch();
+  const [day, setDay] = useState<number[]>([]);
   const [index, setIndex] = useState<number>(0);
+  const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
+  const dayFeedData = useSelector((state: RootState) => state.dayFeed.data);
+  useEffect(() => {
+    for (let i = 1; i <= dayFeedData.length; i++) {
+      setDay((day) => [...day, i]);
+    }
+  }, [dayFeedData]);
+
   return (
     <div className="wallpaperdetailview-wrapper">
       <div className="detail-title-box">
-        <p className="detail-title">{fetchData && fetchData.title}</p>
-        <p className="detail-date">2022.01.10 - 01.14</p>
+        <p className="detail-title">{readWallPaperData.title}</p>
+        <p className="detail-date">
+          {readWallPaperData.firstDay} ~ {readWallPaperData.lastDay}
+        </p>
       </div>
-      <Tabs selectedIndex={index} onSelect={(index) => {setIndex(index)}}>
-        <TabList className='tab-header'>
-          {dayFeedData.map((value: DayFeedDataType) => {
+      <Tabs
+        selectedIndex={index}
+        onSelect={(index) => {
+          setIndex(index);
+        }}
+      >
+        <TabList className="tab-header">
+          {dayFeedData.map((value: DayFeedDataType, i) => {
             return (
-              <Tab key={value.day}>
-                <TabHeader day={value.day} index={index}/>
+              <Tab key={value.archiveId}>
+                <TabHeader day={day[i]} index={index} />
               </Tab>
             );
           })}
         </TabList>
         {dayFeedData.map((value: DayFeedDataType) => {
           return (
-            <TabPanel key={value.day}>
-              <TabBody value={value}/> 
+            <TabPanel key={value.archiveId}>
+              <TabBody value={value} />
             </TabPanel>
           );
         })}

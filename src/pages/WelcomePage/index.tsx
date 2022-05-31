@@ -1,4 +1,4 @@
-import React, { useCallback} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
 import axios from 'axios';
@@ -10,6 +10,9 @@ import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login
 import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 function WelcomePage() {
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
 
   const KakaoLogIn = useCallback(async () => {
     const kakaoSignIn = async () => {
