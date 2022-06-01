@@ -109,6 +109,25 @@
         .toggle+.toggle{
             margin-top:1.2rem;
         }
+        input{
+            width:12.6rem;
+            height:4.4rem;
+            @include font-face(Pretendard-Regular, 1.6rem, 2.4rem, $primaryPurple);
+            background-color: $bg2;
+            border-radius: 2.4rem;
+            padding:1rem 1.4rem;
+            box-sizing: border-box;
+            border:solid 0.1rem $primaryPurple;
+            margin-left:1.2rem;
+            text-align: center;
+            &:focus{
+                outline:none;
+            }
+            &:placeholder-shown {
+                border:none;
+            }
+        
+        }
     }
     .four{
         .date-container{

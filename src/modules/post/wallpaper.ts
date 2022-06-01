@@ -1,4 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import instance from '../../lib/axios';
 import { WallPaperModuleType, WallPaperDataType } from '../../constants/index';
 import { RootState } from '..';
@@ -9,6 +10,8 @@ import { RootState } from '..';
 const UPLOAD_IMAGE = 'wallpaper/UPLOAD_IMAGE' as const;
 const DELETE_IMAGE = 'wallpaper/DELETE_IMAGE' as const;
 const CHANGE_TITLE = 'wallpaper/CHANGE_TITLE' as const;
+const RESET_TITLE = 'wallpaper/RESET_TITLE' as const;
+const CHANGE_TOGGLE = 'wallpaper/CHANGE_TOGGLE' as const;
 
 const POST_WALLPAPER_PENDING = 'wallpaper/POST_WALLPAPER_PENDING' as const;
 const POST_WALLPAPER_SUCCESS = 'wallpaper/POST_WALLPAPER_SUCCESS' as const;
@@ -31,14 +34,26 @@ export const changeTitle = (e: React.ChangeEvent<HTMLInputElement>) => ({
   payload: e.target.value,
 });
 
+export const resetTitle = () => ({
+  type: RESET_TITLE,
+  payload: '',
+});
+
+export const changeToggle = (name: string, value: string) => ({
+  type: CHANGE_TOGGLE,
+  payload: { name, value },
+});
+
 const postWallpaperPending = () => ({ type: POST_WALLPAPER_PENDING });
-const postWallpaperSuccess = (payload: any) => ({ type: POST_WALLPAPER_SUCCESS, payload });
-const postWallpaperFailure = (payload: any) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
+const postWallpaperSuccess = (payload: AxiosResponse) => ({ type: POST_WALLPAPER_SUCCESS, payload });
+const postWallpaperFailure = (payload: AxiosError) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
 
 type wallpaperAction =
   | ReturnType<typeof uploadImage>
   | ReturnType<typeof deleteImage>
   | ReturnType<typeof changeTitle>
+  | ReturnType<typeof resetTitle>
+  | ReturnType<typeof changeToggle>
   | ReturnType<typeof postWallpaperPending>
   | ReturnType<typeof postWallpaperSuccess>
   | ReturnType<typeof postWallpaperFailure>;
@@ -49,11 +64,29 @@ export const postWallpaper =
   async (dispatch) => {
     try {
       dispatch(postWallpaperPending());
-      console.log(data.coverPicture);
-      const response = await instance.post(`/api/v1/archives`, data);
+      const formData = new FormData();
+      if (data.coverPicture) formData.append('coverImage', data.coverPicture);
+      formData.append(
+        'archivesSaveRequestDto',
+        new Blob(
+          [
+            JSON.stringify({
+              firstDay: data.firstDay,
+              lastDay: data.lastDay,
+              place: data.place,
+              title: data.title,
+              archivingStyle: data.archivingStyle,
+              haveCompanion: data.haveCompanion,
+              budget: data.budget,
+            }),
+          ],
+          { type: 'application/json' },
+        ),
+      );
+      const response = await instance.post(`/api/v1/archives`, formData);
       dispatch(postWallpaperSuccess(response));
-    } catch (e) {
-      dispatch(postWallpaperFailure(e));
+    } catch (e: AxiosError | unknown) {
+      if (axios.isAxiosError(e)) dispatch(postWallpaperFailure(e));
       throw e;
     }
   };
@@ -61,12 +94,12 @@ export const postWallpaper =
 // 초기 상태
 const initailState: WallPaperModuleType = {
   data: {
-    coverPicture: null, // null
+    coverPicture: null,
     title: '',
     place: '',
     firstDay: '',
     lastDay: '',
-    haveCompanion: false, // null
+    haveCompanion: '',
     budget: '',
     archivingStyle: '',
   },
@@ -84,6 +117,10 @@ function wallpaper(state: WallPaperModuleType = initailState, action: wallpaperA
       return { ...state, data: { ...state.data, coverPicture: action.payload } };
     case CHANGE_TITLE:
       return { ...state, data: { ...state.data, title: action.payload } };
+    case RESET_TITLE:
+      return { ...state, data: { ...state.data, title: action.payload } };
+    case CHANGE_TOGGLE:
+      return { ...state, data: { ...state.data, [action.payload.name]: action.payload.value } }; // key object 변수 설정할때는 [key]:value 형태 사용
     case POST_WALLPAPER_PENDING:
       return { ...state, loading: true };
     case POST_WALLPAPER_SUCCESS:

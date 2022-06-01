@@ -30,33 +30,23 @@ export type archivingModuleType = {
   error: boolean | Error;
 };
 
-export type WallPaperModuleType = {
-  data: {
-    coverPicture: File | null;
-    title: string;
-    place: string;
-    firstDay: string;
-    lastDay: string;
-    haveCompanion: boolean | null;
-    budget: string;
-    archivingStyle: string;
-  };
-  loading: boolean;
-  error: null | Error;
-};
-
-// 더미데이터
 export type WallPaperDataType = {
+  [index: string]: string | File | null;
   coverPicture: File | null;
   title: string;
   place: string;
   firstDay: string;
   lastDay: string;
-  haveCompanion: boolean | null;
+  haveCompanion: string;
   budget: string;
   archivingStyle: string;
 };
 
+export type WallPaperModuleType = {
+  data: WallPaperDataType;
+  loading: boolean;
+  error: null | Error;
+};
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
 export type ReadWallPaperDataType = {
   archivingStyle: string;
@@ -89,7 +79,7 @@ export type DayFeedModuleType = {
   data: DayFeedDataType[];
   loading: boolean;
   error: boolean | Error;
-}
+};
 // Home
 // 지역 별로 한글 매칭
 export const locationNames = [

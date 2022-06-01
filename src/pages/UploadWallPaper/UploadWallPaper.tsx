@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './UploadWallPaper.scss';
-import { changeTitle, deleteImage, uploadImage } from '../../modules/post/wallpaper';
+import { changeTitle, deleteImage, uploadImage, resetTitle, changeToggle } from '../../modules/post/wallpaper';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import DateModal from '../../components/UploadModals/DateModal';
@@ -12,31 +12,9 @@ import { RootState } from '../../modules';
 function UploadWallPaper() {
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
   const dispatch = useDispatch();
-  // 표지작성 데이터
-  // const [wallPaperData, setWallPaperData] = useState<UploadWallPaperDataType>({
-  //   coverImage: null,
-  //   title: '',
-  //   place: '',
-  //   firstDay: '',
-  //   lastDay: '',
-  //   haveCompanion: null,
-  //   budget: '',
-  //   archivingStyle: '',
-  // });
 
+  // 1번 질문 : 커버사진
   const [isImageSizeOK, setIsImageSizeOK] = useState<boolean>(true);
-
-  // const onUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!e.target.files) return;
-  //   if (e.target.files[0].size > 1024 * 1024 * 5) {
-  //     setIsImageSizeOK(false);
-  //     setTimeout(() => {
-  //       setIsImageSizeOK(true);
-  //     }, 1200);
-  //     return;
-  //   }
-  //   setWallPaperData({ ...wallPaperData, coverImage: e.target.files[0] });
-  // };
 
   const onUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,50 +31,40 @@ function UploadWallPaper() {
     [dispatch],
   );
 
-  // const onDeleteImage = () => {
-  //   setWallPaperData({ ...wallPaperData, coverImage: null });
-  // };
-
   const onDeleteImage = useCallback(() => dispatch(deleteImage()), [dispatch]);
 
-  // 2번 질문
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  // const onInputText = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setWallPaperData({ ...wallPaperData, title: e.target.value });
-  // };
-
+  // 2번 질문 : 제목
   const onInputText = useCallback((e) => dispatch(changeTitle(e)), [dispatch]);
 
-  // const resetText = () => {
-  //   if (!inputRef.current) return;
-  //   inputRef.current.value = '';
-  //   setWallPaperData({ ...wallPaperData, title: '' });
-  // };
+  const onResetText = useCallback(() => dispatch(resetTitle()), [dispatch]);
 
-  // 3~7번 질문
-  const onClickToggle = (type: string, value: string | boolean) => {
-    console.log('click');
-    // setWallPaperData({ ...wallPaperData, [type]: value });
-  };
+  // 3~7번 질문 : 여행장소, 여행기간, 동행여부, 예산계획, 스타일
+  // 여행 장소 (그외)
+  const etcInputRef = useRef<HTMLInputElement>(null);
+  const onInputEtc = useCallback((name, value) => {
+    dispatch(changeToggle(name, value));
+  }, []);
+  const onRestEtc = useCallback(() => {
+    if (etcInputRef.current) etcInputRef.current.value = '';
+  }, []);
 
-  // 작성 완료
+  // 작성 완료 확인
   const [complete, setComplete] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   if (
-  //     wallPaperData.archivingStyle !== '' &&
-  //     wallPaperData.budget !== '' &&
-  //     wallPaperData.coverImage !== null &&
-  //     wallPaperData.firstDay !== '' &&
-  //     wallPaperData.haveCompanion !== null &&
-  //     wallPaperData.lastDay !== '' &&
-  //     wallPaperData.place !== '' &&
-  //     wallPaperData.title !== ''
-  //   ) {
-  //     setComplete(true);
-  //   }
-  // }, [wallPaperData]);
+  useEffect(() => {
+    if (
+      wallpaper.archivingStyle !== '' &&
+      wallpaper.budget !== '' &&
+      wallpaper.coverPicture !== null &&
+      wallpaper.firstDay !== '' &&
+      wallpaper.haveCompanion !== null &&
+      wallpaper.lastDay !== '' &&
+      wallpaper.place !== '' &&
+      wallpaper.title !== ''
+    ) {
+      setComplete(true);
+    }
+  }, [wallpaper]);
 
   const navigate = useNavigate();
 
@@ -144,13 +112,10 @@ function UploadWallPaper() {
               type="text"
               placeholder="이번 여행 기록의 제목을 정해주세요."
               onChange={(e) => onInputText(e)}
-              ref={inputRef}
+              value={wallpaper.title}
             />
             {wallpaper.title !== '' && (
-              <button
-                type="button"
-                // onClick={resetText}
-              >
+              <button type="button" onClick={onResetText}>
                 <img src="imgs/Upload/ic_x_small.png" alt="reset" />
               </button>
             )}
@@ -159,80 +124,43 @@ function UploadWallPaper() {
         <div className="three question">
           <UploadQuestion number={3} title="여행 장소를 입력해주세요." />
           <div className="toggle">
-            <UploadToggle text="부산" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
-            <UploadToggle text="제주도" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
-            <UploadToggle text="강릉/속초" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle text="부산" type="place" resetText={onRestEtc} />
+            <UploadToggle text="제주도" type="place" resetText={onRestEtc} />
+            <UploadToggle text="강릉/속초" type="place" resetText={onRestEtc} />
           </div>
           <div className="toggle">
-            <UploadToggle text="여수" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
-            <UploadToggle text="유럽" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
-            <UploadToggle text="휴양지" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
+            <UploadToggle text="여수" type="place" resetText={onRestEtc} />
+            <UploadToggle text="유럽" type="place" resetText={onRestEtc} />
+            <UploadToggle text="휴양지" type="place" resetText={onRestEtc} />
           </div>
           <div className="toggle">
-            <UploadToggle text="미국" selected={wallpaper.place} setSelected={onClickToggle} type="place" />
-            <UploadToggle
-              text="그외(직접입력)"
-              selected={wallpaper.place}
-              setSelected={onClickToggle}
-              type="place"
-              value="그외"
+            <UploadToggle text="미국" type="place" resetText={onRestEtc} />
+            <input
+              type="text"
+              placeholder="그외(직접입력)"
+              ref={etcInputRef}
+              onChange={(e) => onInputEtc('place', e.target.value)}
             />
           </div>
         </div>
         <div className="four question">
           <UploadQuestion number={4} title="여행 기간을 입력해주세요." />
-          <DateModal setSelected={onClickToggle} />
+          <DateModal />
         </div>
         <div className="five question">
           <UploadQuestion number={5} title="동행 여부를 선택해주세요." />
-          <UploadToggle
-            text="혼자여행"
-            selected={wallpaper.haveCompanion}
-            setSelected={onClickToggle}
-            type="haveCompanion"
-            value="혼자"
-          />
-          <UploadToggle
-            text="동행과의 여행"
-            selected={wallpaper.haveCompanion}
-            setSelected={onClickToggle}
-            type="haveCompanion"
-            value="동행"
-          />
+          <UploadToggle text="혼자여행" type="haveCompanion" value="false" />
+          <UploadToggle text="동행과의 여행" type="haveCompanion" value="true" />
         </div>
         <div className="six question">
           <UploadQuestion number={6} title="예산 계획에 대해 알려주세요." />
-          <UploadToggle
-            text="최소한으로 준비"
-            selected={wallpaper.budget}
-            setSelected={onClickToggle}
-            type="budget"
-            value="최소한"
-          />
-          <UploadToggle
-            text="넉넉하게 준비"
-            selected={wallpaper.budget}
-            setSelected={onClickToggle}
-            type="budget"
-            value="넉넉"
-          />
+          <UploadToggle text="최소한으로 준비" type="budget" value="최소한" />
+          <UploadToggle text="넉넉하게 준비" type="budget" value="넉넉" />
         </div>
         <div className="seven question">
           <UploadQuestion number={7} title="해당 기록의 스타일을 선택해주세요." />
-          <UploadToggle
-            text="감성 아카이빙"
-            selected={wallpaper.archivingStyle}
-            setSelected={onClickToggle}
-            type="archivingStyle"
-            value="감성"
-          />
-          <UploadToggle
-            text="정보 아카이빙"
-            selected={wallpaper.archivingStyle}
-            setSelected={onClickToggle}
-            type="archivingStyle"
-            value="정보"
-          />
+          <UploadToggle text="감성 아카이빙" type="archivingStyle" value="감성" />
+          <UploadToggle text="정보 아카이빙" type="archivingStyle" value="정보" />
         </div>
       </main>
       <button
