@@ -80,7 +80,15 @@ function App() {
             </>
           }
         />
-        <Route path="/upload-day" element={<UploadDay />} />
+        <Route
+          path="/upload-day"
+          element={
+            <>
+              <UploadHeader isCanGoBack title="기록작성" />
+              <UploadDay />
+            </>
+          }
+        />
         <Route path="/scrap" element={<Scrap />} />
         <Route path="/withdrawal" element={<Withdrawal />} />
       </Routes>

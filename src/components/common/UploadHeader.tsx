@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { postWallpaper } from '../../modules/post/wallpaper';
+import { postDay } from '../../modules/post/days';
 import './UploadHeader.scss';
 import ButtonModal from '../UploadModals/ButtonModal';
 import UploadAlert from '../UploadModals/UploadAlert';
@@ -18,9 +19,11 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
 
   const navigate = useNavigate();
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const days = useSelector((state: RootState) => state.days.data);
   const dispatch = useDispatch();
   const onSave = useCallback(() => {
-    dispatch(postWallpaper(wallpaper));
+    // dispatch(postWallpaper(wallpaper));
+    dispatch(postDay(days));
   }, [dispatch, wallpaper]);
 
   return (
