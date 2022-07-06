@@ -21,6 +21,7 @@ import UploadHeader from '../components/common/UploadHeader';
 import LogInProcess from './LogInProcess';
 import SignUpPage from './SignUpPage';
 import Withdrawal from './Withdrawal';
+import { archivingType } from '../constants/index';
 
 function App() {
   const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));

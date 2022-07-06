@@ -31,15 +31,18 @@ export type archivingModuleType = {
 };
 
 export type WallPaperDataType = {
-  [index: string]: string | File | null;
-  coverPicture: File | null;
+  [index: string]: string | File | null | number | boolean;
+  coverImage: File | null | string;
   title: string | null;
-  place: string | null;
+  places: string | null;
   firstDay: string | null;
   lastDay: string | null;
-  haveCompanion: string | null;
+  haveCompanion: string | null | boolean;
   budget: string | null;
   archivingStyle: string | null;
+  id: number | null;
+  countDaysFeeds: number | null;
+  share: boolean | null;
 };
 
 export type WallPaperModuleType = {

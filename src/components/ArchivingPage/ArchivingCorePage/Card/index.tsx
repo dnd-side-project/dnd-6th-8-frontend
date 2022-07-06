@@ -19,10 +19,13 @@ function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
     setDeleteId(info.id);
   }, []);
 
+  const onEditHandler = useCallback(() => {
+    navigate('/upload-wallpaper', { state: info.id });
+  }, []);
+
   const gotoWallPaper = () => {
     navigate(`/wallpaper/${info.id}`);
   };
-
 
   return (
     <div className="card-wrapper">
@@ -46,7 +49,7 @@ function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
         </div>
         <div className="info-title">{info.title}</div>
         <div className="info-btn">
-          <button>수정하기</button>
+          <button onClick={onEditHandler}>수정하기</button>
           <button onClick={onDeleteHandler}>삭제하기</button>
         </div>
         <div className="info-date">
