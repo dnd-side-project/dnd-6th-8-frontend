@@ -99,8 +99,13 @@ export const postDay =
     try {
       dispatch(postDaysPending());
       const formData = new FormData();
-      formData.append('daysSaveRequestDto', new Blob([JSON.stringify(data)], { type: 'application/json' }));
-      const response = await instance.post(`/api/v1/archives/days`, formData);
+      formData.append(
+        'dayTotalRequestDto',
+        new Blob([JSON.stringify({ daysSaveRequestDto: data })], { type: 'application/json' }),
+      );
+      const response = await instance.post(`/api/v1/archives/days?archiveId=${92}`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       dispatch(postDaysSuccess(response));
     } catch (e: AxiosError | unknown) {
       if (axios.isAxiosError(e)) dispatch(postDaysFailure(e));

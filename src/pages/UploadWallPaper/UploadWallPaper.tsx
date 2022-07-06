@@ -77,6 +77,7 @@ function UploadWallPaper() {
             아래의 정보는 <span>필수</span>로 작성해주세요.
           </span>
         </div>
+
         <div className="one question">
           <UploadQuestion number={1} title="커버사진을 업로드해주세요." />
           <div className="images-container">
@@ -88,6 +89,7 @@ function UploadWallPaper() {
               </div>
             </label>
             <input
+              name="coverImage"
               type="file"
               accept="image/x-png,image/jpeg,image/gif"
               multiple={false}
@@ -112,7 +114,7 @@ function UploadWallPaper() {
               type="text"
               placeholder="이번 여행 기록의 제목을 정해주세요."
               onChange={(e) => onInputText(e)}
-              value={wallpaper.title}
+              value={wallpaper.title ? wallpaper.title : ''}
             />
             {wallpaper.title !== '' && (
               <button type="button" onClick={onResetText}>
@@ -164,7 +166,7 @@ function UploadWallPaper() {
         </div>
       </main>
       <button
-        type="button"
+        type="submit"
         className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
         disabled={!complete}
         onClick={() => navigate('/upload-day?day=1')}

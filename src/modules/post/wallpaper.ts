@@ -66,24 +66,23 @@ export const postWallpaper =
       dispatch(postWallpaperPending());
       const formData = new FormData();
       if (data.coverPicture) formData.append('coverImage', data.coverPicture);
-      formData.append(
-        'archivesSaveRequestDto',
-        new Blob(
-          [
-            JSON.stringify({
-              firstDay: data.firstDay,
-              lastDay: data.lastDay,
-              place: data.place,
-              title: data.title,
-              archivingStyle: data.archivingStyle,
-              haveCompanion: data.haveCompanion,
-              budget: data.budget,
-            }),
-          ],
-          { type: 'application/json' },
-        ),
-      );
-      const response = await instance.post(`/api/v1/archives`, formData);
+      const jsonData = {
+        firstDay: data.firstDay,
+        lastDay: data.lastDay,
+        places: data.place,
+        title: data.title,
+        archivingStyle: data.archivingStyle,
+        haveCompanion: data.haveCompanion,
+        budget: data.budget,
+      };
+      const archivesSaveRequestDto = JSON.stringify(jsonData);
+      // formData.append('archivesSaveRequestDto', archivesSaveRequestDto);
+      formData.append('archivesSaveRequestDto', new Blob([archivesSaveRequestDto], { type: 'application/json' }));
+      const response = await instance.post(`/api/v1/archives`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       dispatch(postWallpaperSuccess(response));
     } catch (e: AxiosError | unknown) {
       if (axios.isAxiosError(e)) dispatch(postWallpaperFailure(e));
@@ -95,13 +94,13 @@ export const postWallpaper =
 const initailState: WallPaperModuleType = {
   data: {
     coverPicture: null,
-    title: '',
-    place: '',
-    firstDay: '',
-    lastDay: '',
-    haveCompanion: '',
-    budget: '',
-    archivingStyle: '',
+    title: null,
+    place: null,
+    firstDay: null,
+    lastDay: null,
+    haveCompanion: null,
+    budget: null,
+    archivingStyle: null,
   },
   loading: false,
   error: null,

@@ -22,8 +22,9 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
   const days = useSelector((state: RootState) => state.days.data);
   const dispatch = useDispatch();
   const onSave = useCallback(() => {
-    // dispatch(postWallpaper(wallpaper));
-    dispatch(postDay(days));
+    dispatch(postWallpaper(wallpaper));
+    // if (isCanGoBack) dispatch(postDay(days));
+    // else dispatch(postWallpaper(wallpaper));
   }, [dispatch, wallpaper]);
 
   return (

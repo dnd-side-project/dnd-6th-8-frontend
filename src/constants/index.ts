@@ -33,13 +33,13 @@ export type archivingModuleType = {
 export type WallPaperDataType = {
   [index: string]: string | File | null;
   coverPicture: File | null;
-  title: string;
-  place: string;
-  firstDay: string;
-  lastDay: string;
-  haveCompanion: string;
-  budget: string;
-  archivingStyle: string;
+  title: string | null;
+  place: string | null;
+  firstDay: string | null;
+  lastDay: string | null;
+  haveCompanion: string | null;
+  budget: string | null;
+  archivingStyle: string | null;
 };
 
 export type WallPaperModuleType = {
