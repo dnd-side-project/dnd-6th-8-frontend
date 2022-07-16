@@ -11,6 +11,7 @@ function WallPaperPreview() {
   const dispatch = useDispatch();
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
   useEffect(() => {
+    console.log('여기서 아카이빙 id', readWallPaperData.id);
     dispatch(readDayFeed(readWallPaperData.id));
   }, []);
   return (

@@ -69,20 +69,20 @@ function TabBody({ value }: TabBodyProps) {
             <div className="today-line" />
             하루의 여정
           </p>
-          <div className="archiving-wrapper">{value.travelDescription}</div>
+          {/* <div className="archiving-wrapper">{value.travelDescription}</div> */}
         </div>
         <div className="today-wrapper">
           <p>
             <div className="today-line" /> 하루의 감정
           </p>
-          <div className="archiving-wrapper">{value.emotionDescription}</div>
+          {/* <div className="archiving-wrapper">{value.emotionDescription}</div> */}
         </div>
         <div className="today-wrapper">
           <p>
             <div className="today-line" />
             여행 꿀팁
           </p>
-          <div className="archiving-wrapper">{value.tipDescription}</div>
+          {/* <div className="archiving-wrapper">{value.tipDescription}</div> */}
         </div>
       </div>
     </div>

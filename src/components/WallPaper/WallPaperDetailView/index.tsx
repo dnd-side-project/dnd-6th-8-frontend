@@ -14,20 +14,21 @@ import TabBody from './TabBody';
 import TabHeader from './TabHeader';
 
 function WallPaperDetailView() {
-  const dispatch = useDispatch();
-  const [day, setDay] = useState<number[]>([]);
-  const [index, setIndex] = useState<number>(0);
-  const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
-  const dayFeedData = useSelector((state: RootState) => state.dayFeed.data);
-  useEffect(() => {
-    for (let i = 1; i <= dayFeedData.length; i++) {
-      setDay((day) => [...day, i]);
-    }
-  }, [dayFeedData]);
+  // const dispatch = useDispatch();
+  // const [day, setDay] = useState<number[]>([]);
+  // const [index, setIndex] = useState<number>(0);
+  // const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
+  // const dayFeedData = useSelector((state: RootState) => state.dayFeed.data);
+  // useEffect(() => {
+  //   for (let i = 1; i <= dayFeedData.length; i++) {
+  //     setDay((day) => [...day, i]);
+  //   }
+  // }, [dayFeedData]);
 
   return (
     <div className="wallpaperdetailview-wrapper">
-      <div className="detail-title-box">
+      1
+      {/* <div className="detail-title-box">
         <p className="detail-title">{readWallPaperData.title}</p>
         <p className="detail-date">
           {readWallPaperData.firstDay} ~ {readWallPaperData.lastDay}
@@ -56,7 +57,7 @@ function WallPaperDetailView() {
           );
         })}
       </Tabs>
-      <ReactionBar />
+      <ReactionBar /> */}
     </div>
   );
 }
