@@ -68,11 +68,31 @@ export type ReadWallPaperModuleType = {
   error: boolean | Error;
 };
 
-export type DayFeedDataType = {
-  archiveId: number | null;
+export type daysObjectiveResponseDtoList = {
+  arrival: string;
+  departure: string;
+  transportation: string;
+  travelTime: string;
+};
+export type daysSubjectiveResponseDtoList = {
+  archiveId: number;
+  date: string;
+  dayNumber: number;
   emotionDescription: string;
   tipDescription: string;
   travelDescription: string;
+  weather: string;
+  writer: string;
+};
+
+export type DayFeedDataType = {
+  daysInArchiveDto: {
+    archiveTitle: string;
+    firstDay: string;
+    lastDay: string;
+  };
+  daysObjectiveResponseDtoList: daysObjectiveResponseDtoList[];
+  daysSubjectiveResponseDtoList: daysSubjectiveResponseDtoList[];
 };
 
 export type DayFeedModuleType = {
@@ -80,6 +100,20 @@ export type DayFeedModuleType = {
   loading: boolean;
   error: boolean | Error;
 };
+
+export type EmoJiReadDataType = {
+  emojiId: number;
+  emojiCount: number;
+  emojisName: string;
+  emojisUrl: string;
+};
+
+export type EmojiReadDataModuleType = {
+  data: EmoJiReadDataType[];
+  loading: boolean;
+  error: boolean | Error;
+};
+
 // Home
 // 지역 별로 한글 매칭
 export const locationNames = [

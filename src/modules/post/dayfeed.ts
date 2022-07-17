@@ -22,8 +22,9 @@ export const readDayFeed =
   async (dispatch) => {
     try {
       dispatch(readDayFeedPending());
+      console.log('요청 이전 id ', id);
       const response = await instance.get(`/api/v1/archives/${id}/days/1`);
-      console.log('데이피드 읽기', response.data);
+      console.log('데이피드 읽기', response);
       dispatch(readDayFeedSuccess(response));
     } catch (e) {
       dispatch(readDayFeedFailure(e));
@@ -45,7 +46,8 @@ function dayFeed(state: DayFeedModuleType = initailState, action: readDayFeedAct
     case POST_READ_DAYFEED_PENDING:
       return { ...state, loading: true };
     case POST_READ_DAYFEED_SUCCESS:
-      return { ...state, data: [...action.payload], loading: false };
+      console.log(action.payload);
+      return { ...state, data: { ...action.payload }, loading: false };
     case POST_READ_DAYFEED_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
