@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setBadge } from '../../modules/post/days';
+import { setBadge } from '../../modules/post/wallpaper';
 import './EmotionModal.scss';
 
 type EmotionModalProps = {

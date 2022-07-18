@@ -14,7 +14,6 @@ const DELETE_IMAGE = 'days/DELETE_IMAGE' as const;
 const CHANGE_LOCATION = 'days/CHANGE_LOCATION' as const;
 const MODIFY_LOCATION = 'days/MODIFY_LOCATION' as const;
 const WRITING = 'days/WRITING' as const;
-const SET_BADGE = 'days/SET_BADGE' as const;
 
 const POST_DAYS_PENDING = 'days/POST_DAYS_PENDING' as const;
 const POST_DAYS_SUCCESS = 'days/POST_DAYS_SUCCESS' as const;
@@ -65,11 +64,6 @@ export const writing = (day: number, type: string, data: string) => ({
   payload: { day, type, data },
 });
 
-export const setBadge = (badge: string) => ({
-  type: SET_BADGE,
-  payload: badge,
-});
-
 const postDaysPending = () => ({ type: POST_DAYS_PENDING });
 const postDaysSuccess = (payload: AxiosResponse) => ({ type: POST_DAYS_SUCCESS, payload });
 const postDaysFailure = (payload: AxiosError) => ({ type: POST_DAYS_FAILURE, error: true, payload });
@@ -84,7 +78,6 @@ type dayAction =
   | ReturnType<typeof changeLocation>
   | ReturnType<typeof modifyLocation>
   | ReturnType<typeof writing>
-  | ReturnType<typeof setBadge>
   | ReturnType<typeof postDaysPending>
   | ReturnType<typeof postDaysSuccess>
   | ReturnType<typeof postDaysFailure>;
@@ -115,7 +108,6 @@ export type DaysModuleType = {
   data: DaysDataType[];
   loading: boolean;
   error: null | Error;
-  badge: string;
 };
 
 // thunk 함수
@@ -164,7 +156,6 @@ const initailState: DaysModuleType = {
   ],
   loading: false,
   error: null,
-  badge: '',
 };
 
 // 리듀서
@@ -272,8 +263,6 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
           day.dayNumber === action.payload.day ? { ...day, [action.payload.type]: action.payload.data } : day,
         ),
       };
-    case SET_BADGE:
-      return { ...state, badge: action.payload };
     case POST_DAYS_PENDING:
       return { ...state, loading: true };
     case POST_DAYS_SUCCESS:

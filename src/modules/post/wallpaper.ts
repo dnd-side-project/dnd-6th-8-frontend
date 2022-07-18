@@ -14,6 +14,7 @@ const RESET_TITLE = 'wallpaper/RESET_TITLE' as const;
 const CHANGE_TOGGLE = 'wallpaper/CHANGE_TOGGLE' as const;
 const RESET_WALLPAPER = 'wallpaper/RESET_WALLPAPER' as const;
 const GET_ARCHIVE_ID = 'wallpaper/GET_ARCHIVE_ID' as const;
+const SET_BADGE = 'wallpaper/SET_BADGE' as const;
 
 const POST_WALLPAPER_PENDING = 'wallpaper/POST_WALLPAPER_PENDING' as const;
 const POST_WALLPAPER_SUCCESS = 'wallpaper/POST_WALLPAPER_SUCCESS' as const;
@@ -63,6 +64,11 @@ export const getArchiveId = (id: number) => ({
   payload: id,
 });
 
+export const setBadge = (badge: string) => ({
+  type: SET_BADGE,
+  payload: badge,
+});
+
 const postWallpaperPending = () => ({ type: POST_WALLPAPER_PENDING });
 const postWallpaperSuccess = () => ({ type: POST_WALLPAPER_SUCCESS });
 const postWallpaperFailure = (payload: AxiosError) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
@@ -83,6 +89,7 @@ type wallpaperAction =
   | ReturnType<typeof changeToggle>
   | ReturnType<typeof resetWallpaper>
   | ReturnType<typeof getArchiveId>
+  | ReturnType<typeof setBadge>
   | ReturnType<typeof postWallpaperPending>
   | ReturnType<typeof postWallpaperSuccess>
   | ReturnType<typeof postWallpaperFailure>
@@ -168,6 +175,7 @@ const initailState: WallPaperModuleType = {
   },
   loading: false,
   error: null,
+  badge: '',
 };
 
 // 리듀서
@@ -203,6 +211,8 @@ function wallpaper(state: WallPaperModuleType = initailState, action: wallpaperA
       };
     case GET_ARCHIVE_ID:
       return { ...state, data: { ...state.data, id: action.payload } };
+    case SET_BADGE:
+      return { ...state, badge: action.payload };
     case POST_WALLPAPER_PENDING:
       return { ...state, loading: true };
     case POST_WALLPAPER_SUCCESS:

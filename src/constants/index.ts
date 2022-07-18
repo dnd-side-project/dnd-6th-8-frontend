@@ -49,6 +49,7 @@ export type WallPaperModuleType = {
   data: WallPaperDataType;
   loading: boolean;
   error: null | Error;
+  badge: string;
 };
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
 export type ReadWallPaperDataType = {
