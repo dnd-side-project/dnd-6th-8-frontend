@@ -9,6 +9,7 @@ import {
   resetTitle,
   changeToggle,
   getWallpaper,
+  postWallpaper,
 } from '../../modules/post/wallpaper';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
@@ -64,13 +65,13 @@ function UploadWallPaper() {
 
   useEffect(() => {
     if (
-      wallpaper.archivingStyle !== '' &&
-      wallpaper.budget !== '' &&
-      wallpaper.coverPicture !== null &&
+      wallpaper.archivingStyle !== null &&
+      wallpaper.budget !== null &&
+      wallpaper.coverImage !== null &&
       wallpaper.firstDay !== '' &&
       wallpaper.haveCompanion !== null &&
       wallpaper.lastDay !== '' &&
-      wallpaper.place !== '' &&
+      wallpaper.places !== '' &&
       wallpaper.title !== ''
     ) {
       setComplete(true);
@@ -192,7 +193,10 @@ function UploadWallPaper() {
         type="submit"
         className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
         disabled={!complete}
-        onClick={() => navigate('/upload-day?day=1')}
+        onClick={() => {
+          dispatch(postWallpaper(wallpaper));
+          navigate('/upload-day?day=1');
+        }}
       >
         다음으로
       </button>

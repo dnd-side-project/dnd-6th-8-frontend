@@ -36,6 +36,7 @@ function UploadDay() {
   const navigate = useNavigate();
   const dayRef = useRef<HTMLElement>(null);
 
+  const archiveId = useSelector((state: RootState) => state.wallpaper.data.id);
   const days = useSelector((state: RootState) => state.days.data);
   const dispatch = useDispatch();
 
