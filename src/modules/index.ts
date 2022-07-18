@@ -3,13 +3,18 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userInformation from './user/userinfomation';
 import wallpaper from './post/wallpaper';
+import days from './post/days';
 import myArchivesReducer from './post/archives';
 import mypage from './user/mypage';
+import readWallPaperReducer from './post/readwallpaper';
+import dayFeed from './post/dayfeed';
+import home from './post/home';
+import emojiCounts from './post/emojiCount';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['userInformation'],
+  whitelist: ['userInformation', 'readWallPaperReducer', 'myArchivesReducer', 'dayFeed'],
 };
 
 const rootReducer = combineReducers({
@@ -17,6 +22,11 @@ const rootReducer = combineReducers({
   userInformation,
   myArchivesReducer,
   mypage,
+  readWallPaperReducer,
+  dayFeed,
+  home,
+  days,
+  emojiCounts,
 });
 
 // export default rootReducer;

@@ -1,18 +1,26 @@
-import React from 'react';
+/* eslint-disable import/no-unresolved */
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
 import Arrow from '../../../assets/icons/WallPaper/chevron_duo_left.png';
-import Jeju from '../../../assets/icons/WallPaper/img_jeju01_wallpaper.png';
-import { HomeFeedsType } from '../../../constants';
+import defaultImg from '../../../assets/icons/WallPaper/defaultImg.png';
+import { RootState } from '../../../modules';
+import { readDayFeed } from '../../../modules/post/dayfeed';
 
-type WallPaperPreview = {
-  fetchData: HomeFeedsType | undefined;
-};
-
-function WallPaperPreview({ fetchData }: WallPaperPreview) {
+function WallPaperPreview() {
+  const dispatch = useDispatch();
+  const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
+  useEffect(() => {
+    console.log('여기서 아카이빙 id', readWallPaperData.id);
+    dispatch(readDayFeed(readWallPaperData.id));
+  }, []);
   return (
-    <div className="wallpaperpreview-wrapper" >
-      <img className="wallpaperpreview-background" src={Jeju} alt="Background-img" />
-      {/* <img className="wallpaperpreview-background" src={fetchData && fetchData.image} alt="Background-img" /> */}
+    <div className="wallpaperpreview-wrapper">
+      <img
+        className="wallpaperpreview-background"
+        src={readWallPaperData.coverImage === null ? defaultImg : readWallPaperData.coverPicture}
+        alt="Background-img"
+      />
       <div className="wallpaperpreview-main">
         <div className="arrow-wrapper">
           <img className="arrow" src={Arrow} alt="arrow" />
@@ -21,16 +29,19 @@ function WallPaperPreview({ fetchData }: WallPaperPreview) {
           </p>
         </div>
         <div className="line-top">
-          <span>🍊</span> <span>{fetchData && fetchData.locationKR}</span>
-          <p>{fetchData && fetchData.title}</p>
+          <span>🍊</span> <span>{readWallPaperData && readWallPaperData.places}</span>
+          <p>{readWallPaperData && readWallPaperData.title}</p>
         </div>
         <div className="line" />
         <div className="line-bottom">
-          <p>{fetchData && fetchData.date}일 간의 여정</p>
+          <p>
+            {/* <img src={} alt="" /> */}
+            {readWallPaperData && readWallPaperData.travelDuration}일 간의 여정
+          </p>
           <div className="info-box">
-            <p>{fetchData && fetchData.category} 위주</p>
-            <p>혼자 여행</p>
-            <p>넉넉하게 준비</p>
+            <p>{readWallPaperData && readWallPaperData.archivingStyle} 위주</p>
+            <p>{readWallPaperData.haveCompanion ? <p>동료와</p> : <p>혼자</p>}</p>
+            <p>{readWallPaperData && readWallPaperData.budget} 준비</p>
           </div>
         </div>
       </div>

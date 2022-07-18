@@ -7,6 +7,7 @@ type TabHeaderProps = {
 };
 
 function TabHeader({ day, index }: TabHeaderProps) {
+
   return (
     <div className="tabheader-wrapper">
       {day === index + 1 ? (

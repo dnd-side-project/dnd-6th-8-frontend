@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeToggle } from '../../modules/post/wallpaper';
+import { RootState } from '../../modules';
 import './UploadWallPaperToggle.scss';
 
 type UploadWallPaperToggleProps = {
   text: string;
   value?: string;
-  selected: string | boolean | null;
-  setSelected: (type: string, value: string | boolean) => void;
   type: string;
+  resetText?: () => void;
 };
 
 UploadWallPaperToggle.defaultProps = {
-  value: '',
+  value: null,
+  resetText: null,
 };
 
-function UploadWallPaperToggle({ text, value, selected, setSelected, type }: UploadWallPaperToggleProps) {
-  const data = value || text;
+function UploadWallPaperToggle({ text, value, type, resetText }: UploadWallPaperToggleProps) {
+  value = value || text;
+  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const dispatch = useDispatch();
+
+  const onClickToggle = useCallback(
+    (name: string, data: string) => {
+      dispatch(changeToggle(name, data));
+      if (resetText) resetText();
+    },
+    [dispatch],
+  );
 
   return (
     <button
       type="button"
-      className={`uploadWallPaperToggle-wrapper${selected === data ? ' selected' : ''}`}
-      onClick={() => setSelected(type, data)}
+      name="place"
+      className={`uploadWallPaperToggle-wrapper${wallpaper[type]?.toString() === value ? ' selected' : ''}`}
+      onClick={() => {
+        if (value) onClickToggle(type, value);
+      }}
     >
       {text}
     </button>

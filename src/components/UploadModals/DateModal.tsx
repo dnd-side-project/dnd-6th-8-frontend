@@ -1,17 +1,20 @@
-import React, { forwardRef, useState, useRef } from 'react';
+import React, { forwardRef, useState, useRef, useCallback } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeToggle } from '../../modules/post/wallpaper';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateModal.scss';
+import { RootState } from '../../modules';
 
-type DateModalProps = {
-  setSelected: (type: string, value: string | boolean) => void;
-};
-
-function DateModal({ setSelected }: DateModalProps) {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+function DateModal() {
+  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const [startDate, setStartDate] = useState<Date | null>(wallpaper.firstDay ? new Date(wallpaper.firstDay) : null);
+  const [endDate, setEndDate] = useState<Date | null>(wallpaper.lastDay ? new Date(wallpaper.lastDay) : null);
   const [hidden, setHidden] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
+  const onClickToggle = useCallback((name: string, data: string) => dispatch(changeToggle(name, data)), [dispatch]);
 
   const ref = React.createRef();
   const startRef = useRef<DatePicker>(null);
@@ -57,7 +60,13 @@ function DateModal({ setSelected }: DateModalProps) {
           onClick={() => {
             closeDatePicker(startRef);
             if (startDate !== null)
-              setSelected('firstDay', `${startDate.getFullYear()}-${startDate.getMonth() + 1}-${startDate.getDate()}`);
+              onClickToggle(
+                'firstDay',
+                `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, '0')}-${startDate
+                  .getDate()
+                  .toString()
+                  .padStart(2, '0')}`,
+              );
           }}
         >
           선택 완료
@@ -83,7 +92,13 @@ function DateModal({ setSelected }: DateModalProps) {
           onClick={() => {
             closeDatePicker(endRef);
             if (endDate !== null)
-              setSelected('lastDay', `${endDate.getFullYear()}-${endDate.getMonth() + 1}-${endDate.getDate()}`);
+              onClickToggle(
+                'lastDay',
+                `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate
+                  .getDate()
+                  .toString()
+                  .padStart(2, '0')}`,
+              );
           }}
         >
           선택 완료
