@@ -1,14 +1,16 @@
 import React, { forwardRef, useState, useRef, useCallback } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeToggle } from '../../modules/post/wallpaper';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DateModal.scss';
+import { RootState } from '../../modules';
 
 function DateModal() {
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const [startDate, setStartDate] = useState<Date | null>(wallpaper.firstDay ? new Date(wallpaper.firstDay) : null);
+  const [endDate, setEndDate] = useState<Date | null>(wallpaper.lastDay ? new Date(wallpaper.lastDay) : null);
   const [hidden, setHidden] = useState<boolean>(true);
 
   const dispatch = useDispatch();

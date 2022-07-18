@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import './style.scss';
 import { ReactComponent as UpToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_up.svg';
 import { ReactComponent as DownToggle } from '../../../assets/icons/ArchivingPage/ArchivingCorePage/ic_dropdown_archiving_down.svg';
@@ -8,6 +8,7 @@ import { ReactComponent as AddBtn } from '../../../assets/icons/ArchivingPage/Ar
 import Personal from './Personal';
 import Shared from './Shared';
 import HistoryBox from './HistoryBox';
+import { resetWallpaper } from '../../../modules/post/wallpaper';
 
 import { RootState } from '../../../modules';
 
@@ -26,6 +27,7 @@ function ArchivingCorePage({ setDeleteClick, setDeleteId }: ArchivingCorePage) {
   const onPersonalClick = (): void => setPersonalClick((prev) => !prev);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <div className="archivingCorePage-wrapper">
@@ -47,8 +49,14 @@ function ArchivingCorePage({ setDeleteClick, setDeleteId }: ArchivingCorePage) {
           {personalClick ? <DownToggle onClick={onPersonalClick} /> : <UpToggle onClick={onPersonalClick} />}
         </div>
       </div>
-      {personalClick && <Personal setDeleteClick={setDeleteClick} setDeleteId={setDeleteId}/>}
-      <AddBtn className="add-btn" onClick={() => navigate('/upload-wallpaper')} />
+      {personalClick && <Personal setDeleteClick={setDeleteClick} setDeleteId={setDeleteId} />}
+      <AddBtn
+        className="add-btn"
+        onClick={() => {
+          dispatch(resetWallpaper());
+          navigate('/upload-wallpaper');
+        }}
+      />
     </div>
   );
 }

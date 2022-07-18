@@ -1,13 +1,24 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import './UploadWallPaper.scss';
-import { changeTitle, deleteImage, uploadImage, resetTitle, changeToggle } from '../../modules/post/wallpaper';
+import {
+  changeTitle,
+  deleteImage,
+  uploadImage,
+  resetTitle,
+  changeToggle,
+  getWallpaper,
+} from '../../modules/post/wallpaper';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
 import DateModal from '../../components/UploadModals/DateModal';
 import UploadAlert from '../../components/UploadModals/UploadAlert';
 import { RootState } from '../../modules';
+
+interface LocationType {
+  state: number;
+}
 
 function UploadWallPaper() {
   const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
@@ -34,7 +45,7 @@ function UploadWallPaper() {
   const onDeleteImage = useCallback(() => dispatch(deleteImage()), [dispatch]);
 
   // 2번 질문 : 제목
-  const onInputText = useCallback((e) => dispatch(changeTitle(e)), [dispatch]);
+  const onInputText = useCallback((e) => dispatch(changeTitle(e.target.value)), [dispatch]);
 
   const onResetText = useCallback(() => dispatch(resetTitle()), [dispatch]);
 
@@ -67,6 +78,13 @@ function UploadWallPaper() {
   }, [wallpaper]);
 
   const navigate = useNavigate();
+  const { state } = useLocation() as LocationType;
+
+  useEffect(() => {
+    if (state) {
+      dispatch(getWallpaper(state));
+    }
+  }, [state]);
 
   return (
     <div>
@@ -77,27 +95,34 @@ function UploadWallPaper() {
             아래의 정보는 <span>필수</span>로 작성해주세요.
           </span>
         </div>
+
         <div className="one question">
           <UploadQuestion number={1} title="커버사진을 업로드해주세요." />
           <div className="images-container">
             <label htmlFor="upload">
               <img src="imgs/Upload/ic_camera.png" alt="camera" />
               <div>
-                <span>{wallpaper.coverPicture !== null ? 1 : 0}</span>
+                <span>{wallpaper.coverImage !== null ? 1 : 0}</span>
                 <span>/1</span>
               </div>
             </label>
             <input
+              name="coverImage"
               type="file"
               accept="image/x-png,image/jpeg,image/gif"
               multiple={false}
               onChange={(e) => onUploadImage(e)}
               id="upload"
-              disabled={wallpaper.coverPicture !== null}
+              disabled={wallpaper.coverImage !== null}
             />
-            {wallpaper.coverPicture && (
+            {wallpaper.coverImage && (
               <div className="image">
-                <img src={URL.createObjectURL(wallpaper.coverPicture)} alt="upload_img" />
+                {wallpaper.coverImage instanceof File ? (
+                  <img src={URL.createObjectURL(wallpaper.coverImage)} alt="archiving_img" />
+                ) : (
+                  <img src={wallpaper.coverImage} alt="archiving_img" />
+                )}
+
                 <button type="button" onClick={() => onDeleteImage()}>
                   <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
                 </button>
@@ -112,7 +137,7 @@ function UploadWallPaper() {
               type="text"
               placeholder="이번 여행 기록의 제목을 정해주세요."
               onChange={(e) => onInputText(e)}
-              value={wallpaper.title}
+              value={wallpaper.title ? wallpaper.title : ''}
             />
             {wallpaper.title !== '' && (
               <button type="button" onClick={onResetText}>
@@ -124,22 +149,22 @@ function UploadWallPaper() {
         <div className="three question">
           <UploadQuestion number={3} title="여행 장소를 입력해주세요." />
           <div className="toggle">
-            <UploadToggle text="부산" type="place" resetText={onRestEtc} />
-            <UploadToggle text="제주도" type="place" resetText={onRestEtc} />
-            <UploadToggle text="강릉/속초" type="place" resetText={onRestEtc} />
+            <UploadToggle text="부산" type="places" resetText={onRestEtc} />
+            <UploadToggle text="제주도" type="places" resetText={onRestEtc} />
+            <UploadToggle text="강릉/속초" type="places" resetText={onRestEtc} />
           </div>
           <div className="toggle">
-            <UploadToggle text="여수" type="place" resetText={onRestEtc} />
-            <UploadToggle text="유럽" type="place" resetText={onRestEtc} />
-            <UploadToggle text="휴양지" type="place" resetText={onRestEtc} />
+            <UploadToggle text="여수" type="places" resetText={onRestEtc} />
+            <UploadToggle text="유럽" type="places" resetText={onRestEtc} />
+            <UploadToggle text="휴양지" type="places" resetText={onRestEtc} />
           </div>
           <div className="toggle">
-            <UploadToggle text="미국" type="place" resetText={onRestEtc} />
+            <UploadToggle text="미국" type="places" resetText={onRestEtc} />
             <input
               type="text"
               placeholder="그외(직접입력)"
               ref={etcInputRef}
-              onChange={(e) => onInputEtc('place', e.target.value)}
+              onChange={(e) => onInputEtc('places', e.target.value)}
             />
           </div>
         </div>
@@ -164,7 +189,7 @@ function UploadWallPaper() {
         </div>
       </main>
       <button
-        type="button"
+        type="submit"
         className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
         disabled={!complete}
         onClick={() => navigate('/upload-day?day=1')}

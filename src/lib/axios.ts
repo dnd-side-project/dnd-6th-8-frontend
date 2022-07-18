@@ -4,7 +4,7 @@ const token = localStorage.getItem('accessToken');
 // axios instance 생성
 const instance = axios.create({
   baseURL: 'http://3.37.253.113:8080',
-  timeout: 1000,
+  timeout: 10000,
   headers: {
     Authorization: `Bearer ${token}`,
   },
@@ -30,7 +30,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => {
     // 200인 경우. 응답 성공 직전 호출됨. then으로 이어짐
-    console.log(response);
+    console.log(response.data);
     return response.data;
   },
   (error) => {

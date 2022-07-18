@@ -21,6 +21,7 @@ import UploadHeader from '../components/common/UploadHeader';
 import LogInProcess from './LogInProcess';
 import SignUpPage from './SignUpPage';
 import Withdrawal from './Withdrawal';
+import { archivingType } from '../constants/index';
 
 function App() {
   const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));
@@ -80,7 +81,15 @@ function App() {
             </>
           }
         />
-        <Route path="/upload-day" element={<UploadDay />} />
+        <Route
+          path="/upload-day"
+          element={
+            <>
+              <UploadHeader isCanGoBack title="기록작성" />
+              <UploadDay />
+            </>
+          }
+        />
         <Route path="/scrap" element={<Scrap />} />
         <Route path="/withdrawal" element={<Withdrawal />} />
       </Routes>

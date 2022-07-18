@@ -32,7 +32,8 @@ function UploadWallPaperToggle({ text, value, type, resetText }: UploadWallPaper
   return (
     <button
       type="button"
-      className={`uploadWallPaperToggle-wrapper${wallpaper[type] === value ? ' selected' : ''}`}
+      name="place"
+      className={`uploadWallPaperToggle-wrapper${wallpaper[type]?.toString() === value ? ' selected' : ''}`}
       onClick={() => {
         if (value) onClickToggle(type, value);
       }}

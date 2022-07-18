@@ -4,13 +4,19 @@ import './UploadPlace.scss';
 type UploadPlaceProps = {
   onInputStart: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
   day: number;
-  nowLocation: { id: number; start: string; time: string; transportation: string; end: string };
+  nowLocation: {
+    departure: string;
+    arrival: string;
+    travelTime: string;
+    transportation: string;
+  };
   onInputEnd: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
   onInputTime: (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, locNum: number) => void;
   onChangeTranport: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number, id: number) => void;
   onDeleteLocation: (nowDay: number, id: number) => void;
   onResetStartLoc: (nowDay: number, id: number) => void;
   onResetEndLoc: (nowDay: number, id: number) => void;
+  id: number;
 };
 
 function UploadPlace({
@@ -23,6 +29,7 @@ function UploadPlace({
   onDeleteLocation,
   onResetEndLoc,
   onResetStartLoc,
+  id,
 }: UploadPlaceProps) {
   const startLocInputRef = useRef<HTMLInputElement>(null);
   const endLocInputRef = useRef<HTMLInputElement>(null);
@@ -43,16 +50,16 @@ function UploadPlace({
             placeholder="출발 장소를 입력해주세요."
             ref={startLocInputRef}
             onChange={(e) => {
-              onInputStart(e, day, nowLocation.id);
+              onInputStart(e, day, id);
             }}
-            value={nowLocation.start || ''}
+            value={nowLocation.departure || ''}
           />
-          {nowLocation.start !== '' && (
+          {nowLocation.departure !== '' && (
             <button
               type="button"
               onClick={() => {
                 resetText(startLocInputRef);
-                onResetStartLoc(day, nowLocation.id);
+                onResetStartLoc(day, id);
               }}
             >
               <img src="imgs/Upload/ic_x_small.png" alt="reset" />
@@ -67,8 +74,8 @@ function UploadPlace({
           <input
             type="text"
             placeholder="걸린 시간을 입력해주세요."
-            onChange={(e) => onInputTime(e, day, nowLocation.id)}
-            value={nowLocation.time || ''}
+            onChange={(e) => onInputTime(e, day, id)}
+            value={nowLocation.travelTime || ''}
           />
         </div>
         <div className="transportation">
@@ -80,6 +87,7 @@ function UploadPlace({
                 key={transportation}
                 nowLocation={nowLocation}
                 day={day}
+                id={id}
                 onChangeTransport={onChangeTranport}
               />
             ))}
@@ -95,16 +103,16 @@ function UploadPlace({
             placeholder="도착 장소를 입력해주세요."
             ref={endLocInputRef}
             onChange={(e) => {
-              onInputEnd(e, day, nowLocation.id);
+              onInputEnd(e, day, id);
             }}
-            value={nowLocation.end || ''}
+            value={nowLocation.arrival || ''}
           />
-          {nowLocation.end !== '' && (
+          {nowLocation.arrival !== '' && (
             <button
               type="button"
               onClick={() => {
                 resetText(endLocInputRef);
-                onResetEndLoc(day, nowLocation.id);
+                onResetEndLoc(day, id);
               }}
             >
               <img src="imgs/Upload/ic_x_small.png" alt="reset" />
@@ -112,8 +120,8 @@ function UploadPlace({
           )}
         </div>
       </article>
-      {nowLocation.id > 1 && (
-        <button type="button" className="delete" onClick={() => onDeleteLocation(day, nowLocation.id)}>
+      {id > 0 && (
+        <button type="button" className="delete" onClick={() => onDeleteLocation(day, id)}>
           <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
         </button>
       )}
@@ -123,12 +131,18 @@ function UploadPlace({
 
 type TransportationButtonProps = {
   transportation: string;
-  nowLocation: { id: number; start: string; time: string; transportation: string; end: string };
+  nowLocation: {
+    departure: string;
+    arrival: string;
+    travelTime: string;
+    transportation: string;
+  };
   day: number;
+  id: number;
   onChangeTransport: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number, id: number) => void;
 };
 
-function TransportationButton({ transportation, nowLocation, onChangeTransport, day }: TransportationButtonProps) {
+function TransportationButton({ transportation, nowLocation, onChangeTransport, day, id }: TransportationButtonProps) {
   let transportationKR = '';
   switch (transportation) {
     case 'foot':
@@ -153,7 +167,7 @@ function TransportationButton({ transportation, nowLocation, onChangeTransport, 
     <button
       id="transportation-wrapper"
       type="button"
-      onClick={(e) => onChangeTransport(e, day, nowLocation.id)}
+      onClick={(e) => onChangeTransport(e, day, id)}
       className={transportation === nowLocation.transportation ? 'selected' : ''}
     >
       <img src={`imgs/Upload/emoji_${transportation}.png`} alt={transportation} />
