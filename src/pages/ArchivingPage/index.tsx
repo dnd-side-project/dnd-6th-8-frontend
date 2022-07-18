@@ -15,7 +15,7 @@ function ArchivingPage() {
   const [deleteClick, setDeleteClick] = useState<boolean>(false);
   const [agreeClick, setAgreeClick] = useState<boolean>(false);
   const [deleteId, setDeleteId] = useState<number>();
-  
+
   useEffect(() => {
     dispatch(myArchivesIsShared());
     dispatch(myArchivesPrivate());

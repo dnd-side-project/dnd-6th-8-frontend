@@ -8,6 +8,7 @@ import myArchivesReducer from './post/archives';
 import readWallPaperReducer from './post/readwallpaper';
 import dayFeed from './post/dayfeed';
 import home from './post/home';
+import emojiCounts from './post/emojiCount';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   dayFeed,
   home,
   days,
+  emojiCounts,
 });
 
 // export default rootReducer;

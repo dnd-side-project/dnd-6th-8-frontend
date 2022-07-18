@@ -1,24 +1,28 @@
 /* eslint-disable react/jsx-key */
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination } from 'swiper';
-import { DayFeedDataType, dayTripCourse } from '../../../../constants';
 import LocPin from '../../../../assets/icons/WallPaper/dayfeed/ic_location_purple 1.png';
 import './style.scss';
+import { RootState } from '../../../../modules';
 
 type TabBodyProps = {
-  value: DayFeedDataType;
+  index: number;
 };
 
-function TabBody({ value }: TabBodyProps) {
+function TabBody({ index }: TabBodyProps) {
   const [imgClick, setImgClick] = useState(true);
+  const { daysObjectiveResponseDtoList, daysSubjectiveResponseDtoList } = useSelector(
+    (state: RootState) => state.dayFeed.data,
+  );
   SwiperCore.use([Pagination]);
   return (
     <div className="tabbody-wrapper">
-      {/* <div className="date-weather">
-        <p className="body-date">{value.date}</p>
-        <div>{value.weather}</div>
-      </div> */}
+      <div className="date-weather">
+        <p className="body-date">{daysSubjectiveResponseDtoList[index].date}</p>
+        <div>{daysSubjectiveResponseDtoList[index].weather}</div>
+      </div>
 
       {/* <div className="carousel-wrapper">
         <Swiper spaceBetween={150} slidesPerView={3}>
@@ -69,20 +73,20 @@ function TabBody({ value }: TabBodyProps) {
             <div className="today-line" />
             하루의 여정
           </p>
-          <div className="archiving-wrapper">{value.travelDescription}</div>
+          <div className="archiving-wrapper">{daysSubjectiveResponseDtoList[index].travelDescription}</div>
         </div>
         <div className="today-wrapper">
           <p>
             <div className="today-line" /> 하루의 감정
           </p>
-          <div className="archiving-wrapper">{value.emotionDescription}</div>
+          <div className="archiving-wrapper">{daysSubjectiveResponseDtoList[index].emotionDescription}</div>
         </div>
         <div className="today-wrapper">
           <p>
             <div className="today-line" />
             여행 꿀팁
           </p>
-          <div className="archiving-wrapper">{value.tipDescription}</div>
+          <div className="archiving-wrapper">{daysSubjectiveResponseDtoList[index].tipDescription}</div>
         </div>
       </div>
     </div>
