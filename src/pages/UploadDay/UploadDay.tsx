@@ -333,7 +333,7 @@ function UploadDay() {
               placeholder="YYYY/MM/DD"
               className={days[selectedDay - 1].date ? 'input' : ''}
               onChange={(e) => onInputDate(e, selectedDay)}
-              // value={writeData[day - 1].date}
+              value={days[selectedDay - 1].date}
             />
           </article>
           <article className="question weather">

@@ -14,6 +14,7 @@ const DELETE_IMAGE = 'days/DELETE_IMAGE' as const;
 const CHANGE_LOCATION = 'days/CHANGE_LOCATION' as const;
 const MODIFY_LOCATION = 'days/MODIFY_LOCATION' as const;
 const WRITING = 'days/WRITING' as const;
+const SET_BADGE = 'days/SET_BADGE' as const;
 
 const POST_DAYS_PENDING = 'days/POST_DAYS_PENDING' as const;
 const POST_DAYS_SUCCESS = 'days/POST_DAYS_SUCCESS' as const;
@@ -64,6 +65,11 @@ export const writing = (day: number, type: string, data: string) => ({
   payload: { day, type, data },
 });
 
+export const setBadge = (badge: string) => ({
+  type: SET_BADGE,
+  payload: badge,
+});
+
 const postDaysPending = () => ({ type: POST_DAYS_PENDING });
 const postDaysSuccess = (payload: AxiosResponse) => ({ type: POST_DAYS_SUCCESS, payload });
 const postDaysFailure = (payload: AxiosError) => ({ type: POST_DAYS_FAILURE, error: true, payload });
@@ -78,6 +84,7 @@ type dayAction =
   | ReturnType<typeof changeLocation>
   | ReturnType<typeof modifyLocation>
   | ReturnType<typeof writing>
+  | ReturnType<typeof setBadge>
   | ReturnType<typeof postDaysPending>
   | ReturnType<typeof postDaysSuccess>
   | ReturnType<typeof postDaysFailure>;
@@ -92,12 +99,12 @@ export type dayInfoType = {
 
 export type DaysDataType = {
   [index: string]: string | File[] | number | dayInfoType[] | null | string[];
-  date: string | null;
+  date: string;
   archiveId: number | null;
   dayNumber: number;
-  travelDescription: string | null;
-  emotionDescription: string | null;
-  weather: string | null;
+  travelDescription: string;
+  emotionDescription: string;
+  weather: string;
   tipDescription: string | null;
   dayInfoSaveRequestDtos: dayInfoType[];
   images: File[];
@@ -108,6 +115,7 @@ export type DaysModuleType = {
   data: DaysDataType[];
   loading: boolean;
   error: null | Error;
+  badge: string;
 };
 
 // thunk 함수
@@ -137,11 +145,11 @@ const initailState: DaysModuleType = {
     {
       dayNumber: 1,
       writer: null,
-      date: null,
+      date: '',
       archiveId: null,
-      weather: null,
-      travelDescription: null,
-      emotionDescription: null,
+      weather: '',
+      travelDescription: '',
+      emotionDescription: '',
       tipDescription: null,
       dayInfoSaveRequestDtos: [
         {
@@ -156,6 +164,7 @@ const initailState: DaysModuleType = {
   ],
   loading: false,
   error: null,
+  badge: '',
 };
 
 // 리듀서
@@ -169,11 +178,11 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
           {
             dayNumber: state.data.length + 1,
             writer: null,
-            date: null,
+            date: '',
             archiveId: null,
-            weather: null,
-            travelDescription: null,
-            emotionDescription: null,
+            weather: '',
+            travelDescription: '',
+            emotionDescription: '',
             tipDescription: null,
             dayInfoSaveRequestDtos: [
               {
@@ -263,6 +272,8 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
           day.dayNumber === action.payload.day ? { ...day, [action.payload.type]: action.payload.data } : day,
         ),
       };
+    case SET_BADGE:
+      return { ...state, badge: action.payload };
     case POST_DAYS_PENDING:
       return { ...state, loading: true };
     case POST_DAYS_SUCCESS:
