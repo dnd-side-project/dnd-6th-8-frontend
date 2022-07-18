@@ -15,6 +15,7 @@ const CHANGE_TOGGLE = 'wallpaper/CHANGE_TOGGLE' as const;
 const RESET_WALLPAPER = 'wallpaper/RESET_WALLPAPER' as const;
 const GET_ARCHIVE_ID = 'wallpaper/GET_ARCHIVE_ID' as const;
 const SET_BADGE = 'wallpaper/SET_BADGE' as const;
+const SET_SHARE = 'wallpaper/SET_SHARE' as const;
 
 const POST_WALLPAPER_PENDING = 'wallpaper/POST_WALLPAPER_PENDING' as const;
 const POST_WALLPAPER_SUCCESS = 'wallpaper/POST_WALLPAPER_SUCCESS' as const;
@@ -69,6 +70,11 @@ export const setBadge = (badge: string) => ({
   payload: badge,
 });
 
+export const setShare = (share: boolean) => ({
+  type: SET_SHARE,
+  payload: share,
+});
+
 const postWallpaperPending = () => ({ type: POST_WALLPAPER_PENDING });
 const postWallpaperSuccess = () => ({ type: POST_WALLPAPER_SUCCESS });
 const postWallpaperFailure = (payload: AxiosError) => ({ type: POST_WALLPAPER_FAILURE, error: true, payload });
@@ -90,6 +96,7 @@ type wallpaperAction =
   | ReturnType<typeof resetWallpaper>
   | ReturnType<typeof getArchiveId>
   | ReturnType<typeof setBadge>
+  | ReturnType<typeof setShare>
   | ReturnType<typeof postWallpaperPending>
   | ReturnType<typeof postWallpaperSuccess>
   | ReturnType<typeof postWallpaperFailure>
@@ -170,7 +177,7 @@ const initailState: WallPaperModuleType = {
     budget: null,
     archivingStyle: null,
     id: null,
-    share: null,
+    share: false,
     countDaysFeeds: null,
   },
   loading: false,
@@ -205,7 +212,7 @@ function wallpaper(state: WallPaperModuleType = initailState, action: wallpaperA
           budget: null,
           archivingStyle: null,
           id: null,
-          share: null,
+          share: false,
           countDaysFeeds: null,
         },
       };
@@ -213,6 +220,8 @@ function wallpaper(state: WallPaperModuleType = initailState, action: wallpaperA
       return { ...state, data: { ...state.data, id: action.payload } };
     case SET_BADGE:
       return { ...state, badge: action.payload };
+    case SET_SHARE:
+      return { ...state, data: { ...state.data, share: action.payload } };
     case POST_WALLPAPER_PENDING:
       return { ...state, loading: true };
     case POST_WALLPAPER_SUCCESS:

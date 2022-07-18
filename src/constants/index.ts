@@ -42,7 +42,7 @@ export type WallPaperDataType = {
   archivingStyle: string | null;
   id: number | null;
   countDaysFeeds: number | null;
-  share: boolean | null;
+  share: boolean;
 };
 
 export type WallPaperModuleType = {
