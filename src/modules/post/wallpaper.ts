@@ -109,10 +109,7 @@ export const postWallpaper =
         },
       });
 
-      if (response.id) {
-        console.log(response);
-        dispatch(getArchiveId(response.id));
-      }
+      if (response.id) dispatch(getArchiveId(response.id));
       dispatch(postWallpaperSuccess());
     } catch (e: AxiosError | unknown) {
       if (axios.isAxiosError(e)) dispatch(postWallpaperFailure(e));

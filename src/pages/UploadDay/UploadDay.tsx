@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import DayButton from '../../components/UploadDay/DayButton';
+import WeatherButton from '../../components/UploadDay/WeatherButton';
 import UploadDayQuestion from '../../components/UploadDay/UploadDayQuestion';
 import UploadDayTextArea from '../../components/UploadDay/UploadDayTextArea';
 import UploadPlace from '../../components/UploadDay/UploadPlace';
@@ -18,6 +19,8 @@ import {
   modifyLocation,
   writing,
   postDay,
+  inputDate,
+  inputWeather,
 } from '../../modules/post/days';
 import { RootState } from '../../modules';
 
@@ -104,9 +107,10 @@ function UploadDay() {
   };
 
   // input받는 함수 하나로 합치기
-  // const onInputDate = (e: React.ChangeEvent<HTMLInputElement>, nowDay: number) => {
-  //   setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, date: e.target.value } : data)));
-  // };
+  const onInputDate = (e: React.ChangeEvent<HTMLInputElement>, nowDay: number) => {
+    dispatch(inputDate(nowDay - 1, e.target.value));
+    // setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, date: e.target.value } : data)));
+  };
 
   const onInputStartLoc = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, nowDay: number, id: number) => {
@@ -246,12 +250,13 @@ function UploadDay() {
     // );
   };
 
-  // const onInputWeather = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number) => {
-  //   const newWeather = e.currentTarget.children[0].getAttribute('alt');
-  //   if (newWeather) {
-  //     setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, weather: newWeather } : data)));
-  //   }
-  // };
+  const onInputWeather = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, nowDay: number) => {
+    const newWeather = e.currentTarget.children[0].getAttribute('alt');
+    if (newWeather) {
+      dispatch(inputWeather(nowDay - 1, newWeather));
+      // setWriteData(writeData.map((data) => (data.day === nowDay ? { ...data, weather: newWeather } : data)));
+    }
+  };
 
   const onInputDiary = (e: React.ChangeEvent<HTMLTextAreaElement>, nowDay: number) => {
     dispatch(writing(nowDay, 'travelDescription', e.target.value));
@@ -271,20 +276,15 @@ function UploadDay() {
   // 작성 완료
   const [complete, setComplete] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   setComplete(true);
-  //   for (let i = 0; i < writeData.length; i += 1) {
-  //     if (
-  //       writeData[i].date === '' ||
-  //       writeData[i].weather === '' ||
-  //       writeData[i].diary === '' ||
-  //       writeData[i].feeling === ''
-  //     ) {
-  //       setComplete(false);
-  //       break;
-  //     }
-  //   }
-  // }, [writeData]);
+  useEffect(() => {
+    setComplete(true);
+    for (let i = 0; i < days.length; i += 1) {
+      if (!days[i].date || !days[i].weather || !days[i].travelDescription || !days[i].emotionDescription) {
+        setComplete(false);
+        break;
+      }
+    }
+  }, [days]);
 
   const [isStickerModalOpen, setIsStickerModalOpen] = useState<boolean>(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
@@ -331,46 +331,26 @@ function UploadDay() {
             <input
               type="text"
               placeholder="YYYY/MM/DD"
-              // className={writeData[day - 1].date ? 'input' : ''}
-              // onChange={(e) => onInputDate(e, day)}
+              className={days[selectedDay - 1].date ? 'input' : ''}
+              onChange={(e) => onInputDate(e, selectedDay)}
               // value={writeData[day - 1].date}
             />
           </article>
           <article className="question weather">
             <UploadDayQuestion text="그날 여행의 날씨는 어땠나요?" necessary />
             <div className="weather-container">
-              <button
+              <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="sun" />
+              <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="cloud" />
+              <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="rain" />
+              <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="snow" />
+              {/* <button
                 type="button"
-                // onClick={(e) => onInputWeather(e, day)}
-                // className={writeData[day - 1].weather === 'sun' ? 'selected' : ''}
+                onClick={(e) => onInputWeather(e, selectedDay)}
+                className={days[selectedDay - 1].weather === 'sun' ? 'selected' : ''}
               >
                 <img src="imgs/Upload/illust_sun.png" alt="sun" />
                 <span>맑음</span>
-              </button>
-              <button
-                type="button"
-                // onClick={(e) => onInputWeather(e, day)}
-                // className={writeData[day - 1].weather === 'cloud' ? 'selected' : ''}
-              >
-                <img src="imgs/Upload/illust_cloud.png" alt="cloud" />
-                <span>흐림</span>
-              </button>
-              <button
-                type="button"
-                // onClick={(e) => onInputWeather(e, day)}
-                // className={writeData[day - 1].weather === 'rain' ? 'selected' : ''}
-              >
-                <img src="imgs/Upload/illust_rain.png" alt="rain" />
-                <span>비</span>
-              </button>
-              <button
-                type="button"
-                // onClick={(e) => onInputWeather(e, day)}
-                // className={writeData[day - 1].weather === 'snow' ? 'selected' : ''}
-              >
-                <img src="imgs/Upload/illust_snow.png" alt="snow" />
-                <span>눈</span>
-              </button>
+              </button> */}
             </div>
           </article>
           <article className="question images">
@@ -424,23 +404,26 @@ function UploadDay() {
                 onResetEndLoc={onResetEndLoc}
               />
             ))}
-            <button
-              type="button"
-              className="plus-button"
-              onClick={() => {
-                if (days[selectedDay - 1].dayInfoSaveRequestDtos.length === 3) {
-                  setIsLocationAlertOpen(true);
-                  setTimeout(() => {
-                    setIsLocationAlertOpen(false);
-                  }, 1200);
-                } else {
+            {days[selectedDay - 1].dayInfoSaveRequestDtos.length < 3 && (
+              <button
+                type="button"
+                className="plus-button"
+                onClick={() => {
                   onAddLocation(selectedDay, days[selectedDay - 1].dayInfoSaveRequestDtos.length);
-                }
-              }}
-            >
-              <img src="imgs/Upload/ic_plus_circle_route.png" alt="plus" />
-              <span>장소 경로 추가하기</span>
-            </button>
+                  // if (days[selectedDay - 1].dayInfoSaveRequestDtos.length === 3) {
+                  //   setIsLocationAlertOpen(true);
+                  //   setTimeout(() => {
+                  //     setIsLocationAlertOpen(false);
+                  //   }, 1200);
+                  // } else {
+                  //   onAddLocation(selectedDay, days[selectedDay - 1].dayInfoSaveRequestDtos.length);
+                  // }
+                }}
+              >
+                <img src="imgs/Upload/ic_plus_circle_route.png" alt="plus" />
+                <span>장소 경로 추가하기</span>
+              </button>
+            )}
           </article>
           <article className="question">
             <UploadDayQuestion text="하루의 여정을 상세히 기록해보세요." necessary />
