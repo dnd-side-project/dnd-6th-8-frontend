@@ -9,7 +9,6 @@
         z-index : 1; 
         background: rgba(248, 249, 252, 0.95);
         display : flex; 
-        // justify-content: space-between;
         animation: sererec 0.3s backwards;
         overflow: hidden;
         .heart{
@@ -98,6 +97,10 @@
                     font-family: 'Pretendard-Medium';
                     margin-left : 0.4rem; 
                 }
+            }
+            .active-icon{
+                color : #3a13c1 !important;
+                background-color: #eeeeff !important;
             }
         }
     }

@@ -2,18 +2,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
+import { useParams } from 'react-router-dom';
 import Arrow from '../../../assets/icons/WallPaper/chevron_duo_left.png';
 import defaultImg from '../../../assets/icons/WallPaper/defaultImg.png';
 import { RootState } from '../../../modules';
 import { readDayFeed } from '../../../modules/post/dayfeed';
 
 function WallPaperPreview() {
+  const { id } = useParams();
   const dispatch = useDispatch();
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
-  useEffect(() => {
-    console.log('여기서 아카이빙 id', readWallPaperData.id);
-    dispatch(readDayFeed(readWallPaperData.id));
-  }, []);
   return (
     <div className="wallpaperpreview-wrapper">
       <img

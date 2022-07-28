@@ -105,8 +105,10 @@ export type DayFeedModuleType = {
 };
 
 export type EmoJiReadDataType = {
-  emojiId: number;
   emojiCount: number;
+  emojiId: number;
+  emojisChecked: number;
+  emojisCheckedId: number;
   emojisName: string;
   emojisUrl: string;
 };
