@@ -51,6 +51,29 @@
                 line-height: 1.67;
             }
         }
+        .active-introduce{
+            display: flex;
+            align-items: center;
+            height : 100%;
+            padding : 0.4rem 0.6rem; 
+            border-radius: 1.8rem;
+            background: white;
+            border : 1px solid #7d4bff;
+            cursor : pointer; 
+            img{
+                height : 100%;
+            }
+            p{
+                white-space: nowrap;
+                height : 100%;
+                margin-left : 0.4rem; 
+                color : #7d4bff;
+                font-family: 'Pretendard-Medium';
+                font-size: 1.2rem;
+                font-weight: 500;
+                line-height: 1.67;
+            }
+        }
     } 
     .reactionbar-inner-wrapper{
         min-width : 36rem; 
@@ -99,8 +122,23 @@
                 }
             }
             .active-icon{
-                color : #3a13c1 !important;
-                background-color: #eeeeff !important;
+                background-color: #eeeeff ;
+                cursor: pointer;
+                padding: 0.4rem 0.6rem;
+                border-radius: 1.8rem;
+                display: flex;
+                align-items: center;
+                img{
+                    height : 100%;
+                }
+                p{
+                    color : #3a13c1 ;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    line-height: 1.67;
+                    font-family: 'Pretendard-Medium';
+                    margin-left : 0.4rem; 
+                }
             }
         }
     }
