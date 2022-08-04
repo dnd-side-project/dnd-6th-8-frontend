@@ -25,15 +25,11 @@ function TabBody({ index }: TabBodyProps) {
       </div>
 
       <div className="carousel-wrapper">
-        <Swiper spaceBetween={150} slidesPerView={3}>
-          {data.daysObjAndSubResponseDto[index].imgUrl.map((url : string) => {
+        {data.daysObjAndSubResponseDto[index].imgUrl.map((url : string) => {
             return (
-              <SwiperSlide>
                 <img className="day-img" src={url} alt="이미지캐루셀" width="150px" height="150px" />
-              </SwiperSlide>
             );
           })}
-        </Swiper>
       </div>
       <div className="content-wrapper">
         {/* <Swiper

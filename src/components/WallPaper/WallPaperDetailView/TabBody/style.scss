@@ -43,9 +43,14 @@
         }
     }
     .carousel-wrapper{
+        display: flex;
         margin-top : 2.4rem; 
+        overflow: auto;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar { display: none; }
         .day-img{
             border-radius: 1.2rem;
+            margin-right: 1.2rem;
             img{
              height : 100%;   
             }

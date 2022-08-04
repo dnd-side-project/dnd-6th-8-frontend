@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { useParams } from 'react-router-dom';
 import ReactionGood from '../../../assets/icons/WallPaper/ReactionBar/ic_thumbs_purple 1.png';
 import ReactionHeart from '../../../assets/icons/WallPaper/ReactionBar/emoji_heart.png';
@@ -38,8 +37,6 @@ function ReactionBar() {
     <div className="reactionbar-wrapper">
       {reactionClick && (
         <div className="reaction-click">
-          <Swiper slidesPerView={3} spaceBetween={8} slidesOffsetBefore={8} slidesOffsetAfter={80}>
-            <SwiperSlide>
               <div
                 className={data[0]?.emojisChecked ? 'active-introduce heart' : 'icon-introduce heart'}
                 onClick={() => onEmojiClick(1, data[0]?.emojisCheckedId)}
@@ -48,8 +45,6 @@ function ReactionBar() {
                 <img src={ReactionHeart} alt="하트" />
                 <p>좋아요</p>
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
               <div
                 className={data[1]?.emojisChecked ? 'active-introduce bag' : 'icon-introduce bag'}
                 onClick={() => onEmojiClick(2, data[1]?.emojisCheckedId)}
@@ -58,8 +53,6 @@ function ReactionBar() {
                 <img src={ReactionBag} alt="가방" />
                 <p>저도 가고 싶어요!</p>
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
               <div
                 className={data[2]?.emojisChecked ? 'active-introduce spark' : 'icon-introduce spark'}
                 onClick={() => onEmojiClick(3, data[2]?.emojisCheckedId)}
@@ -68,8 +61,6 @@ function ReactionBar() {
                 <img src={ReactionSpark} alt="빛" />
                 <p>아름다운 추억이에요</p>
               </div>
-            </SwiperSlide>
-            <SwiperSlide>
               <div
                 className={data[3]?.emojisChecked ? 'active-introduce eyes' : 'icon-introduce eyes'}
                 onClick={() => onEmojiClick(4, data[3]?.emojisCheckedId)}
@@ -78,8 +69,6 @@ function ReactionBar() {
                 <img src={ReactionEyes} alt="눈" />
                 <p>도움이 많이 됐어요</p>
               </div>
-            </SwiperSlide>
-          </Swiper>
         </div>
       )}
       <div className="reactionbar-inner-wrapper">
