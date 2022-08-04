@@ -1,5 +1,5 @@
 import { ThunkAction } from 'redux-thunk';
-import { DayFeedDataType, DayFeedModuleType } from '../../constants/index';
+import { DayFeedModuleType } from '../../constants/index';
 
 import instance from '../../lib/axios';
 import { RootState } from '..';
@@ -23,7 +23,7 @@ export const readDayFeed =
     try {
       dispatch(readDayFeedPending());
       console.log('요청 이전 id ', id);
-      const response = await instance.get(`/api/v1/archives/${id}/days/1`);
+      const response = await instance.get(`/api/v1/archives/${id}/days/detail`);
       console.log('데이피드 읽기', response);
       dispatch(readDayFeedSuccess(response));
     } catch (e) {
@@ -34,7 +34,7 @@ export const readDayFeed =
 
 // 초기 상태
 const initailState: DayFeedModuleType = {
-  data: [],
+  data: null,
   loading: false,
   error: false,
 };
@@ -46,8 +46,8 @@ function dayFeed(state: DayFeedModuleType = initailState, action: readDayFeedAct
     case POST_READ_DAYFEED_PENDING:
       return { ...state, loading: true };
     case POST_READ_DAYFEED_SUCCESS:
-      console.log(action.payload);
-      return { ...state, data: { ...action.payload }, loading: false };
+      console.log('payload', action.payload);
+      return { ...state, data: action.payload, loading: false };
     case POST_READ_DAYFEED_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:

@@ -71,35 +71,38 @@ export type ReadWallPaperModuleType = {
   error: boolean | Error;
 };
 
-export type daysObjectiveResponseDtoList = {
+export type daysObjectiveResponseDtoType = {
   arrival: string;
   departure: string;
   transportation: string;
   travelTime: string;
 };
-export type daysSubjectiveResponseDtoList = {
-  archiveId: number;
+export type daysSubjectiveResponseDtoType = {
   date: string;
-  dayNumber: number;
+  weather: string;
   emotionDescription: string;
   tipDescription: string;
   travelDescription: string;
-  weather: string;
-  writer: string;
 };
 
+export type daysObjAndSubResponseDtoType = {
+  dayNumber : number;
+  imgUrl : string[];
+  daysObjectiveResponseDto : daysObjectiveResponseDtoType;
+  daysSubjectiveResponseDto : daysSubjectiveResponseDtoType;
+}
+
 export type DayFeedDataType = {
-  daysInArchiveDto: {
+    writer : string;
+    archiveId: number;
     archiveTitle: string;
     firstDay: string;
     lastDay: string;
-  };
-  daysObjectiveResponseDtoList: daysObjectiveResponseDtoList[];
-  daysSubjectiveResponseDtoList: daysSubjectiveResponseDtoList[];
+    daysObjAndSubResponseDto : daysObjAndSubResponseDtoType[];
 };
 
 export type DayFeedModuleType = {
-  data: DayFeedDataType[];
+  data: DayFeedDataType | null;
   loading: boolean;
   error: boolean | Error;
 };

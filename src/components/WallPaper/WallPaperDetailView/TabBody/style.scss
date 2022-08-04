@@ -44,6 +44,12 @@
     }
     .carousel-wrapper{
         margin-top : 2.4rem; 
+        .day-img{
+            border-radius: 1.2rem;
+            img{
+             height : 100%;   
+            }
+        }
     }
     .content-wrapper{
         padding-right : 1.6rem; 
