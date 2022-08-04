@@ -15,9 +15,16 @@ type TabBodyProps = {
   index: number;
 };
 
+function getDate(date: string) {
+  const week = ['일', '월', '화', '수', '목', '금', '토'];
+  const dayOfWeek = week[new Date(date).getDay()];
+  return dayOfWeek;
+}
+
 function TabBody({ index }: TabBodyProps) {
   const { data } = useSelector((state: RootState) => state.dayFeed);
   const [weather, setWeather] = useState('');
+  const [date, setDate] = useState(data.daysObjAndSubResponseDto[index].daysSubjectiveResponseDto.date);
   useEffect(() => {
     switch (data.daysObjAndSubResponseDto[index].daysSubjectiveResponseDto.weather) {
       case '맑음':
@@ -40,7 +47,9 @@ function TabBody({ index }: TabBodyProps) {
   return (
     <div className="tabbody-wrapper">
       <div className="date-weather">
-        <p className="body-date">{data.daysObjAndSubResponseDto[index].daysSubjectiveResponseDto.date}</p>
+        <p className="body-date">{`${date.split('-')[0]}.${date.split('-')[1]}.${date.split('-')[2]} (${getDate(
+          date,
+        )})`}</p>
         <div>
           <img src={weather} alt="날씨" />
           <p>{data.daysObjAndSubResponseDto[index].daysSubjectiveResponseDto.weather}</p>
