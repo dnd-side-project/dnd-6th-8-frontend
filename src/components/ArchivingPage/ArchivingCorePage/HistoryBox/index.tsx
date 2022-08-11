@@ -10,7 +10,6 @@ function HistoryBox() {
   const [myArchivingData, setMyArchivingData] = useState([] as any);
 
   const filterPlaces = (tempData: archivingType[]) => {
-    console.log('템프', tempData);
     if (tempData !== undefined) {
       const placeCount = tempData.reduce((acc: any, cur: any) => {
         const temp = acc[cur.places];
@@ -44,7 +43,7 @@ function HistoryBox() {
                 <div className="icon-box" key={value[0]}>
                   <div className="icon">🚄</div>
                   <div className="region">
-                    {value[0]}
+                    {value[0] === 'null' ? '미입력' : value[0]}
                     {`(${value[1]})`}
                   </div>
                 </div>

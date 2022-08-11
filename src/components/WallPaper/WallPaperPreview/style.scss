@@ -71,12 +71,20 @@
                 max-width : 43rem; 
                 height : 3.6rem; 
                 border: solid 1px #ffffff; 
-                padding : 0.8rem 1.6rem; 
+                padding : 0 1rem; 
                 background: rgba(248, 249, 252, 0.2);
                 border-radius: 1.2rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                div{
+                    display: flex;
+                    align-items: center;
+                    img{
+                        display: block;
+                        margin-right: 0.5rem;
+                    }
+                }
             }
         }
     }

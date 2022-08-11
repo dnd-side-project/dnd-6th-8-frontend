@@ -1,33 +1,34 @@
 .reactionbar-wrapper{
     .reaction-click{
         position: fixed;
+        overflow: auto;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar { display: none; }
         bottom : 5.6rem; 
-        width : 100vw;
+        width : 100%;
         min-width : 36rem; 
         height : 4.4rem; 
-        padding : 0.8rem 0; 
+        padding : 0.8rem; 
         z-index : 1; 
         background: rgba(248, 249, 252, 0.95);
         display : flex; 
         animation: sererec 0.3s backwards;
-        overflow: hidden;
         .heart{
             min-width : 6.5rem;
             max-width: 7rem;
-            margin-left : 0.8rem;  
         }
         .bag{
             min-width : 12rem;
             width : 12rem; 
-            margin-left : -2rem; 
+            margin-left : 0.8rem; 
         }
         .spark{
             width : 14rem; 
-            margin-left : -rem;
+            margin-left : 0.8rem;
         }
         .eyes{
             width : 13rem; 
-            margin-left : 4rem; 
+            margin-left : 0.8rem; 
         }
         .icon-introduce{
             display: flex;

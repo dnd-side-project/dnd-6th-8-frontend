@@ -32,7 +32,7 @@
         }
         div{
             margin-left : 1.2rem; 
-            padding: 0.5rem 0.8rem;
+            padding: 0.7rem 0.8rem;
             border-radius: 2rem;
             background: #f8f9fc;
             font-family: 'Pretendard-Medium';
@@ -40,10 +40,29 @@
             font-weight: 500;
             line-height: 1.67;
             color : #474451;
+            display: flex;
+            align-items: center;
+            img {
+                display: block;
+                width : 2rem;
+                height : 2rem;
+                margin-right: 0.5rem;
+            }
         }
     }
     .carousel-wrapper{
+        display: flex;
         margin-top : 2.4rem; 
+        overflow: auto;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar { display: none; }
+        .day-img{
+            border-radius: 1.2rem;
+            margin-right: 1.2rem;
+            img{
+             height : 100%;   
+            }
+        }
     }
     .content-wrapper{
         padding-right : 1.6rem; 
@@ -97,7 +116,7 @@
             }
         }
         .today-wrapper{
-            margin-top : 7rem;
+            margin-top : 2.4rem;
             p{
                 display: flex;
                 align-items: center;

@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { daysObjectiveResponseDtoList, daysSubjectiveResponseDtoList } from '../../../constants';
+import { daysObjAndSubResponseDtoType } from '../../../constants';
 import { RootState } from '../../../modules';
 import { readDayFeed } from '../../../modules/post/dayfeed';
 import ReactionBar from '../ReactionBar';
@@ -20,15 +20,14 @@ function WallPaperDetailView() {
   const [index, setIndex] = useState<number>(0);
   const dayFeedData = useSelector((state: RootState) => state.dayFeed.data);
   useEffect(() => {
-    console.log('여기서 아카이빙 id', id);
     if (id !== undefined) dispatch(readDayFeed(id));
   }, [dispatch]);
   return (
     <div className="wallpaperdetailview-wrapper">
       <div className="detail-title-box">
-        <p className="detail-title">{dayFeedData && dayFeedData?.daysInArchiveDto.archiveTitle}</p>
+        <p className="detail-title">{dayFeedData && dayFeedData?.archiveTitle}</p>
         <p className="detail-date">
-          {dayFeedData && dayFeedData?.daysInArchiveDto.firstDay} ~ {dayFeedData && dayFeedData?.daysInArchiveDto.lastDay}
+          {dayFeedData && dayFeedData?.firstDay} ~ {dayFeedData && dayFeedData?.lastDay}
         </p>
       </div>
       <Tabs
@@ -39,7 +38,7 @@ function WallPaperDetailView() {
       >
         <TabList className="tab-header">
           {dayFeedData &&
-            dayFeedData.daysSubjectiveResponseDtoList.map((value: daysSubjectiveResponseDtoList, i: number) => {
+            dayFeedData.daysObjAndSubResponseDto.map((value: daysObjAndSubResponseDtoType, i: number) => {
               return (
                 <Tab key={value.dayNumber}>
                   <TabHeader day={value.dayNumber} index={index} />
@@ -48,9 +47,9 @@ function WallPaperDetailView() {
             })}
         </TabList>
         {dayFeedData &&
-          dayFeedData.daysObjectiveResponseDtoList.map((value: daysObjectiveResponseDtoList, i: number) => {
+          dayFeedData.daysObjAndSubResponseDto.map((value: daysObjAndSubResponseDtoType, i: number) => {
             return (
-              <TabPanel key={value.travelTime}>
+              <TabPanel key={value.dayNumber}>
                 <TabBody index={index} />
               </TabPanel>
             );

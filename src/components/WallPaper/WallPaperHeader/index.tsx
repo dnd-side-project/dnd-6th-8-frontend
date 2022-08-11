@@ -25,7 +25,7 @@ function WallPaperHeader() {
 
   return (
     <div className="wallpaperheader-wrapper">
-      {hamburgerMenu && <HamburgerMenu me={me} onHamburgerMenuClick={onHamburgerMenuClick} />}
+      {hamburgerMenu && <HamburgerMenu onHamburgerMenuClick={onHamburgerMenuClick} />}
       <div className="header-left">
         <img className="x-logo" src={XLogo} alt="X" onClick={goBackHome} aria-hidden="true" />
       </div>
