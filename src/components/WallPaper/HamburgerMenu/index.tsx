@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import './style.scss';
+import { useNavigate } from 'react-router-dom';
 import Report from '../../../assets/icons/WallPaper/Hamburger/ic_singo.png';
 import KakaoShare from '../../../assets/icons/WallPaper/Hamburger/ic_kakao_share.png';
 import Update from '../../../assets/icons/WallPaper/Hamburger/ic_update.png';
@@ -12,8 +13,13 @@ type HamburgerMenuProps = {
 };
 
 function HamburgerMenu({ onHamburgerMenuClick }: HamburgerMenuProps) {
+  const navigate = useNavigate();
+  const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
   const { writer } = useSelector((state: RootState) => state.dayFeed.data);
   const { userEmail } = useSelector((state: RootState) => state.userInformation.data);
+  const goReportPage = () => {
+    navigate(`/report/${readWallPaperData.id}`);
+  };
   return (
     <div
       className="hamburgermenu-wrapper"
@@ -39,7 +45,7 @@ function HamburgerMenu({ onHamburgerMenuClick }: HamburgerMenuProps) {
             <img src={KakaoShare} alt="카톡공유" />
             카카오톡으로 공유하기
           </p>
-          <p>
+          <p onClick={goReportPage} aria-hidden>
             <img src={Report} alt="신고" />
             신고하기
           </p>

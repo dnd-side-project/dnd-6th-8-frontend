@@ -22,6 +22,7 @@ import LogInProcess from './LogInProcess';
 import SignUpPage from './SignUpPage';
 import Withdrawal from './Withdrawal';
 import { archivingType } from '../constants/index';
+import ReportPage from './ReportPage';
 
 function App() {
   const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));
@@ -91,6 +92,7 @@ function App() {
           }
         />
         <Route path="/scrap" element={<Scrap />} />
+        <Route path="/report/:id" element={<ReportPage />} />
         <Route path="/withdrawal" element={<Withdrawal />} />
       </Routes>
     </Router>
