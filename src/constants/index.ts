@@ -86,19 +86,19 @@ export type daysSubjectiveResponseDtoType = {
 };
 
 export type daysObjAndSubResponseDtoType = {
-  dayNumber : number;
-  imgUrl : string[];
-  daysObjectiveResponseDto : daysObjectiveResponseDtoType;
-  daysSubjectiveResponseDto : daysSubjectiveResponseDtoType;
-}
+  dayNumber: number;
+  imgUrl: string[];
+  daysObjectiveResponseDto: daysObjectiveResponseDtoType;
+  daysSubjectiveResponseDto: daysSubjectiveResponseDtoType;
+};
 
 export type DayFeedDataType = {
-    writer : string;
-    archiveId: number;
-    archiveTitle: string;
-    firstDay: string;
-    lastDay: string;
-    daysObjAndSubResponseDto : daysObjAndSubResponseDtoType[];
+  writer: string | null;
+  archiveId: number;
+  archiveTitle: string;
+  firstDay: string;
+  lastDay: string;
+  daysObjAndSubResponseDto: daysObjAndSubResponseDtoType[];
 };
 
 export type DayFeedModuleType = {

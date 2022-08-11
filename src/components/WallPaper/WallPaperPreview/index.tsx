@@ -43,7 +43,7 @@ function WallPaperPreview() {
             </div>
             <div>
               <img src={readWallPaperData?.budget === '최소한' ? LittleMoney : ManyMoney} alt="최소한/넉넉하게" />
-              <p>{readWallPaperData?.budget} 준비</p>
+              <p>{readWallPaperData?.budget === '넉넉' ? '넉넉하게' : readWallPaperData?.budget} 준비</p>
             </div>
           </div>
         </div>
