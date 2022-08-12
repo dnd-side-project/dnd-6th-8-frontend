@@ -15,8 +15,8 @@ type HamburgerMenuProps = {
 function HamburgerMenu({ onHamburgerMenuClick }: HamburgerMenuProps) {
   const navigate = useNavigate();
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
-  const { writer } = useSelector((state: RootState) => state.dayFeed.data);
-  const { userEmail } = useSelector((state: RootState) => state.userInformation.data);
+  const dayFeed = useSelector((state: RootState) => state.dayFeed.data);
+  const userInformation = useSelector((state: RootState) => state.userInformation.data);
   const goReportPage = () => {
     navigate(`/report/${readWallPaperData.id}`);
   };
@@ -28,7 +28,7 @@ function HamburgerMenu({ onHamburgerMenuClick }: HamburgerMenuProps) {
       onClick={onHamburgerMenuClick}
       onKeyDown={onHamburgerMenuClick}
     >
-      {writer === userEmail ? (
+      {dayFeed?.writer === userInformation?.userEmail ? (
         <div className="hamburger-modal">
           <p>
             <img src={Update} alt="수정" />

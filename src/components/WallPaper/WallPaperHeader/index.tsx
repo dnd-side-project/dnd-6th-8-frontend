@@ -14,9 +14,9 @@ import { RootState } from '../../../modules';
 import instance from '../../../lib/axios';
 
 function WallPaperHeader() {
+  const dayFeed = useSelector((state: RootState) => state.dayFeed.data);
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
-  const { writer } = useSelector((state: RootState) => state.dayFeed.data);
-  const { userEmail } = useSelector((state: RootState) => state.userInformation.data);
+  const userInformation = useSelector((state: RootState) => state.userInformation.data);
   const [sharedToggle, setSharedToggle] = useState<boolean>(true);
   const [scrapToggle, setScrapToggle] = useState<any>();
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
@@ -79,7 +79,7 @@ function WallPaperHeader() {
         <img className="x-logo" src={XLogo} alt="X" onClick={goBackHome} aria-hidden="true" />
       </div>
       <div className="header-right">
-        {writer !== userEmail ? (
+        {dayFeed?.writer === userInformation?.userEmail ? (
           sharedToggle ? (
             <>
               <p className="shared-text">공유 ON</p>
