@@ -17,29 +17,61 @@ function WallPaperHeader() {
   const dayFeed = useSelector((state: RootState) => state.dayFeed.data);
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
   const userInformation = useSelector((state: RootState) => state.userInformation.data);
-  const [sharedToggle, setSharedToggle] = useState<boolean>(true);
+  const [sharedToggle, setSharedToggle] = useState<boolean | null>(readWallPaperData?.share);
   const [scrapToggle, setScrapToggle] = useState<any>();
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
   const navigate = useNavigate();
-  const goBackHome = () => {
-    navigate('/home');
+  const goBack = () => {
+    navigate(-1);
   };
-  const onSharedToggleClick = (): void => setSharedToggle((prev) => !prev);
+  const onSharedToggleClick = async (): Promise<any> => {
+    if (sharedToggle) {
+      await instance
+        .put(`/api/v1/archives/${readWallPaperData.id}/share`, {
+          params: {
+            isShare: false,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setSharedToggle(false);
+        })
+        .catch((err) => {
+          // alert(err);
+        });
+    } else {
+      // false, 스크랩 POST
+      await instance
+        .put(`/api/v1/archives/${readWallPaperData.id}/share`, {
+          params: {
+            isShare: true,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          setSharedToggle(true);
+        })
+        .catch((err) => {
+          // alert(err);
+        });
+    }
+  };
+
   const onScrapToggle = async (): Promise<any> => {
     if (scrapToggle) {
       // true, 스크랩 DELETE
       await instance
-        .delete(`/api/v1/archives/${readWallPaperData.id}/unScraps`)
+        .delete(`/api/v1/archives/16/unScraps`)
         .then(async () => {
           await instance
             .get(`/api/v1/archives/${readWallPaperData.id}/scrap`)
             .then((res) => setScrapToggle(res))
             .catch((err) => {
-              alert(err);
+              // alert(err);
             });
         })
         .catch((err) => {
-          alert(err);
+          // alert(err);
         });
     } else {
       // false, 스크랩 POST
@@ -50,11 +82,11 @@ function WallPaperHeader() {
             .get(`/api/v1/archives/${readWallPaperData.id}/scrap`)
             .then((res) => setScrapToggle(res))
             .catch((err) => {
-              alert(err);
+              // alert(err);
             });
         })
         .catch((err) => {
-          alert(err);
+          // alert(err);
         });
     }
   };
@@ -76,7 +108,7 @@ function WallPaperHeader() {
     <div className="wallpaperheader-wrapper">
       {hamburgerMenu && <HamburgerMenu onHamburgerMenuClick={onHamburgerMenuClick} />}
       <div className="header-left">
-        <img className="x-logo" src={XLogo} alt="X" onClick={goBackHome} aria-hidden="true" />
+        <img className="x-logo" src={XLogo} alt="X" onClick={goBack} aria-hidden="true" />
       </div>
       <div className="header-right">
         {dayFeed?.writer === userInformation?.userEmail ? (

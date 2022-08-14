@@ -13,7 +13,11 @@ function ReportPage() {
   };
   const reportSubmit = async () => {
     if (reportContent === null || undefined) return;
-    console.log(reportContent);
+    console.log({
+      params: {
+        reportType: `${reportContent}`,
+      },
+    });
     await instance
       .post(`/api/v1/report/archives/${id}`, {
         params: {
