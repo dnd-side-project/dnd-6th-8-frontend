@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './style.scss';
+import { useDispatch } from 'react-redux';
 import cancel from '../../assets/icons/ReportPage/cancel.png';
 import instance from '../../lib/axios';
+import { postReport } from '../../modules/report/report';
 
 function ReportPage() {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [reportContent, setReportContent] = useState<string | null>(null);
@@ -13,19 +16,15 @@ function ReportPage() {
   };
   const reportSubmit = async () => {
     if (reportContent === null || undefined) return;
-    console.log({
-      params: {
-        reportType: `${reportContent}`,
-      },
-    });
+    // dispatch(postReport(String(id), reportContent));
+    const data = {
+      reportType: reportContent,
+    };
     await instance
-      .post(`/api/v1/report/archives/${id}`, {
-        params: {
-          reportType: reportContent,
-        },
-      })
+      .post(`/api/v1/report/archives/${id}`, data)
       .then((res) => {
-        console.log(res);
+        alert('신고가 완료되었습니다.');
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);

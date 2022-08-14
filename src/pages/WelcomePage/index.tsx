@@ -12,11 +12,7 @@ import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_logi
 function WelcomePage() {
   const KakaoLogIn = useCallback(async () => {
     const kakaoSignIn = async () => {
-      const kakao: string = await instance.get('/auth/kakao', {
-        params: {
-          loginType: 'kakao',
-        },
-      });
+      const kakao: string = await instance.get('/auth/kakao');
       window.location.replace(kakao);
     };
     kakaoSignIn();

@@ -25,13 +25,13 @@ function WallPaperHeader() {
     navigate(-1);
   };
   const onSharedToggleClick = async (): Promise<any> => {
+    console.log(sharedToggle);
     if (sharedToggle) {
+      const data = {
+        isShare: false,
+      };
       await instance
-        .put(`/api/v1/archives/${readWallPaperData.id}/share`, {
-          params: {
-            isShare: false,
-          },
-        })
+        .put(`/api/v1/archives/${readWallPaperData.id}/share`, data)
         .then((res) => {
           console.log(res);
           setSharedToggle(false);
@@ -41,12 +41,11 @@ function WallPaperHeader() {
         });
     } else {
       // false, 스크랩 POST
+      const data = {
+        isShare: true,
+      };
       await instance
-        .put(`/api/v1/archives/${readWallPaperData.id}/share`, {
-          params: {
-            isShare: true,
-          },
-        })
+        .put(`/api/v1/archives/${readWallPaperData.id}/share`, data)
         .then((res) => {
           console.log(res);
           setSharedToggle(true);
