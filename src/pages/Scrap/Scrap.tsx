@@ -3,16 +3,18 @@ import './Scrap.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import ScrapHeader from '../../components/Scrap/ScrapHeader';
 import ScrapFeed from '../../components/Scrap/ScrapFeed';
-import { ScrapData, ScrapDataType } from '../../constants/index';
+import { ScrapDataType } from '../../constants/index';
 import { getScrapList } from '../../modules/scrap/scrap';
 import { RootState } from '../../modules';
 
 function Scrap() {
   const dispatch = useDispatch();
   const scrapList = useSelector((state: RootState) => state.scrap.data.scrapPreviewDto);
+
   useEffect(() => {
     dispatch(getScrapList());
   }, [dispatch]);
+
   return (
     <div className="scrap-wrapper">
       <ScrapHeader />
@@ -28,6 +30,7 @@ function Scrap() {
               title={scrap.archiveTitle}
               category={scrap.archivingStyle}
               image={scrap.coverImage}
+              id={scrap.archiveId}
               key={scrap.id}
             />
           ))}
