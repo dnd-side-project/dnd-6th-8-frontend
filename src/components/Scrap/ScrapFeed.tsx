@@ -3,8 +3,8 @@ import './ScrapComponent.scss';
 
 type ScrapFeedProps = {
   title: string;
-  image: string;
   category: string;
+  image: string;
 };
 
 function ScrapFeed({ title, image, category }: ScrapFeedProps) {

@@ -1,4 +1,3 @@
-// 더미데이터
 export type archivingDataType = {
   id: number;
   archivingStyle: string;
@@ -52,16 +51,6 @@ export type WallPaperModuleType = {
 };
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
 export type ReadWallPaperDataType = {
-  // archivingStyle: string;
-  // coverPicture: string;
-  // createdAt: string;
-  // emojiNum: number | null;
-  // id: number | null;
-  // places: string;
-  // scrapNum: number | null;
-  // shortContent: string;
-  // title: string;
-  // travelDuration: string;
   id: number | null;
   title: string | null;
   firstDay: string | null;
@@ -242,6 +231,26 @@ export type dayTripCourse = {
   finish: string;
   start: string;
   goingBy: string;
+};
+
+// 스크랩 실제
+export type ScrapDataType = {
+  id: number;
+  archiveId: number;
+  archiveTitle: string;
+  archivingStyle: string;
+  coverImage: string;
+  scrapedAt: string;
+};
+
+// 스크랩 실제
+export type ScrapDataModule = {
+  data: {
+    scrapPreviewDto: ScrapDataType[] | null;
+    countMyScraps: number | null;
+  };
+  loading: boolean;
+  error: Error | null;
 };
 
 export const ScrapData = [
