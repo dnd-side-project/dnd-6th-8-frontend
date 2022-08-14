@@ -1,7 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './style.scss';
 import BtnToggleOn from '../../../assets/icons/WallPaper/btn_toggle.png';
 import BtnToggleOff from '../../../assets/icons/WallPaper/btn_toggle_off.png';
@@ -12,12 +12,13 @@ import ClickScrap from '../../../assets/icons/WallPaper/Hamburger/ic_scrap_navig
 import HamburgerMenu from '../HamburgerMenu';
 import { RootState } from '../../../modules';
 import instance from '../../../lib/axios';
+import { readWallPaper } from '../../../modules/post/readwallpaper';
 
 function WallPaperHeader() {
+  const dispatch = useDispatch();
   const dayFeed = useSelector((state: RootState) => state.dayFeed.data);
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
   const userInformation = useSelector((state: RootState) => state.userInformation.data);
-  const [sharedToggle, setSharedToggle] = useState<boolean | null>(readWallPaperData?.share);
   const [scrapToggle, setScrapToggle] = useState<any>();
   const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ function WallPaperHeader() {
     navigate(-1);
   };
   const onSharedToggleClick = async () => {
-    if (sharedToggle) {
+    if (readWallPaperData.share) {
       await instance
         .put(`/api/v1/archives/${readWallPaperData.id}/share?isShare=false`)
         .then((res) => {
-          setSharedToggle(false);
+          dispatch(readWallPaper(readWallPaperData.id));
         })
         .catch((err) => {
           alert(err);
@@ -38,7 +39,7 @@ function WallPaperHeader() {
       await instance
         .put(`/api/v1/archives/${readWallPaperData.id}/share?isShare=true`)
         .then((res) => {
-          setSharedToggle(true);
+          dispatch(readWallPaper(readWallPaperData.id));
         })
         .catch((err) => {
           alert(err);
@@ -46,7 +47,7 @@ function WallPaperHeader() {
     }
   };
 
-  const onScrapToggle = async (): Promise<any> => {
+  const onScrapToggle = async () => {
     if (scrapToggle) {
       // true, 스크랩 DELETE
       await instance
@@ -90,8 +91,10 @@ function WallPaperHeader() {
           alert(err);
         });
     };
-    getScrap();
-  }, []);
+    if (dayFeed?.writer !== userInformation?.userEmail && readWallPaperData.id !== null) {
+      getScrap();
+    }
+  }, [readWallPaperData.id, dayFeed, userInformation]);
 
   return (
     <div className="wallpaperheader-wrapper">
@@ -101,7 +104,7 @@ function WallPaperHeader() {
       </div>
       <div className="header-right">
         {dayFeed?.writer === userInformation?.userEmail ? (
-          sharedToggle ? (
+          readWallPaperData.share ? (
             <>
               <p className="shared-text">공유 ON</p>
               <img

@@ -52,16 +52,27 @@ export type WallPaperModuleType = {
 };
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
 export type ReadWallPaperDataType = {
-  archivingStyle: string;
-  coverPicture: string;
-  createdAt: string;
-  emojiNum: number | null;
+  // archivingStyle: string;
+  // coverPicture: string;
+  // createdAt: string;
+  // emojiNum: number | null;
+  // id: number | null;
+  // places: string;
+  // scrapNum: number | null;
+  // shortContent: string;
+  // title: string;
+  // travelDuration: string;
   id: number | null;
-  places: string;
-  scrapNum: number | null;
-  shortContent: string;
-  title: string;
-  travelDuration: string;
+  title: string | null;
+  firstDay: string | null;
+  lastDay: string | null;
+  places: string | null;
+  archivingStyle: string | null;
+  budget: string | null;
+  haveCompanion: boolean | null;
+  coverImage: string | null;
+  countDayFeeds: number | null;
+  share: boolean | null;
 };
 
 // wallPaper InitailState

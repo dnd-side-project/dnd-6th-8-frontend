@@ -9,7 +9,7 @@ import WallPaperDetailView from '../../components/WallPaper/WallPaperDetailView'
 import WallPaperHeader from '../../components/WallPaper/WallPaperHeader';
 import WallPaperPreview from '../../components/WallPaper/WallPaperPreview';
 import { deleteDayFeed } from '../../modules/post/dayfeed';
-import { readWallPaper } from '../../modules/post/readwallpaper';
+import { deleteWallPaper, readWallPaper } from '../../modules/post/readwallpaper';
 import './style.scss';
 
 function WallPaper() {
@@ -24,8 +24,9 @@ function WallPaper() {
     }
     return () => {
       dispatch(deleteDayFeed());
+      dispatch(deleteWallPaper());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="wallpaper-wrapper">
