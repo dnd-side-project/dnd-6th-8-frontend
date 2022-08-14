@@ -24,34 +24,24 @@ function WallPaperHeader() {
   const goBack = () => {
     navigate(-1);
   };
-  const onSharedToggleClick = async (): Promise<any> => {
-    console.log(sharedToggle);
+  const onSharedToggleClick = async () => {
     if (sharedToggle) {
-      const data = {
-        isShare: false,
-      };
       await instance
-        .put(`/api/v1/archives/${readWallPaperData.id}/share`, data)
+        .put(`/api/v1/archives/${readWallPaperData.id}/share?isShare=false`)
         .then((res) => {
-          console.log(res);
           setSharedToggle(false);
         })
         .catch((err) => {
-          // alert(err);
+          alert(err);
         });
     } else {
-      // false, 스크랩 POST
-      const data = {
-        isShare: true,
-      };
       await instance
-        .put(`/api/v1/archives/${readWallPaperData.id}/share`, data)
+        .put(`/api/v1/archives/${readWallPaperData.id}/share?isShare=true`)
         .then((res) => {
-          console.log(res);
           setSharedToggle(true);
         })
         .catch((err) => {
-          // alert(err);
+          alert(err);
         });
     }
   };
