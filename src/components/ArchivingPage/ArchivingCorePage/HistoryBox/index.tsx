@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import './style.scss';
 import { archivingType } from '../../../../constants/index';
 import { RootState } from '../../../../modules';
+import { emojiSelector } from '../../../../constants/emojiSelector';
 
 function HistoryBox() {
   const sharedData = useSelector((state: RootState) => state.myArchivesReducer.sharedData);
@@ -25,7 +26,7 @@ function HistoryBox() {
 
   useEffect(() => {
     filterPlaces([...sharedData, ...privateData]);
-  }, []);
+  }, [sharedData, privateData]);
 
   return (
     <div className="historybox-wrapper">
@@ -41,7 +42,9 @@ function HistoryBox() {
             {myArchivingData.map((value: any) => {
               return (
                 <div className="icon-box" key={value[0]}>
-                  <div className="icon">🚄</div>
+                  <div className="icon">
+                    <img src={emojiSelector(value[0])} alt="지역 이모지" />
+                  </div>
                   <div className="region">
                     {value[0] === 'null' ? '미입력' : value[0]}
                     {`(${value[1]})`}

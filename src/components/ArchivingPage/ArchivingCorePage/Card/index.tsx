@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './style.scss';
 import { archivingType } from '../../../../constants/index';
 import defaultImg from '../../../../assets/icons/ArchivingPage/Card/defaultImg.png';
+import { emojiSelector } from '../../../../constants/emojiSelector';
 
 type CardProps = {
   info: archivingType;
@@ -43,7 +44,9 @@ function Card({ info, setDeleteClick, setDeleteId }: CardProps) {
       </div>
       <div className="card-info">
         <div className="info-header">
-          <span>🚄</span>
+          <span className="emoji-wrapper">
+            <img src={emojiSelector(info.places)} alt="지역 이모지" />
+          </span>
           <span className="region">{info.places}</span>
           <span className="day-box">{info.travelDuration}</span>
         </div>
