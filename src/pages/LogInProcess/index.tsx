@@ -5,7 +5,6 @@ import { userInfo } from '../../modules/user/userinfomation';
 import './style.scss';
 import { ReactComponent as Tracious } from '../../assets/icons/WelcomePage/tracious_text_logo.svg';
 
-
 type params = {
   accessToken: string;
   signupCheck: string;
@@ -21,7 +20,7 @@ function LogInProcess() {
     if (accessToken !== undefined) {
       localStorage.setItem('accessToken', accessToken);
       dispatch(userInfo());
-      if (signupCheck) {
+      if (!signupCheck) {
         navigate('/home');
       } else {
         navigate('/intro');
