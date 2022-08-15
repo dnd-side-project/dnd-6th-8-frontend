@@ -37,7 +37,13 @@
         .social-wrap{
             margin-top : 2.4rem; 
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
+            .kakao{
+                margin-right: 1.5rem;
+            }
+            .naver{
+                margin-left: 1.5rem;
+            }
             animation : social-wrap 2s forwards; 
         }
     }
