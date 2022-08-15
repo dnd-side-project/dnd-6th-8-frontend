@@ -29,13 +29,7 @@ function WallPaperPreview() {
         </div>
         <div className="line" />
         <div className="line-bottom">
-          {parseInt(readWallPaperData?.countDaysFeeds, 10) - 1 === -1 ? (
-            <p>당일치기</p>
-          ) : (
-            <p>
-              {parseInt(readWallPaperData?.countDaysFeeds, 10) - 1}박 {readWallPaperData?.countDaysFeeds}일 간의 여정
-            </p>
-          )}
+          <p>{readWallPaperData?.travelDuration} 간의 여정</p>
           <div className="info-box">
             <div>
               <img src={readWallPaperData?.archivingStyle === '정보' ? Information : Emotion} alt="정보/감성" />

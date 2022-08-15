@@ -50,6 +50,7 @@ const initailState: ReadWallPaperModuleType = {
     coverImage: null,
     countDayFeeds: null,
     share: null,
+    travelDuration: null,
   },
   loading: false,
   error: false,
