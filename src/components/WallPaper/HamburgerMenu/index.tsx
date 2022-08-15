@@ -12,9 +12,11 @@ import instance from '../../../lib/axios';
 
 type HamburgerMenuProps = {
   onHamburgerMenuClick: () => void;
+  setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
 };
 
-function HamburgerMenu({ onHamburgerMenuClick }: HamburgerMenuProps) {
+function HamburgerMenu({ onHamburgerMenuClick, setDeleteClick, setDeleteId }: HamburgerMenuProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
@@ -24,12 +26,14 @@ function HamburgerMenu({ onHamburgerMenuClick }: HamburgerMenuProps) {
     navigate(`/report/${readWallPaperData.id}`);
   };
   const onDeleteClick = async () => {
-    await instance
-      .delete(`/api/v1/archives/${readWallPaperData.id}`)
-      .then((res) => {
-        navigate(`/archiving`);
-      })
-      .catch((err) => console.log(err));
+    setDeleteClick(true);
+    setDeleteId(readWallPaperData.id);
+    // await instance
+    //   .delete(`/api/v1/archives/${readWallPaperData.id}`)
+    //   .then((res) => {
+    //     navigate(`/archiving`);
+    //   })
+    //   .catch((err) => console.log(err));
   };
   return (
     <div
