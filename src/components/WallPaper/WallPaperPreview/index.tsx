@@ -29,9 +29,13 @@ function WallPaperPreview() {
         </div>
         <div className="line" />
         <div className="line-bottom">
-          <p>
-            {parseInt(readWallPaperData?.countDaysFeeds, 10) - 1}박 {readWallPaperData?.countDaysFeeds}일 간의 여정
-          </p>
+          {parseInt(readWallPaperData?.countDaysFeeds, 10) - 1 === -1 ? (
+            <p>당일치기</p>
+          ) : (
+            <p>
+              {parseInt(readWallPaperData?.countDaysFeeds, 10) - 1}박 {readWallPaperData?.countDaysFeeds}일 간의 여정
+            </p>
+          )}
           <div className="info-box">
             <div>
               <img src={readWallPaperData?.archivingStyle === '정보' ? Information : Emotion} alt="정보/감성" />
@@ -43,7 +47,7 @@ function WallPaperPreview() {
             </div>
             <div>
               <img src={readWallPaperData?.budget === '최소한' ? LittleMoney : ManyMoney} alt="최소한/넉넉하게" />
-              <p>{readWallPaperData?.budget} 준비</p>
+              <p>{readWallPaperData?.budget === '넉넉' ? '넉넉하게' : readWallPaperData?.budget} 준비</p>
             </div>
           </div>
         </div>

@@ -8,7 +8,8 @@ import 'use-swiper/lib/swiper.min.css';
 import WallPaperDetailView from '../../components/WallPaper/WallPaperDetailView';
 import WallPaperHeader from '../../components/WallPaper/WallPaperHeader';
 import WallPaperPreview from '../../components/WallPaper/WallPaperPreview';
-import { readWallPaper } from '../../modules/post/readwallpaper';
+import { deleteDayFeed } from '../../modules/post/dayfeed';
+import { deleteWallPaper, readWallPaper } from '../../modules/post/readwallpaper';
 import './style.scss';
 
 function WallPaper() {
@@ -17,11 +18,15 @@ function WallPaper() {
   const dispatch = useDispatch();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  useEffect(() => { 
+  useEffect(() => {
     if (id !== undefined) {
       dispatch(readWallPaper(id));
     }
-  }, []);
+    return () => {
+      dispatch(deleteDayFeed());
+      dispatch(deleteWallPaper());
+    };
+  }, [dispatch]);
 
   return (
     <div className="wallpaper-wrapper">

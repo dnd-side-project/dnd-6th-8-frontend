@@ -10,17 +10,9 @@ import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login
 import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 function WelcomePage() {
-  // useEffect(() => {
-  //   localStorage.clear();
-  // }, []);
-
   const KakaoLogIn = useCallback(async () => {
     const kakaoSignIn = async () => {
-      const kakao: string = await instance.get('/auth/kakao', {
-        params: {
-          loginType: 'kakao',
-        },
-      });
+      const kakao: string = await instance.get('/auth/kakao');
       window.location.replace(kakao);
     };
     kakaoSignIn();
