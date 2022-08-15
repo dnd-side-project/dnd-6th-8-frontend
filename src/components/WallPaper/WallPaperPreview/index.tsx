@@ -36,9 +36,9 @@ function WallPaperPreview() {
         <div className="line" />
         <div className="line-bottom">
           <p>
-            {`${readWallPaperData.travelDuration?.split('박')[0]}박 ${
+            {readWallPaperData.travelDuration === '0일' ? '당일치기' : `${readWallPaperData.travelDuration?.split('박')[0]}박 ${
               readWallPaperData.travelDuration?.split('박')[1]
-            }간의 여정`}
+            } 간의 여정`}
           </p>
           <div className="info-box">
             <div>
