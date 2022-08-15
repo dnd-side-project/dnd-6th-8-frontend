@@ -29,7 +29,11 @@ function WallPaperPreview() {
         </div>
         <div className="line" />
         <div className="line-bottom">
-          <p>{readWallPaperData?.travelDuration} 간의 여정</p>
+          <p>
+            {`${readWallPaperData.travelDuration?.split('박')[0]}박 ${
+              readWallPaperData.travelDuration?.split('박')[1]
+            }간의 여정`}
+          </p>
           <div className="info-box">
             <div>
               <img src={readWallPaperData?.archivingStyle === '정보' ? Information : Emotion} alt="정보/감성" />
