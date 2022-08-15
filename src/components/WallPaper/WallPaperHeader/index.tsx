@@ -56,7 +56,7 @@ function WallPaperHeader({ setDeleteClick, setDeleteId }: WallPaperHeaderProps) 
     if (scrapToggle) {
       // true, 스크랩 DELETE
       await instance
-        .delete(`/api/v1/archives/16/unScraps`)
+        .delete(`/api/v1/archives/${readWallPaperData.id}/unScraps`)
         .then(async () => {
           await instance
             .get(`/api/v1/archives/${readWallPaperData.id}/scrap`)
