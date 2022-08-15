@@ -14,28 +14,26 @@
         height : 25rem; 
         margin-top : 3.2rem; 
     }
-    .dot-wrapper{
-        .one-dot{
-            width: 1rem;
-            height: 1rem;
-            flex-grow: 0;
-            margin: 0 0 0 2.5rem;
-            transform: rotate(-180deg);
-            border-radius: 0.5rem;
-            background: #a19fad;
-            position : fixed;
-            bottom : 20rem;
+    .circle-wrapper{
+        margin-top: 11.6rem;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        .active-circle{
+            border-radius: 1000rem;
+            width : 2rem;
+            height : 1rem;
+            background-color: #a19fad;
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
         }
-        .two-dot{
-            width: 2rem;
-            height: 1rem;
-            flex-grow: 0;
-            margin: 0 1rem 0 0;
-            transform: rotate(-180deg);
-            border-radius: 0.5rem;
-            background: #d8dce8;
-            position : fixed;
-            bottom : 20rem;
+        .non-active-circle{
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            width : 1rem;
+            height : 1rem;
+            border-radius: 1000rem;
+            background-color: #d8dce8;
         }
     }
 }

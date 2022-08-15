@@ -2,25 +2,3 @@
     width : 100vw; 
     height : 100vh;
 }
-
-.intro-swiper-pagination-bullet { 
-    width: 2rem;
-    height: 1rem;
-    flex-grow: 0;
-    margin: 0 1rem 0 0;
-    transform: rotate(-180deg);
-    border-radius: 0.5rem;
-    background: #d8dce8;
-    position : fixed;
-    bottom : 20rem;
-}
-
-.intro-swiper-pagination-bullet-active {     
-    width: 1rem;
-    height: 1rem;
-    flex-grow: 0;
-    margin: 0 0 0 2.5rem;
-    transform: rotate(-180deg);
-    border-radius: 0.5rem;
-    background: #a19fad;
-}

@@ -20,7 +20,7 @@ function LogInProcess() {
     if (accessToken !== undefined) {
       localStorage.setItem('accessToken', accessToken);
       dispatch(userInfo());
-      if (!signupCheck) {
+      if (signupCheck) {
         navigate('/home');
       } else {
         navigate('/intro');
