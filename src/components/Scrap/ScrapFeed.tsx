@@ -1,15 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ScrapComponent.scss';
 
 type ScrapFeedProps = {
   title: string;
-  image: string;
   category: string;
+  image: string;
+  id: number;
 };
 
-function ScrapFeed({ title, image, category }: ScrapFeedProps) {
+function ScrapFeed({ title, image, category, id }: ScrapFeedProps) {
+  const navigate = useNavigate();
+  const gotoWallPaper = () => {
+    navigate(`/wallpaper/${id}`);
+  };
   return (
-    <div className="scrapFeed">
+    <div className="scrapFeed" onClick={gotoWallPaper} aria-hidden>
       <div className="img-container">
         <span className={`category${category === '정보' ? ' info' : ''}`}>{category}</span>
         <img src={image} alt={`스크랩된 ${title} 피드 표지사진`} />
