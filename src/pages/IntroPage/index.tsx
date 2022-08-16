@@ -17,22 +17,17 @@ function IntroPage() {
         <Swiper
           spaceBetween={50}
           slidesPerView={1}
-          pagination={{
-            clickable: true,
-            bulletClass: `intro-swiper-pagination-bullet`,
-            bulletActiveClass: `intro-swiper-pagination-bullet-active`,
-          }}
           onSlideChange={(swiper) => setTimeout(() => setActiveIndex(swiper.activeIndex), 500)}
         >
           <SwiperSlide>
-            <FirstPage />
+            <FirstPage activeIndex={activeIndex} />
           </SwiperSlide>
           <SwiperSlide>
-            <SecondPage sec={36000000000000000} />
+            <SecondPage sec={36000000000000000} activeIndex={activeIndex} />
           </SwiperSlide>
         </Swiper>
       ) : (
-        <SecondPage sec={1500} />
+        <SecondPage sec={3000} activeIndex={activeIndex} />
       )}
     </div>
   );

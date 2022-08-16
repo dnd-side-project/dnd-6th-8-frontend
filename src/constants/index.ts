@@ -62,6 +62,7 @@ export type ReadWallPaperDataType = {
   coverImage: string | null;
   countDayFeeds: number | null;
   share: boolean | null;
+  travelDuration: string | null;
 };
 
 // wallPaper InitailState
