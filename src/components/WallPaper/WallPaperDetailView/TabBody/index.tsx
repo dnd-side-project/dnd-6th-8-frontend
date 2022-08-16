@@ -6,12 +6,10 @@ import SwiperCore, { Pagination } from 'swiper';
 import LocPin from '../../../../assets/icons/WallPaper/dayfeed/ic_location_purple 1.png';
 import './style.scss';
 import { RootState } from '../../../../modules';
-import Sun from '../../../../assets/icons/Weather/맑음.png';
-import Cloudy from '../../../../assets/icons/Weather/흐림.png';
-import Rainy from '../../../../assets/icons/Weather/비.png';
-import Snow from '../../../../assets/icons/Weather/눈.png';
 import { daysObjectiveResponseDtoType } from '../../../../constants';
 import { weatherSelector } from '../../../../constants/weatherSelector';
+import { translatorSelector } from '../../../../constants/transportationSelector';
+import Clock from '../../../../assets/icons/WallPaper/clock.png';
 
 type TabBodyProps = {
   index: number;
@@ -65,11 +63,17 @@ function TabBody({ index }: TabBodyProps) {
                 <div className="start-finish-middle">
                   <div className="start-finish-middle-line">
                     <p className="gray-letter">걸린 시간</p>
-                    <p className="arrive-time">{course.travelTime}</p>
+                    <p className="arrive-time">
+                      <img src={Clock} alt="clock" />
+                      <p>{course.travelTime}</p>
+                    </p>
                   </div>
                   <div className="start-finish-middle-line">
                     <p className="gray-letter">이동 수단</p>
-                    <p className="arrive-time">{course.transportation}</p>
+                    <p className="arrive-time">
+                      <img src={translatorSelector(course.transportation)} alt="이동수단" />
+                      <p>{course.transportation}</p>
+                    </p>
                   </div>
                 </div>
                 <div className="start-finish-line">

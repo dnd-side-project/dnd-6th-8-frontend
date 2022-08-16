@@ -70,6 +70,8 @@
                     margin-top : 0.8rem; 
                     margin-bottom : 0.8rem; 
                     .arrive-time{
+                        display: flex;
+                        align-items: center;
                         margin-left : 1rem; 
                         font-family: 'Pretendard-Medium';
                         font-size: 1.2rem;
@@ -78,6 +80,11 @@
                         border-radius: 1.8rem;
                         border: 1px solid #d8dce8;
                         padding: 4px 6px;
+                        img {
+                            width: 1.6rem;
+                            height : 1.6rem;
+                            margin-right: 0.5rem;
+                        }
                     }
                 }
             }
