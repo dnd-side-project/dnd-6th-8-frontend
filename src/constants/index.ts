@@ -73,6 +73,7 @@ export type ReadWallPaperModuleType = {
 };
 
 export type daysObjectiveResponseDtoType = {
+  daysInfo_Id : number;
   arrival: string;
   departure: string;
   transportation: string;
@@ -89,7 +90,7 @@ export type daysSubjectiveResponseDtoType = {
 export type daysObjAndSubResponseDtoType = {
   dayNumber: number;
   imgUrl: string[];
-  daysObjectiveResponseDto: daysObjectiveResponseDtoType;
+  daysObjectiveResponses: daysObjectiveResponseDtoType;
   daysSubjectiveResponseDto: daysSubjectiveResponseDtoType;
 };
 
@@ -253,42 +254,3 @@ export type ScrapDataModule = {
   loading: boolean;
   error: Error | null;
 };
-
-export const ScrapData = [
-  {
-    id: 1,
-    title: '나의 두 번째 부산',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 2,
-    title: '제주도에서 한달 살기',
-    cateogry: '정보',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 3,
-    title: '프라하에서 체스키어쩌구저쩌구',
-    cateogry: '정보',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 4,
-    title: '강릉에서 적는 회고록',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 5,
-    title: '나의 두 번째 부산',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 6,
-    title: '나의 두 번째 부산',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-];

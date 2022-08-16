@@ -1,23 +1,4 @@
-.swiper-pagination-bullet { 
-    width: 1rem;
-    height: 1rem;
-    flex-grow: 0;
-    margin: 0 1rem 0 0;
-    transform: rotate(-180deg);
-    background-color: #d8dce8;
-    position : relative; 
-    bottom : -5rem;
-}
 
-.swiper-pagination-bullet-active {     
-    width: 2rem;
-    height: 1rem;
-    flex-grow: 0;
-    margin: 0 0 0 1rem;
-    transform: rotate(-180deg);
-    border-radius: 0.5rem;
-    background: #a19fad;
-}
 
 .tabbody-wrapper{
     padding : 1.6rem 0 11rem 1.6rem;
@@ -113,6 +94,26 @@
                 font-weight: 600;
                 line-height: 1.29;
                 margin-left : 1rem; 
+            }
+        }
+        .circle-wrapper{
+            margin-top: 1.2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            .active-circle{
+                border-radius: 1000rem;
+                width : 2rem;
+                height : 1rem;
+                background-color: #a19fad;
+                margin-right: 0.5rem;
+            }
+            .non-active-circle{
+                margin-left: 0.5rem;
+                width : 1rem;
+                height : 1rem;
+                border-radius: 1000rem;
+                background-color: #d8dce8;
             }
         }
         .today-wrapper{
