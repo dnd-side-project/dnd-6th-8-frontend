@@ -25,7 +25,7 @@ function WallPaperPreview() {
           </p>
         </div>
         <div className="line-top">
-          <div className='emoji-wrapper'>
+          <div className="emoji-wrapper">
             <span>
               <img src={emojiSelector(readWallPaperData?.places)} alt="지역 이모지" />
             </span>
@@ -36,9 +36,11 @@ function WallPaperPreview() {
         <div className="line" />
         <div className="line-bottom">
           <p>
-            {readWallPaperData.travelDuration === '0일' ? '당일치기' : `${readWallPaperData.travelDuration?.split('박')[0]}박 ${
-              readWallPaperData.travelDuration?.split('박')[1]
-            } 간의 여정`}
+            {readWallPaperData.travelDuration === '0일'
+              ? '당일치기'
+              : `${readWallPaperData.travelDuration?.split('박')[0]}박 ${
+                  readWallPaperData.travelDuration?.split('박')[1]
+                } 간의 여정`}
           </p>
           <div className="info-box">
             <div>
