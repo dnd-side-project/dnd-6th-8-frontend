@@ -14,7 +14,12 @@ import { RootState } from '../../../modules';
 import instance from '../../../lib/axios';
 import { readWallPaper } from '../../../modules/post/readwallpaper';
 
-function WallPaperHeader() {
+type WallPaperHeaderProps = {
+  setDeleteClick: (click: boolean) => void;
+  setDeleteId: (number: number) => void;
+};
+
+function WallPaperHeader({ setDeleteClick, setDeleteId }: WallPaperHeaderProps) {
   const dispatch = useDispatch();
   const dayFeed = useSelector((state: RootState) => state.dayFeed.data);
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
@@ -51,7 +56,7 @@ function WallPaperHeader() {
     if (scrapToggle) {
       // true, 스크랩 DELETE
       await instance
-        .delete(`/api/v1/archives/16/unScraps`)
+        .delete(`/api/v1/archives/${readWallPaperData.id}/unScraps`)
         .then(async () => {
           await instance
             .get(`/api/v1/archives/${readWallPaperData.id}/scrap`)
@@ -98,7 +103,13 @@ function WallPaperHeader() {
 
   return (
     <div className="wallpaperheader-wrapper">
-      {hamburgerMenu && <HamburgerMenu onHamburgerMenuClick={onHamburgerMenuClick} />}
+      {hamburgerMenu && (
+        <HamburgerMenu
+          onHamburgerMenuClick={onHamburgerMenuClick}
+          setDeleteClick={setDeleteClick}
+          setDeleteId={setDeleteId}
+        />
+      )}
       <div className="header-left">
         <img className="x-logo" src={XLogo} alt="X" onClick={goBack} aria-hidden="true" />
       </div>

@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import instance from '../../../../lib/axios';
 import { myArchivesIsShared, myArchivesPrivate } from '../../../../modules/post/archives';
 import './style.scss';
@@ -16,6 +17,7 @@ type DeleteDialog = {
 
 function DeleteDialog({ deleteClick, setDeleteClick, agreeClick, setAgreeClick, deleteId, setDeleteId }: DeleteDialog) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onCancelClick = useCallback(() => {
     setDeleteClick(false);
   }, []);
@@ -28,10 +30,11 @@ function DeleteDialog({ deleteClick, setDeleteClick, agreeClick, setAgreeClick, 
       setDeleteId(-1);
       dispatch(myArchivesIsShared());
       dispatch(myArchivesPrivate());
+      navigate('/archiving');
     });
     setTimeout(() => {
       setAgreeClick(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   return (
