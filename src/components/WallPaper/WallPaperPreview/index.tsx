@@ -10,6 +10,7 @@ import Withfriend from '../../../assets/icons/TravelTaste/동행과함께.png';
 import Information from '../../../assets/icons/TravelTaste/정보위주.png';
 import LittleMoney from '../../../assets/icons/TravelTaste/최소한으로준비.png';
 import Alone from '../../../assets/icons/TravelTaste/혼자여행.png';
+import { emojiSelector } from '../../../constants/emojiSelector';
 
 function WallPaperPreview() {
   const readWallPaperData = useSelector((state: RootState) => state.readWallPaperReducer.data);
@@ -24,15 +25,22 @@ function WallPaperPreview() {
           </p>
         </div>
         <div className="line-top">
-          <span>🍊</span> <span>{readWallPaperData?.places}</span>
+          <div className="emoji-wrapper">
+            <span>
+              <img src={emojiSelector(readWallPaperData?.places)} alt="지역 이모지" />
+            </span>
+            <span>{readWallPaperData?.places}</span>
+          </div>
           <p>{readWallPaperData?.title}</p>
         </div>
         <div className="line" />
         <div className="line-bottom">
           <p>
-            {`${readWallPaperData.travelDuration?.split('박')[0]}박 ${
-              readWallPaperData.travelDuration?.split('박')[1]
-            }간의 여정`}
+            {readWallPaperData.travelDuration === '0일'
+              ? '당일치기'
+              : `${readWallPaperData.travelDuration?.split('박')[0]}박 ${
+                  readWallPaperData.travelDuration?.split('박')[1]
+                } 간의 여정`}
           </p>
           <div className="info-box">
             <div>

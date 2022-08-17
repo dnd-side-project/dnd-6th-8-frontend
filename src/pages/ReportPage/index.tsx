@@ -5,12 +5,14 @@ import { useDispatch } from 'react-redux';
 import cancel from '../../assets/icons/ReportPage/cancel.png';
 import instance from '../../lib/axios';
 import { postReport } from '../../modules/report/report';
+import ReportCompleteModal from '../../components/ReportPage/ReportCompleteModal/ReportCompleteModal';
 
 function ReportPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const [reportContent, setReportContent] = useState<string | null>(null);
+  const [reportModal, setReportModal] = useState(false);
   const goBack = () => {
     navigate(-1);
   };
@@ -23,19 +25,22 @@ function ReportPage() {
     await instance
       .post(`/api/v1/report/archives/${id}`, data)
       .then((res) => {
-        alert('신고가 완료되었습니다.');
-        navigate(-1);
+        setReportModal(true);
+        setTimeout(() => {
+          setReportModal(false);
+          navigate(-1);
+        }, 2500);
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const onListClick = (content: string) => {
-    console.log(content);
     setReportContent(content);
   };
   return (
     <div className="reportpage-wrapper">
+      {reportModal && <ReportCompleteModal />}
       <header className="report-header">
         <div>
           <img src={cancel} alt="cancel" onClick={goBack} aria-hidden />
