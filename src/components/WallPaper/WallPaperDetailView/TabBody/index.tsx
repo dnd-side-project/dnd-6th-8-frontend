@@ -10,16 +10,11 @@ import { daysObjectiveResponseDtoType } from '../../../../constants';
 import { weatherSelector } from '../../../../constants/weatherSelector';
 import { translatorSelector } from '../../../../constants/transportationSelector';
 import Clock from '../../../../assets/icons/WallPaper/clock.png';
+import getDate from '../../../../constants/getDate';
 
 type TabBodyProps = {
   index: number;
 };
-
-function getDate(date: string) {
-  const week = ['일', '월', '화', '수', '목', '금', '토'];
-  const dayOfWeek = week[new Date(date).getDay()];
-  return dayOfWeek;
-}
 
 function TabBody({ index }: TabBodyProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
