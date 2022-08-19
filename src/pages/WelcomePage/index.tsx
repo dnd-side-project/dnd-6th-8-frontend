@@ -7,20 +7,11 @@ import { ReactComponent as TextLogo } from '../../assets/icons/WelcomePage/traci
 import { ReactComponent as TalkBox } from '../../assets/icons/WelcomePage/talk_box.svg';
 import { ReactComponent as Kakao } from '../../assets/icons/WelcomePage/ic_login_kakao.svg';
 import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login_naver.svg';
-import { ReactComponent as Google } from '../../assets/icons/WelcomePage/ic_login_google.svg';
 
 function WelcomePage() {
-  // useEffect(() => {
-  //   localStorage.clear();
-  // }, []);
-
   const KakaoLogIn = useCallback(async () => {
     const kakaoSignIn = async () => {
-      const kakao: string = await instance.get('/auth/kakao', {
-        params: {
-          loginType: 'kakao',
-        },
-      });
+      const kakao: string = await instance.get('/auth/kakao');
       window.location.replace(kakao);
     };
     kakaoSignIn();
@@ -28,27 +19,10 @@ function WelcomePage() {
 
   const NaverLogIn = useCallback(async () => {
     const naverSignIn = async () => {
-      const naver = await axios.get('http://3.37.253.113:8080/auth/naver', {
-        params: {
-          loginType: 'naver',
-        },
-      });
-      console.log(naver);
-      // window.location.replace(naver.data);
+      const naver: string = await instance.get('/auth/naver');
+      window.location.replace(naver);
     };
     naverSignIn();
-  }, []);
-
-  const GoogleLogIn = useCallback(async () => {
-    const googleSignIn = async () => {
-      const google = await axios.get('/auth/google', {
-        params: {
-          loginType: 'google',
-        },
-      });
-      console.log(google);
-    };
-    googleSignIn();
   }, []);
 
   return (
@@ -61,9 +35,8 @@ function WelcomePage() {
       <div className="frame">
         <TalkBox className="talk-box" />
         <div className="social-wrap">
-          <Kakao onClick={KakaoLogIn} />
-          <Naver onClick={NaverLogIn} />
-          <Google onClick={GoogleLogIn} />
+          <Kakao className="kakao" onClick={KakaoLogIn} />
+          <Naver className="naver" onClick={NaverLogIn} />
         </div>
       </div>
       <p>가입시 트레셔스의 이용약관에 동의하는 것으로 간주합니다.</p>

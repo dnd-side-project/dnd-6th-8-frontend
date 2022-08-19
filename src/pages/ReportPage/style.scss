@@ -1,0 +1,89 @@
+@import '../../styles/utils.scss';
+
+.reportpage-wrapper{
+    height: 100vh;
+    position : relative;
+    .report-header{
+        height : 4.2rem;
+        display: flex;
+        align-items: center;
+        div{
+            flex: 1;
+            padding-left: 1.6rem;
+            img{
+                display: block;
+                width : 2.4rem;
+                height : 2.4rem;
+            }
+        }
+        p{
+            flex: 1;
+            font-family: 'Pretendard-Medium';
+            font-size: 1.8rem;
+            text-align: center;
+        }
+    }
+    main{
+        padding-left: 1.6rem;
+        padding-top: 2.5rem;
+        .top-content{
+            color : #292733;
+            font-size: 1.6rem;
+            font-family: 'Pretendard-Regular';
+            line-height: 2.4rem;
+        }
+        .report-list{
+            margin-top: 3.2rem;
+            font-family: 'Pretendard-Medium';
+            font-size: 1.6rem;
+            color : #a19fad;
+            .bold{
+                color : #292733;
+            }
+            li{
+                display: flex;
+                align-items: center;
+                margin : 2rem 0;
+                .active{
+                    width : 2.4rem;
+                    height : 2.4rem;
+                    border-radius: 1000000rem;
+                    border : 7px solid #5b21ff;
+                    margin-right: 1.2rem;
+
+                }
+                .non-active{
+                    width : 2.4rem;
+                    height : 2.4rem;
+                    border-radius: 1000000rem;
+                    border : 2px solid #a19fad;
+                    margin-right: 1.2rem;
+                }
+            }
+        }
+    }
+    .btn-submit{
+        width : 90%;
+        height : 5.6rem;
+        position : absolute;
+        bottom: 3.2rem;
+        color : white;
+        font-family: 'Pretendard-Bold';
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background-color: #c4c7d3;
+        border-radius: 1.2rem;
+    }
+    .btn-active{
+        width : 90%;
+        height : 5.6rem;
+        position : absolute;
+        bottom: 3.2rem;
+        color : white;
+        font-family: 'Pretendard-Bold';
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background-color: #5b21ff;
+        border-radius: 1.2rem;
+    }
+}

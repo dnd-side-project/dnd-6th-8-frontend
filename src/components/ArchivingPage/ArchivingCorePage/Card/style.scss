@@ -38,6 +38,12 @@
         padding : 0.9rem 1.6rem 0.8rem 1.6rem;
         .info-header{
             margin-bottom: 0.8rem;
+            .emoji-wrapper{
+                img{
+                    width : 1.2rem;
+                    height : 1.2rem;
+                }
+            }
             .region{
                 font-family : 'Pretendard-Medium'; 
                 color : #474451; 

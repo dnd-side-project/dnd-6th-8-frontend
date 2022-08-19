@@ -30,15 +30,15 @@
 **Social Login**
 
 - Naver Login API
-- Google Login API
 - Kakao Login API
 
 **State 관리 툴**
 
 - Redux
-- Redux Saga (보류)
+- MiddleWare : Redux-Thunk
 - react-redux
 - redux-devtools-extension
+- redux-persist : for refresh-issue
 
 **Request Library**
 
@@ -122,14 +122,3 @@
 | test | 테스트 추가 |
 | rename | 파일 or 폴더명 수정하거나 옮기는 작업만 수행할 경우 |
 | remove | 파일 삭제만 수행 |
-
-### 💻 React Code Rule
-
----
-
-- `.tsx` : 컴포넌트를 작성한다면, .tsx로 파일 확장자 명을 작성한다.
-- `.ts` : 타입스크립트를 활용한 로직만을 위한 파일이라면 .ts로 파일 확장자 명을 작성한다.
-
-### 💻 폴더 구조
-
----

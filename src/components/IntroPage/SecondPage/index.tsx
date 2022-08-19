@@ -5,15 +5,16 @@ import { ReactComponent as IntroStanding } from '../../../assets/icons/IntroPage
 import './style.scss';
 
 type SecondPageProps = {
-  sec : number; 
-}
+  sec: number;
+  activeIndex: number;
+};
 
-function SecondPage({sec} : SecondPageProps) {
+function SecondPage({ sec, activeIndex }: SecondPageProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
-      navigate('/surveyStart'); 
+      navigate('/surveyStart');
     }, sec);
   }, []);
 
@@ -21,6 +22,10 @@ function SecondPage({sec} : SecondPageProps) {
     <div className="secondpage-wrapper">
       <IntroMessage className="intro-message" />
       <IntroStanding className="intro-standing" />
+      <div className="circle-wrapper">
+        <div className={activeIndex === 0 ? 'active-circle' : 'non-active-circle'} />
+        <div className={activeIndex === 1 ? 'active-circle' : 'non-active-circle'} />
+      </div>
     </div>
   );
 }

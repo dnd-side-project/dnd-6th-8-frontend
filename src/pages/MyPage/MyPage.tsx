@@ -17,7 +17,7 @@ function MyPage() {
   useEffect(() => {
     dispatch(myArchivesIsShared());
     dispatch(myArchivesPrivate());
-    setTimeout(() => setLoading(false), 1000);
+    setTimeout(() => setLoading(false), 100);
     return () => setLoading(false);
   }, []);
 

@@ -21,7 +21,8 @@ import UploadHeader from '../components/common/UploadHeader';
 import LogInProcess from './LogInProcess';
 import SignUpPage from './SignUpPage';
 import Withdrawal from './Withdrawal';
-import { archivingType } from '../constants/index';
+import ReportPage from './ReportPage';
+import ProtectedRoutes from './ProtectRoutes';
 
 function App() {
   const [accessToken, setAccessToken] = useState(() => localStorage.getItem('accessToken'));
@@ -31,7 +32,6 @@ function App() {
       setTimeout(() => {
         localStorage.removeItem('accessToken');
         setAccessToken('');
-        alert('사용자 세션이 만료되었습니다.');
         window.location.replace('/');
       }, 10800000);
     }
@@ -48,50 +48,53 @@ function App() {
         <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
-        <Route
-          path="/home"
-          element={
-            <>
-              <Header />
-              <Home />
-              <NavigationBar />
-            </>
-          }
-        />
-        <Route path="/wallpaper/:id" element={<WallPaper />} />
-        <Route
-          path="/mypage"
-          element={
-            <>
-              <Header />
-              <MyPage />
-              <NavigationBar />
-            </>
-          }
-        />
-        <Route path="/userProfile" element={<UserProfile />} />
-        <Route path="/termsConditions" element={<TermsConditions />} />
-        <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
-        <Route
-          path="/upload-wallpaper"
-          element={
-            <>
-              <UploadHeader isCanGoBack={false} title="표지작성" />
-              <UploadWallPaper />
-            </>
-          }
-        />
-        <Route
-          path="/upload-day"
-          element={
-            <>
-              <UploadHeader isCanGoBack title="기록작성" />
-              <UploadDay />
-            </>
-          }
-        />
-        <Route path="/scrap" element={<Scrap />} />
-        <Route path="/withdrawal" element={<Withdrawal />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route
+            path="/home"
+            element={
+              <>
+                <Header />
+                <Home />
+                <NavigationBar />
+              </>
+            }
+          />
+          <Route path="/wallpaper/:id" element={<WallPaper />} />
+          <Route
+            path="/mypage"
+            element={
+              <>
+                <Header />
+                <MyPage />
+                <NavigationBar />
+              </>
+            }
+          />
+          <Route path="/userProfile" element={<UserProfile />} />
+          <Route path="/termsConditions" element={<TermsConditions />} />
+          <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
+          <Route
+            path="/upload-wallpaper"
+            element={
+              <>
+                <UploadHeader isCanGoBack={false} title="표지작성" />
+                <UploadWallPaper />
+              </>
+            }
+          />
+          <Route
+            path="/upload-day"
+            element={
+              <>
+                <UploadHeader isCanGoBack title="기록작성" />
+                <UploadDay />
+              </>
+            }
+          />
+          <Route path="/scrap" element={<Scrap />} />
+          <Route path="/report/:id" element={<ReportPage />} />
+          <Route path="/withdrawal" element={<Withdrawal />} />
+        </Route>
       </Routes>
     </Router>
   );

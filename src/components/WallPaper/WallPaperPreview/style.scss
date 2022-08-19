@@ -15,8 +15,8 @@
         height : 100vh;
         z-index: 2;
         position: absolute;
-        padding-left:  1.6rem;
-        padding-right : 1.6rem;  
+        padding-left: 1.6rem;
+        padding-right: 1.6rem;  
         background-color: rgba(6, 2, 19, 0.4);
         .arrow-wrapper{
             animation: arrow 4s infinite;
@@ -35,11 +35,31 @@
         .line-top{
             position: absolute;
             bottom : 16.8rem; 
+            .emoji-wrapper{
+                display: flex;
+                align-items: center;
+                span{
+                    color : #ffffff;
+                    font-family: 'Pretendard-Regular';
+                    font-size: 1.6rem;
+                    line-height: 1.5;
+                    margin : 0 0.3rem;
+                    img{
+                        width : 2rem;
+                        height : 2rem;
+                    }
+                }
+            }
             span{
                 color : #ffffff;
                 font-family: 'Pretendard-Regular';
                 font-size: 1.6rem;
                 line-height: 1.5;
+                img{
+                    
+                    width : 2rem;
+                    height : 2rem;
+                }
             }
             p{
                 margin-top : 0.8rem; 
@@ -71,12 +91,20 @@
                 max-width : 43rem; 
                 height : 3.6rem; 
                 border: solid 1px #ffffff; 
-                padding : 0.8rem 1.6rem; 
+                padding : 0 1rem; 
                 background: rgba(248, 249, 252, 0.2);
                 border-radius: 1.2rem;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                div{
+                    display: flex;
+                    align-items: center;
+                    img{
+                        display: block;
+                        margin-right: 0.5rem;
+                    }
+                }
             }
         }
     }
