@@ -1,4 +1,3 @@
-// 더미데이터
 export type archivingDataType = {
   id: number;
   archivingStyle: string;
@@ -31,8 +30,13 @@ export type archivingModuleType = {
 };
 
 export type WallPaperDataType = {
-  [index: string]: string | File | null | number | boolean;
-  coverImage: File | null | string;
+  [index: string]: File | null | ArchivesDtoType;
+  coverImage: File | null;
+  archivesDto: ArchivesDtoType;
+};
+
+export type ArchivesDtoType = {
+  imagesUrl: string | null;
   title: string | null;
   places: string | null;
   firstDay: string | null;
@@ -41,27 +45,45 @@ export type WallPaperDataType = {
   budget: string | null;
   archivingStyle: string | null;
   id: number | null;
-  countDaysFeeds: number | null;
-  share: boolean | null;
+  // countDaysFeeds: number | null;
+  share: boolean;
+};
+
+export type WallPaperResponseType = {
+  coverImage: string;
+  title: string;
+  places: string;
+  firstDay: string;
+  lastDay: string;
+  haveCompanion: boolean;
+  budget: string;
+  archivingStyle: string;
+  id: number;
+  countDaysFeeds: number;
+  share: boolean;
+  travelDuration: string;
 };
 
 export type WallPaperModuleType = {
   data: WallPaperDataType;
   loading: boolean;
   error: null | Error;
+  badge: string;
 };
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
 export type ReadWallPaperDataType = {
-  archivingStyle: string;
-  coverPicture: string;
-  createdAt: string;
-  emojiNum: number | null;
   id: number | null;
-  places: string;
-  scrapNum: number | null;
-  shortContent: string;
-  title: string;
-  travelDuration: string;
+  title: string | null;
+  firstDay: string | null;
+  lastDay: string | null;
+  places: string | null;
+  archivingStyle: string | null;
+  budget: string | null;
+  haveCompanion: boolean | null;
+  coverImage: string | null;
+  countDayFeeds: number | null;
+  share: boolean | null;
+  travelDuration: string | null;
 };
 
 // wallPaper InitailState
@@ -71,42 +93,48 @@ export type ReadWallPaperModuleType = {
   error: boolean | Error;
 };
 
-export type daysObjectiveResponseDtoList = {
+export type daysObjectiveResponseDtoType = {
+  daysInfo_Id: number;
   arrival: string;
   departure: string;
   transportation: string;
   travelTime: string;
 };
-export type daysSubjectiveResponseDtoList = {
-  archiveId: number;
+export type daysSubjectiveResponseDtoType = {
   date: string;
-  dayNumber: number;
+  weather: string;
   emotionDescription: string;
   tipDescription: string;
   travelDescription: string;
-  weather: string;
-  writer: string;
+};
+
+export type daysObjAndSubResponseDtoType = {
+  dayNumber: number;
+  imgUrl: string[];
+  daysObjectiveResponses: daysObjectiveResponseDtoType;
+  daysSubjectiveResponseDto: daysSubjectiveResponseDtoType;
 };
 
 export type DayFeedDataType = {
-  daysInArchiveDto: {
-    archiveTitle: string;
-    firstDay: string;
-    lastDay: string;
-  };
-  daysObjectiveResponseDtoList: daysObjectiveResponseDtoList[];
-  daysSubjectiveResponseDtoList: daysSubjectiveResponseDtoList[];
+  writer: string | null;
+  archiveId: number;
+  archiveTitle: string;
+  firstDay: string;
+  lastDay: string;
+  daysObjAndSubResponseDto: daysObjAndSubResponseDtoType[];
 };
 
 export type DayFeedModuleType = {
-  data: DayFeedDataType[];
+  data: DayFeedDataType | null;
   loading: boolean;
   error: boolean | Error;
 };
 
 export type EmoJiReadDataType = {
-  emojiId: number;
   emojiCount: number;
+  emojiId: number;
+  emojisChecked: number;
+  emojisCheckedId: number;
   emojisName: string;
   emojisUrl: string;
 };
@@ -228,45 +256,6 @@ export type dayTripCourse = {
   goingBy: string;
 };
 
-export const ScrapData = [
-  {
-    id: 1,
-    title: '나의 두 번째 부산',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 2,
-    title: '제주도에서 한달 살기',
-    cateogry: '정보',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 3,
-    title: '프라하에서 체스키어쩌구저쩌구',
-    cateogry: '정보',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 4,
-    title: '강릉에서 적는 회고록',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 5,
-    title: '나의 두 번째 부산',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-  {
-    id: 6,
-    title: '나의 두 번째 부산',
-    cateogry: '감정',
-    image: 'imgs/Home/img_busan01_home.png',
-  },
-];
-
 export type MyPageData = {
   archiveNumber: number;
   badgesList: string[];
@@ -278,4 +267,23 @@ export type MyPageModule = {
   data: MyPageData;
   loading: boolean;
   error: null | Error;
+};
+// 스크랩 실제
+export type ScrapDataType = {
+  id: number;
+  archiveId: number;
+  archiveTitle: string;
+  archivingStyle: string;
+  coverImage: string;
+  scrapedAt: string;
+};
+
+// 스크랩 실제
+export type ScrapDataModule = {
+  data: {
+    scrapPreviewDto: ScrapDataType[] | null;
+    countMyScraps: number | null;
+  };
+  loading: boolean;
+  error: Error | null;
 };

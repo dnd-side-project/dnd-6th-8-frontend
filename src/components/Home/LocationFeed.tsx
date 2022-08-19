@@ -44,6 +44,7 @@ function LocationFeed() {
               title={feed.title}
               coverImage={feed.coverImage}
               places={feed.places}
+              id={feed.id}
               key={feed.id}
             />
           ))

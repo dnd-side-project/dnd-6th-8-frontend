@@ -22,6 +22,7 @@ function MyPage() {
     dispatch(myArchivesIsShared());
     dispatch(myArchivesPrivate());
     dispatch(getMyPage());
+    setTimeout(() => setLoading(false), 100);
     return () => setLoading(false);
   }, []);
 

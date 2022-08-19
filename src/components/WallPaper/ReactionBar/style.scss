@@ -1,34 +1,34 @@
 .reactionbar-wrapper{
     .reaction-click{
         position: fixed;
+        overflow: auto;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar { display: none; }
         bottom : 5.6rem; 
-        width : 100vw;
+        width : 100%;
         min-width : 36rem; 
         height : 4.4rem; 
-        padding : 0.8rem 0; 
+        padding : 0.8rem; 
         z-index : 1; 
         background: rgba(248, 249, 252, 0.95);
         display : flex; 
-        // justify-content: space-between;
         animation: sererec 0.3s backwards;
-        overflow: hidden;
         .heart{
             min-width : 6.5rem;
             max-width: 7rem;
-            margin-left : 0.8rem;  
         }
         .bag{
             min-width : 12rem;
             width : 12rem; 
-            margin-left : -2rem; 
+            margin-left : 0.8rem; 
         }
         .spark{
             width : 14rem; 
-            margin-left : -rem;
+            margin-left : 0.8rem;
         }
         .eyes{
             width : 13rem; 
-            margin-left : 4rem; 
+            margin-left : 0.8rem; 
         }
         .icon-introduce{
             display: flex;
@@ -46,6 +46,29 @@
                 height : 100%;
                 margin-left : 0.4rem; 
                 color : #595663;
+                font-family: 'Pretendard-Medium';
+                font-size: 1.2rem;
+                font-weight: 500;
+                line-height: 1.67;
+            }
+        }
+        .active-introduce{
+            display: flex;
+            align-items: center;
+            height : 100%;
+            padding : 0.4rem 0.6rem; 
+            border-radius: 1.8rem;
+            background: white;
+            border : 1px solid #7d4bff;
+            cursor : pointer; 
+            img{
+                height : 100%;
+            }
+            p{
+                white-space: nowrap;
+                height : 100%;
+                margin-left : 0.4rem; 
+                color : #7d4bff;
                 font-family: 'Pretendard-Medium';
                 font-size: 1.2rem;
                 font-weight: 500;
@@ -92,6 +115,25 @@
                 }
                 p{
                     color : #7f7d8a; 
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    line-height: 1.67;
+                    font-family: 'Pretendard-Medium';
+                    margin-left : 0.4rem; 
+                }
+            }
+            .active-icon{
+                background-color: #eeeeff ;
+                cursor: pointer;
+                padding: 0.4rem 0.6rem;
+                border-radius: 1.8rem;
+                display: flex;
+                align-items: center;
+                img{
+                    height : 100%;
+                }
+                p{
+                    color : #3a13c1 ;
                     font-size: 1.2rem;
                     font-weight: 500;
                     line-height: 1.67;

@@ -7,6 +7,8 @@ import { RootState } from '..';
 // 액션 타입
 const ADD_DAY = 'days/ADD_DAY' as const;
 const DELETE_DAY = 'days/DELETE_DAY' as const;
+const INPUT_DATE = 'days/INPUT_DATE' as const;
+const INPUT_WEATHER = 'days/INPUT_WEATHER' as const;
 const UPLOAD_IMAGE = 'days/UPLOAD_IMAGE' as const;
 const DELETE_IMAGE = 'days/DELETE_IMAGE' as const;
 const CHANGE_LOCATION = 'days/CHANGE_LOCATION' as const;
@@ -27,14 +29,24 @@ export const deleteDay = (day: number) => ({
   payload: { day },
 });
 
+export const inputDate = (day: number, date: string) => ({
+  type: INPUT_DATE,
+  payload: { day, date },
+});
+
+export const inputWeather = (day: number, data: string) => ({
+  type: INPUT_WEATHER,
+  payload: { day, data },
+});
+
 export const uploadImage = (day: number, file: File[]) => ({
   type: UPLOAD_IMAGE,
   payload: { day, file },
 });
 
-export const deleteImage = (day: number, file: File) => ({
+export const deleteImage = (day: number, index: number) => ({
   type: DELETE_IMAGE,
-  payload: { day, file },
+  payload: { day, index },
 });
 
 export const changeLocation = (day: number, type: string, data: string, index: number) => ({
@@ -59,6 +71,8 @@ const postDaysFailure = (payload: AxiosError) => ({ type: POST_DAYS_FAILURE, err
 type dayAction =
   | ReturnType<typeof addDay>
   | ReturnType<typeof deleteDay>
+  | ReturnType<typeof inputDate>
+  | ReturnType<typeof inputWeather>
   | ReturnType<typeof uploadImage>
   | ReturnType<typeof deleteImage>
   | ReturnType<typeof changeLocation>
@@ -77,13 +91,17 @@ export type dayInfoType = {
 };
 
 export type DaysDataType = {
-  [index: string]: string | File[] | number | dayInfoType[];
+  [index: string]: string | File[] | number | dayInfoType[] | null | string[];
+  date: string;
+  // archiveId: number | null;
   dayNumber: number;
   travelDescription: string;
   emotionDescription: string;
-  tipDescription: string;
+  weather: string;
+  tipDescription: string | null;
   dayInfoSaveRequestDtos: dayInfoType[];
-  images: File[];
+  dayImages: File[];
+  // writer: string | null;
 };
 
 export type DaysModuleType = {
@@ -94,16 +112,16 @@ export type DaysModuleType = {
 
 // thunk 함수
 export const postDay =
-  (data: DaysDataType[]): ThunkAction<void, RootState, null, dayAction> =>
+  (data: DaysDataType, id: number, num: number): ThunkAction<void, RootState, null, dayAction> =>
   async (dispatch) => {
     try {
       dispatch(postDaysPending());
       const formData = new FormData();
       formData.append(
-        'dayTotalRequestDto',
-        new Blob([JSON.stringify({ daysSaveRequestDto: data })], { type: 'application/json' }),
+        'daysSaveRequestDtos',
+        new Blob([JSON.stringify({ daysSaveRequestDtos: data })], { type: 'application/json' }),
       );
-      const response = await instance.post(`/api/v1/archives/days?archiveId=${92}`, formData, {
+      const response = await instance.post(`/api/v1/archives/${id}/days/${num}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       dispatch(postDaysSuccess(response));
@@ -118,9 +136,13 @@ const initailState: DaysModuleType = {
   data: [
     {
       dayNumber: 1,
+      // writer: null,
+      date: '',
+      // archiveId: null,
+      weather: '',
       travelDescription: '',
       emotionDescription: '',
-      tipDescription: '',
+      tipDescription: null,
       dayInfoSaveRequestDtos: [
         {
           departure: '',
@@ -129,7 +151,7 @@ const initailState: DaysModuleType = {
           transportation: '',
         },
       ],
-      images: [],
+      dayImages: [],
     },
   ],
   loading: false,
@@ -146,9 +168,13 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
         data: state.data.concat([
           {
             dayNumber: state.data.length + 1,
+            // writer: null,
+            date: '',
+            // archiveId: null,
+            weather: '',
             travelDescription: '',
             emotionDescription: '',
-            tipDescription: '',
+            tipDescription: null,
             dayInfoSaveRequestDtos: [
               {
                 departure: '',
@@ -157,7 +183,7 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
                 transportation: '',
               },
             ],
-            images: [],
+            dayImages: [],
           },
         ]),
       };
@@ -171,21 +197,33 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
             return day;
           }),
       };
+    case INPUT_DATE:
+      return {
+        ...state,
+        data: produce(state.data, (draft) => {
+          draft[action.payload.day].date = action.payload.date;
+        }),
+      };
+    case INPUT_WEATHER:
+      return {
+        ...state,
+        data: produce(state.data, (draft) => {
+          draft[action.payload.day].weather = action.payload.data;
+        }),
+      };
     case UPLOAD_IMAGE:
       return {
         ...state,
-        data: state.data.map((day) =>
-          day.dayNumber === action.payload.day ? { ...day, images: day.images.concat(action.payload.file) } : day,
-        ),
+        data: produce(state.data, (draft) => {
+          draft[action.payload.day].dayImages.push(...action.payload.file);
+        }),
       };
     case DELETE_IMAGE:
       return {
         ...state,
-        data: state.data.map((day) =>
-          day.dayNumber === action.payload.day
-            ? { ...day, images: day.images.filter((img) => img !== action.payload.file) }
-            : day,
-        ),
+        data: produce(state.data, (draft) => {
+          draft[action.payload.day].dayImages.slice(action.payload.index, 1);
+        }),
       };
     case CHANGE_LOCATION:
       return {
