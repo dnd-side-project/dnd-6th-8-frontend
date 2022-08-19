@@ -48,6 +48,8 @@ function App() {
         <Route path="/archiving" element={<ArchivingPage />} />
         <Route path="/surveyStart" element={<SurveyStart />} />
         <Route path="/survey" element={<Survey />} />
+        <Route path="/termsConditions" element={<TermsConditions />} />
+        <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
         <Route element={<ProtectedRoutes />}>
           <Route
             path="/home"
@@ -71,8 +73,6 @@ function App() {
             }
           />
           <Route path="/userProfile" element={<UserProfile />} />
-          <Route path="/termsConditions" element={<TermsConditions />} />
-          <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
           <Route
             path="/upload-wallpaper"
             element={
