@@ -10,6 +10,7 @@ import {
   changeToggle,
   getWallpaper,
   postWallpaper,
+  putWallpaper,
 } from '../../modules/post/wallpaper';
 import UploadQuestion from '../../components/UploadWallPaper/UploadWallPaperQuestion';
 import UploadToggle from '../../components/UploadWallPaper/UploadWallPaperToggle';
@@ -22,7 +23,7 @@ interface LocationType {
 }
 
 function UploadWallPaper() {
-  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const { archivesDto, coverImage } = useSelector((state: RootState) => state.wallpaper.data);
   const dispatch = useDispatch();
 
   // 1번 질문 : 커버사진
@@ -65,18 +66,18 @@ function UploadWallPaper() {
 
   useEffect(() => {
     if (
-      wallpaper.archivingStyle !== null &&
-      wallpaper.budget !== null &&
-      wallpaper.coverImage !== null &&
-      wallpaper.firstDay !== '' &&
-      wallpaper.haveCompanion !== null &&
-      wallpaper.lastDay !== '' &&
-      wallpaper.places !== '' &&
-      wallpaper.title !== ''
+      archivesDto.archivingStyle !== null &&
+      archivesDto.budget !== null &&
+      (coverImage !== null || archivesDto.imagesUrl !== null) &&
+      archivesDto.firstDay !== '' &&
+      archivesDto.haveCompanion !== null &&
+      archivesDto.lastDay !== '' &&
+      archivesDto.places !== '' &&
+      archivesDto.title !== ''
     ) {
       setComplete(true);
     }
-  }, [wallpaper]);
+  }, [archivesDto, coverImage]);
 
   const navigate = useNavigate();
   const { state } = useLocation() as LocationType;
@@ -103,7 +104,7 @@ function UploadWallPaper() {
             <label htmlFor="upload">
               <img src="imgs/Upload/ic_camera.png" alt="camera" />
               <div>
-                <span>{wallpaper.coverImage !== null ? 1 : 0}</span>
+                <span>{coverImage !== null ? 1 : 0}</span>
                 <span>/1</span>
               </div>
             </label>
@@ -114,14 +115,14 @@ function UploadWallPaper() {
               multiple={false}
               onChange={(e) => onUploadImage(e)}
               id="upload"
-              disabled={wallpaper.coverImage !== null}
+              disabled={!coverImage || !archivesDto.imagesUrl}
             />
-            {wallpaper.coverImage && (
+            {(coverImage || archivesDto.imagesUrl) && (
               <div className="image">
-                {wallpaper.coverImage instanceof File ? (
-                  <img src={URL.createObjectURL(wallpaper.coverImage)} alt="archiving_img" />
+                {coverImage instanceof File ? (
+                  <img src={URL.createObjectURL(coverImage)} alt="archiving_img" />
                 ) : (
-                  <img src={wallpaper.coverImage} alt="archiving_img" />
+                  <img src={archivesDto.imagesUrl!} alt="archiving_img" />
                 )}
 
                 <button type="button" onClick={() => onDeleteImage()}>
@@ -138,9 +139,9 @@ function UploadWallPaper() {
               type="text"
               placeholder="이번 여행 기록의 제목을 정해주세요."
               onChange={(e) => onInputText(e)}
-              value={wallpaper.title ? wallpaper.title : ''}
+              value={archivesDto.title ? archivesDto.title : ''}
             />
-            {wallpaper.title !== '' && (
+            {archivesDto.title !== '' && (
               <button type="button" onClick={onResetText}>
                 <img src="imgs/Upload/ic_x_small.png" alt="reset" />
               </button>
@@ -194,7 +195,8 @@ function UploadWallPaper() {
         className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
         disabled={!complete}
         onClick={() => {
-          dispatch(postWallpaper(wallpaper));
+          if (archivesDto.id) dispatch(putWallpaper({ coverImage, archivesDto }));
+          else dispatch(postWallpaper({ coverImage, archivesDto }));
           navigate('/upload-day?day=1');
         }}
       >

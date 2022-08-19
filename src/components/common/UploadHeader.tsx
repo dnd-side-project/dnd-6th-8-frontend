@@ -18,16 +18,22 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
   const [isOpenSaveModal, setIsOpenSaveModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const { coverImage, archivesDto } = useSelector((state: RootState) => state.wallpaper.data);
   const days = useSelector((state: RootState) => state.days.data);
   const dispatch = useDispatch();
   const onSave = useCallback(() => {
-    if (wallpaper.id) dispatch(putWallpaper(wallpaper));
-    else dispatch(postWallpaper(wallpaper));
+    // Day 작성 페이지
+    if (isCanGoBack) {
+      days.forEach((day) => {
+        if (archivesDto.id) dispatch(postDay(day, archivesDto.id, day.dayNumber));
+      });
+    }
+    // 표지 작성 페이지
+    else if (archivesDto.id) dispatch(putWallpaper({ coverImage, archivesDto }));
+    else dispatch(postWallpaper({ coverImage, archivesDto }));
 
-    // if (isCanGoBack) dispatch(postDay(days));
     // else dispatch(postWallpaper(wallpaper));
-  }, [dispatch, wallpaper]);
+  }, [dispatch, archivesDto, coverImage, isCanGoBack, days]);
 
   return (
     <>

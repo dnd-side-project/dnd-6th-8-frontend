@@ -44,9 +44,9 @@ export const uploadImage = (day: number, file: File[]) => ({
   payload: { day, file },
 });
 
-export const deleteImage = (day: number, file: File) => ({
+export const deleteImage = (day: number, index: number) => ({
   type: DELETE_IMAGE,
-  payload: { day, file },
+  payload: { day, index },
 });
 
 export const changeLocation = (day: number, type: string, data: string, index: number) => ({
@@ -93,15 +93,15 @@ export type dayInfoType = {
 export type DaysDataType = {
   [index: string]: string | File[] | number | dayInfoType[] | null | string[];
   date: string;
-  archiveId: number | null;
+  // archiveId: number | null;
   dayNumber: number;
   travelDescription: string;
   emotionDescription: string;
   weather: string;
   tipDescription: string | null;
   dayInfoSaveRequestDtos: dayInfoType[];
-  images: File[];
-  writer: string | null;
+  dayImages: File[];
+  // writer: string | null;
 };
 
 export type DaysModuleType = {
@@ -112,16 +112,16 @@ export type DaysModuleType = {
 
 // thunk 함수
 export const postDay =
-  (data: DaysDataType[]): ThunkAction<void, RootState, null, dayAction> =>
+  (data: DaysDataType, id: number, num: number): ThunkAction<void, RootState, null, dayAction> =>
   async (dispatch) => {
     try {
       dispatch(postDaysPending());
       const formData = new FormData();
       formData.append(
         'dayTotalRequestDto',
-        new Blob([JSON.stringify({ daysSaveRequestDto: data })], { type: 'application/json' }),
+        new Blob([JSON.stringify({ dayTotalRequestDto: data })], { type: 'application/json' }),
       );
-      const response = await instance.post(`/api/v1/archives/days?archiveId=${92}`, formData, {
+      const response = await instance.post(`/api/v1/archives/${id}/days/${num}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       dispatch(postDaysSuccess(response));
@@ -136,9 +136,9 @@ const initailState: DaysModuleType = {
   data: [
     {
       dayNumber: 1,
-      writer: null,
+      // writer: null,
       date: '',
-      archiveId: null,
+      // archiveId: null,
       weather: '',
       travelDescription: '',
       emotionDescription: '',
@@ -151,7 +151,7 @@ const initailState: DaysModuleType = {
           transportation: '',
         },
       ],
-      images: [],
+      dayImages: [],
     },
   ],
   loading: false,
@@ -168,9 +168,9 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
         data: state.data.concat([
           {
             dayNumber: state.data.length + 1,
-            writer: null,
+            // writer: null,
             date: '',
-            archiveId: null,
+            // archiveId: null,
             weather: '',
             travelDescription: '',
             emotionDescription: '',
@@ -183,7 +183,7 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
                 transportation: '',
               },
             ],
-            images: [],
+            dayImages: [],
           },
         ]),
       };
@@ -214,18 +214,16 @@ function days(state: DaysModuleType = initailState, action: dayAction) {
     case UPLOAD_IMAGE:
       return {
         ...state,
-        data: state.data.map((day) =>
-          day.dayNumber === action.payload.day ? { ...day, images: day.images.concat(action.payload.file) } : day,
-        ),
+        data: produce(state.data, (draft) => {
+          draft[action.payload.day].dayImages.push(...action.payload.file);
+        }),
       };
     case DELETE_IMAGE:
       return {
         ...state,
-        data: state.data.map((day) =>
-          day.dayNumber === action.payload.day
-            ? { ...day, images: day.images.filter((img) => img !== action.payload.file) }
-            : day,
-        ),
+        data: produce(state.data, (draft) => {
+          draft[action.payload.day].dayImages.slice(action.payload.index, 1);
+        }),
       };
     case CHANGE_LOCATION:
       return {

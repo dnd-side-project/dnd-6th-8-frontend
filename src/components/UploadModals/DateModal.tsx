@@ -8,9 +8,9 @@ import './DateModal.scss';
 import { RootState } from '../../modules';
 
 function DateModal() {
-  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
-  const [startDate, setStartDate] = useState<Date | null>(wallpaper.firstDay ? new Date(wallpaper.firstDay) : null);
-  const [endDate, setEndDate] = useState<Date | null>(wallpaper.lastDay ? new Date(wallpaper.lastDay) : null);
+  const { archivesDto } = useSelector((state: RootState) => state.wallpaper.data);
+  const [startDate, setStartDate] = useState<Date | null>(archivesDto.firstDay ? new Date(archivesDto.firstDay) : null);
+  const [endDate, setEndDate] = useState<Date | null>(archivesDto.lastDay ? new Date(archivesDto.lastDay) : null);
   const [hidden, setHidden] = useState<boolean>(true);
 
   const dispatch = useDispatch();

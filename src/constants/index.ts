@@ -31,8 +31,13 @@ export type archivingModuleType = {
 };
 
 export type WallPaperDataType = {
-  [index: string]: string | File | null | number | boolean;
+  [index: string]: string | File | null | ArchivesDtoType;
   coverImage: File | null | string;
+  archivesDto: ArchivesDtoType;
+};
+
+export type ArchivesDtoType = {
+  imagesUrl: string | null;
   title: string | null;
   places: string | null;
   firstDay: string | null;
@@ -41,8 +46,23 @@ export type WallPaperDataType = {
   budget: string | null;
   archivingStyle: string | null;
   id: number | null;
-  countDaysFeeds: number | null;
+  // countDaysFeeds: number | null;
   share: boolean;
+};
+
+export type WallPaperResponseType = {
+  coverImage: string;
+  title: string;
+  places: string;
+  firstDay: string;
+  lastDay: string;
+  haveCompanion: boolean;
+  budget: string;
+  archivingStyle: string;
+  id: number;
+  countDaysFeeds: number;
+  share: boolean;
+  travelDuration: string;
 };
 
 export type WallPaperModuleType = {

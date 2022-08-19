@@ -241,8 +241,8 @@ function UploadDay() {
     // );
   };
 
-  const onDeleteImages = (nowDay: number, image: File) => {
-    dispatch(deleteImage(nowDay, image));
+  const onDeleteImages = (nowDay: number, index: number) => {
+    dispatch(deleteImage(nowDay, index));
     // setWriteData(
     //   writeData.map((data) =>
     //     data.day === day ? { ...data, images: data.images.filter((img) => img !== image) } : data,
@@ -343,14 +343,6 @@ function UploadDay() {
               <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="cloud" />
               <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="rain" />
               <WeatherButton onInputWeather={onInputWeather} selectedDay={selectedDay} alt="snow" />
-              {/* <button
-                type="button"
-                onClick={(e) => onInputWeather(e, selectedDay)}
-                className={days[selectedDay - 1].weather === 'sun' ? 'selected' : ''}
-              >
-                <img src="imgs/Upload/illust_sun.png" alt="sun" />
-                <span>맑음</span>
-              </button> */}
             </div>
           </article>
           <article className="question images">
@@ -360,7 +352,7 @@ function UploadDay() {
                 <label htmlFor="upload">
                   <img src="imgs/Upload/ic_camera.png" alt="camera" />
                   <div>
-                    <span>{days[selectedDay - 1].images.length}</span>
+                    <span>{days[selectedDay - 1].dayImages?.length || '0'}</span>
                     <span>/3</span>
                   </div>
                 </label>
@@ -368,17 +360,17 @@ function UploadDay() {
               <input
                 type="file"
                 accept="image/x-png,image/jpeg,image/gif"
-                onChange={(e) => onInputImages(e, selectedDay)}
+                onChange={(e) => onInputImages(e, selectedDay - 1)}
                 multiple
                 id="upload"
-                disabled={days[selectedDay - 1].images.length >= 3 && true}
+                disabled={days[selectedDay - 1].dayImages.length >= 3}
               />
-              {days[selectedDay - 1].images.map((image) => {
+              {days[selectedDay - 1].dayImages.map((image, idx) => {
                 const src = URL.createObjectURL(image);
                 return (
                   <div key={image.name} className="image">
                     <img src={src} alt="upload_img" />
-                    <button type="button" onClick={() => onDeleteImages(selectedDay, image)}>
+                    <button type="button" onClick={() => onDeleteImages(selectedDay - 1, idx)}>
                       <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
                     </button>
                   </div>
