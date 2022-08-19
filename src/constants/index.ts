@@ -256,6 +256,18 @@ export type dayTripCourse = {
   goingBy: string;
 };
 
+export type MyPageData = {
+  archiveNumber: number;
+  badgesList: string[];
+  diaryColor: string;
+  userName: string;
+};
+
+export type MyPageModule = {
+  data: MyPageData;
+  loading: boolean;
+  error: null | Error;
+};
 // 스크랩 실제
 export type ScrapDataType = {
   id: number;

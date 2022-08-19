@@ -5,6 +5,7 @@ import userInformation from './user/userinfomation';
 import wallpaper from './post/wallpaper';
 import days from './post/days';
 import myArchivesReducer from './post/archives';
+import mypage from './user/mypage';
 import readWallPaperReducer from './post/readwallpaper';
 import dayFeed from './post/dayfeed';
 import home from './post/home';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   wallpaper,
   userInformation,
   myArchivesReducer,
+  mypage,
   readWallPaperReducer,
   dayFeed,
   home,

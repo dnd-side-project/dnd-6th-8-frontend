@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination } from 'swiper';
 import './Sticker.scss';
+import { RootState } from '../../modules';
+
+function matchColor(color: string): string {
+  switch (color) {
+    case 'red':
+      return '01';
+    case 'blue':
+      return '02';
+    case 'purple':
+      return '03';
+    case 'white':
+      return '04';
+    default:
+      return '01';
+  }
+}
 
 // 스티커 데이터
 const stickers = [
