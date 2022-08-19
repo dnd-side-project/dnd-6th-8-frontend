@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setShare } from '../../modules/post/wallpaper';
 import './ShareModal.scss';
+import { RootState } from '../../modules';
 
 type ShareModalProps = {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function ShareModal({ closeModal }: ShareModalProps) {
-  const [share, setShare] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const share = useSelector((state: RootState) => state.wallpaper.data.share);
+  // const [share, setShare] = useState<boolean>(false);
   return (
     <div className="shareModal-wrapper">
       <div className="dimmed" />
@@ -17,7 +22,7 @@ function ShareModal({ closeModal }: ShareModalProps) {
           <div className="share-container">
             <span className={share ? 'share' : ''}>{`공유 ${share ? 'ON' : 'OFF'}`}</span>
             <label className="switch" htmlFor="toggle">
-              <input type="checkbox" id="toggle" onClick={() => setShare(!share)} />
+              <input type="checkbox" id="toggle" onClick={() => dispatch(setShare(!share))} />
               <span className="slider" />
             </label>
           </div>
