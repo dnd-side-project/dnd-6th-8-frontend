@@ -30,8 +30,8 @@ export type archivingModuleType = {
 };
 
 export type WallPaperDataType = {
-  [index: string]: string | File | null | ArchivesDtoType;
-  coverImage: File | null | string;
+  [index: string]: File | null | ArchivesDtoType;
+  coverImage: File | null;
   archivesDto: ArchivesDtoType;
 };
 
@@ -94,7 +94,7 @@ export type ReadWallPaperModuleType = {
 };
 
 export type daysObjectiveResponseDtoType = {
-  daysInfo_Id : number;
+  daysInfo_Id: number;
   arrival: string;
   departure: string;
   transportation: string;

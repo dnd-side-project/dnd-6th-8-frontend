@@ -118,8 +118,8 @@ export const postDay =
       dispatch(postDaysPending());
       const formData = new FormData();
       formData.append(
-        'dayTotalRequestDto',
-        new Blob([JSON.stringify({ dayTotalRequestDto: data })], { type: 'application/json' }),
+        'daysSaveRequestDtos',
+        new Blob([JSON.stringify({ daysSaveRequestDtos: data })], { type: 'application/json' }),
       );
       const response = await instance.post(`/api/v1/archives/${id}/days/${num}`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },

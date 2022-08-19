@@ -117,14 +117,17 @@ function UploadWallPaper() {
               id="upload"
               disabled={!coverImage || !archivesDto.imagesUrl}
             />
-            {(coverImage || archivesDto.imagesUrl) && (
+            {coverImage && (
               <div className="image">
-                {coverImage instanceof File ? (
-                  <img src={URL.createObjectURL(coverImage)} alt="archiving_img" />
-                ) : (
-                  <img src={archivesDto.imagesUrl!} alt="archiving_img" />
-                )}
-
+                <img src={URL.createObjectURL(coverImage)} alt="archiving_img" />
+                <button type="button" onClick={() => onDeleteImage()}>
+                  <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
+                </button>
+              </div>
+            )}
+            {archivesDto.imagesUrl && (
+              <div className="image">
+                <img src={archivesDto.imagesUrl} alt="archiving_img" />
                 <button type="button" onClick={() => onDeleteImage()}>
                   <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
                 </button>

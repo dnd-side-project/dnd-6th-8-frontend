@@ -1,7 +1,7 @@
 import { ThunkAction } from 'redux-thunk';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import instance from '../../lib/axios';
-import { WallPaperModuleType, WallPaperDataType, ArchivesDtoType, WallPaperResponseType } from '../../constants/index';
+import { WallPaperModuleType, WallPaperDataType, WallPaperResponseType } from '../../constants/index';
 import { RootState } from '..';
 
 // 액션 타입
