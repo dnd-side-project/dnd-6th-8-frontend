@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import './style.scss';
-import axios from 'axios';
 import instance from '../../lib/axios';
 import { ReactComponent as TextLogo } from '../../assets/icons/WelcomePage/tracious_text_logo.svg';
 import { ReactComponent as TalkBox } from '../../assets/icons/WelcomePage/talk_box.svg';
@@ -9,7 +8,7 @@ import { ReactComponent as Kakao } from '../../assets/icons/WelcomePage/ic_login
 import { ReactComponent as Naver } from '../../assets/icons/WelcomePage/ic_login_naver.svg';
 
 function WelcomePage() {
-  const KakaoLogIn = useCallback(async () => {
+  const KakaoLogIn = useCallback(() => {
     const kakaoSignIn = async () => {
       const kakao: string = await instance.get('/auth/kakao');
       window.location.replace(kakao);
@@ -17,7 +16,7 @@ function WelcomePage() {
     kakaoSignIn();
   }, []);
 
-  const NaverLogIn = useCallback(async () => {
+  const NaverLogIn = useCallback(() => {
     const naverSignIn = async () => {
       const naver: string = await instance.get('/auth/naver');
       window.location.replace(naver);
