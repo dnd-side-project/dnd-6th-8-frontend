@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Home.scss';
 import { getLocation, getRecommend, getHome } from '../../modules/post/home';
 import Greeting from '../../components/Home/Greeting';
-import LocationFeed from '../../components/Home/LocationFeed';
+import Location from '../../components/Home/Location';
 import Recommend from '../../components/Home/Recommend';
 import HomeLoading from '../../components/Home/HomeLoading';
 import { RootState } from '../../modules';
@@ -36,7 +36,7 @@ function Home() {
         ) : (
           <>
             <Greeting />
-            <LocationFeed />
+            <Location />
             <Recommend />
           </>
         )}

@@ -1,36 +1,56 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { getLocation } from '../../modules/post/home';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import LocationNav from './LocationNav';
+import LocFeed from './LocFeed';
+import EmptyFeed from './EmptyFeed';
+import { locationNames } from '../../constants/index';
+import './Location.scss';
+import { RootState } from '../../modules';
 
-type LocationProps = {
-  title: string;
-  en: string;
-  param: string;
-  click: string;
-  setClick: React.Dispatch<React.SetStateAction<string>>;
-};
+function Location() {
+  // 지역별 추천 피드 데이터
+  const locationData = useSelector((state: RootState) => state.home.location.data);
 
-function Location({ title, en, param, click, setClick }: LocationProps) {
-  const dispatch = useDispatch();
-  // 지역 버튼 클릭
-  const onClickLoc = useCallback(
-    (loc: string) => {
-      setClick(loc);
-      dispatch(getLocation(loc));
-    },
-    [dispatch, click],
-  );
+  const [clickLoc, setClickLoc] = useState<string>('부산'); // 선택된 지역 버튼
 
   return (
-    <button
-      type="button"
-      onClick={() => onClickLoc(param)}
-      className={`location-wrapper${click === param ? ' click' : ''}`}
-      key={en}
-    >
-      <img src={`imgs/Home/emoji_${en}.png`} alt={`${title} 지역 여행기록 추천`} />
-      {title}
-    </button>
+    <section className="locationFeed-wrapper">
+      <div className="header">
+        <h2>어느 지역의 여행 기록을 보고싶나요?</h2>
+        <button className="refresh" type="button">
+          <span>새로고침</span>
+          <img src="imgs/Home/img_refreshbutton_home.png" alt="새로고침 버튼" />
+        </button>
+      </div>
+      <nav>
+        {locationNames.map((location) => (
+          <LocationNav
+            title={location.title}
+            en={location.en}
+            param={location.param}
+            key={location.en}
+            click={clickLoc}
+            setClick={setClickLoc}
+          />
+        ))}
+      </nav>
+      <article>
+        {locationData.length === 0 ? (
+          <EmptyFeed />
+        ) : (
+          locationData.map((feed) => (
+            <LocFeed
+              archivingStyle={feed.archivingStyle}
+              title={feed.title}
+              coverImage={feed.coverImage}
+              places={feed.places}
+              id={feed.id}
+              key={feed.id}
+            />
+          ))
+        )}
+      </article>
+    </section>
   );
 }
 
