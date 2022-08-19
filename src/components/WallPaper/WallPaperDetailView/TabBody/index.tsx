@@ -46,7 +46,7 @@ function TabBody({ index }: TabBodyProps) {
         <Swiper
           slidesPerView={1}
           style={{ overflow: 'visible' }}
-          onSlideChange={(swiper) => setTimeout(() => setActiveIndex(swiper.activeIndex), 500)}
+          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         >
           {data.daysObjAndSubResponseDto[index].daysObjectiveResponses.map((course: daysObjectiveResponseDtoType) => (
             <SwiperSlide>

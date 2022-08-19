@@ -27,26 +27,28 @@ function WelcomePage() {
 
   return (
     <div className="welcomepage-wrapper">
-      <TextLogo className="text-logo" />
-      <div className="intro">
-        트레셔스와 함께
-        <br /> 여행의 설렘을 간직하세요!
-      </div>
-      <div className="frame">
-        <TalkBox className="talk-box" />
-        <div className="social-wrap">
-          <Kakao className="kakao" onClick={KakaoLogIn} />
-          <Naver className="naver" onClick={NaverLogIn} />
+      <div className="inner-wrapper">
+        <TextLogo className="text-logo" />
+        <div className="intro">
+          트레셔스와 함께
+          <br /> 여행의 설렘을 간직하세요!
         </div>
-      </div>
-      <p>가입시 트레셔스의 이용약관에 동의하는 것으로 간주합니다.</p>
-      <div className="see-long-term-wrapper">
-        <Link to="/termsConditions" style={{ textDecoration: 'none' }}>
-          <p className="see-long-term">이용약관 보기</p>
-        </Link>
-        <Link to="/personalInfoPolicy" style={{ textDecoration: 'none' }}>
-          <p className="see-long-term">개인정보처리방침 보기</p>
-        </Link>
+        <div className="frame">
+          <TalkBox className="talk-box" />
+          <div className="social-wrap">
+            <Kakao className="kakao" onClick={KakaoLogIn} />
+            <Naver className="naver" onClick={NaverLogIn} />
+          </div>
+        </div>
+        <p>가입시 트레셔스의 이용약관에 동의하는 것으로 간주합니다.</p>
+        <div className="see-long-term-wrapper">
+          <Link to="/termsConditions" style={{ textDecoration: 'none' }}>
+            <p className="see-long-term">이용약관 보기</p>
+          </Link>
+          <Link to="/personalInfoPolicy" style={{ textDecoration: 'none' }}>
+            <p className="see-long-term">개인정보처리방침 보기</p>
+          </Link>
+        </div>
       </div>
     </div>
   );
