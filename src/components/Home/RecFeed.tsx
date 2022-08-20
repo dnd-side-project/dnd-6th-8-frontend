@@ -1,18 +1,7 @@
 import React, { useCallback } from 'react';
 import './Recommend.scss';
 import { useNavigate } from 'react-router-dom';
-
-type RecFeedProps = {
-  id: number;
-  archivingStyle: string;
-  coverImage: string;
-  places: string;
-  title: string;
-  travelDuration: string;
-  emojiNum: number;
-  scrapNum: number;
-  shortContent: string;
-};
+import { RecFeedProps } from '../../constants/index';
 
 function RecFeed({
   id,

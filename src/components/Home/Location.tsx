@@ -15,13 +15,7 @@ function Location() {
 
   return (
     <section className="locationFeed-wrapper">
-      <div className="header">
-        <h2>어느 지역의 여행 기록을 보고싶나요?</h2>
-        <button className="refresh" type="button">
-          <span>새로고침</span>
-          <img src="imgs/Home/img_refreshbutton_home.png" alt="새로고침 버튼" />
-        </button>
-      </div>
+      <h2>어느 지역의 여행 기록을 보고싶나요?</h2>
       <nav>
         {locationNames.map((location) => (
           <LocationNav

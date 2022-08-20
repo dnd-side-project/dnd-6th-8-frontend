@@ -25,7 +25,7 @@ function Greeting() {
           <div className="image" key={image} style={{ zIndex: 3 - index }}>
             <img
               src={image}
-              alt={`${index}번째 이미지`}
+              alt="인기 포스트 이미지"
               style={{ filter: index === images.length - 1 ? 'brightness(0.5)' : '' }}
             />
             {index === images.length - 1 && <span>+{homeData?.totalArchiveNum}</span>}

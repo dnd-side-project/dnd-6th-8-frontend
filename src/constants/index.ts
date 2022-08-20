@@ -196,6 +196,18 @@ export type HomeMainType = {
   userNickName: string;
 };
 
+export type RecFeedProps = {
+  id: number;
+  archivingStyle: string;
+  coverImage: string;
+  places: string;
+  title: string;
+  travelDuration: string;
+  emojiNum: number;
+  scrapNum: number;
+  shortContent: string;
+};
+
 export type UserInfoModuleType = {
   data: {
     surveyResponse: {
