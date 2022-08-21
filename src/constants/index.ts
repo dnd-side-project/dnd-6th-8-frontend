@@ -30,9 +30,17 @@ export type archivingModuleType = {
 };
 
 export type WallPaperDataType = {
-  [index: string]: File | null | ArchivesDtoType;
+  [index: string]: File | null | string | number | boolean;
   coverImage: File | null;
-  archivesDto: ArchivesDtoType;
+  imagesUrl: string | null;
+  title: string | null;
+  places: string | null;
+  firstDay: string | null;
+  lastDay: string | null;
+  haveCompanion: string | null | boolean;
+  budget: string | null;
+  archivingStyle: string | null;
+  id: number | null;
 };
 
 export type ArchivesDtoType = {
@@ -46,7 +54,7 @@ export type ArchivesDtoType = {
   archivingStyle: string | null;
   id: number | null;
   // countDaysFeeds: number | null;
-  share: boolean;
+  // share: boolean;
 };
 
 export type WallPaperResponseType = {
@@ -68,7 +76,6 @@ export type WallPaperModuleType = {
   data: WallPaperDataType;
   loading: boolean;
   error: null | Error;
-  badge: string;
 };
 // real WallPaer 데이터 => 실제로 클릭했을 때 뜨는 정보
 export type ReadWallPaperDataType = {

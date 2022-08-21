@@ -23,15 +23,14 @@ function UploadHeader({ isCanGoBack, title }: UploadHeaderProps) {
   const dispatch = useDispatch();
   const onSave = useCallback(() => {
     // Day 작성 페이지
-    if (isCanGoBack) {
-      days.forEach((day) => {
-        if (archivesDto.id) dispatch(postDay(day, archivesDto.id, day.dayNumber));
-      });
-    }
+    // if (isCanGoBack) {
+    //   days.forEach((day) => {
+    //     if (archivesDto.id) dispatch(postDay(day, archivesDto.id, day.dayNumber));
+    //   });
+    // }
     // 표지 작성 페이지
-    else if (archivesDto.id) dispatch(putWallpaper({ coverImage, archivesDto }));
-    else dispatch(postWallpaper({ coverImage, archivesDto }));
-
+    // else if (archivesDto.id) dispatch(putWallpaper({ coverImage, archivesDto }));
+    // else dispatch(postWallpaper({ coverImage, archivesDto }));
     // else dispatch(postWallpaper(wallpaper));
   }, [dispatch, archivesDto, coverImage, isCanGoBack, days]);
 

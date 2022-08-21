@@ -7,11 +7,10 @@ import { RootState } from '..';
 // 액션 타입
 // change -> local에서 바뀔때마다 변경
 // post -> 저장할때마다 axios 통신
-const UPLOAD_IMAGE = 'wallpaper/UPLOAD_IMAGE' as const;
-const DELETE_IMAGE = 'wallpaper/DELETE_IMAGE' as const;
+const CHANGE_IMAGE = 'wallpaper/CHANGE_IMAGE' as const;
 const CHANGE_TITLE = 'wallpaper/CHANGE_TITLE' as const;
-const RESET_TITLE = 'wallpaper/RESET_TITLE' as const;
 const CHANGE_TOGGLE = 'wallpaper/CHANGE_TOGGLE' as const;
+
 const RESET_WALLPAPER = 'wallpaper/RESET_WALLPAPER' as const;
 const GET_ARCHIVE_ID = 'wallpaper/GET_ARCHIVE_ID' as const;
 const SET_BADGE = 'wallpaper/SET_BADGE' as const;
@@ -31,24 +30,14 @@ const PUT_WALLPAPER_FAILURE = 'wallpaper/PUT_WALLPAPER_FAILURE' as const;
 
 // 액션 생성 함수
 // File object -> redux dev tools에서 {}로 표시됨(https://stackoverflow.com/questions/67137855/how-could-i-handle-a-file-upload-with-react-and-redux)
-export const uploadImage = (file: File) => ({
-  type: UPLOAD_IMAGE,
+export const changeImage = (file: File | null) => ({
+  type: CHANGE_IMAGE,
   payload: file,
 });
 
-export const deleteImage = () => ({
-  type: DELETE_IMAGE,
-  payload: null,
-});
-
-export const changeTitle = (value: string) => ({
+export const changeTitle = (value: string | null) => ({
   type: CHANGE_TITLE,
   payload: value,
-});
-
-export const resetTitle = () => ({
-  type: RESET_TITLE,
-  payload: '',
 });
 
 export const changeToggle = (name: string, value: string) => ({
@@ -88,10 +77,8 @@ const putWallpaperSuccess = (payload: AxiosResponse) => ({ type: PUT_WALLPAPER_S
 const putWallpaperFailure = (payload: AxiosError) => ({ type: PUT_WALLPAPER_FAILURE, error: true, payload });
 
 type wallpaperAction =
-  | ReturnType<typeof uploadImage>
-  | ReturnType<typeof deleteImage>
+  | ReturnType<typeof changeImage>
   | ReturnType<typeof changeTitle>
-  | ReturnType<typeof resetTitle>
   | ReturnType<typeof changeToggle>
   | ReturnType<typeof resetWallpaper>
   | ReturnType<typeof getArchiveId>
@@ -115,7 +102,7 @@ export const postWallpaper =
       dispatch(postWallpaperPending());
       const formData = new FormData();
       if (data.coverImage) formData.append('coverImage', data.coverImage);
-      const archivesSaveRequestDto = JSON.stringify(data.archivesDto);
+      const archivesSaveRequestDto = JSON.stringify(data);
       formData.append('archivesSaveRequestDto', new Blob([archivesSaveRequestDto], { type: 'application/json' }));
       const response: WallPaperResponseType = await instance.post(`/api/v1/archives`, formData, {
         headers: {
@@ -151,9 +138,9 @@ export const putWallpaper =
       dispatch(putWallpaperPending());
       const formData = new FormData();
       if (data.coverImage instanceof File) formData.append('coverImage', data.coverImage);
-      const archiveUpdateRequestDto = JSON.stringify(data.archivesDto);
+      const archiveUpdateRequestDto = JSON.stringify(data);
       formData.append('archiveUpdateRequestDto', new Blob([archiveUpdateRequestDto], { type: 'application/json' }));
-      const response = await instance.put(`/api/v1/archives/${data.archivesDto.id}`, formData, {
+      const response = await instance.put(`/api/v1/archives/${data.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -169,114 +156,110 @@ export const putWallpaper =
 const initailState: WallPaperModuleType = {
   data: {
     coverImage: null,
-    archivesDto: {
-      imagesUrl: null,
-      title: null,
-      places: null,
-      firstDay: null,
-      lastDay: null,
-      haveCompanion: null,
-      budget: null,
-      archivingStyle: null,
-      id: null,
-      share: false,
-    },
+    imagesUrl: null,
+    title: null,
+    places: null,
+    firstDay: null,
+    lastDay: null,
+    haveCompanion: null,
+    budget: null,
+    archivingStyle: null,
+    id: null,
+    // share: false,
   },
   loading: false,
   error: null,
-  badge: '',
 };
 
 // 리듀서
 // eslint-disable-next-line default-param-last
 function wallpaper(state: WallPaperModuleType = initailState, action: wallpaperAction) {
   switch (action.type) {
-    case UPLOAD_IMAGE:
-      if (action.payload instanceof File) {
-        return { ...state, data: { ...state.data, coverImage: action.payload } };
-      }
+    case CHANGE_IMAGE:
+      if (!action.payload) return { ...state, data: { ...state.data, coverImage: null } };
       return {
         ...state,
-        data: { ...state.data, archivesDto: { ...state.data.archivesDto, imagesUrl: action.payload } },
+        data: { ...state.data, coverImage: action.payload },
       };
-    case DELETE_IMAGE:
-      return {
-        ...state,
-        data: { coverImage: action.payload, archivesDto: { ...state.data.archivesDto, imagesUrl: action.payload } },
-      };
+    // case DELETE_IMAGE:
+    //   return {
+    //     ...state,
+    //     data: { coverImage: action.payload, archivesDto: { ...state.data.archivesDto, imagesUrl: action.payload } },
+    //   };
     case CHANGE_TITLE:
-      return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, title: action.payload } } };
-    case RESET_TITLE:
-      return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, title: action.payload } } };
+      return { ...state, data: { ...state.data, title: action.payload } };
+    // case RESET_TITLE:
+    //   return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, title: action.payload } } };
     case CHANGE_TOGGLE:
       return {
         ...state,
         data: {
           ...state.data,
-          archivesDto: { ...state.data.archivesDto, [action.payload.name]: action.payload.value },
+          [action.payload.name]: action.payload.value,
         },
       }; // key object 변수 설정할때는 [key]:value 형태 사용
-    case RESET_WALLPAPER:
-      return {
-        ...state,
-        data: {
-          coverImage: null,
-          archivesDto: {
-            imagesUrl: null,
-            title: null,
-            places: null,
-            firstDay: null,
-            lastDay: null,
-            haveCompanion: null,
-            budget: null,
-            archivingStyle: null,
-            id: null,
-            share: false,
-          },
-        },
-      };
-    case GET_ARCHIVE_ID:
-      return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, id: action.payload } } };
-    case SET_BADGE:
-      return { ...state, badge: action.payload };
-    case SET_SHARE:
-      return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, share: action.payload } } };
-    case POST_WALLPAPER_PENDING:
-      return { ...state, loading: true };
-    case POST_WALLPAPER_SUCCESS:
-      return { ...state, loading: false };
-    case POST_WALLPAPER_FAILURE:
-      return { ...state, loading: false, error: action.payload };
-    case GET_WALLPAPER_PENDING:
-      return { ...state, loading: true };
-    case GET_WALLPAPER_SUCCESS:
-      return {
-        ...state,
-        data: {
-          coverImage: null,
-          archivesDto: {
-            imagesUrl: action.payload.coverImage,
-            title: action.payload.title,
-            places: action.payload.places,
-            firstDay: action.payload.firstDay,
-            lastDay: action.payload.lastDay,
-            haveCompanion: action.payload.haveCompanion,
-            budget: action.payload.budget,
-            archivingStyle: action.payload.archivingStyle,
-            id: action.payload.id,
-            share: action.payload.share,
-          },
-        },
-        loading: false,
-      };
-    case GET_WALLPAPER_FAILURE:
-      return { ...state, loading: false, error: action.payload };
-    case PUT_WALLPAPER_PENDING:
-      return { ...state, loading: true };
-    case PUT_WALLPAPER_SUCCESS:
-      return { ...state, loading: false };
-    case PUT_WALLPAPER_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+    // case RESET_WALLPAPER:
+    //   return {
+    //     ...state,
+    //     data: {
+    //       coverImage: null,
+    //       archivesDto: {
+    //         imagesUrl: null,
+    //         title: null,
+    //         places: null,
+    //         firstDay: null,
+    //         lastDay: null,
+    //         haveCompanion: null,
+    //         budget: null,
+    //         archivingStyle: null,
+    //         id: null,
+    //         // share: false,
+    //       },
+    //     },
+    //   };
+    // case GET_ARCHIVE_ID:
+    //   return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, id: action.payload } } };
+    // // case SET_BADGE:
+    // //   return { ...state, data: { ...state.data, badge: action.payload } };
+    // // case SET_SHARE:
+    // //   return { ...state, data: { ...state.data, archivesDto: { ...state.data.archivesDto, share: action.payload } } };
+    // case POST_WALLPAPER_PENDING:
+    //   return { ...state, loading: true };
+    // case POST_WALLPAPER_SUCCESS:
+    //   return { ...state, loading: false };
+    // case POST_WALLPAPER_FAILURE:
+    //   return { ...state, loading: false, error: action.payload };
+    // case GET_WALLPAPER_PENDING:
+    //   return { ...state, loading: true };
+    // case GET_WALLPAPER_SUCCESS:
+    //   return {
+    //     ...state,
+    //     data: {
+    //       coverImage: null,
+    //       archivesDto: {
+    //         imagesUrl: action.payload.coverImage,
+    //         title: action.payload.title,
+    //         places: action.payload.places,
+    //         firstDay: action.payload.firstDay,
+    //         lastDay: action.payload.lastDay,
+    //         haveCompanion: action.payload.haveCompanion,
+    //         budget: action.payload.budget,
+    //         archivingStyle: action.payload.archivingStyle,
+    //         id: action.payload.id,
+    //         // share: action.payload.share,
+    //       },
+    //       // badge: '',
+    //     },
+    //     loading: false,
+    //   };
+    // case GET_WALLPAPER_FAILURE:
+    //   return { ...state, loading: false, error: action.payload };
+    // case PUT_WALLPAPER_PENDING:
+    //   return { ...state, loading: true };
+    // case PUT_WALLPAPER_SUCCESS:
+    //   return { ...state, loading: false };
+    // case PUT_WALLPAPER_FAILURE:
+    //   return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }

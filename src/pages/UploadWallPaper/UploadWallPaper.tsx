@@ -4,9 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './UploadWallPaper.scss';
 import {
   changeTitle,
-  deleteImage,
-  uploadImage,
-  resetTitle,
+  changeImage,
   changeToggle,
   getWallpaper,
   postWallpaper,
@@ -23,33 +21,42 @@ interface LocationType {
 }
 
 function UploadWallPaper() {
-  const { archivesDto, coverImage } = useSelector((state: RootState) => state.wallpaper.data);
+  const { coverImage, imagesUrl, title, places, firstDay, lastDay, archivingStyle, budget, haveCompanion } =
+    useSelector((state: RootState) => state.wallpaper.data);
   const dispatch = useDispatch();
 
   // 1번 질문 : 커버사진
   const [isImageSizeOK, setIsImageSizeOK] = useState<boolean>(true);
 
-  const onUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (!e.target.files) return;
-      if (e.target.files[0].size > 1024 * 1024 * 5) {
-        setIsImageSizeOK(false);
-        setTimeout(() => {
-          setIsImageSizeOK(true);
-        }, 1200);
-        return;
+  const onChangeImage = useCallback(
+    (e?: React.ChangeEvent<HTMLInputElement>) => {
+      if (e) {
+        if (!e.target.files) return;
+        // 사진 크기 체크
+        if (e.target.files[0].size > 1024 * 1024 * 5) {
+          setIsImageSizeOK(false);
+          setTimeout(() => {
+            setIsImageSizeOK(true);
+          }, 1200);
+          return;
+        }
+        dispatch(changeImage(e.target.files[0]));
+        e.target.value = ''; // 이미지 중복 업로드 처리
+      } else {
+        dispatch(changeImage(null));
       }
-      dispatch(uploadImage(e.target.files[0]));
     },
     [dispatch],
   );
 
-  const onDeleteImage = useCallback(() => dispatch(deleteImage()), [dispatch]);
-
   // 2번 질문 : 제목
-  const onInputText = useCallback((e) => dispatch(changeTitle(e.target.value)), [dispatch]);
-
-  const onResetText = useCallback(() => dispatch(resetTitle()), [dispatch]);
+  const onChangeTitle = useCallback(
+    (e?: React.ChangeEvent<HTMLInputElement>) => {
+      if (e) dispatch(changeTitle(e.target.value));
+      else dispatch(changeTitle(null));
+    },
+    [dispatch],
+  );
 
   // 3~7번 질문 : 여행장소, 여행기간, 동행여부, 예산계획, 스타일
   // 여행 장소 (그외)
@@ -65,19 +72,10 @@ function UploadWallPaper() {
   const [complete, setComplete] = useState<boolean>(false);
 
   useEffect(() => {
-    if (
-      archivesDto.archivingStyle !== null &&
-      archivesDto.budget !== null &&
-      (coverImage !== null || archivesDto.imagesUrl !== null) &&
-      archivesDto.firstDay !== '' &&
-      archivesDto.haveCompanion !== null &&
-      archivesDto.lastDay !== '' &&
-      archivesDto.places !== '' &&
-      archivesDto.title !== ''
-    ) {
+    if (archivingStyle && budget && coverImage && firstDay && haveCompanion && lastDay && places && title) {
       setComplete(true);
-    }
-  }, [archivesDto, coverImage]);
+    } else setComplete(false);
+  }, [coverImage, archivingStyle, budget, firstDay, haveCompanion, lastDay, places, title]);
 
   const navigate = useNavigate();
   const { state } = useLocation() as LocationType;
@@ -104,7 +102,7 @@ function UploadWallPaper() {
             <label htmlFor="upload">
               <img src="imgs/Upload/ic_camera.png" alt="camera" />
               <div>
-                <span>{coverImage !== null ? 1 : 0}</span>
+                <span>{coverImage ? 1 : 0}</span>
                 <span>/1</span>
               </div>
             </label>
@@ -113,22 +111,14 @@ function UploadWallPaper() {
               type="file"
               accept="image/x-png,image/jpeg,image/gif"
               multiple={false}
-              onChange={(e) => onUploadImage(e)}
+              onChange={(e) => onChangeImage(e)}
               id="upload"
-              disabled={!coverImage || !archivesDto.imagesUrl}
+              disabled={coverImage !== null}
             />
             {coverImage && (
               <div className="image">
                 <img src={URL.createObjectURL(coverImage)} alt="archiving_img" />
-                <button type="button" onClick={() => onDeleteImage()}>
-                  <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
-                </button>
-              </div>
-            )}
-            {archivesDto.imagesUrl && (
-              <div className="image">
-                <img src={archivesDto.imagesUrl} alt="archiving_img" />
-                <button type="button" onClick={() => onDeleteImage()}>
+                <button type="button" onClick={() => onChangeImage()}>
                   <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
                 </button>
               </div>
@@ -141,11 +131,11 @@ function UploadWallPaper() {
             <input
               type="text"
               placeholder="이번 여행 기록의 제목을 정해주세요."
-              onChange={(e) => onInputText(e)}
-              value={archivesDto.title ? archivesDto.title : ''}
+              onChange={(e) => onChangeTitle(e)}
+              value={title || ''}
             />
-            {archivesDto.title !== '' && (
-              <button type="button" onClick={onResetText}>
+            {title && (
+              <button type="button" onClick={() => onChangeTitle()}>
                 <img src="imgs/Upload/ic_x_small.png" alt="reset" />
               </button>
             )}
@@ -198,8 +188,8 @@ function UploadWallPaper() {
         className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
         disabled={!complete}
         onClick={() => {
-          if (archivesDto.id) dispatch(putWallpaper({ coverImage, archivesDto }));
-          else dispatch(postWallpaper({ coverImage, archivesDto }));
+          // if (id) dispatch(putWallpaper({ coverImage }));
+          // else dispatch(postWallpaper({ coverImage }));
           navigate('/upload-day?day=1');
         }}
       >
