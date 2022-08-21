@@ -171,21 +171,13 @@ export type HomeFeedType = {
 };
 
 export type HomeModuleType = {
-  home: {
-    data: HomeMainType | null;
-    loading: boolean;
-    error: null | Error;
+  data: {
+    home: HomeMainType | null;
+    location: HomeFeedType[];
+    recommend: HomeFeedType[];
   };
-  location: {
-    data: HomeFeedType[];
-    loading: boolean;
-    error: null | Error;
-  };
-  recommend: {
-    data: HomeFeedType[];
-    loading: boolean;
-    error: null | Error;
-  };
+  loading: boolean;
+  error: null | Error;
 };
 
 export type HomeMainType = {
@@ -194,6 +186,18 @@ export type HomeMainType = {
   thirdArchiveImage: string;
   totalArchiveNum: number;
   userNickName: string;
+};
+
+export type RecFeedProps = {
+  id: number;
+  archivingStyle: string;
+  coverImage: string;
+  places: string;
+  title: string;
+  travelDuration: string;
+  emojiNum: number;
+  scrapNum: number;
+  shortContent: string;
 };
 
 export type UserInfoModuleType = {
