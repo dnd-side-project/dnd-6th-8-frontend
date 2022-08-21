@@ -4,7 +4,7 @@ import { RootState } from '../../modules';
 import './Greeting.scss';
 
 function Greeting() {
-  const homeData = useSelector((state: RootState) => state.home.home.data);
+  const homeData = useSelector((state: RootState) => state.home.data.home);
 
   // 이미지 null값 처리
   const images = [];

@@ -171,21 +171,13 @@ export type HomeFeedType = {
 };
 
 export type HomeModuleType = {
-  home: {
-    data: HomeMainType | null;
-    loading: boolean;
-    error: null | Error;
+  data: {
+    home: HomeMainType | null;
+    location: HomeFeedType[];
+    recommend: HomeFeedType[];
   };
-  location: {
-    data: HomeFeedType[];
-    loading: boolean;
-    error: null | Error;
-  };
-  recommend: {
-    data: HomeFeedType[];
-    loading: boolean;
-    error: null | Error;
-  };
+  loading: boolean;
+  error: null | Error;
 };
 
 export type HomeMainType = {

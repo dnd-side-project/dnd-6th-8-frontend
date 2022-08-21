@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { getLocation } from '../../modules/post/home';
+import { getHome } from '../../modules/post/home';
 
 type LocationProps = {
   title: string;
@@ -16,7 +16,7 @@ function LocationNav({ title, en, param, click, setClick }: LocationProps) {
   const onClickLoc = useCallback(
     (loc: string) => {
       setClick(loc);
-      dispatch(getLocation(loc));
+      dispatch(getHome(loc, true));
     },
     [dispatch, click],
   );

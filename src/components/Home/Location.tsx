@@ -9,7 +9,7 @@ import { RootState } from '../../modules';
 
 function Location() {
   // 지역별 추천 피드 데이터
-  const locationData = useSelector((state: RootState) => state.home.location.data);
+  const locationData = useSelector((state: RootState) => state.home.data.location);
 
   const [clickLoc, setClickLoc] = useState<string>('부산'); // 선택된 지역 버튼
 
