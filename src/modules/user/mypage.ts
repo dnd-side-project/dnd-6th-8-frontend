@@ -35,6 +35,23 @@ export const getMyPage = (): ThunkAction<void, RootState, null, mypageAction> =>
   try {
     dispatch(getMypagePending());
     const response: MyPageData = await instance.get(`/api/v1/user`);
+    const stickers: string[][] = [];
+    let temp: string[] = [];
+    for (let i = 0; i < response.badgesList.length; i += 1) {
+      if (response.badgesList[i]) temp.push(response.badgesList[i]);
+      if (temp.length === 8) {
+        stickers.push(temp);
+        temp = [];
+      }
+    }
+    stickers.push(temp);
+
+    let none: number[] = [];
+    if (stickers.length === 0) none = Array(8).fill(0);
+    else none = Array(8 - stickers[stickers.length - 1].length).fill(0);
+
+    response.stickers = stickers;
+    response.none = none;
     dispatch(getMypageSuccess(response));
   } catch (e: AxiosError | unknown) {
     if (axios.isAxiosError(e)) dispatch(getMypageFailure(e));
@@ -62,6 +79,8 @@ const initialState: MyPageModule = {
     archiveNumber: 0,
     diaryColor: '',
     badgesList: [],
+    stickers: [],
+    none: [],
   },
   loading: false,
   error: null,
