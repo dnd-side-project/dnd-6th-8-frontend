@@ -21,8 +21,8 @@ interface LocationType {
 }
 
 function UploadWallPaper() {
-  const { coverImage, imagesUrl, title, places, firstDay, lastDay, archivingStyle, budget, haveCompanion } =
-    useSelector((state: RootState) => state.wallpaper.data);
+  const wallpaper = useSelector((state: RootState) => state.wallpaper.data);
+  const { coverImage, title, places, firstDay, lastDay, archivingStyle, budget, haveCompanion, id } = wallpaper;
   const dispatch = useDispatch();
 
   // 1번 질문 : 커버사진
@@ -78,7 +78,7 @@ function UploadWallPaper() {
   }, [coverImage, archivingStyle, budget, firstDay, haveCompanion, lastDay, places, title]);
 
   const navigate = useNavigate();
-  const { state } = useLocation() as LocationType;
+  const { state } = useLocation() as LocationType; // 수정하기인 경우
 
   useEffect(() => {
     if (state) {
@@ -117,7 +117,11 @@ function UploadWallPaper() {
             />
             {coverImage && (
               <div className="image">
-                <img src={URL.createObjectURL(coverImage)} alt="archiving_img" />
+                {coverImage instanceof File ? (
+                  <img src={URL.createObjectURL(coverImage)} alt="archiving_img" />
+                ) : (
+                  <img src={coverImage} alt="archiving_img" />
+                )}
                 <button type="button" onClick={() => onChangeImage()}>
                   <img src="imgs/Upload/ic_x_circle_full.png" alt="delete" />
                 </button>
@@ -188,8 +192,8 @@ function UploadWallPaper() {
         className={`bottomButton-wrapper${complete ? ' complete' : ''}`}
         disabled={!complete}
         onClick={() => {
-          // if (id) dispatch(putWallpaper({ coverImage }));
-          // else dispatch(postWallpaper({ coverImage }));
+          if (id) dispatch(putWallpaper(wallpaper)); // 수정하기
+          else dispatch(postWallpaper(wallpaper)); // 작성하기
           navigate('/upload-day?day=1');
         }}
       >

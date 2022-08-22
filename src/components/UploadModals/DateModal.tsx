@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useRef, useCallback } from 'react';
+import React, { forwardRef, useState, useRef, useCallback, useEffect } from 'react';
 import { ko } from 'date-fns/esm/locale';
 import DatePicker from 'react-datepicker';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,12 +9,17 @@ import { RootState } from '../../modules';
 
 function DateModal() {
   const { firstDay, lastDay } = useSelector((state: RootState) => state.wallpaper.data);
-  const [startDate, setStartDate] = useState<Date | null>(firstDay ? new Date(firstDay) : null);
-  const [endDate, setEndDate] = useState<Date | null>(lastDay ? new Date(lastDay) : null);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
   const [hidden, setHidden] = useState<boolean>(true);
 
   const dispatch = useDispatch();
   const onClickToggle = useCallback((name: string, data: string) => dispatch(changeToggle(name, data)), [dispatch]);
+
+  useEffect(() => {
+    setStartDate(firstDay ? new Date(firstDay) : null);
+    setEndDate(lastDay ? new Date(lastDay) : null);
+  }, [firstDay, lastDay]);
 
   const ref = React.createRef();
   const startRef = useRef<DatePicker>(null);
