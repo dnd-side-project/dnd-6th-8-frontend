@@ -1,44 +1,18 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination } from 'swiper';
 import './Sticker.scss';
 import { RootState } from '../../modules';
-
-function matchColor(color: string): string {
-  switch (color) {
-    case 'red':
-      return '01';
-    case 'blue':
-      return '02';
-    case 'purple':
-      return '03';
-    case 'white':
-      return '04';
-    default:
-      return '01';
-  }
-}
-
-// 스티커 데이터
-const stickers = [
-  ['01', '02', '03', '04', '05', '06', '01', '02'],
-  ['04', '03'],
-];
-
-// 빈 스티커 데이터
-const none: JSX.Element[] = [];
-for (let i = 0; i < 8 - stickers[stickers.length - 1].length; i += 1) {
-  none.push(<img src="imgs/MyPage/illust_sticker_none.png" alt="스티커 없음" className="none" key={i} />);
-}
+import { patchColor } from '../../modules/user/mypage';
 
 function Sticker() {
-  // 선택된 배경 스타일 번호
-  const [selectedBg, setSelectedBg] = useState<number>(1);
+  const dispatch = useDispatch();
+  const { diaryColor, stickers, none } = useSelector((state: RootState) => state.mypage.data);
 
   // 배경 스타일 변경
-  const onClickBg = (newBg: number) => {
-    setSelectedBg(newBg);
+  const onClickBg = (newBg: string) => {
+    dispatch(patchColor(newBg));
   };
 
   SwiperCore.use([Pagination]);
@@ -49,34 +23,54 @@ function Sticker() {
       <div className="bgstyle-container">
         <h4>배경 스타일 바꾸기</h4>
         <div className="images">
-          {[1, 2, 3, 4].map((bg) => (
+          {['red', 'blue', 'white', 'purple'].map((bg) => (
             <button
               type="button"
               key={bg}
               onClick={() => onClickBg(bg)}
-              className={selectedBg === bg ? 'selected' : ''}
+              className={diaryColor === bg ? 'selected' : ''}
             >
-              <img src={`imgs/MyPage/illust_bg0${bg}_sample.png`} alt={`배경스타일 ${bg}번`} />
+              <img src={`imgs/MyPage/illust_bg_${bg}_sample.png`} alt={`배경스타일 ${bg}번`} />
             </button>
           ))}
         </div>
       </div>
       <Swiper spaceBetween={50} slidesPerView={1} pagination={{ type: 'fraction' }}>
-        {stickers.map((page, index) => (
-          <SwiperSlide key={page[0]}>
+        {stickers.length === 0 && (
+          <SwiperSlide>
             <div
               className="sticker-container"
-              style={{ backgroundImage: `url(imgs/MyPage/illust_bg0${selectedBg}_roundx.png` }}
+              style={{
+                backgroundImage: `url(imgs/MyPage/illust_bg_${diaryColor}_roundx.png`,
+              }}
+            >
+              {none.map((_, idx) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img src="imgs/MyPage/illust_sticker_none.png" alt="스티커 없음" className="none" key={idx} />
+              ))}
+            </div>
+          </SwiperSlide>
+        )}
+        {stickers.map((page, index) => (
+          <SwiperSlide key={`${page.join(index.toString())}`}>
+            <div
+              className="sticker-container"
+              style={{
+                backgroundImage: `url(imgs/MyPage/illust_bg_${diaryColor}_roundx.png`,
+              }}
             >
               {page.map((sticker, idx) => (
                 <img
-                  src={`imgs/MyPage/illust_sticker${sticker}.png`}
-                  alt={`스티커 ${sticker}번`}
-                  // eslint-disable-next-line react/no-array-index-key
-                  key={sticker + idx}
+                  src={`imgs/MyPage/illust_sticker_${sticker}.png`}
+                  alt={`${sticker} 스티커`}
+                  key={sticker + idx.toString()}
                 />
               ))}
-              {index === stickers.length - 1 && none.map((sticker) => sticker)}
+              {index === stickers.length - 1 &&
+                none.map((_, idx) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <img src="imgs/MyPage/illust_sticker_none.png" alt="스티커 없음" className="none" key={idx} />
+                ))}
             </div>
           </SwiperSlide>
         ))}

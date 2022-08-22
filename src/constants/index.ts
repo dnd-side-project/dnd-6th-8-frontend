@@ -265,6 +265,8 @@ export type MyPageData = {
   badgesList: string[];
   diaryColor: string;
   userName: string;
+  stickers: string[][];
+  none: number[];
 };
 
 export type MyPageModule = {
