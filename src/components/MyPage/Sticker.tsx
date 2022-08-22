@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Pagination } from 'swiper';
 import './Sticker.scss';
 import { RootState } from '../../modules';
+import { patchColor } from '../../modules/user/mypage';
 
 function matchColor(color: string): string {
   switch (color) {
@@ -33,12 +34,15 @@ for (let i = 0; i < 8 - stickers[stickers.length - 1].length; i += 1) {
 }
 
 function Sticker() {
+  const dispatch = useDispatch();
+  const { diaryColor, badgesList } = useSelector((state: RootState) => state.mypage.data);
+
   // 선택된 배경 스타일 번호
   const [selectedBg, setSelectedBg] = useState<number>(1);
 
   // 배경 스타일 변경
-  const onClickBg = (newBg: number) => {
-    setSelectedBg(newBg);
+  const onClickBg = (newBg: string) => {
+    dispatch(patchColor(newBg));
   };
 
   SwiperCore.use([Pagination]);
@@ -49,14 +53,14 @@ function Sticker() {
       <div className="bgstyle-container">
         <h4>배경 스타일 바꾸기</h4>
         <div className="images">
-          {[1, 2, 3, 4].map((bg) => (
+          {['red', 'blue', 'white', 'purple'].map((bg) => (
             <button
               type="button"
               key={bg}
               onClick={() => onClickBg(bg)}
-              className={selectedBg === bg ? 'selected' : ''}
+              className={diaryColor === bg ? 'selected' : ''}
             >
-              <img src={`imgs/MyPage/illust_bg0${bg}_sample.png`} alt={`배경스타일 ${bg}번`} />
+              <img src={`imgs/MyPage/illust_bg_${bg}_sample.png`} alt={`배경스타일 ${bg}번`} />
             </button>
           ))}
         </div>
@@ -66,7 +70,7 @@ function Sticker() {
           <SwiperSlide key={page[0]}>
             <div
               className="sticker-container"
-              style={{ backgroundImage: `url(imgs/MyPage/illust_bg0${selectedBg}_roundx.png` }}
+              style={{ backgroundImage: `url(imgs/MyPage/illust_bg_${diaryColor}_roundx.png` }}
             >
               {page.map((sticker, idx) => (
                 <img

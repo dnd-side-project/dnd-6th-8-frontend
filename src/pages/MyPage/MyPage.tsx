@@ -11,7 +11,7 @@ import { RootState } from '../../modules';
 
 function MyPage() {
   const dispatch = useDispatch();
-  const mypage = useSelector((state: RootState) => state.mypage);
+  const { loading } = useSelector((state: RootState) => state.mypage);
 
   const [logOut, setLogOut] = useState<boolean>(false);
   const logOutHandler = (): void => setLogOut((prev) => !prev);
@@ -23,7 +23,7 @@ function MyPage() {
   return (
     <div className="mypage-wrapper">
       {logOut && <Logout logOutHandler={logOutHandler} />}
-      {mypage.loading ? (
+      {loading ? (
         <>
           <Loading height={9.2} />
           <Loading height={29.4} />
