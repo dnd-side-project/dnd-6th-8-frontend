@@ -262,7 +262,7 @@ export type dayTripCourse = {
 
 export type MyPageData = {
   archiveNumber: number;
-  badgesList: string[];
+  badgesList: string | null[];
   diaryColor: string;
   userName: string;
 };
