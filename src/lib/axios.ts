@@ -3,7 +3,7 @@ import axios from 'axios';
 const token = localStorage.getItem('accessToken');
 // axios instance 생성
 const instance = axios.create({
-  baseURL: 'http://3.37.253.113:8080',
+  baseURL: 'https://tracious-api.shop',
   timeout: 10000,
   headers: {
     Authorization: `Bearer ${token}`,

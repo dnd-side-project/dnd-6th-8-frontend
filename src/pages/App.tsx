@@ -50,51 +50,51 @@ function App() {
         <Route path="/survey" element={<Survey />} />
         <Route path="/termsConditions" element={<TermsConditions />} />
         <Route path="/personalInfoPolicy" element={<PersonalInfoPolicy />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route
-            path="/home"
-            element={
-              <>
-                <Header />
-                <Home />
-                <NavigationBar />
-              </>
-            }
-          />
-          <Route path="/wallpaper/:id" element={<WallPaper />} />
-          <Route
-            path="/mypage"
-            element={
-              <>
-                <Header />
-                <MyPage />
-                <NavigationBar />
-              </>
-            }
-          />
-          <Route path="/userProfile" element={<UserProfile />} />
-          <Route
-            path="/upload-wallpaper"
-            element={
-              <>
-                <UploadHeader isCanGoBack={false} title="표지작성" />
-                <UploadWallPaper />
-              </>
-            }
-          />
-          <Route
-            path="/upload-day"
-            element={
-              <>
-                <UploadHeader isCanGoBack title="기록작성" />
-                <UploadDay />
-              </>
-            }
-          />
-          <Route path="/scrap" element={<Scrap />} />
-          <Route path="/report/:id" element={<ReportPage />} />
-          <Route path="/withdrawal" element={<Withdrawal />} />
-        </Route>
+        {/* <Route element={<ProtectedRoutes />}> */}
+        <Route
+          path="/home"
+          element={
+            <>
+              <Header />
+              <Home />
+              <NavigationBar />
+            </>
+          }
+        />
+        <Route path="/wallpaper/:id" element={<WallPaper />} />
+        <Route
+          path="/mypage"
+          element={
+            <>
+              <Header />
+              <MyPage />
+              <NavigationBar />
+            </>
+          }
+        />
+        <Route path="/userProfile" element={<UserProfile />} />
+        <Route
+          path="/upload-wallpaper"
+          element={
+            <>
+              <UploadHeader isCanGoBack={false} title="표지작성" />
+              <UploadWallPaper />
+            </>
+          }
+        />
+        <Route
+          path="/upload-day"
+          element={
+            <>
+              <UploadHeader isCanGoBack title="기록작성" />
+              <UploadDay />
+            </>
+          }
+        />
+        <Route path="/scrap" element={<Scrap />} />
+        <Route path="/report/:id" element={<ReportPage />} />
+        <Route path="/withdrawal" element={<Withdrawal />} />
+        {/* </Route> */}
       </Routes>
     </Router>
   );

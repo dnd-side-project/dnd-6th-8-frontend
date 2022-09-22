@@ -11,6 +11,7 @@ function WelcomePage() {
   const KakaoLogIn = useCallback(() => {
     const kakaoSignIn = async () => {
       const kakao: string = await instance.get('/auth/kakao');
+      console.log(kakao);
       window.location.replace(kakao);
     };
     kakaoSignIn();
