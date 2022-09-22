@@ -5,7 +5,7 @@ import RecFeed from './RecFeed';
 import { RootState } from '../../modules';
 
 function Recommend() {
-  const recommendData = useSelector((state: RootState) => state.home.recommend.data);
+  const recommendData = useSelector((state: RootState) => state.home.data.recommend);
   return (
     <section className="recommend-wrapper">
       <h2 className="h2">나의 취향 저격, 기록 피드를 추천드려요</h2>

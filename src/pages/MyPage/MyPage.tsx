@@ -6,24 +6,18 @@ import UserInfo from '../../components/MyPage/UserInfo';
 import Loading from '../../components/MyPage/Loading';
 import './MyPage.scss';
 import Logout from '../../components/MyPage/Logout';
-import { myArchivesIsShared, myArchivesPrivate } from '../../modules/post/archives';
 import { getMyPage } from '../../modules/user/mypage';
 import { RootState } from '../../modules';
 
 function MyPage() {
   const dispatch = useDispatch();
-  const mypage = useSelector((state: RootState) => state.mypage);
+  const { loading } = useSelector((state: RootState) => state.mypage);
 
-  const [loading, setLoading] = useState<boolean>(mypage.loading);
   const [logOut, setLogOut] = useState<boolean>(false);
   const logOutHandler = (): void => setLogOut((prev) => !prev);
 
   useEffect(() => {
-    dispatch(myArchivesIsShared());
-    dispatch(myArchivesPrivate());
     dispatch(getMyPage());
-    setTimeout(() => setLoading(false), 100);
-    return () => setLoading(false);
   }, []);
 
   return (
